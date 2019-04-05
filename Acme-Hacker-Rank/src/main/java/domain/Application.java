@@ -27,7 +27,6 @@ public class Application extends DomainEntity {
 	private String		answerExplanation;
 	private String		link;
 	private Position	position;
-	private Problem		problem;
 	private Hacker		hacker;
 
 
@@ -78,16 +77,6 @@ public class Application extends DomainEntity {
 
 	public void setPosition(final Position position) {
 		this.position = position;
-	}
-
-	@Valid
-	@ManyToOne(optional = false)
-	public Problem getProblem() {
-		return this.problem;
-	}
-
-	public void setProblem(final Problem problem) {
-		this.problem = problem;
 	}
 
 	@Valid
