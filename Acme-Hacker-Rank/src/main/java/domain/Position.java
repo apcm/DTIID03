@@ -132,11 +132,11 @@ public class Position extends DomainEntity {
 		this.ticker = ticker;
 	}
 
-	public boolean isCancelled() {
+	public boolean getIsCancelled() {
 		return this.isCancelled;
 	}
 
-	public void setCancelled(final boolean isCancelled) {
+	public void setIsCancelled(final boolean isCancelled) {
 		this.isCancelled = isCancelled;
 	}
 

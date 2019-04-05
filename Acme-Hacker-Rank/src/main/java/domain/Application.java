@@ -51,7 +51,7 @@ public class Application extends DomainEntity {
 	public void setStatus(final String status) {
 		this.status = status;
 	}
-	@NotBlank
+
 	public String getAnswerExplanation() {
 		return this.answerExplanation;
 	}
@@ -60,7 +60,6 @@ public class Application extends DomainEntity {
 		this.answerExplanation = answerExplanation;
 	}
 
-	@NotBlank
 	@URL
 	public String getLink() {
 		return this.link;

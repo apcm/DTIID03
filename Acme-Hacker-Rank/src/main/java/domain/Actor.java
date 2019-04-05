@@ -8,11 +8,15 @@ import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.constraints.URL;
+
+import security.UserAccount;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -29,6 +33,7 @@ public abstract class Actor extends DomainEntity {
 	private boolean						isBanned;
 	private Collection<SocialProfile>	socialProfiles;
 	private Collection<Box>				boxes;
+	private UserAccount					userAccount;
 
 
 	@OneToMany
@@ -103,7 +108,7 @@ public abstract class Actor extends DomainEntity {
 		this.vat = vat;
 	}
 
-	public boolean isFlagSpam() {
+	public boolean getFlagSpam() {
 		return this.flagSpam;
 	}
 
@@ -111,11 +116,11 @@ public abstract class Actor extends DomainEntity {
 		this.flagSpam = flagSpam;
 	}
 
-	public boolean isBanned() {
+	public boolean getIsBanned() {
 		return this.isBanned;
 	}
 
-	public void setBanned(final boolean isBanned) {
+	public void setIsBanned(final boolean isBanned) {
 		this.isBanned = isBanned;
 	}
 
@@ -126,6 +131,16 @@ public abstract class Actor extends DomainEntity {
 
 	public void setSocialProfiles(final Collection<SocialProfile> socialProfiles) {
 		this.socialProfiles = socialProfiles;
+	}
+
+	@Valid
+	@OneToOne(cascade = CascadeType.ALL)
+	public UserAccount getUserAccount() {
+		return this.userAccount;
+	}
+
+	public void setUserAccount(final UserAccount userAccount) {
+		this.userAccount = userAccount;
 	}
 
 }

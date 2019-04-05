@@ -52,7 +52,7 @@ public class ActorService {
 		final UserAccount actual = LoginService.getPrincipal();
 		final Actor a = this.actorRepository.getActor(actual);
 
-		Assert.isTrue(!a.isBanned());
+		Assert.isTrue(!a.getIsBanned());
 
 		//Compruebo que no se produce ninguna redundancia Padre-Hijo:
 		boolean fine = true;
@@ -84,7 +84,7 @@ public class ActorService {
 		final Actor a = this.actorRepository.getActor(actual);
 
 		Assert.isTrue(a.getBoxes().contains(m));
-		Assert.isTrue(!a.isBanned());
+		Assert.isTrue(!a.getIsBanned());
 
 		Assert.isTrue(!m.getPredefined());
 		final Collection<Box> actorBoxes = a.getBoxes();

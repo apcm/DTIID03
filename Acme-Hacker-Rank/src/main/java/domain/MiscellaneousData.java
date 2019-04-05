@@ -29,12 +29,12 @@ public class MiscellaneousData extends DomainEntity {
 	public void setAttachments(final String attachments) {
 		this.attachments = attachments;
 	}
-
+	@Valid
+	@ManyToOne(optional = false)
 	public Curricula getCurricula() {
 		return this.curricula;
 	}
-	@Valid
-	@ManyToOne(optional = false)
+
 	public void setCurricula(final Curricula curricula) {
 		this.curricula = curricula;
 	}

@@ -56,7 +56,7 @@ public class MessageService {
 		Assert.isTrue(!(m.getId() == 0));
 		final UserAccount actual = LoginService.getPrincipal();
 		final Actor actorActual = this.ar.getActor(actual);
-		Assert.isTrue(!actorActual.isBanned());
+		Assert.isTrue(!actorActual.getIsBanned());
 
 		final List<Box> msgb = (List<Box>) actorActual.getBoxes();
 		final Box trash = msgb.get(3);
@@ -129,7 +129,7 @@ public class MessageService {
 		final UserAccount actual = LoginService.getPrincipal();
 		final Actor admin = this.ar.getActor(actual);
 		Assert.notNull(msg);
-		Assert.isTrue(!admin.isBanned());
+		Assert.isTrue(!admin.getIsBanned());
 
 		final Message result = this.save(msg);
 
@@ -159,7 +159,7 @@ public class MessageService {
 		final UserAccount actual = LoginService.getPrincipal();
 		final Actor admin = this.ar.getActor(actual);
 		Assert.notNull(msg);
-		Assert.isTrue(!admin.isBanned());
+		Assert.isTrue(!admin.getIsBanned());
 
 		final Message result = this.save(msg);
 

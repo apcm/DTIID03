@@ -99,7 +99,7 @@ public class BoxService {
 		final UserAccount actual = LoginService.getPrincipal();
 		final Actor a = this.actorRepository.getActor(actual);
 		Assert.notNull(msg);
-		Assert.isTrue(!a.isBanned());
+		Assert.isTrue(!a.getIsBanned());
 
 		final Message result = this.ms.save(msg);
 
@@ -133,7 +133,7 @@ public class BoxService {
 		final UserAccount actual = LoginService.getPrincipal();
 		final Actor a = this.actorRepository.getActor(actual);
 		Assert.notNull(msg);
-		Assert.isTrue(!a.isBanned());
+		Assert.isTrue(!a.getIsBanned());
 		Assert.isTrue(msg.getFlagSpam());
 
 		final Message result = this.ms.save(msg);

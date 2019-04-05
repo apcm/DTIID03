@@ -7,6 +7,7 @@ import java.util.Date;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -58,7 +59,7 @@ public class Finder extends DomainEntity {
 	public void setMinimumSalary(final Integer minimumSalary) {
 		this.minimumSalary = minimumSalary;
 	}
-
+	@ManyToMany
 	public Collection<Position> getPositions() {
 		return this.positions;
 	}
