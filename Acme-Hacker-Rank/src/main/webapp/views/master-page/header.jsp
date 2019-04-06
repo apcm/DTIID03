@@ -40,8 +40,22 @@
 			</li>
 		</security:authorize>
 		
+		<security:authorize access="hasRole('COMPANY')">
+			<li><a class="fNiv"><spring:message	code="master.page.customer" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="company/company/edit.do"><spring:message code="master.page.edit.company" /></a></li>
+				</ul>
+			</li>
+		</security:authorize>
+		
 		<security:authorize access="isAnonymous()">
-			<li><a class="fNiv" href="security/login.do"><spring:message code="master.page.login" /></a></li>
+			<li>
+			<a class="fNiv" href="security/login.do"><spring:message code="master.page.login" /></a>
+			</li>
+			<li>
+			<a class="fNiv" href="company/register.do"><spring:message code="master.page.register.company" /></a>
+			</li>
 		</security:authorize>
 		
 		<security:authorize access="isAuthenticated()">

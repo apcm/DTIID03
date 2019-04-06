@@ -13,70 +13,61 @@
 
 
 	<h4>
-		<spring:message code="brotherhood.edit.label.name" />:
+		<spring:message code="company.edit.label.name" />:
 	</h4>
-	<jstl:out value="${brotherhood.name}"></jstl:out>
+	<jstl:out value="${company.name}"></jstl:out>
 	
 	<h4>
-		<spring:message code="brotherhood.edit.label.middleName" />:
+		<spring:message code="company.edit.label.surname" />:
 	</h4>
-	<jstl:out value="${brotherhood.middleName}"></jstl:out>
+	<jstl:out value="${company.surname}"></jstl:out>
+	
+	<h4>
+		<spring:message code="company.edit.label.address" />:
+	</h4>
+	<jstl:out value="${company.address}"></jstl:out>
+	
+	<h4>
+		<spring:message code="company.edit.label.vat" />:
+	</h4>
+	<jstl:out value="${company.vat}"></jstl:out>
+	
+	<h4>
+		<spring:message code="company.edit.label.email" />:
+	</h4>
+	<jstl:out value="${company.email}"></jstl:out>
+	
+	<h4>
+		<spring:message code="company.edit.label.phoneNumber" />:
+	</h4>
+	<jstl:out value="${company.phoneNumber}"></jstl:out>
 
 	<h4>
-		<spring:message code="brotherhood.edit.label.surname" />:
+		<spring:message code="company.edit.label.username" />:
 	</h4>
-	<jstl:out value="${brotherhood.surname}"></jstl:out>
+	<jstl:out value="${company.userAccount.username}"></jstl:out>
 	
 	<h4>
-		<spring:message code="brotherhood.edit.label.address" />:
+		<spring:message code="company.companyName" />:
 	</h4>
-	<jstl:out value="${brotherhood.address}"></jstl:out>
+	<jstl:out value="${company.companyName}"></jstl:out>
 	
-	<h4>
-		<spring:message code="brotherhood.edit.label.email" />:
-	</h4>
-	<jstl:out value="${brotherhood.email}"></jstl:out>
-	
-	<h4>
-		<spring:message code="brotherhood.edit.label.phoneNumber" />:
-	</h4>
-	<jstl:out value="${brotherhood.phoneNumber}"></jstl:out>
 
-	<h4>
-		<spring:message code="brotherhood.edit.label.username" />:
-	</h4>
-	<jstl:out value="${brotherhood.userAccount.username}"></jstl:out>
-	
-		<h4>
-		<spring:message code="brotherhood.title" />:
-	</h4>
-	<jstl:out value="${brotherhood.title}"></jstl:out>
-
-	<h4>
-		<spring:message code="brotherhood.stablishment.date" />:
-	</h4>
-	<jstl:out value="${brotherhood.stablishmentDate}"></jstl:out>
-
-	<h4>
-		<spring:message code="brotherhood.photos" />:
-	</h4>
-	<jstl:out value="${brotherhood.urls}"></jstl:out>
-	
 <br/><br/>
 
-	<spring:message code="brotherhood.export.explanation" var="exportExplanation"/>
+	<spring:message code="company.export.explanation" var="exportExplanation"/>
 	<jstl:out value="${exportExplanation}"/>
 	
-	<a href="brotherhood/brotherhood/edit.do"> Link </a>
+	<a href="company/company/edit.do"> Link </a>
 	
 	
 	<br/>
 <security:authorize access="hasRole('MEMBER')">
 	<jstl:if test="${enrolement.status=='APPROVED'}">
-	<form:form action="brotherhood/member/show.do" modelAttribute="brotherhood">
+	<form:form action="company/member/show.do" modelAttribute="company">
 	<form:hidden path="id"/>
 	<input type="submit" name="delete"
-			value="<spring:message code="brotherhood.delete" />"
+			value="<spring:message code="company.delete" />"
 			onclick="return confirm('<spring:message code="message.confirm.delete" />')" />&nbsp;
 	</form:form>
 	</jstl:if>

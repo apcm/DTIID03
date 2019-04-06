@@ -34,10 +34,17 @@
 		<br /> <br />
 
 		<form:label path="address">
-			<spring:message code="company.edit.label.address" />* :
+			<spring:message code="company.edit.label.address" /> :
 		</form:label>
 		<form:input path="address" />
 		<form:errors cssClass="error" path="address" />
+		<br /> <br />
+
+		<form:label path="vat">
+			<spring:message code="company.edit.label.vat" />* :
+		</form:label>
+		<form:input path="vat" />
+		<form:errors cssClass="error" path="vat" />
 		<br /> <br />
 
 		<form:label path="email">

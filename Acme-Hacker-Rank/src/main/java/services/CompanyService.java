@@ -180,23 +180,25 @@ public class CompanyService {
 	public Company reconstruct(final CompanyForm companyForm, final BindingResult binding) {
 		final Company company = this.create();
 
-		//Assert.isTrue(CompanyForm.isConditionsAccepted());
-		final Authority bro = new Authority();
-		bro.setAuthority(Authority.COMPANY);
-		Assert.isTrue(companyForm.getUserAccount().getAuthorities().contains(bro));
-		final Collection<Authority> colMem = new ArrayList<Authority>();
-		colMem.add(bro);
 		//Assert.isTrue(CompanyForm.getUserAccount().getAuthorities() == colMem);
 		//Damos valores a los atributos de la hermandad con los datos que nos llegan
+		final Authority com = new Authority();
+		com.setAuthority(Authority.COMPANY);
+		final List<Authority> aus = new ArrayList<>();
+		aus.add(com);
+		final UserAccount ua = companyForm.getUserAccount();
+		ua.setAuthorities(aus);
+
 		company.setAddress(companyForm.getAddress());
 		company.setEmail(companyForm.getEmail());
 		company.setName(companyForm.getName());
 		company.setPhoneNumber(companyForm.getPhoneNumber());
 		company.setPhoto(companyForm.getPhoto());
 		company.setSurname(companyForm.getSurname());
-		company.setUserAccount(companyForm.getUserAccount());
+		company.setUserAccount(ua);
+		company.setVat(companyForm.getVat());
 
-		company.setName(companyForm.getName());
+		company.setCompanyName(companyForm.getCompanyName());
 
 		company.setIsBanned(false);
 

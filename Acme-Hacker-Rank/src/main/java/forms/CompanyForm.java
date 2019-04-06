@@ -5,6 +5,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.constraints.URL;
 
 import security.UserAccount;
@@ -15,11 +16,11 @@ public class CompanyForm {
 	private String		email;
 	private String		phoneNumber;
 	private String		address;
-	private String		middleName;
 	private String		surname;
 	private String		photo;
 	private boolean		conditionsAccepted;
 	private UserAccount	userAccount;
+	private Integer		vat;
 
 	private String		companyName;
 
@@ -52,13 +53,6 @@ public class CompanyForm {
 	}
 	public void setAddress(final String address) {
 		this.address = address;
-	}
-
-	public String getMiddleName() {
-		return this.middleName;
-	}
-	public void setMiddleName(final String middleName) {
-		this.middleName = middleName;
 	}
 
 	@NotBlank
@@ -102,6 +96,16 @@ public class CompanyForm {
 
 	public void setCompanyName(final String companyName) {
 		this.companyName = companyName;
+	}
+
+	@NotNull
+	@Range(min = 0, max = 100)
+	public Integer getVat() {
+		return this.vat;
+	}
+
+	public void setVat(final Integer vat) {
+		this.vat = vat;
 	}
 
 }

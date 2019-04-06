@@ -20,8 +20,8 @@
 		<put-attribute name="body" value="/views/company/register.jsp" />
 	</definition>
 	
-	<definition name="brotherhood/show" extends="master.page">	
-		<put-attribute name="title" value="Showing brotherhood" />
+	<definition name="company/show" extends="master.page">	
+		<put-attribute name="title" value="Showing company" />
 		<put-attribute name="body" value="/views/brotherhood/show.jsp" />
 	</definition>
 	
@@ -30,9 +30,9 @@
 		<put-attribute name="body" value="/views/company/edit.jsp" />
 	</definition>
 	
-	<definition name="brotherhood/show" extends="master.page">	
+	<definition name="company/show" extends="master.page">	
 		<put-attribute name="title" value="Personal data" />
-		<put-attribute name="body" value="/views/brotherhood/show.jsp" />
+		<put-attribute name="body" value="/views/company/show.jsp" />
 	</definition>
 		
 	<definition name="brotherhood/list" extends="master.page">	

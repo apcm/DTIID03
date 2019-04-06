@@ -50,6 +50,13 @@
 		<form:errors cssClass="error" path="email" />
 		<br /> <br />
 
+		<form:label path="vat">
+			<spring:message code="company.edit.label.vat" />*:
+		</form:label>
+		<form:input path="vat"/>
+		<form:errors cssClass="error" path="vat" />
+		<br /> <br />
+
 		<form:label path="phoneNumber">
 			<spring:message code="company.edit.label.phoneNumber" />:
 		</form:label>

@@ -11,6 +11,7 @@
 
 <br/>
 
+
 <h3><spring:message code="security.terms.b" /></h3>
 <spring:message htmlEscape="false" code="security.terms.b.content" />
 
@@ -48,3 +49,13 @@
 
 <h3><spring:message code="security.terms.i" /></h3>
 <spring:message htmlEscape="false" code="security.terms.i.content" />
+
+<br/>
+
+<h3><spring:message code="security.contact" /></h3>
+<p>
+<spring:message htmlEscape="false" code="security.contact.legalInfo" />
+</p>
+<p>
+<spring:message htmlEscape="false" code="security.contact.contact" />
+</p>

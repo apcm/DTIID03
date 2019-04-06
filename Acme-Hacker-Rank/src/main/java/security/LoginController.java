@@ -65,4 +65,14 @@ public class LoginController extends AbstractController {
 		return result;
 	}
 
+	//Terms and Conditions ---------------------------
+	@RequestMapping("/termsAndConditions")
+	public ModelAndView termsAndConditions() {
+		ModelAndView result;
+
+		result = new ModelAndView("security/termsAndConditions");
+
+		return result;
+	}
+
 }
