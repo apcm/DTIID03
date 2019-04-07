@@ -16,9 +16,9 @@
        
 <tiles-definitions>
 
-	<definition name="security/login" extends="master.page">
-		<put-attribute name="title" value="Login" />
-		<put-attribute name="body" value="/views/security/login.jsp" />
+	<definition name="dashboard/dashboard" extends="master.page">	
+		<put-attribute name="title" value="Administrator Dashboard" />
+		<put-attribute name="body" value="/views/dashboard/dashboard.jsp" />
 	</definition>
-		
+	
 </tiles-definitions>
