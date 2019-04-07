@@ -7,21 +7,16 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<display:table name="positions" id="row" requestURI="${requestURI}" pagesize="5" class ="displaytag">
+<display:table name="companies" id="row" requestURI="${requestURI}" pagesize="5" class ="displaytag">
 
-<display:column property="title" titleKey="position.title"/>
-<display:column property="description" titleKey="position.description"/>
-<display:column property="deadline" titleKey="position.deadline"/>
-<display:column property="skills" titleKey="position.skills"/>
-<display:column property="technologies" titleKey="position.technologies"/>
-<display:column property="profile" titleKey="position.profile"/>
-<display:column property="salary" titleKey="position.salary"/>
-<display:column property="ticker" titleKey="position.ticker"/>
-<display:column property="finalMode" titleKey="position.finalmode"/>
-
-<input type="button" name="companies"
-		value="<spring:message code="position.companies" />"
-		onclick="javascript: relativeRedir('company/list.do');" />
-
+<display:column property="name" titleKey="company.name"/>
+<display:column property="photo" titleKey="company.photo"/>
+<display:column property="email" titleKey="company.email"/>
+<display:column property="phoneNumber" titleKey="company.phoneNumber"/>
+<display:column property="address" titleKey="company.address"/>
 
 </display:table>
+
+<input type="button" name="positions"
+		value="<spring:message code="company.positions" />"
+		onclick="javascript: relativeRedir('position/list.do');" />

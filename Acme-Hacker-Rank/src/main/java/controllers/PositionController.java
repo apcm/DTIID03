@@ -26,12 +26,24 @@ public class PositionController extends AbstractController{
 		Collection<Position> positions = positionService.findAll();
 		
 		res = new ModelAndView("position/list");
-		res = new ModelAndView("float/list");
 		res.addObject("requestURI", "position/list.do");
 		res.addObject("positions", positions);
 		
 		return res;
 		
+	}
+	
+	@RequestMapping(value="/search", method=RequestMethod.POST, params="search")
+	public ModelAndView search(String keyword) {
+		ModelAndView res;
+		
+		Collection<Position> positions = positionService.findPositionByKeyword(keyword);
+		
+		res = new ModelAndView("position/list");
+		res.addObject("requestURI", "position/list.do");
+		res.addObject("positions", positions);
+		
+		return res;
 	}
 
 }
