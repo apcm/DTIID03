@@ -62,4 +62,5 @@ public interface DashboardRepository extends JpaRepository<Administrator, Intege
 
 	@Query("select p from Position p order by p.salary asc")
 	Collection<Position> lowestSalaryPosition();
+
 }

@@ -18,8 +18,8 @@
 	<bean id="customisation1" class="domain.Customisation">
 		<property name="systemName" value="Acme Hacker-Rank"/>
 		<property name="bannerUrl" value="https://i.imgur.com/7b8lu4b.png"/>
-		<property name="welcomeMessageEng" value="Welcome to Acme hacker Rank! We’re IT hacker’s favourite job marketplace!"/>
-		<property name="welcomeMessageEsp" value="¡Bien-venidos a Acme Hacker Rank! ¡Somos el mercado de trabajo favorito de los profesionales de las TICs!"/>
+		<property name="welcomeMessageEng" value="Welcome to Acme hacker Rank! We're IT hacker's favourite job marketplace!"/>
+		<property name="welcomeMessageEsp" value="¡Bienvenidos a Acme Hacker Rank! ¡Somos el mercado de trabajo favorito de los profesionales de las TICs!"/>
 		<property name="phoneNumberCode" value="+34"/>
 		<property name="spamWords">
 			<list>
