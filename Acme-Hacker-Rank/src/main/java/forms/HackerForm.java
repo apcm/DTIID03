@@ -1,0 +1,115 @@
+
+package forms;
+
+import javax.persistence.OneToOne;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.Range;
+import org.hibernate.validator.constraints.URL;
+
+import security.UserAccount;
+import domain.Finder;
+
+public class HackerForm {
+
+	private String		name;
+	private String		email;
+	private String		phoneNumber;
+	private String		address;
+	private String		surname;
+	private String		photo;
+	private boolean		conditionsAccepted;
+	private UserAccount	userAccount;
+	private Integer		vat;
+
+	private Finder		finder;
+
+
+	@NotBlank
+	public String getName() {
+		return this.name;
+	}
+	public void setName(final String name) {
+		this.name = name;
+	}
+
+	public String getEmail() {
+		return this.email;
+	}
+	public void setEmail(final String email) {
+		this.email = email;
+	}
+
+	public String getPhoneNumber() {
+		return this.phoneNumber;
+	}
+	public void setPhoneNumber(final String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
+	@NotBlank
+	public String getAddress() {
+		return this.address;
+	}
+	public void setAddress(final String address) {
+		this.address = address;
+	}
+
+	@NotBlank
+	public String getSurname() {
+		return this.surname;
+	}
+	public void setSurname(final String surname) {
+		this.surname = surname;
+	}
+
+	@URL
+	public String getPhoto() {
+		return this.photo;
+	}
+	public void setPhoto(final String photo) {
+		this.photo = photo;
+	}
+
+	@NotNull
+	public boolean isConditionsAccepted() {
+		return this.conditionsAccepted;
+	}
+
+	public void setConditionsAccepted(final boolean conditionsAccepted) {
+		this.conditionsAccepted = conditionsAccepted;
+	}
+
+	@Valid
+	@NotNull
+	public UserAccount getUserAccount() {
+		return this.userAccount;
+	}
+
+	public void setUserAccount(final UserAccount userAccount) {
+		this.userAccount = userAccount;
+	}
+
+	@NotNull
+	@Range(min = 0, max = 100)
+	public Integer getVat() {
+		return this.vat;
+	}
+
+	public void setVat(final Integer vat) {
+		this.vat = vat;
+	}
+
+	@Valid
+	@OneToOne(optional = false)
+	public Finder getFinder() {
+		return this.finder;
+	}
+
+	public void setFinder(final Finder finder) {
+		this.finder = finder;
+	}
+
+}

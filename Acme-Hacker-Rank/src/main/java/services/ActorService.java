@@ -29,6 +29,64 @@ public class ActorService {
 	private CustomisationService	cs;
 
 
+
+	//Constructor
+	public ActorService() {
+		super();
+	}
+
+	//Returns logged actor
+	public Actor findByPrincipal() {
+		Actor res;
+		UserAccount userAccount;
+
+		userAccount = LoginService.getPrincipal();
+		Assert.notNull(userAccount);
+		res = this.findByUserAccount(userAccount);
+		Assert.notNull(res);
+
+		return res;
+	}
+
+	//Returns logged actor from his or her userAccount
+	public Actor findByUserAccount(final UserAccount userAccount) {
+		Actor res;
+		Assert.notNull(userAccount);
+		Assert.notNull(userAccount.getId());
+
+		res = this.actorRepository.findByUserAccountId(userAccount.getId());
+
+		return res;
+	}
+
+	public boolean checkCompany() {
+		boolean res;
+		final Authority a = new Authority();
+		final UserAccount user = LoginService.getPrincipal();
+		a.setAuthority(Authority.COMPANY);
+		res = user.getAuthorities().contains(a);
+		return res;
+	}
+
+	public boolean checkHacker() {
+		boolean res;
+		final Authority a = new Authority();
+		final UserAccount user = LoginService.getPrincipal();
+		a.setAuthority(Authority.HACKER);
+		res = user.getAuthorities().contains(a);
+		return res;
+	}
+
+	public boolean checkAdmin() {
+		boolean res;
+		final Authority a = new Authority();
+		final UserAccount user = LoginService.getPrincipal();
+		a.setAuthority(Authority.ADMIN);
+		res = user.getAuthorities().contains(a);
+		return res;
+	}
+
+
 	public Collection<Actor> findAll() {
 		return this.actorRepository.findAll();
 	}
@@ -71,7 +129,7 @@ public class ActorService {
 
 			}
 		Assert.isTrue(fine);
-		//Fin de la comprobación
+		//Fin de la comprobaciï¿½n
 
 		final Box result = this.mbs.save(m);
 
