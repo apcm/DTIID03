@@ -16,8 +16,6 @@ import security.UserAccount;
 import domain.Actor;
 import domain.Administrator;
 import domain.Box;
-import domain.Company;
-import domain.Hacker;
 import domain.Message;
 
 @Service
@@ -63,12 +61,6 @@ public class BoxService {
 		return this.messageBoxRepository.findOne(messageBoxId);
 	}
 
-	public Box saveInitial(final Box messageBox) {
-		final Box mb = this.messageBoxRepository.save(messageBox);
-		return mb;
-
-	}
-
 	public Box save(final Box messageBox) {
 		final UserAccount actual = LoginService.getPrincipal();
 		final Actor a = this.actorRepository.getActor(actual);
@@ -78,33 +70,6 @@ public class BoxService {
 			mboxes.add(mb);
 			a.setBoxes(mboxes);
 			Assert.isTrue(a.getBoxes().contains(mb));
-
-		}
-		return mb;
-
-	}
-
-	public Box saveToRemote(final Box messageBox, final Hacker c) {
-
-		final Box mb = this.messageBoxRepository.save(messageBox);
-		if (!c.getBoxes().contains(messageBox)) {
-			final Collection<Box> mboxes = c.getBoxes();
-			mboxes.add(mb);
-			c.setBoxes(mboxes);
-			Assert.isTrue(c.getBoxes().contains(mb));
-
-		}
-		return mb;
-	}
-
-	public Box saveToRemote(final Box messageBox, final Company c) {
-
-		final Box mb = this.messageBoxRepository.save(messageBox);
-		if (!c.getBoxes().contains(messageBox)) {
-			final Collection<Box> mboxes = c.getBoxes();
-			mboxes.add(mb);
-			c.setBoxes(mboxes);
-			Assert.isTrue(c.getBoxes().contains(mb));
 
 		}
 		return mb;
@@ -163,6 +128,7 @@ public class BoxService {
 		System.out.println("Lo guarda");
 		return result;
 	}
+
 	public Message sendSpamMessage(final Message msg) {
 		final UserAccount actual = LoginService.getPrincipal();
 		final Actor a = this.actorRepository.getActor(actual);
@@ -197,4 +163,5 @@ public class BoxService {
 		System.out.println("Lo guarda");
 		return result;
 	}
+
 }
