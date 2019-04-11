@@ -70,6 +70,24 @@ public class ActorService {
 		return res;
 	}
 
+	public boolean checkHacker() {
+		boolean res;
+		final Authority a = new Authority();
+		final UserAccount user = LoginService.getPrincipal();
+		a.setAuthority(Authority.HACKER);
+		res = user.getAuthorities().contains(a);
+		return res;
+	}
+
+	public boolean checkAdmin() {
+		boolean res;
+		final Authority a = new Authority();
+		final UserAccount user = LoginService.getPrincipal();
+		a.setAuthority(Authority.ADMIN);
+		res = user.getAuthorities().contains(a);
+		return res;
+	}
+
 	public Collection<Actor> findAll() {
 		return this.actorRepository.findAll();
 	}

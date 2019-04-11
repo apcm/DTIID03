@@ -41,7 +41,7 @@
 		</security:authorize>
 		
 		<security:authorize access="hasRole('COMPANY')">
-			<li><a class="fNiv"><spring:message	code="master.page.customer" /></a>
+			<li><a class="fNiv"><spring:message	code="master.page.company" /></a>
 				<ul>
 					<li class="arrow"></li>
 					<li><a href="company/company/edit.do"><spring:message code="master.page.edit.company" /></a></li>
@@ -49,12 +49,23 @@
 			</li>
 		</security:authorize>
 		
+		<security:authorize access="hasRole('HACKER')">
+			<li><a class="fNiv"><spring:message	code="master.page.hacker" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="hacker/hacker/edit.do"><spring:message code="master.page.edit.hacker" /></a></li>
+				</ul>
+			</li>
+		</security:authorize>
 		<security:authorize access="isAnonymous()">
 			<li>
 			<a class="fNiv" href="security/login.do"><spring:message code="master.page.login" /></a>
 			</li>
 			<li>
 			<a class="fNiv" href="company/register.do"><spring:message code="master.page.register.company" /></a>
+			</li>
+			<li>
+			<a class="fNiv" href="hacker/register.do"><spring:message code="master.page.register.hacker" /></a>
 			</li>
 		</security:authorize>
 		
