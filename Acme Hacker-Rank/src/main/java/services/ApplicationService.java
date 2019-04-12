@@ -1,8 +1,6 @@
 
 package services;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -17,6 +15,7 @@ import org.springframework.validation.Validator;
 
 import repositories.ApplicationRepository;
 import domain.Application;
+import domain.Hacker;
 import domain.Problem;
 
 @Service
@@ -30,15 +29,8 @@ public class ApplicationService {
 	private Validator				validator;
 
 
-	public List<Application> getApplicationsByHacker(final int id) {
-		final Collection<Application> all = this.ar.findAll();
-		final List<Application> applicationsfinal = new ArrayList<Application>();
-		for (final Application a : all)
-			if (a.getHacker() != null)
-				if (a.getHacker().getId() == id)
-					applicationsfinal.add(a);
-
-		return applicationsfinal;
+	public List<Application> getApplicationsByHacker(final Hacker h) {
+		return this.ar.getApplicationsByHacker(h);
 	}
 
 	public Application findOne(final int id) {
@@ -56,7 +48,9 @@ public class ApplicationService {
 		if (a.getStatus().equals("PENDING"))
 			try {
 				Assert.notNull(a.getLink());
-				a.setMoment(new Date());
+				final Date moment = new Date();
+				moment.setSeconds(moment.getSeconds() - 1);
+				a.setMoment(moment);
 				a.setStatus("SUBMITTED");
 			} catch (final Throwable oops) {
 				return null;

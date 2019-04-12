@@ -43,7 +43,7 @@ public class ApplicationHackerController {
 		final UserAccount ua = LoginService.getPrincipal();
 		final Hacker h = this.hs.getHackerByUserAccount(ua.getId());
 
-		final List<Application> applications = this.as.getApplicationsByHacker(h.getId());
+		final List<Application> applications = this.as.getApplicationsByHacker(h);
 		result = new ModelAndView("application/hacker/list");
 		result.addObject("applications", applications);
 		result.addObject("requestURI", "application/hacker/list.do");
@@ -123,7 +123,7 @@ public class ApplicationHackerController {
 		final Application a = this.as.create();
 		final Position p = this.ps.findOne(positionId);
 		final Hacker h = this.hs.getHackerByUserAccount(LoginService.getPrincipal().getId());
-		final Collection<Application> appsByHacker = this.ps.getApplicationsByHacker(h);
+		final Collection<Application> appsByHacker = this.as.getApplicationsByHacker(h);
 
 		for (final Application app : appsByHacker)
 			if (app.getPosition().equals(p)) {
