@@ -120,6 +120,13 @@
 			<list>
 			</list>
 		</property>
+		
+		<property name="holderName" value="Admin Admin"/>
+		<property name="makeName" value="VISA"/>
+		<property name="number" value="4083602396731593"/>
+		<property name="expirationYear" value="2025"/>
+		<property name="expirationMonth" value="5"/>
+		<property name="cvv" value="583"/>
 	</bean>
 	
 	<bean id="hacker1" class="domain.Hacker">
@@ -142,6 +149,13 @@
 			<list>
 			</list>
 		</property>
+		
+		<property name="holderName" value="Hacker One"/>
+		<property name="makeName" value="VISA"/>
+		<property name="number" value="4128837079312553"/>
+		<property name="expirationYear" value="2022"/>
+		<property name="expirationMonth" value="4"/>
+		<property name="cvv" value="188"/>
 	</bean>
 	<bean id="hacker2" class="domain.Hacker">
 		<property name="name" value="Hacker"/>
@@ -163,6 +177,13 @@
 			<list>
 			</list>
 		</property>
+		
+		<property name="holderName" value="Hacker Two"/>
+		<property name="makeName" value="VISA"/>
+		<property name="number" value="4338709129661089"/>
+		<property name="expirationYear" value="2023"/>
+		<property name="expirationMonth" value="5"/>
+		<property name="cvv" value="206"/>
 	</bean>
 	
 	<bean id="company1" class="domain.Company">
@@ -185,6 +206,12 @@
 			<list>
 			</list>
 		</property>
+		<property name="holderName" value="Company One"/>
+		<property name="makeName" value="VISA"/>
+		<property name="number" value="4588502912013759"/>
+		<property name="expirationYear" value="2022"/>
+		<property name="expirationMonth" value="2"/>
+		<property name="cvv" value="247"/>
 	</bean>
 	
 	<bean id="company2" class="domain.Company">
@@ -207,53 +234,16 @@
 			<list>
 			</list>
 		</property>
-	</bean>
-	<!-- CREDITCARDS -->
-	<bean id="creditcard1" class="domain.CreditCard">
-		<property name="holderName" value="Hacker One"/>
-		<property name="makeName" value="VISA"/>
-		<property name="number" value="4128837079312553"/>
-		<property name="expirationYear" value="2022"/>
-		<property name="expirationMonth" value="4"/>
-		<property name="cvv" value="188"/>
-		<property name="actor" ref="hacker1"/>
-	</bean>
-	<bean id="creditcard2" class="domain.CreditCard">
-		<property name="holderName" value="Hacker Two"/>
-		<property name="makeName" value="VISA"/>
-		<property name="number" value="4338709129661089"/>
-		<property name="expirationYear" value="2023"/>
-		<property name="expirationMonth" value="5"/>
-		<property name="cvv" value="206"/>
-		<property name="actor" ref="hacker2"/>
-	</bean>
-	<bean id="creditcard3" class="domain.CreditCard">
-		<property name="holderName" value="Company One"/>
-		<property name="makeName" value="VISA"/>
-		<property name="number" value="4588502912013759"/>
-		<property name="expirationYear" value="2022"/>
-		<property name="expirationMonth" value="2"/>
-		<property name="cvv" value="247"/>
-		<property name="actor" ref="company1"/>
-	</bean>
-	<bean id="creditcard4" class="domain.CreditCard">
 		<property name="holderName" value="Company Two"/>
 		<property name="makeName" value="VISA"/>
 		<property name="number" value="4489952508772500"/>
 		<property name="expirationYear" value="2024"/>
 		<property name="expirationMonth" value="7"/>
 		<property name="cvv" value="339"/>
-		<property name="actor" ref="company2"/>
 	</bean>
-	<bean id="creditcard5" class="domain.CreditCard">
-		<property name="holderName" value="Admin Admin"/>
-		<property name="makeName" value="VISA"/>
-		<property name="number" value="4083602396731593"/>
-		<property name="expirationYear" value="2025"/>
-		<property name="expirationMonth" value="5"/>
-		<property name="cvv" value="583"/>
-		<property name="actor" ref="admin"/>
-	</bean>
+	<!-- CREDITCARDS -->
+
+
 <!-- Problems -->
 <bean id="problem1" class="domain.Problem">
 	<property name="title" value="Problem 1"/>

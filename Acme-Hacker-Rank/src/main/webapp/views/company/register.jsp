@@ -8,19 +8,19 @@
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<form:form action="company/register.do"
-	modelAttribute="companyForm">
+<form:form action=administrator/administrator/create.do"
+	modelAttribute="administratorForm">
 
 	<form:hidden path="userAccount.authorities" />
 
 
 	<fieldset>
 		<legend align="left">
-			<spring:message code="company.edit.contact" />
+			<spring:message code="administrator.edit.contact" />
 		</legend>
 
 		<form:label path="name">
-			<spring:message code="company.edit.label.name" />* :
+			<spring:message code="administrator.edit.label.name" />* :
 		</form:label>
 		<form:input path="name" />
 		<form:errors cssClass="error" path="name" />
@@ -28,7 +28,7 @@
 		<br /> <br />
 
 		<form:label path="surname">
-			<spring:message code="company.edit.label.surname" />* :
+			<spring:message code="administrator.edit.label.surname" />* :
 		</form:label>
 		<form:input path="surname" />
 		<form:errors cssClass="error" path="surname" />
@@ -36,7 +36,7 @@
 		<br /> <br />
 
 		<form:label path="address">
-			<spring:message code="company.edit.label.address" />* :
+			<spring:message code="administrator.edit.label.address" />* :
 		</form:label>
 		<form:input path="address" />
 		<form:errors cssClass="error" path="address" />
@@ -44,21 +44,21 @@
 		<br /> <br />
 
 		<form:label path="email">
-			<spring:message code="company.edit.label.email" />*:
+			<spring:message code="administrator.edit.label.email" />*:
 		</form:label>
 		<form:input path="email"/>
 		<form:errors cssClass="error" path="email" />
 		<br /> <br />
 
 		<form:label path="vat">
-			<spring:message code="company.edit.label.vat" />*:
+			<spring:message code="administrator.edit.label.vat" />*:
 		</form:label>
 		<form:input path="vat"/>
 		<form:errors cssClass="error" path="vat" />
 		<br /> <br />
 
 		<form:label path="phoneNumber">
-			<spring:message code="company.edit.label.phoneNumber" />:
+			<spring:message code="administrator.edit.label.phoneNumber" />:
 		</form:label>
 		<form:input path="phoneNumber" onchange="check(this)"
 			pattern="^(\d|\(|\)| |\+)+$" />
@@ -74,14 +74,14 @@
 				var OK2 = re2.exec(input.value);
 				var OK3 = re3.exec(input.value);
 				if (!(OK || OK2 || OK3)) {
-					alert("<spring:message code="company.confirm" />");
+					alert("<spring:message code="administrator.confirm" />");
 				}
 			}
 		</script>
 		<br /> <br />
 
 		<form:label path="photo">
-			<spring:message code="company.edit.label.photo" />:
+			<spring:message code="administrator.edit.label.photo" />*:
 		</form:label>
 		<form:input path="photo" />
 		<form:errors cssClass="error" path="photo" />
@@ -94,25 +94,59 @@
 
 	<fieldset>
 		<legend align="left">
-			<spring:message code="company.company" />
+			<spring:message code="administrator.creditCard" />
 		</legend>
-		<form:label path="companyName">
-			<spring:message code="company.companyName" />* :
+		
+		<form:label path="holderName">
+			<spring:message code="administrator.holderName" />* :
 		</form:label>
-		<form:input path="companyName" />
-		<form:errors cssClass="error" path="companyName" />
+		<form:input path="holderName" />
+		<form:errors cssClass="error" path="holderName" />
 		<br />
+		
+		<form:label path="makeName">
+			<spring:message code="administrator.makeName" />* :
+		</form:label>
+		<form:input path="makeName" />
+		<form:errors cssClass="error" path="makeName" />
 		<br />
+				
+		<form:label path="number">
+			<spring:message code="administrator.number" />* :
+		</form:label>
+		<form:input path="number" />
+		<form:errors cssClass="error" path="number" />
+		<br />
+		
+		<form:label path="expirationYear">
+			<spring:message code="administrator.expirationYear" />* :
+		</form:label>
+		<form:input path="expirationYear" />
+		<form:errors cssClass="error" path="expirationYear" />
+		<br />	
+					
+		<form:label path="expirationMonth">
+			<spring:message code="administrator.expirationMonth" />* :
+		</form:label>
+		<form:input path="expirationMonth" />
+		<form:errors cssClass="error" path="expirationMonth" />
+		<br />	
+				
+		<form:label path="cvv">
+			<spring:message code="administrator.cvv" />* :
+		</form:label>
+		<form:input path="cvv" />
+		<form:errors cssClass="error" path="cvv" />
+		<br />			
 	</fieldset>
-
 
 	<br />
 	<fieldset>
 		<legend align="left">
-			<spring:message code="company.edit.useraccount" />
+			<spring:message code="administrator.edit.useraccount" />
 		</legend>
 		<form:label path="userAccount.username">
-			<spring:message code="company.edit.label.username" />* :
+			<spring:message code="administrator.edit.label.username" />* :
 		</form:label>
 		<form:input path="userAccount.username" />
 		<form:errors cssClass="error" path="userAccount.username" />
@@ -120,14 +154,14 @@
 		<br /> <br />
 
 		<form:label path="userAccount.password">
-			<spring:message code="company.edit.label.password" />* :
+			<spring:message code="administrator.edit.label.password" />* :
 		</form:label>
 		<form:password path="userAccount.password" />
 		<form:errors cssClass="error" path="userAccount.password" />
 	</fieldset>
 
 	<form:label path="conditionsAccepted">
-		<spring:message code="company.conditions" />:
+		<spring:message code="administrator.conditions" />:
 	</form:label>
 	<form:checkbox path="conditionsAccepted" />
 	<form:errors cssClass="error" path="conditionsAccepted" />
@@ -141,9 +175,9 @@
 	<br />
 	<br />
 	<input type="submit" name="save"
-		value="<spring:message code="company.edit.save" />" />&nbsp;
+		value="<spring:message code="administrator.edit.save" />" />&nbsp;
 	<input type="button" name="cancel"
 		onclick="javascript: window.location.replace('welcome/index.do')"
-		value="<spring:message code="company.edit.cancel" />" />
+		value="<spring:message code="administrator.edit.cancel" />" />
 
 </form:form>

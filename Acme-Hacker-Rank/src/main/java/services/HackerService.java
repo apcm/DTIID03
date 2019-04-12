@@ -41,6 +41,9 @@ public class HackerService {
 	@Autowired
 	public CustomisationService	customisationService;
 
+	@Autowired
+	public FinderService		finderService;
+
 
 	//Constructor
 	public HackerService() {
@@ -100,17 +103,17 @@ public class HackerService {
 		return this.hackerRepository.findAll();
 	}
 
-	public Hacker save(final Hacker Hacker) {
-		Assert.notNull(Hacker);
-		Assert.isTrue(!Hacker.getIsBanned());
+	public Hacker save(final Hacker hacker) {
+		Assert.notNull(hacker);
+		Assert.isTrue(!hacker.getIsBanned());
 
-		final String pnumber = Hacker.getPhoneNumber();
+		final String pnumber = hacker.getPhoneNumber();
 		final Customisation cus = ((List<Customisation>) this.customisationService.findAll()).get(0);
 		final String cc = cus.getPhoneNumberCode();
 		if (pnumber.matches("^[0-9]{4,}$"))
-			Hacker.setPhoneNumber(cc.concat(pnumber));
+			hacker.setPhoneNumber(cc.concat(pnumber));
 
-		if (Hacker.getId() != 0) {
+		if (hacker.getId() != 0) {
 			Assert.isTrue(this.actorService.checkHacker());
 
 			// Modified Hacker must be logged Hacker
@@ -122,19 +125,23 @@ public class HackerService {
 		} else {
 
 			final Collection<Box> boxes = this.actorService.createPredefinedBoxes();
-			Hacker.setBoxes(boxes);
+			hacker.setBoxes(boxes);
 			final Md5PasswordEncoder encoder = new Md5PasswordEncoder();
-			final String oldpass = Hacker.getUserAccount().getPassword();
+			final String oldpass = hacker.getUserAccount().getPassword();
 			final String hash = encoder.encodePassword(oldpass, null);
 
-			final UserAccount cuenta = Hacker.getUserAccount();
+			final UserAccount cuenta = hacker.getUserAccount();
 			cuenta.setPassword(hash);
-			Hacker.setUserAccount(cuenta);
+			hacker.setUserAccount(cuenta);
+
+			final Finder find = new Finder();
+			final Finder find2 = this.finderService.save(find);
+			hacker.setFinder(find2);
 		}
 		// Restrictions
 		Hacker res;
 
-		res = this.hackerRepository.save(Hacker);
+		res = this.hackerRepository.save(hacker);
 		return res;
 	}
 
@@ -185,7 +192,7 @@ public class HackerService {
 		//Assert.isTrue(HackerForm.getUserAccount().getAuthorities() == colMem);
 		//Damos valores a los atributos de la hermandad con los datos que nos llegan
 		final Authority com = new Authority();
-		com.setAuthority(Authority.COMPANY);
+		com.setAuthority(Authority.HACKER);
 		final List<Authority> aus = new ArrayList<>();
 		aus.add(com);
 		final UserAccount ua = hackerForm.getUserAccount();
@@ -199,6 +206,13 @@ public class HackerService {
 		hacker.setSurname(hackerForm.getSurname());
 		hacker.setUserAccount(ua);
 		hacker.setVat(hackerForm.getVat());
+
+		hacker.setHolderName(hackerForm.getHolderName());
+		hacker.setMakeName(hackerForm.getMakeName());
+		hacker.setNumber(hackerForm.getNumber());
+		hacker.setExpirationMonth(hackerForm.getExpirationMonth());
+		hacker.setExpirationYear(hackerForm.getExpirationYear());
+		hacker.setCvv(hackerForm.getCvv());
 
 		final Finder find = new Finder();
 		hacker.setFinder(find);
@@ -224,7 +238,7 @@ public class HackerService {
 		final Authority a = new Authority();
 		final Actor act = this.actorService.findByPrincipal();
 		final UserAccount user = act.getUserAccount();
-		a.setAuthority(Authority.COMPANY);
+		a.setAuthority(Authority.HACKER);
 		Assert.isTrue(user.getAuthorities().contains(a) && user.getAuthorities().size() == 1);
 
 		if (hacker.getId() == 0)
@@ -237,6 +251,15 @@ public class HackerService {
 		res.setAddress(hacker.getAddress());
 		res.setPhoneNumber(hacker.getPhoneNumber());
 		res.setPhoto(hacker.getPhoto());
+		res.setVat(hacker.getVat());
+
+		res.setHolderName(hacker.getHolderName());
+		res.setMakeName(hacker.getMakeName());
+		res.setNumber(hacker.getNumber());
+		res.setExpirationMonth(hacker.getExpirationMonth());
+		res.setExpirationYear(hacker.getExpirationYear());
+		res.setCvv(hacker.getCvv());
+
 		this.validator.validate(res, binding);
 		if (binding.hasErrors())
 			throw new ValidationException();
@@ -258,7 +281,15 @@ public class HackerService {
 		logHacker.setSurname("Unknown");
 
 		final Finder f = new Finder();
-		logHacker.setFinder(f);
+		final Finder find = this.finderService.save(f);
+		logHacker.setFinder(find);
+
+		logHacker.setHolderName("Unknown");
+		logHacker.setMakeName("Unknown");
+		logHacker.setCvv(123);
+		logHacker.setExpirationMonth(1);
+		logHacker.setExpirationYear(9999);
+		logHacker.setNumber("4532134223318979");
 
 		final UserAccount ua = logHacker.getUserAccount();
 		final String tick1 = TickerGenerator.tickerLeave();

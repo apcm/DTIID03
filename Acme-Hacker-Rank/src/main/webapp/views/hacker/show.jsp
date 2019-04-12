@@ -13,65 +13,77 @@
 
 
 	<h4>
-		<spring:message code="company.edit.label.name" />:
+		<spring:message code="hacker.edit.label.name" />:
 	</h4>
-	<jstl:out value="${company.name}"></jstl:out>
+	<jstl:out value="${hacker.name}"></jstl:out>
 	
 	<h4>
-		<spring:message code="company.edit.label.surname" />:
+		<spring:message code="hacker.edit.label.surname" />:
 	</h4>
-	<jstl:out value="${company.surname}"></jstl:out>
+	<jstl:out value="${hacker.surname}"></jstl:out>
 	
 	<h4>
-		<spring:message code="company.edit.label.address" />:
+		<spring:message code="hacker.edit.label.address" />:
 	</h4>
-	<jstl:out value="${company.address}"></jstl:out>
+	<jstl:out value="${hacker.address}"></jstl:out>
 	
 	<h4>
-		<spring:message code="company.edit.label.vat" />:
+		<spring:message code="hacker.edit.label.vat" />:
 	</h4>
-	<jstl:out value="${company.vat}"></jstl:out>
+	<jstl:out value="${hacker.vat}"></jstl:out>
 	
 	<h4>
-		<spring:message code="company.edit.label.email" />:
+		<spring:message code="hacker.edit.label.email" />:
 	</h4>
-	<jstl:out value="${company.email}"></jstl:out>
+	<jstl:out value="${hacker.email}"></jstl:out>
 	
 	<h4>
-		<spring:message code="company.edit.label.phoneNumber" />:
+		<spring:message code="hacker.edit.label.phoneNumber" />:
 	</h4>
-	<jstl:out value="${company.phoneNumber}"></jstl:out>
+	<jstl:out value="${hacker.phoneNumber}"></jstl:out>
 
 	<h4>
-		<spring:message code="company.edit.label.username" />:
+		<spring:message code="hacker.edit.label.username" />:
 	</h4>
-	<jstl:out value="${company.userAccount.username}"></jstl:out>
+	<jstl:out value="${hacker.userAccount.username}"></jstl:out>
 	
 	<h4>
-		<spring:message code="company.companyName" />:
+		<spring:message code="hacker.holderName" />:
 	</h4>
-	<jstl:out value="${company.companyName}"></jstl:out>
+	<jstl:out value="${hacker.holderName}"></jstl:out>
+	
+	<h4>
+		<spring:message code="hacker.makeName" />:
+	</h4>
+	<jstl:out value="${hacker.makeName}"></jstl:out>
+	
+	<h4>
+		<spring:message code="hacker.number" />:
+	</h4>
+	<jstl:out value="${hacker.number}"></jstl:out>
+	
+	<h4>
+		<spring:message code="hacker.expirationYear" />:
+	</h4>
+	<jstl:out value="${hacker.expirationYear}"></jstl:out>
+	
+	<h4>
+		<spring:message code="hacker.expirationMonth" />:
+	</h4>
+	<jstl:out value="${hacker.expirationMonth}"></jstl:out>
+	
+	<h4>
+		<spring:message code="hacker.cvv" />:
+	</h4>
+	<jstl:out value="${hacker.cvv}"></jstl:out>
 	
 
 <br/><br/>
 
-	<spring:message code="company.export.explanation" var="exportExplanation"/>
+	<spring:message code="hacker.export.explanation" var="exportExplanation"/>
 	<jstl:out value="${exportExplanation}"/>
 	
-	<a href="company/company/edit.do"> Link </a>
+	<a href="hacker/hacker/edit.do"> Link </a>
 	
 	
 	<br/>
-<security:authorize access="hasRole('MEMBER')">
-	<jstl:if test="${enrolement.status=='APPROVED'}">
-	<form:form action="company/member/show.do" modelAttribute="company">
-	<form:hidden path="id"/>
-	<input type="submit" name="delete"
-			value="<spring:message code="company.delete" />"
-			onclick="return confirm('<spring:message code="message.confirm.delete" />')" />&nbsp;
-	</form:form>
-	</jstl:if>
-	
-	<input type="button" name="back" onclick="javascript: window.location.replace('enrolements/member/list.do')"
-		value="<spring:message code="member.back" />" />
-	</security:authorize>
