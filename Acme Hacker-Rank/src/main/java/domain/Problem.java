@@ -13,12 +13,12 @@ import org.hibernate.validator.constraints.NotBlank;
 @Access(AccessType.PROPERTY)
 public class Problem extends DomainEntity {
 
-	private String		title;
-	private String		statement;
-	private String		hint;
-	private String		attachments;
-	private boolean		finalMode;
-	private Position	position;
+	private String	title;
+	private String	statement;
+	private String	hint;
+	private String	attachments;
+	private boolean	finalMode;
+	private Company	company;
 
 
 	@NotBlank
@@ -63,12 +63,12 @@ public class Problem extends DomainEntity {
 	}
 	@Valid
 	@ManyToOne(optional = false)
-	public Position getPosition() {
-		return this.position;
+	public Company getCompany() {
+		return this.company;
 	}
 
-	public void setPosition(final Position position) {
-		this.position = position;
+	public void setCompany(final Company company) {
+		this.company = company;
 	}
 
 }

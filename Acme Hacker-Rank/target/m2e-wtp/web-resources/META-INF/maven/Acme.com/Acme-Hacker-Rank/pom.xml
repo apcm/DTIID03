@@ -22,7 +22,7 @@
 
 	<!-- Indexing information -->
 
-	<name>Acme Hacker-Rank</name>
+	<name>Acme-Hacker-Rank</name>
 	<url>http://www.acme-hacker-rank.com</url>
 
 	<!-- Build commands -->
@@ -315,5 +315,5 @@
 
 	</dependencies>
 
-	<description>System for hackers and companies.</description>
+	<description>This system is for companies and hackers.</description>
 </project> 

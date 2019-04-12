@@ -8,8 +8,11 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -25,10 +28,32 @@ public class Position extends DomainEntity {
 	private Collection<String>	skills;
 	private Collection<String>	technologies;
 	private String				profile;
+	private boolean				isCancelled;
 	private Integer				salary;
 	private boolean				finalMode;
 	private String				ticker;
+	private Company				company;
+	private Collection<Problem>	problems;
 
+
+	@ManyToOne
+	@Valid
+	public Company getCompany() {
+		return this.company;
+	}
+
+	public void setCompany(final Company company) {
+		this.company = company;
+	}
+
+	@ManyToMany
+	public Collection<Problem> getProblems() {
+		return this.problems;
+	}
+
+	public void setProblems(final Collection<Problem> problems) {
+		this.problems = problems;
+	}
 
 	@NotBlank
 	public String getTitle() {
@@ -105,6 +130,14 @@ public class Position extends DomainEntity {
 
 	public void setTicker(final String ticker) {
 		this.ticker = ticker;
+	}
+
+	public boolean getIsCancelled() {
+		return this.isCancelled;
+	}
+
+	public void setIsCancelled(final boolean isCancelled) {
+		this.isCancelled = isCancelled;
 	}
 
 }
