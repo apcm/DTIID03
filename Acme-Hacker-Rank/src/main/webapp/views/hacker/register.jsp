@@ -8,7 +8,7 @@
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<form:form action="hacker/create.do"
+<form:form action="hacker/register.do"
 	modelAttribute="hackerForm">
 
 	<form:hidden path="userAccount.authorities" />
@@ -92,7 +92,53 @@
 	</fieldset>
 	<br />
 
-
+	<fieldset>
+		<legend align="left">
+			<spring:message code="hacker.creditCard" />
+		</legend>
+		
+		<form:label path="holderName">
+			<spring:message code="hacker.holderName" />* :
+		</form:label>
+		<form:input path="holderName" />
+		<form:errors cssClass="error" path="holderName" />
+		<br />
+		
+		<form:label path="makeName">
+			<spring:message code="hacker.makeName" />* :
+		</form:label>
+		<form:input path="makeName" />
+		<form:errors cssClass="error" path="makeName" />
+		<br />
+				
+		<form:label path="number">
+			<spring:message code="hacker.number" />* :
+		</form:label>
+		<form:input path="number" />
+		<form:errors cssClass="error" path="number" />
+		<br />
+		
+		<form:label path="expirationYear">
+			<spring:message code="hacker.expirationYear" />* :
+		</form:label>
+		<form:input path="expirationYear" />
+		<form:errors cssClass="error" path="expirationYear" />
+		<br />	
+					
+		<form:label path="expirationMonth">
+			<spring:message code="hacker.expirationMonth" />* :
+		</form:label>
+		<form:input path="expirationMonth" />
+		<form:errors cssClass="error" path="expirationMonth" />
+		<br />	
+				
+		<form:label path="cvv">
+			<spring:message code="hacker.cvv" />* :
+		</form:label>
+		<form:input path="cvv" />
+		<form:errors cssClass="error" path="cvv" />
+		<br />			
+	</fieldset>
 	<br />
 	<fieldset>
 		<legend align="left">

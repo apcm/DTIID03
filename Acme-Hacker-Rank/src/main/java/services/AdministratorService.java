@@ -55,7 +55,7 @@ public class AdministratorService {
 
 		final UserAccount newUser = new UserAccount();
 		final Authority f = new Authority();
-		f.setAuthority(Authority.COMPANY);
+		f.setAuthority(Authority.ADMIN);
 		newUser.addAuthority(f);
 		result.setUserAccount(newUser);
 
@@ -182,7 +182,7 @@ public class AdministratorService {
 		//Assert.isTrue(AdministratorForm.getUserAccount().getAuthorities() == colMem);
 		//Damos valores a los atributos de la hermandad con los datos que nos llegan
 		final Authority com = new Authority();
-		com.setAuthority(Authority.COMPANY);
+		com.setAuthority(Authority.ADMIN);
 		final List<Authority> aus = new ArrayList<>();
 		aus.add(com);
 		final UserAccount ua = adminForm.getUserAccount();
@@ -196,6 +196,13 @@ public class AdministratorService {
 		admin.setSurname(adminForm.getSurname());
 		admin.setUserAccount(ua);
 		admin.setVat(adminForm.getVat());
+
+		admin.setHolderName(adminForm.getHolderName());
+		admin.setMakeName(adminForm.getMakeName());
+		admin.setNumber(adminForm.getNumber());
+		admin.setExpirationMonth(adminForm.getExpirationMonth());
+		admin.setExpirationYear(adminForm.getExpirationYear());
+		admin.setCvv(adminForm.getCvv());
 
 		admin.setIsBanned(false);
 
@@ -218,7 +225,7 @@ public class AdministratorService {
 		final Authority a = new Authority();
 		final Actor act = this.actorService.findByPrincipal();
 		final UserAccount user = act.getUserAccount();
-		a.setAuthority(Authority.COMPANY);
+		a.setAuthority(Authority.ADMIN);
 		Assert.isTrue(user.getAuthorities().contains(a) && user.getAuthorities().size() == 1);
 
 		if (admin.getId() == 0)
@@ -231,21 +238,19 @@ public class AdministratorService {
 		res.setAddress(admin.getAddress());
 		res.setPhoneNumber(admin.getPhoneNumber());
 		res.setPhoto(admin.getPhoto());
+
+		res.setHolderName(admin.getHolderName());
+		res.setMakeName(admin.getMakeName());
+		res.setNumber(admin.getNumber());
+		res.setExpirationMonth(admin.getExpirationMonth());
+		res.setExpirationYear(admin.getExpirationYear());
+		res.setCvv(admin.getCvv());
+
 		this.validator.validate(res, binding);
 		if (binding.hasErrors())
 			throw new ValidationException();
 
 		return res;
-	}
-
-	private void checkAuthority() {
-		UserAccount ua;
-		ua = LoginService.getPrincipal();
-		Assert.notNull(ua);
-		final Collection<Authority> auth = ua.getAuthorities();
-		final Authority a = new Authority();
-		a.setAuthority(Authority.COMPANY);
-		Assert.isTrue(auth.contains(a));
 	}
 
 	public void leave() {
@@ -260,6 +265,13 @@ public class AdministratorService {
 
 		logAdministrator.setSocialProfiles(null);
 		logAdministrator.setSurname("Unknown");
+
+		logAdministrator.setHolderName("Unknown");
+		logAdministrator.setMakeName("Unknown");
+		logAdministrator.setCvv(123);
+		logAdministrator.setExpirationMonth(1);
+		logAdministrator.setExpirationYear(9999);
+		logAdministrator.setNumber("4532134223318979");
 
 		final UserAccount ua = logAdministrator.getUserAccount();
 		final String tick1 = TickerGenerator.tickerLeave();
