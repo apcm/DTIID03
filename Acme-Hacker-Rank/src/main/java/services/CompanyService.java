@@ -197,12 +197,6 @@ public class CompanyService {
 		company.setSurname(companyForm.getSurname());
 		company.setUserAccount(ua);
 		company.setVat(companyForm.getVat());
-		company.setHolderName(companyForm.getHolderName());
-		company.setMakeName(companyForm.getMakeName());
-		company.setNumber(companyForm.getNumber());
-		company.setExpirationMonth(companyForm.getExpirationMonth());
-		company.setExpirationYear(companyForm.getExpirationYear());
-		company.setCvv(companyForm.getCvv());
 
 		company.setCompanyName(companyForm.getCompanyName());
 
@@ -240,21 +234,21 @@ public class CompanyService {
 		res.setAddress(company.getAddress());
 		res.setPhoneNumber(company.getPhoneNumber());
 		res.setPhoto(company.getPhoto());
-		res.setVat(company.getVat());
-
-		res.setCompanyName(company.getCompanyName());
-
-		res.setHolderName(company.getHolderName());
-		res.setMakeName(company.getMakeName());
-		res.setNumber(company.getNumber());
-		res.setExpirationMonth(company.getExpirationMonth());
-		res.setExpirationYear(company.getExpirationYear());
-		res.setCvv(company.getCvv());
 		this.validator.validate(res, binding);
 		if (binding.hasErrors())
 			throw new ValidationException();
 
 		return res;
+	}
+
+	private void checkAuthority() {
+		UserAccount ua;
+		ua = LoginService.getPrincipal();
+		Assert.notNull(ua);
+		final Collection<Authority> auth = ua.getAuthorities();
+		final Authority a = new Authority();
+		a.setAuthority(Authority.COMPANY);
+		Assert.isTrue(auth.contains(a));
 	}
 
 	public void leave() {
@@ -266,17 +260,11 @@ public class CompanyService {
 		logCompany.setName("Unknown");
 		logCompany.setPhoneNumber("Unknown");
 		logCompany.setPhoto("http://www.unknown.com");
+
 		logCompany.setSocialProfiles(null);
 		logCompany.setSurname("Unknown");
 
 		logCompany.setCompanyName("Unknown");
-
-		logCompany.setHolderName("Unknown");
-		logCompany.setMakeName("Unknown");
-		logCompany.setCvv(123);
-		logCompany.setExpirationMonth(1);
-		logCompany.setExpirationYear(9999);
-		logCompany.setNumber("4532134223318979");
 
 		final UserAccount ua = logCompany.getUserAccount();
 		final String tick1 = TickerGenerator.tickerLeave();

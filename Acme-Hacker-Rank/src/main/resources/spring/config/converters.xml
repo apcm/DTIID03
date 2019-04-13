@@ -18,6 +18,24 @@
 	">
 
 	<util:list id="converters">
+	<bean class="converters.ProblemToStringConverter" /> 
+  	<bean class="converters.StringToProblemConverter" /> 
+  	<bean class="converters.CompanyToStringConverter" /> 
+  	<bean class="converters.StringToCompanyConverter" /> 
+  	<bean class="converters.CurriculaToStringConverter" /> 
+  	<bean class="converters.StringToCurriculaConverter" /> 
+  	<bean class="converters.HackerToStringConverter" /> 
+  	<bean class="converters.StringToHackerConverter" /> 
+  	
+  	<bean class="converters.EducationDataToStringConverter" /> 
+  	<bean class="converters.StringToEducationDataConverter" /> 
+  	<bean class="converters.PersonalDataToStringConverter" /> 
+  	<bean class="converters.StringToPersonalDataConverter" /> 
+  	<bean class="converters.PositionDataToStringConverter" /> 
+  	<bean class="converters.StringToPositionDataConverter" /> 
+  	<bean class="converters.MiscellaneousDataToStringConverter" /> 
+  	<bean class="converters.StringToMiscellaneousDataConverter" /> 
+	
 		<!-- 
 			Add your own converters using entries of the following form: 
 			<bean class="converters.Class1ToClass2" /> 

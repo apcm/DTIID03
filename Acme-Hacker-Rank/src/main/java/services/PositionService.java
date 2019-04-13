@@ -1,24 +1,28 @@
 
 package services;
 
-import java.util.Collection;
-
-import javax.transaction.Transactional;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import repositories.PositionRepository;
+import domain.Position;
 
 @Service
 @Transactional
 public class PositionService {
 
-	@Autowired(required = true)
-	PositionRepository	positionRepository;
+	@Autowired
+	private PositionRepository	positionRepository;
 
 
-	public Collection<String> searchPositions(final String keyword) {
-		return this.positionRepository.searchPositions(keyword);
+	public List<Position> getPositionByProblemId(final int id) {
+		return this.positionRepository.findByProblemId(id);
+	}
+
+	public void save(final Position p) {
+		this.positionRepository.save(p);
 	}
 }

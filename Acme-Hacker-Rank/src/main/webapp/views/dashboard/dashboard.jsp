@@ -9,7 +9,6 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
 <security:authorize access="hasRole('ADMIN')">
-
 	<spring:message code="dashboard.avgPositions"/>
 	<jstl:out value="${avgPositions}"/>
 	<br/>

@@ -5,7 +5,6 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.validation.Valid;
 
 @Entity
@@ -13,11 +12,20 @@ import javax.validation.Valid;
 public class Curricula extends DomainEntity {
 
 	private Hacker		hacker;
+	private String		name;
 	private Application	application;
 
 
+	public String getName() {
+		return this.name;
+	}
+
+	public void setName(final String name) {
+		this.name = name;
+	}
+
 	@Valid
-	@OneToOne(optional = false)
+	@ManyToOne
 	public Hacker getHacker() {
 		return this.hacker;
 	}
