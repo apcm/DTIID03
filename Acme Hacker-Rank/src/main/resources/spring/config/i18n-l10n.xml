@@ -27,6 +27,7 @@
 		<value>/views/profile/messages</value>
 		<value>/views/company/messages</value>
 		<value>/views/application/messages</value>
+		<value>/views/position/messages</value>
 
 		
 	</util:list>

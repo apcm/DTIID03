@@ -149,4 +149,31 @@ public class TickerGenerator {
 
 		return ticker;
 	}
+
+	public static String tickerPosition() {
+		final List<String> nums = new ArrayList<String>();
+		nums.add("0");
+		nums.add("1");
+		nums.add("2");
+		nums.add("3");
+		nums.add("4");
+		nums.add("5");
+		nums.add("6");
+		nums.add("7");
+		nums.add("8");
+		nums.add("9");
+
+		String ticker = "";
+		
+		final String a = "ACME";
+		ticker = ticker + a;
+
+		for (Integer i = 0; i < 5 ; i++) {
+				final Integer numero = new Random().nextInt(9);
+				final String b = nums.get(numero);
+				ticker = ticker + b;
+		}
+
+		return ticker;
+	}
 }

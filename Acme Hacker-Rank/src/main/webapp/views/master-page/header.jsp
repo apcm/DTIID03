@@ -45,6 +45,7 @@
 				<ul>
 					<li class="arrow"></li>
 					<li><a href="company/company/edit.do"><spring:message code="master.page.edit.company" /></a></li>
+					<li><a href="position/company/list.do"><spring:message code="master.page.list.position" /></a></li>
 				</ul>
 			</li>
 		</security:authorize>

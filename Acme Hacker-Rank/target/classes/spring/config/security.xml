@@ -53,7 +53,8 @@
 
 		<!-- COMPANY -->
 		<security:intercept-url pattern="/company/company/edit.do" access="hasRole('COMPANY')" /> 
-		<security:intercept-url pattern="/company/company/show.do" access="hasRole('COMPANY')" /> 
+		<security:intercept-url pattern="/company/company/show.do" access="hasRole('COMPANY')" />
+		<security:intercept-url pattern="/position/company/**" access="hasRole('COMPANY')" />
 		
 
 		<!-- HACKER -->
