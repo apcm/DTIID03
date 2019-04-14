@@ -12,91 +12,93 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import services.EducationDataService;
-import domain.EducationData;
+import services.PositionDataService;
+import domain.PositionData;
 
 @Controller
-@RequestMapping("/educationData/hacker")
-public class EducationDataHackerController {
+@RequestMapping("/positionData/hacker")
+public class PositionDataHackerController {
 
 	@Autowired
-	EducationDataService	educationDataService;
+	PositionDataService	positionDataService;
 
 
 	//crear
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create(@RequestParam final int curriculaId) {
 		final ModelAndView res;
-		final EducationData ed = this.educationDataService.create(curriculaId);
+		final PositionData pd = this.positionDataService.create(curriculaId);
 
-		res = this.createEditModelAndView(ed);
-
-		return res;
-	}
-
-	private ModelAndView createEditModelAndView(final EducationData ed) {
-		ModelAndView res;
-		res = this.createEditModelAndView(ed, null);
+		res = this.createEditModelAndView(pd);
 
 		return res;
 	}
 
-	private ModelAndView createEditModelAndView(final EducationData ed, final String messageCode) {
+	private ModelAndView createEditModelAndView(final PositionData pd) {
 		ModelAndView res;
-		res = new ModelAndView("educationData/edit");
+		res = this.createEditModelAndView(pd, null);
 
-		res.addObject("educationData", ed);
+		return res;
+	}
+
+	private ModelAndView createEditModelAndView(final PositionData pd, final String messageCode) {
+		ModelAndView res;
+		res = new ModelAndView("positionData/edit");
+		Assert.notNull(pd);
+
+		res.addObject("positionData", pd);
 		res.addObject("message", messageCode);
 
 		return res;
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public ModelAndView save(@RequestParam final int educationDataId) {
+	public ModelAndView save(@RequestParam final int positionDataId) {
 		ModelAndView res;
-		final EducationData ed = this.educationDataService.findOne(educationDataId);
+		final PositionData pd = this.positionDataService.findOne(positionDataId);
 
-		res = new ModelAndView("educationData/edit");
+		res = new ModelAndView("positionData/edit");
 
-		res.addObject("educationData", ed);
-		Assert.notNull(ed);
-		res = this.createEditModelAndView(ed);
+		res.addObject("positionData", pd);
+		Assert.notNull(pd);
+		res = this.createEditModelAndView(pd);
 
 		return res;
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(EducationData ed, final BindingResult binding) {
+	public ModelAndView save(PositionData pd, final BindingResult binding) {
 		ModelAndView res;
 
 		try {
-			ed = this.educationDataService.reconstruct(ed, binding);
-			this.educationDataService.save(ed);
+			pd = this.positionDataService.reconstruct(pd, binding);
+			this.positionDataService.save(pd);
 
 			String redirect = "curricula/hacker/show.do?curriculaId=";
-			redirect = redirect + String.valueOf(ed.getCurricula().getId());
+			redirect = redirect + String.valueOf(pd.getCurricula().getId());
 			res = new ModelAndView("redirect:../../" + redirect);
 		} catch (final ValidationException oops) {
-			res = this.createEditModelAndView(ed);
+			res = this.createEditModelAndView(pd);
 		} catch (final Throwable oops) {
-			res = this.createEditModelAndView(ed, "error.educationData");
+			res = this.createEditModelAndView(pd, "error.positionData");
 		}
 
 		return res;
 	}
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
-	public ModelAndView delete(final EducationData ed, final BindingResult binding) {
+	public ModelAndView delete(final PositionData ed, final BindingResult binding) {
 		ModelAndView res;
 
 		try {
 			String redirect = "curricula/hacker/show.do?curriculaId=";
-			final EducationData ed1 = this.educationDataService.findOne(ed.getId());
+			final PositionData ed1 = this.positionDataService.findOne(ed.getId());
 			redirect = redirect + String.valueOf(ed1.getCurricula().getId());
-			this.educationDataService.delete(ed1);
+
+			this.positionDataService.delete(ed1);
 
 			res = new ModelAndView("redirect:../../" + redirect);
 		} catch (final Throwable oops) {
-			res = this.createEditModelAndView(ed, "error.educationData");
+			res = this.createEditModelAndView(ed, "error.positionData");
 		}
 
 		return res;

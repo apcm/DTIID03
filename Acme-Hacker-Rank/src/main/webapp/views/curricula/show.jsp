@@ -16,166 +16,111 @@
 		<spring:message code="curricula.name" />:
 	</h3>
 	<jstl:out value="${curricula.name}"></jstl:out>
-	
-	<jstl:forEach items="${personalData}" var="personalData">
-	
+	<!-- Personal Data -->
 	<h3 style="color:blue;">
 		<spring:message code="personalData.part" />:
 	</h3>
 	
-	<h4>
-		<spring:message code="personalData.fullName" />:
-	</h4>
-	<jstl:out value="${personalData.fullName}"></jstl:out>
+	<display:table pagesize="5" class="displaytag" keepStatus="true"
+	name="personalData" requestURI="${requestURI}" id="row">
+
+	<display:column property="fullName" titleKey="personalData.fullName"  />
+	<display:column property="statement" titleKey="personalData.statement"  />
+	<display:column property="phoneNumber" titleKey="personalData.phoneNumber"  />
+	<display:column property="gitProfile" titleKey="personalData.gitProfile"  />
+	<display:column property="linkedInProfile" titleKey="personalData.linkedInProfile"  />
 	
-	<h4>
-		<spring:message code="personalData.statement" />:
-	</h4>
-	<jstl:out value="${personalData.statement}"></jstl:out>
-	
-	<h4>
-		<spring:message code="personalData.phoneNumber" />:
-	</h4>
-	<jstl:out value="${personalData.phoneNumber}"></jstl:out>
-	
-	<h4>
-		<spring:message code="personalData.gitProfile" />:
-	</h4>
-	<jstl:out value="${personalData.gitProfile}"></jstl:out>
-	
-	<h4>
-		<spring:message code="personalData.linkedInProfile" />:
-	</h4>
-	<jstl:out value="${personalData.linkedInProfile}"></jstl:out>
-	
-	<br/>
-	<br/>
-	
-	<a href="personalData/hacker/edit.do?personalDataId=${personalData.id }">
+	<display:column>
+	<a href="personalData/hacker/edit.do?personalDataId=${row.id }">
 	<spring:message code="edit.pesonalData"/></a>
+
+	</display:column>
 	
-	<br/>
-	
-	</jstl:forEach>
-	
+		
+</display:table>
+
 	<a href="personalData/hacker/create.do?curriculaId=${curricula.id }">
 	<spring:message code="create.pesonalData"/></a>
 	<br/>
+	<br/>
 	
-	<jstl:forEach items="${educationData}" var="educationData">
+	<!-- Education Data -->
 	<h3 style="color:blue;">
 		<spring:message code="educationData.part" />:
 	</h3>
 	
-	<h4>
-		<spring:message code="educationData.degree" />:
-	</h4>
-	<jstl:out value="${educationData.degree}"></jstl:out>
+	<display:table pagesize="5" class="displaytag" keepStatus="true"
+	name="educationData" requestURI="${requestURI}" id="row">
+
+	<display:column property="degree" titleKey="educationData.degree"  />
+	<display:column property="institution" titleKey="educationData.institution"  />
+	<display:column property="mark" titleKey="educationData.mark"  />
+	<display:column property="startMoment" titleKey="educationData.startMoment"  />
+	<display:column property="endMoment" titleKey="educationData.endMoment"  />
 	
-	<h4>
-		<spring:message code="educationData.institution" />:
-	</h4>
-	<jstl:out value="${educationData.institution}"></jstl:out>
-	
-	<h4>
-		<spring:message code="educationData.mark" />:
-	</h4>
-	<jstl:out value="${educationData.mark}"></jstl:out>
-	
-	<h4>
-		<spring:message code="educationData.startMoment" />:
-	</h4>
-	<jstl:out value="${educationData.startMoment}"></jstl:out>
-	
-	<h4>
-		<spring:message code="educationData.endMoment" />:
-	</h4>
-	<jstl:out value="${educationData.endMoment}"></jstl:out>
-	
-	<br/>
-	<br/>
-	
-	<a href="educationData/hacker/edit.do?educationDataId=${educationData.id }">
+	<display:column>
+	<a href="educationData/hacker/edit.do?educationDataId=${row.id }">
 	<spring:message code="edit.educationData"/></a>
+
+	</display:column>
 	
-	<br/>
-	
-	</jstl:forEach>
+		
+</display:table>
 	
 	<a href="educationData/hacker/create.do?curriculaId=${curricula.id }">
 	<spring:message code="create.educationData"/></a>
 	
 	<br/>
 	
-	<jstl:forEach items="${positionData}" var="positionData">
+	<!-- Position Data -->
 	<h3 style="color:blue;">
 		<spring:message code="positionData.part" />:
 	</h3>
 	
-	<h4>
-		<spring:message code="positionData.title" />:
-	</h4>
-	<jstl:out value="${positionData.title}"></jstl:out>
+	<display:table pagesize="5" class="displaytag" keepStatus="true"
+	name="positionData" requestURI="${requestURI}" id="row">
+
+	<display:column property="title" titleKey="positionData.title"  />
+	<display:column property="description" titleKey="positionData.description"  />
+	<display:column property="startMoment" titleKey="positionData.startMoment"  />
+	<display:column property="endMoment" titleKey="positionData.endMoment"  />
 	
-	<h4>
-		<spring:message code="positionData.description" />:
-	</h4>
-	<jstl:out value="${positionData.description}"></jstl:out>
-	
-	<h4>
-		<spring:message code="positionData.startMoment" />:
-	</h4>
-	<jstl:out value="${positionData.startMoment}"></jstl:out>
-	
-	<h4>
-		<spring:message code="positionData.endMoment" />:
-	</h4>
-	<jstl:out value="${positionData.endMoment}"></jstl:out>
-	
-	<br/>
-	<br/>
-	
-	<a href="positionData/hacker/edit.do?positionDataId=${positionData.id }">
+	<display:column>
+	<a href="positionData/hacker/edit.do?positionDataId=${row.id }">
 	<spring:message code="edit.positionData"/></a>
+
+	</display:column>
 	
-	<br/>
-	
-	</jstl:forEach>
+		
+</display:table>
 	
 	<a href="positionData/hacker/create.do?curriculaId=${curricula.id }">
 	<spring:message code="create.positionData"/></a>
 	<br/>
 	
-	<jstl:forEach items="${miscellaneousData}" var="miscellaneousData">
 	<h3 style="color:blue;">
 		<spring:message code="miscellaneousData.part" />:
 	</h3>
 	
-	<h4>
-		<spring:message code="miscellaneousData.freeText" />:
-	</h4>
-	<jstl:out value="${miscellaneousData.freeText}"></jstl:out>
+	<display:table pagesize="5" class="displaytag" keepStatus="true"
+	name="miscellaneousData" requestURI="${requestURI}" id="row">
+
+	<display:column property="freeText" titleKey="miscellaneousData.freeText"  />
+	<display:column property="attachments" titleKey="miscellaneousData.attachments"  />
 	
-	<h4>
-		<spring:message code="miscellaneousData.attachments" />:
-	</h4>
-	<jstl:out value="${miscellaneousData.attachments}"></jstl:out>
-	
-	<br/>
-	<br/>
-	
-	<a href="miscellaneousData/hacker/edit.do?miscellaneousDataId=${miscellaneousData.id }">
+	<display:column>
+	<a href="miscellaneousData/hacker/edit.do?miscellaneousDataId=${row.id }">
 	<spring:message code="edit.miscellaneousData"/></a>
+
+	</display:column>
 	
-	<br/>
-	
-	</jstl:forEach>
+		
+</display:table>
 	
 	<a href="miscellaneousData/hacker/create.do?curriculaId=${curricula.id }">
 	<spring:message code="create.miscellaneousData"/></a>
 	
 	
-	<br/>
 	<br/>
 	<br/>
 

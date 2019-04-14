@@ -3,7 +3,7 @@ package controllers;
 
 import java.util.List;
 
-import javax.validation.Valid;
+import javax.validation.ValidationException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -84,6 +84,7 @@ public class CurriculaHackerController extends AbstractController {
 		md = this.miscellaneousDataService.findByCurriculaId(curriculaId);
 
 		res = new ModelAndView("curricula/show");
+		res.addObject("requestURI", "curricula/hacker/show.do" + "?curriculaId=" + String.valueOf(c.getId()));
 		res.addObject("curricula", c);
 		res.addObject("educationData", ed);
 		res.addObject("personalData", pd);
@@ -136,21 +137,19 @@ public class CurriculaHackerController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid final Curricula c, final BindingResult binding) {
+	public ModelAndView save(Curricula c, final BindingResult binding) {
 		ModelAndView res;
 
-		if (binding.hasErrors())
+		try {
+			c = this.curriculaService.reconstruct(c, binding);
+			this.curriculaService.save(c);
+
+			res = new ModelAndView("redirect:list.do");
+		} catch (final ValidationException oops) {
 			res = this.createEditModelAndView(c);
-		else
-
-			try {
-
-				this.curriculaService.save(c);
-
-				res = new ModelAndView("redirect:list.do");
-			} catch (final Throwable oops) {
-				res = this.createEditModelAndView(c, "error.curricula");
-			}
+		} catch (final Throwable oops) {
+			res = this.createEditModelAndView(c, "error.curricula");
+		}
 
 		return res;
 	}

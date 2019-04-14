@@ -3,10 +3,14 @@ package services;
 
 import java.util.List;
 
+import javax.validation.ValidationException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.PositionDataRepository;
 import security.Authority;
@@ -17,6 +21,9 @@ import domain.PositionData;
 @Service
 @Transactional
 public class PositionDataService {
+
+	@Autowired
+	private Validator				validator;
 
 	@Autowired
 	private PositionDataRepository	positionDataRepository;
@@ -30,7 +37,11 @@ public class PositionDataService {
 
 	public List<PositionData> findByCurriculaId(final int curriculaId) {
 		this.checkConditions();
-		return this.positionDataRepository.findPositionDataByCurriculaId(curriculaId);
+		final List<Curricula> lc = this.curriculaService.getCurriculasFromHacker();
+		final List<PositionData> res = this.positionDataRepository.findPositionDataByCurriculaId(curriculaId);
+		for (final PositionData ed : res)
+			Assert.isTrue(lc.contains(ed.getCurricula()));
+		return res;
 	}
 
 	private void checkConditions() {
@@ -71,5 +82,25 @@ public class PositionDataService {
 		Assert.isTrue(this.positionDataRepository.findOne(p.getId()).getCurricula().getHacker() == this.hackerService.findOnePrincipal());
 
 		this.positionDataRepository.delete(p);
+	}
+
+	public PositionData reconstruct(final PositionData pd, final BindingResult binding) {
+		PositionData res;
+		if (pd.getId() == 0)
+			res = pd;
+		else {
+			res = this.findOne(pd.getId());
+			res.setDescription(pd.getDescription());
+			res.setEndMoment(pd.getEndMoment());
+			res.setStartMoment(pd.getStartMoment());
+			res.setTitle(pd.getTitle());
+
+		}
+		this.validator.validate(res, binding);
+
+		if (binding.hasErrors())
+			throw new ValidationException();
+
+		return res;
 	}
 }

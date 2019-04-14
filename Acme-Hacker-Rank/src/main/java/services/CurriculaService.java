@@ -3,10 +3,14 @@ package services;
 
 import java.util.List;
 
+import javax.validation.ValidationException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.CurriculaRepository;
 import security.Authority;
@@ -20,6 +24,9 @@ import domain.PositionData;
 @Service
 @Transactional
 public class CurriculaService {
+
+	@Autowired
+	private Validator					validator;
 
 	@Autowired
 	private CurriculaRepository			curriculaRepository;
@@ -41,7 +48,10 @@ public class CurriculaService {
 
 
 	public Curricula findOne(final int curriculaId) {
-		return this.curriculaRepository.findOne(curriculaId);
+		final Curricula c = this.curriculaRepository.findOne(curriculaId);
+		this.checkConditions();
+		Assert.isTrue(this.getCurriculasFromHacker().contains(c));
+		return c;
 	}
 
 	public List<Curricula> getCurriculasFromHacker() {
@@ -106,5 +116,22 @@ public class CurriculaService {
 
 		this.curriculaRepository.delete(c);
 
+	}
+
+	public Curricula reconstruct(final Curricula c, final BindingResult binding) {
+		Curricula res;
+		if (c.getId() == 0)
+			res = c;
+		else {
+			res = this.findOne(c.getId());
+			res.setName(c.getName());
+		}
+
+		this.validator.validate(res, binding);
+
+		if (binding.hasErrors())
+			throw new ValidationException();
+
+		return res;
 	}
 }

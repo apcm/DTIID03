@@ -3,10 +3,14 @@ package services;
 
 import java.util.List;
 
+import javax.validation.ValidationException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.EducationDataRepository;
 import security.Authority;
@@ -17,6 +21,9 @@ import domain.Hacker;
 @Service
 @Transactional
 public class EducationDataService {
+
+	@Autowired
+	private Validator				validator;
 
 	@Autowired
 	private EducationDataRepository	educationDataRepository;
@@ -30,7 +37,11 @@ public class EducationDataService {
 
 	public List<EducationData> findByCurriculaId(final int curriculaId) {
 		this.checkConditions();
-		return this.educationDataRepository.findEducationDataByCurriculaId(curriculaId);
+		final List<Curricula> lc = this.curriculaService.getCurriculasFromHacker();
+		final List<EducationData> res = this.educationDataRepository.findEducationDataByCurriculaId(curriculaId);
+		for (final EducationData ed : res)
+			Assert.isTrue(lc.contains(ed.getCurricula()));
+		return res;
 	}
 
 	private void checkConditions() {
@@ -71,6 +82,27 @@ public class EducationDataService {
 		Assert.isTrue(this.educationDataRepository.findOne(p.getId()).getCurricula().getHacker() == this.hackerService.findOnePrincipal());
 
 		this.educationDataRepository.delete(p);
+	}
+
+	public EducationData reconstruct(final EducationData ed, final BindingResult binding) {
+		EducationData res;
+		if (ed.getId() == 0)
+			res = ed;
+		else {
+			res = this.findOne(ed.getId());
+			res.setDegree(ed.getDegree());
+			res.setEndMoment(ed.getEndMoment());
+			res.setInstitution(ed.getInstitution());
+			res.setMark(ed.getMark());
+			res.setStartMoment(ed.getStartMoment());
+
+		}
+		this.validator.validate(res, binding);
+
+		if (binding.hasErrors())
+			throw new ValidationException();
+
+		return res;
 	}
 
 }

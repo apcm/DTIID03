@@ -11,9 +11,11 @@
 <form:form action="curricula/hacker/edit.do"
 	modelAttribute="curricula">
 	<form:hidden path="id" />
+	<jstl:if test="${id==0 }">
 	<form:hidden path="version" />
 
 	<form:hidden path="hacker" />
+	</jstl:if>
 
 	<fieldset>
 		<legend align="left">

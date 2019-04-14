@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.validation.Valid;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 @Entity
 @Access(AccessType.PROPERTY)
 public class Curricula extends DomainEntity {
@@ -16,6 +18,7 @@ public class Curricula extends DomainEntity {
 	private Application	application;
 
 
+	@NotBlank
 	public String getName() {
 		return this.name;
 	}

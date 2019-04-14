@@ -102,11 +102,11 @@ public class ProblemService {
 			res.setStatement(p.getStatement());
 			res.setTitle(p.getTitle());
 
-			this.validator.validate(res, binding);
-
-			if (binding.hasErrors())
-				throw new ValidationException();
 		}
+		this.validator.validate(res, binding);
+
+		if (binding.hasErrors())
+			throw new ValidationException();
 
 		return res;
 	}

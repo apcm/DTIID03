@@ -31,11 +31,10 @@
 		<value>/views/profile/tiles.xml</value>
 		
 		<value>/views/educationData/tiles.xml</value>
-		
-		<!-- 
 		<value>/views/personalData/tiles.xml</value>
+	
 		<value>/views/positionData/tiles.xml</value>
-		<value>/views/miscellaneousData/tiles.xml</value> -->
+		<value>/views/miscellaneousData/tiles.xml</value> 
 	</util:list>
 
 </beans>
