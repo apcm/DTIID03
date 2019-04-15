@@ -62,7 +62,9 @@ public class PositionService {
 	private boolean has2Problem(Position position) {
 		Boolean res = true;
 		if(position.isFinalMode()){
-			if(res = position.getProblems().size()< 2) res = false;
+			if(position.getProblems().size()< 2){
+				res = false;
+			}
 		}
 			
 		return res;
@@ -104,6 +106,18 @@ public class PositionService {
 		Position p = this.findOne(positionId);
 		p.setIsCancelled(true);
 		Position res = this.save(p);
+		
+		return res;
+	}
+
+	public Collection<Problem> getProblems(Position position) {
+		Collection<Problem> res = new ArrayList<Problem>();
+		Collection<Problem> all = this.problemService.findAll();
+		for ( Problem p: all){
+			if(p.getCompany().equals(getThisCompany())){
+				res.add(p);
+			}
+		}
 		
 		return res;
 	}

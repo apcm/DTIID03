@@ -25,7 +25,6 @@
 		<form:hidden path="version"/>
 		<form:hidden path="ticker"/>
 		<form:hidden path="company"/>
-		<form:hidden path="problems"/>
 		<form:hidden path="isCancelled"/>
 
 		<form:label path="title">
@@ -85,6 +84,15 @@
 		<form:option value="true"></form:option>
 		<form:option value="false"></form:option>
 		</form:select>
+
+		<form:label path="problems">
+		 <spring:message code="position.problems"/>
+	    </form:label>
+	    <form:select path="problems" multiple="true">	
+		<form:option value="0" label="-----"/>
+		<form:options items="${problems}" itemLabel="title"
+			/>
+	</form:select>
 		
 		
 			

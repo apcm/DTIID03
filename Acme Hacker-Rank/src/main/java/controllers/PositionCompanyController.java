@@ -54,10 +54,13 @@ public class PositionCompanyController {
 		Position position;
 
 		position = this.positionService.findOne(positionId);
+
+		Collection<Problem> problems = this.positionService.getProblems(position);
 		if(position.isFinalMode()){
 			result = this.list();
 		}else{
 		result = this.createEditModelAndView(position);
+		result.addObject("problems", problems);
 		}
 		
 		return result;
