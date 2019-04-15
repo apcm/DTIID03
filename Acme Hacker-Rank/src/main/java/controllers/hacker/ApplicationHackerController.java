@@ -127,7 +127,7 @@ public class ApplicationHackerController {
 
 		for (final Application app : appsByHacker)
 			if (app.getPosition().equals(p)) {
-				result = new ModelAndView("redirect:/welcome/index.do"); //TODO: ESTO DEBE REDIRECCIONAR A LA LISTA DE POSITIONS QUE NO ESTA IMPLEMENTADA TODAVIA
+				result = new ModelAndView("redirect:/position/hacker/list.do"); //TODO: ESTO DEBE REDIRECCIONAR A LA LISTA DE POSITIONS QUE NO ESTA IMPLEMENTADA TODAVIA
 				return result;
 			}
 

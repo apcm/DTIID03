@@ -19,9 +19,13 @@
 
 
 <display:table name="positions" id="row" requestURI="${requestURI}" pagesize="5" class ="displaytag">
+		<security:authorize access="hasRole('COMPANY')">
 
 <display:column property="ticker" titleKey="position.ticker"/>
+</security:authorize>
 <display:column property="title" titleKey="position.title"/>
+		<security:authorize access="hasRole('COMPANY')">
+
 <display:column property="deadline" titleKey="position.deadline"/>
 <display:column property="finalMode" titleKey="position.finalMode"/>
 <display:column property="isCancelled" titleKey="position.isCancelled"/>
@@ -45,9 +49,18 @@
 		<spring:message code="position.display"/>
 	</a>
 </display:column>
+
+</security:authorize>
+		<security:authorize access="hasRole('HACKER')">
+			<display:column>
+		
+			<a href="application/hacker/create.do?positionId=${row.id }">
+			<spring:message code="application.problem.create" />
+			</a>
+			</display:column>
+			
+		</security:authorize>
 </display:table>
-
-
 <a href="position/company/create.do">
 <spring:message code="position.create"/>
 </a>
