@@ -288,4 +288,8 @@ public class CompanyService {
 		logCompany.setUserAccount(ua);
 	}
 
+	public void flush() {
+		this.companyRepository.flush();
+	}
+
 }

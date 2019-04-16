@@ -301,4 +301,8 @@ public class HackerService {
 		logHacker.setUserAccount(ua);
 	}
 
+	public void flush() {
+		this.hackerRepository.flush();
+	}
+
 }
