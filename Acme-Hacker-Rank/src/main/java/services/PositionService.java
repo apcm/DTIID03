@@ -1,6 +1,7 @@
 
 package services;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,5 +25,9 @@ public class PositionService {
 
 	public void save(final Position p) {
 		this.positionRepository.save(p);
+	}
+
+	public Collection<Position> findAll() {
+		return positionRepository.findAll();
 	}
 }

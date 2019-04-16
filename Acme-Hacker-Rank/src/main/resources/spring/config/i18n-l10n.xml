@@ -32,7 +32,8 @@
 		<value>/views/personalData/messages</value>
 		<value>/views/positionData/messages</value>
 		<value>/views/miscellaneousData/messages</value>
-
+		<value>/views/position/messages</value>
+		<value>/views/company/messages</value>
 	</util:list>
 
 </beans>
