@@ -283,4 +283,8 @@ public class AdministratorService {
 		logAdministrator.setUserAccount(ua);
 	}
 
+	public void flush() {
+		this.adminRepository.flush();
+	}
+
 }

@@ -100,6 +100,18 @@
 			</list>
 		</property>
 	</bean>
+	
+	<bean id="userAccount6" class="security.UserAccount">
+		<property name="username" value="admin2" />
+		<property name="password" value="c84258e9c39059a89ab77d846ddab909" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="ADMIN" />
+				</bean>
+			</list>
+		</property>
+	</bean>
 	<!-- Actors -->
 	<bean id="admin" class="domain.Administrator">
 		<property name="name" value="Administrator"/>
@@ -122,6 +134,34 @@
 		</property>
 		
 		<property name="holderName" value="Admin Admin"/>
+		<property name="makeName" value="VISA"/>
+		<property name="number" value="4083602396731593"/>
+		<property name="expirationYear" value="2025"/>
+		<property name="expirationMonth" value="5"/>
+		<property name="cvv" value="583"/>
+	</bean>
+	
+	<bean id="admin2" class="domain.Administrator">
+		<property name="name" value="admin2"/>
+		<property name="surname" value="admin2"/>
+		<property name="photo" value="http://www.admin2.com"/>
+		<property name="email" value="admin2@admin2.com"/>
+		<property name="phoneNumber" value="+34 123676676"/>
+		<property name="address" value="Address admin2"/>
+		<property name="vat" value="21"/>
+		<property name="flagSpam" value="false"/>
+		<property name="isBanned" value="false"/>
+		<property name="userAccount" ref="userAccount6"/>
+		<property name="socialProfiles">
+			<list>
+			</list>
+		</property>
+		<property name="boxes">
+			<list>
+			</list>
+		</property>
+		
+		<property name="holderName" value="Admin2 Admin2"/>
 		<property name="makeName" value="VISA"/>
 		<property name="number" value="4083602396731593"/>
 		<property name="expirationYear" value="2025"/>

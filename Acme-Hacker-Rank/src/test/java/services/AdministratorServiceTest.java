@@ -18,22 +18,22 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import security.Authority;
 import security.UserAccount;
 import utilities.AbstractTest;
-import domain.Hacker;
+import domain.Administrator;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
 	"classpath:spring/junit.xml"
 })
 @Transactional
-public class HackerServiceTest extends AbstractTest {
+public class AdministratorServiceTest extends AbstractTest {
 
 	//SUT
 	@Autowired
-	private HackerService	hackerService;
+	private AdministratorService	administratorService;
 
 
 	/**
-	 * TESTING REQUIREMENT #7.1 (Register as a hacker)
+	 * TESTING REQUIREMENT #7.1 (Register as a administrator)
 	 * POSITIVE TEST
 	 * COVERED INSTRUCTIONS IN THIS TEST: 100%
 	 * COVERED INSTRUCTIONS IN LinkRecordService: 22.9%
@@ -41,19 +41,19 @@ public class HackerServiceTest extends AbstractTest {
 	 * */
 
 	@Test
-	public void createHacker() {
+	public void createAdministrator() {
 		final UserAccount ua = new UserAccount();
-		ua.setPassword("hacker5");
-		ua.setUsername("hacker5");
+		ua.setPassword("administrator5");
+		ua.setUsername("administrator5");
 		final Collection<Authority> coll = new ArrayList<Authority>();
 		final Authority a = new Authority();
-		a.setAuthority(Authority.HACKER);
+		a.setAuthority(Authority.ADMIN);
 		coll.add(a);
 		ua.setAuthorities(coll);
-		final Hacker nc = this.hackerService.create();
+		final Administrator nc = this.administratorService.create();
 		nc.setAddress("Sample address");
 		nc.setIsBanned(false);
-		nc.setEmail("newHacker@gmail.com");
+		nc.setEmail("newAdministrator@gmail.com");
 		nc.setFlagSpam(false);
 		nc.setName("Sample");
 		nc.setPhoneNumber("+34 1231456789");
@@ -69,14 +69,14 @@ public class HackerServiceTest extends AbstractTest {
 		nc.setNumber("4929094533598606");
 
 		final UserAccount ua2 = new UserAccount();
-		ua2.setPassword("hacker6");
-		ua2.setUsername("hacker6");
+		ua2.setPassword("administrator6");
+		ua2.setUsername("administrator6");
 		final Collection<Authority> coll2 = new ArrayList<Authority>();
 		final Authority a2 = new Authority();
-		a.setAuthority(Authority.HACKER);
+		a.setAuthority(Authority.ADMIN);
 		coll2.add(a2);
 		ua2.setAuthorities(coll2);
-		final Hacker nc2 = this.hackerService.create();
+		final Administrator nc2 = this.administratorService.create();
 		nc2.setAddress("Sample address");
 		nc2.setIsBanned(false);
 		nc2.setEmail("sad");
@@ -103,7 +103,7 @@ public class HackerServiceTest extends AbstractTest {
 			 * COVERED DATA: 10%
 			 * */
 			{
-				nc, null
+				"admin", nc, null
 			},
 
 			/**
@@ -114,14 +114,14 @@ public class HackerServiceTest extends AbstractTest {
 			 * COVERED DATA: 10%
 			 * */
 			{
-				nc2, ValidationException.class
+				"admin2", nc2, ValidationException.class
 			},
 		};
 
 		for (int i = 0; i < testingData.length; i++)
-			this.template2((Hacker) testingData[i][0], (Class<?>) testingData[i][1]);
+			this.template2((String) testingData[i][0], (Administrator) testingData[i][1], (Class<?>) testingData[i][2]);
 	}
-	protected void template2(final Hacker lr, final Class<?> expected) {
+	protected void template2(final String username, final Administrator lr, final Class<?> expected) {
 
 		Class<?> caught;
 
@@ -130,8 +130,12 @@ public class HackerServiceTest extends AbstractTest {
 		//this.startTransaction();
 
 		try {
-			this.hackerService.save(lr);
-			this.hackerService.flush();
+			this.authenticate(username);
+
+			this.administratorService.save(lr);
+			this.administratorService.flush();
+
+			this.unauthenticate();
 		} catch (final Throwable oops) {
 			caught = oops.getClass();
 		}
@@ -149,20 +153,20 @@ public class HackerServiceTest extends AbstractTest {
 	 * */
 
 	@Test
-	public void editHacker() {
+	public void editAdministrator() {
 
-		final List<Hacker> companies = (List<Hacker>) this.hackerService.findAll();
+		final List<Administrator> companies = (List<Administrator>) this.administratorService.findAll();
 
-		final Hacker compa1 = companies.get(0);
+		final Administrator compa1 = companies.get(0);
 
 		compa1.setAddress("Sample address");
-		compa1.setEmail("newHacker@gmail.com");
+		compa1.setEmail("newAdministrator@gmail.com");
 		compa1.setName("Sample");
 		compa1.setPhoneNumber("+34 123145689");
 		compa1.setPhoto("http://www.sample.com");
 		compa1.setSurname("Sample surname");
 
-		final Hacker com2 = companies.get(1);
+		final Administrator com2 = companies.get(1);
 
 		com2.setAddress(null);
 		com2.setIsBanned(false);
@@ -182,16 +186,16 @@ public class HackerServiceTest extends AbstractTest {
 			 * COVERED DATA: 25%
 			 * */
 			{
-				"hacker1", compa1, null
+				"admin", compa1, null
 			}, {
-				"hacker2", com2, ConstraintViolationException.class
+				"admin", com2, ConstraintViolationException.class
 			},
 		};
 
 		for (int i = 0; i < testingData.length; i++)
-			this.template((String) testingData[i][0], (Hacker) testingData[i][1], (Class<?>) testingData[i][2]);
+			this.template((String) testingData[i][0], (Administrator) testingData[i][1], (Class<?>) testingData[i][2]);
 	}
-	protected void template(final String username, final Hacker comp, final Class<?> expected) {
+	protected void template(final String username, final Administrator comp, final Class<?> expected) {
 
 		Class<?> caught;
 
@@ -202,9 +206,9 @@ public class HackerServiceTest extends AbstractTest {
 		try {
 			this.authenticate(username);
 
-			this.hackerService.save(comp);
+			this.administratorService.save(comp);
 
-			this.hackerService.flush();
+			this.administratorService.flush();
 			this.unauthenticate();
 
 		} catch (final Throwable oops) {
