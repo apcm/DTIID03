@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 
 <!-- 
 	* PopulateDatabase.xml 
@@ -917,4 +917,182 @@
 		</list>
 	</property>
 </bean>
+
+<!-- Curricula -->
+<bean id="curricula1" class="domain.Curricula">
+	<property name="name" value="Curricula1"/>
+	<property name="hacker" ref="hacker1"/>
+	<property name="application" ref="application1"/>
+</bean>
+
+<bean id="curricula2" class="domain.Curricula">
+	<property name="name" value="Curricula2"/>
+	<property name="hacker" ref="hacker1"/>
+	<property name="application" ref="application2"/>
+</bean>
+
+<bean id="curricula3" class="domain.Curricula">
+	<property name="name" value="Curricula3"/>
+	<property name="hacker" ref="hacker2"/>
+	<property name="application" ref="application3"/>
+</bean>
+
+<bean id="curricula4" class="domain.Curricula">
+	<property name="name" value="Curricula4"/>
+	<property name="hacker" ref="hacker2"/>
+	<property name="application" ref="application4"/>
+</bean>
+
+<!-- Personal Data -->
+<bean id="personalData1" class="domain.PersonalData">
+	<property name="fullName" value="Xavier Jimenez Lopez"/>
+	<property name="statement" value="This is a statement"/>
+	<property name="phoneNumber" value="666666666"/>
+	<property name="gitProfile" value="https://gitProfile.com/XDS90"/>
+	<property name="linkedInProfile" value="https://linkedIn.com/XDS90"/>
+	<property name="curricula" ref="curricula1"/>
+	
+</bean>
+
+<bean id="personalData2" class="domain.PersonalData">
+	<property name="fullName" value="Xavier Jimenez Lopez"/>
+	<property name="statement" value="This is a statement"/>
+	<property name="phoneNumber" value="666666666"/>
+	<property name="gitProfile" value="https://gitProfile.com/XDS90"/>
+	<property name="linkedInProfile" value="https://linkedIn.com/XDS90"/>
+	<property name="curricula" ref="curricula2"/>
+	
+</bean>
+
+<bean id="personalData3" class="domain.PersonalData">
+	<property name="fullName" value="Augusto Martinez Sancho"/>
+	<property name="statement" value="This is a statement"/>
+	<property name="phoneNumber" value="666663336"/>
+	<property name="gitProfile" value="https://gitProfile.com/AMS90"/>
+	<property name="linkedInProfile" value="https://linkedIn.com/AMS90"/>
+	<property name="curricula" ref="curricula3"/>
+	
+</bean>
+
+<bean id="personalData4" class="domain.PersonalData">
+	<property name="fullName" value="Augusto Martinez Sancho"/>
+	<property name="statement" value="This is a statement"/>
+	<property name="phoneNumber" value="666663336"/>
+	<property name="gitProfile" value="https://gitProfile.com/AMS90"/>
+	<property name="linkedInProfile" value="https://linkedIn.com/AMS90"/>
+	<property name="curricula" ref="curricula4"/>
+	</bean>
+	
+	<!-- Education Data -->
+	<bean id="educationData1" class="domain.EducationData">
+	<property name="degree" value="Informatic Systems"/>
+	<property name="institution" value="ETSII"/>
+	<property name="mark" value="8.0"/>
+	<property name="startMoment" value="2015/02/02"/>
+	<property name="endMoment" value="2018/02/02"/>
+	<property name="curricula" ref="curricula1"/>
+	</bean>
+	
+	<bean id="educationData2" class="domain.EducationData">
+	<property name="degree" value="Informatic Systems2"/>
+	<property name="institution" value="ETSII"/>
+	<property name="mark" value="8.5"/>
+	<property name="startMoment" value="2018/02/02"/>
+	<property name="endMoment" value="2020/02/02"/>
+	<property name="curricula" ref="curricula1"/>
+	</bean>
+	
+	<bean id="educationData3" class="domain.EducationData">
+	<property name="degree" value="Informatic Systems"/>
+	<property name="institution" value="ETSII"/>
+	<property name="mark" value="8.0"/>
+	<property name="startMoment" value="2015/02/02"/>
+	<property name="endMoment" value="2018/02/02"/>
+	<property name="curricula" ref="curricula2"/>
+	</bean>
+	
+	<bean id="educationData4" class="domain.EducationData">
+	<property name="degree" value="Big Data"/>
+	<property name="institution" value="PDO"/>
+	<property name="mark" value="6.0"/>
+	<property name="startMoment" value="2015/02/02"/>
+	<property name="endMoment" value="2018/02/02"/>
+	<property name="curricula" ref="curricula3"/>
+	</bean>
+	
+	<bean id="educationData5" class="domain.EducationData">
+	<property name="degree" value="Java Guide"/>
+	<property name="institution" value="MTIS"/>
+	<property name="mark" value="8.0"/>
+	<property name="startMoment" value="2015/02/02"/>
+	<property name="endMoment" value="2018/02/02"/>
+	<property name="curricula" ref="curricula4"/>
+	</bean>
+	
+	<!-- Position Data -->
+	<bean id="positionData1" class="domain.PositionData">
+	<property name="title" value="Boss"/>
+	<property name="description" value="CEO of Google"/>
+	<property name="startMoment" value="2015/02/02"/>
+	<property name="endMoment" value="2018/02/02"/>
+	<property name="curricula" ref="curricula1"/>
+	</bean>
+	
+	<bean id="positionData2" class="domain.PositionData">
+	<property name="title" value="Developer"/>
+	<property name="description" value="Working on my own business"/>
+	<property name="startMoment" value="2018/02/02"/>
+	<property name="endMoment" value="2021/02/02"/>
+	<property name="curricula" ref="curricula1"/>
+	
+	</bean>
+	
+	<bean id="positionData3" class="domain.PositionData">
+	<property name="title" value="Boss"/>
+	<property name="description" value="CEO of Amazon"/>
+	<property name="startMoment" value="2015/02/02"/>
+	<property name="endMoment" value="2018/02/02"/>
+	<property name="curricula" ref="curricula2"/>
+	</bean>
+	
+	<bean id="positionData4" class="domain.PositionData">
+	<property name="title" value="Boss"/>
+	<property name="description" value="CEO of Apple"/>
+	<property name="startMoment" value="2015/02/02"/>
+	<property name="endMoment" value="2018/02/02"/>
+	<property name="curricula" ref="curricula3"/>
+	</bean>
+	
+	<bean id="positionData5" class="domain.PositionData">
+	<property name="title" value="Boss"/>
+	<property name="description" value="CEO of PillowTronics"/>
+	<property name="startMoment" value="2015/02/02"/>
+	<property name="endMoment" value="2018/02/02"/>
+	<property name="curricula" ref="curricula4"/>
+	</bean>
+	
+	<!-- Miscellaneous Data -->
+	<bean id="miscellaneousData1" class="domain.MiscellaneousData">
+	<property name="freeText" value="This is some free text1"/>
+	<property name="attachments" value="http://Attachment1.com"/>
+	<property name="curricula" ref="curricula1"/>
+	</bean>
+	
+	<bean id="miscellaneousData2" class="domain.MiscellaneousData">
+	<property name="freeText" value="This is some free text1"/>
+	<property name="attachments" value="http://Attachment1.com"/>
+	<property name="curricula" ref="curricula2"/>
+	</bean>
+	
+	<bean id="miscellaneousData3" class="domain.MiscellaneousData">
+	<property name="freeText" value="This is some free text1"/>
+	<property name="attachments" value="http://Attachment1.com"/>
+	<property name="curricula" ref="curricula3"/>
+	</bean>
+	
+	<bean id="miscellaneousData4" class="domain.MiscellaneousData">
+	<property name="freeText" value="This is some free text1"/>
+	<property name="attachments" value="http://Attachment1.com"/>
+	<property name="curricula" ref="curricula4"/>
+	</bean>
 </beans>
