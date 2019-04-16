@@ -78,7 +78,7 @@
 		<br /> <br />
 
 		<form:label path="photo">
-			<spring:message code="company.edit.label.photo" />:
+			<spring:message code="company.edit.label.photo" />*:
 		</form:label>
 		<form:input path="photo" />
 		<form:errors cssClass="error" path="photo" />
@@ -100,9 +100,54 @@
 		<form:input path="companyName" />
 		<form:errors cssClass="error" path="companyName" />
 		<br />
+	</fieldset>
+
+	<fieldset>
+		<legend align="left">
+			<spring:message code="company.creditCard" />
+		</legend>
+		
+		<form:label path="holderName">
+			<spring:message code="company.holderName" />* :
+		</form:label>
+		<form:input path="holderName" />
+		<form:errors cssClass="error" path="holderName" />
 		<br />
-
-
+		
+		<form:label path="makeName">
+			<spring:message code="company.makeName" />* :
+		</form:label>
+		<form:input path="makeName" />
+		<form:errors cssClass="error" path="makeName" />
+		<br />
+				
+		<form:label path="number">
+			<spring:message code="company.number" />* :
+		</form:label>
+		<form:input path="number" />
+		<form:errors cssClass="error" path="number" />
+		<br />
+		
+		<form:label path="expirationYear">
+			<spring:message code="company.expirationYear" />* :
+		</form:label>
+		<form:input path="expirationYear" />
+		<form:errors cssClass="error" path="expirationYear" />
+		<br />	
+					
+		<form:label path="expirationMonth">
+			<spring:message code="company.expirationMonth" />* :
+		</form:label>
+		<form:input path="expirationMonth" />
+		<form:errors cssClass="error" path="expirationMonth" />
+		<br />	
+				
+		<form:label path="cvv">
+			<spring:message code="company.cvv" />* :
+		</form:label>
+		<form:input path="cvv" />
+		<form:errors cssClass="error" path="cvv" />
+		<br />			
 	</fieldset>
 
 	<br />
