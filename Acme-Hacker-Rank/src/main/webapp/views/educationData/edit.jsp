@@ -47,7 +47,7 @@
 			<spring:message code="educationData.startMoment" />* :
 		</form:label>
 		<form:input path="startMoment" />
-		<form:errors cssClass="error" path="startMoment" placeHolder="2019-05-02"/>
+		<form:errors cssClass="error" path="startMoment" placeHolder="2019-05-02 00:00:00"/>
 		<br /> <br />
 		
 		<form:label path="endMoment">
