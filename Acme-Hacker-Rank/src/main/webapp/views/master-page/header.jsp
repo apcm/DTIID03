@@ -25,7 +25,9 @@
 				<ul>
 					<li class="arrow"></li>
 					<li><a href="administrator/administrator/create.do"><spring:message code="master.page.administrator.create" /></a></li>
-					<li><a href="administrator/administrator/edit.do"><spring:message code="master.page.administrator.edit" /></a></li>					
+					<li><a href="administrator/administrator/edit.do"><spring:message code="master.page.administrator.edit" /></a></li>
+					<li><a href="dashboard/administrator/dashboard.do"><spring:message code="master.page.administrator.dashboard" /></a></li>
+					<li><a href="customisation/administrator/edit.do"><spring:message code="master.page.administrator.customisation" /></a></li>
 				</ul>
 			</li>
 		</security:authorize>
@@ -35,9 +37,7 @@
 				<ul>
 					<li class="arrow"></li>
 					<li><a href="company/company/edit.do"><spring:message code="master.page.edit.company" /></a></li>
-					<li><a href="dashboard/administrator/dashboard.do"><spring:message code="master.page.administrator.dashboard" /></a></li>
-					<li><a href="customisation/administrator/edit.do"><spring:message code="master.page.administrator.customisation" /></a></li>
-					
+									
 				</ul>
 			</li>
 		</security:authorize>
