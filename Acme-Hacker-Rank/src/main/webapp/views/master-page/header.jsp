@@ -14,16 +14,12 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 
 <div>
-	<a href="#"><img src="images/logo.png" alt="Acme Co., Inc." /></a>
+	<a href="#"><img src="${customisation.bannerUrl}" alt="${customisation.systemName}" /></a>
 </div>
 
 <div>
 	<ul id="jMenu">
 		<!-- Do not forget the "fNiv" class for the first level links !! -->
-
-		
-		
-		
 		<security:authorize access="hasRole('ADMIN')">
 			<li><a class="fNiv"><spring:message	code="master.page.administrator" /></a>
 				<ul>
@@ -34,21 +30,14 @@
 			</li>
 		</security:authorize>
 		
-		<security:authorize access="hasRole('CUSTOMER')">
-			<li><a class="fNiv"><spring:message	code="master.page.customer" /></a>
-				<ul>
-					<li class="arrow"></li>
-					<li><a href="customer/action-1.do"><spring:message code="master.page.customer.action.1" /></a></li>
-					<li><a href="customer/action-2.do"><spring:message code="master.page.customer.action.2" /></a></li>					
-				</ul>
-			</li>
-		</security:authorize>
-		
 		<security:authorize access="hasRole('COMPANY')">
 			<li><a class="fNiv"><spring:message	code="master.page.company" /></a>
 				<ul>
 					<li class="arrow"></li>
 					<li><a href="company/company/edit.do"><spring:message code="master.page.edit.company" /></a></li>
+					<li><a href="dashboard/administrator/dashboard.do"><spring:message code="master.page.administrator.dashboard" /></a></li>
+					<li><a href="customisation/administrator/edit.do"><spring:message code="master.page.administrator.customisation" /></a></li>
+					
 				</ul>
 			</li>
 		</security:authorize>
@@ -58,6 +47,7 @@
 				<ul>
 					<li class="arrow"></li>
 					<li><a href="hacker/hacker/edit.do"><spring:message code="master.page.edit.hacker" /></a></li>
+					<li><a href="finder/hacker/show.do"><spring:message code="master.page.finder" /></a></li>			
 				</ul>
 			</li>
 		</security:authorize>
@@ -87,10 +77,17 @@
 			</li>
 			<li>
 			<a class="fNiv" href="security/login.do"><spring:message code="master.page.login" /></a>
+		<security:authorize access="permitAll">
+			<li><a class="fNiv"><spring:message	code="master.page.actions" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="search/search.do"><spring:message code="master.page.search" /></a></li>			
+				</ul>
 			</li>
 		</security:authorize>
 	</ul>
 </div>
+
 
 <div>
 	<a href="?language=en">en</a> | <a href="?language=es">es</a>

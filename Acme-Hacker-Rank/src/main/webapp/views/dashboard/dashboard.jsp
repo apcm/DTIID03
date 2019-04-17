@@ -9,6 +9,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
 <security:authorize access="hasRole('ADMIN')">
+
 	<spring:message code="dashboard.avgPositions"/>
 	<jstl:out value="${avgPositions}"/>
 	<br/>
@@ -61,4 +62,33 @@
 	<spring:message code="dashboard.lowestSalaryPosition"/>
 	<jstl:out value="${lowestSalaryPosition}"/>
 	<br/>
+	
+	<spring:message code="dashboard.minCurricula"/>
+	<jstl:out value="${minCurricula}"/>
+	<br/>
+	<spring:message code="dashboard.maxCurricula"/>
+	<jstl:out value="${maxCurricula}"/>
+	<br/>
+	<spring:message code="dashboard.avgCurricula"/>
+	<jstl:out value="${avgCurricula}"/>
+	<br/>
+	<spring:message code="dashboard.stddevCurricula"/>
+	<jstl:out value="${stddevCurricula}"/>
+	<br/>
+	<spring:message code="dashboard.minResults"/>
+	<jstl:out value="${minResults}"/>
+	<br/>
+	<spring:message code="dashboard.maxResults"/>
+	<jstl:out value="${maxResults}"/>
+	<br/>
+	<spring:message code="dashboard.avgResults"/>
+	<jstl:out value="${avgResults}"/>
+	<br/>
+	<spring:message code="dashboard.stddevResults"/>
+	<jstl:out value="${stddevResults}"/>
+	<br/>
+	<spring:message code="dashboard.ratioFinders"/>
+	<jstl:out value="${ratioFinders}"/>
+	<br/>
+	
 </security:authorize>
