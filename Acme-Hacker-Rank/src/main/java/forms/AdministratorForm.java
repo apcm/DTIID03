@@ -39,6 +39,7 @@ public class AdministratorForm {
 		this.name = name;
 	}
 
+	@NotBlank
 	public String getEmail() {
 		return this.email;
 	}
@@ -53,7 +54,6 @@ public class AdministratorForm {
 		this.phoneNumber = phoneNumber;
 	}
 
-	@NotBlank
 	public String getAddress() {
 		return this.address;
 	}

@@ -78,7 +78,7 @@
 		<br /> <br />
 
 		<form:label path="photo">
-			<spring:message code="company.edit.label.photo" />*:
+			<spring:message code="company.edit.label.photo" />:
 		</form:label>
 		<form:input path="photo" />
 		<form:errors cssClass="error" path="photo" />

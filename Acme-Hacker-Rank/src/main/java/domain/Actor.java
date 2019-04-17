@@ -73,7 +73,6 @@ public abstract class Actor extends DomainEntity {
 	}
 
 	@URL
-	@NotBlank
 	public String getPhoto() {
 		return this.photo;
 	}

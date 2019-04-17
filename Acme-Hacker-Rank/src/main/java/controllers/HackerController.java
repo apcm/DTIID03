@@ -82,9 +82,6 @@ public class HackerController extends AbstractController {
 			else
 				result = this.createEditModelAndView(hackerForm, "hacker.comit.error");
 		}
-		if (!hackerForm.isConditionsAccepted())
-			result = this.createEditModelAndView(hackerForm, "hacker.conditionsError");
-
 		return result;
 
 	}

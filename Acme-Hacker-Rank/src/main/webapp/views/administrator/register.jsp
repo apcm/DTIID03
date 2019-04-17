@@ -36,7 +36,7 @@
 		<br /> <br />
 
 		<form:label path="address">
-			<spring:message code="administrator.edit.label.address" />* :
+			<spring:message code="administrator.edit.label.address" /> :
 		</form:label>
 		<form:input path="address" />
 		<form:errors cssClass="error" path="address" />

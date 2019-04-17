@@ -42,7 +42,7 @@ public class HackerForm {
 	public void setName(final String name) {
 		this.name = name;
 	}
-
+	@NotBlank
 	public String getEmail() {
 		return this.email;
 	}
@@ -57,7 +57,6 @@ public class HackerForm {
 		this.phoneNumber = phoneNumber;
 	}
 
-	@NotBlank
 	public String getAddress() {
 		return this.address;
 	}

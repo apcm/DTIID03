@@ -3,7 +3,6 @@ package services;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 
 import javax.validation.ValidationException;
@@ -216,15 +215,7 @@ public class HackerService {
 		hacker.setCvv(hackerForm.getCvv());
 
 		final Finder find = new Finder();
-		final Finder find2 = new Finder();
-		find.setMoment(new Date());
-		find2.setMoment(new Date());
-
-		this.finderService.save(find);
-		this.finderService.save(find2);
-		this.finderService.flush();
 		hacker.setFinder(find);
-		hackerForm.setFinder(find2);
 
 		hacker.setIsBanned(false);
 
@@ -269,15 +260,10 @@ public class HackerService {
 		res.setExpirationYear(hacker.getExpirationYear());
 		res.setCvv(hacker.getCvv());
 
-		this.validator.validate(res, binding);
-		if (binding.hasErrors())
-			throw new ValidationException();
+	public Hacker getHackerByUserAccount(final int id) {
+		return this.hacherRepository.findByUserAccountId(id);
 
 		return res;
-	}
-
-	public Hacker getHackerByUserAccount(final int id) {
-		return this.hackerRepository.findByUserAccountId(id);
 	}
 
 	public void leave() {

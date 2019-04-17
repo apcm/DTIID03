@@ -40,7 +40,7 @@ public class CompanyForm {
 	public void setName(final String name) {
 		this.name = name;
 	}
-
+	@NotBlank
 	public String getEmail() {
 		return this.email;
 	}
@@ -55,7 +55,6 @@ public class CompanyForm {
 		this.phoneNumber = phoneNumber;
 	}
 
-	@NotBlank
 	public String getAddress() {
 		return this.address;
 	}
