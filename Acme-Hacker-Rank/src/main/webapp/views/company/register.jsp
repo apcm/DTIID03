@@ -8,7 +8,7 @@
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<form:form action=administrator/administrator/create.do"
+<form:form action="administrator/administrator/create.do"
 	modelAttribute="administratorForm">
 
 	<form:hidden path="userAccount.authorities" />
