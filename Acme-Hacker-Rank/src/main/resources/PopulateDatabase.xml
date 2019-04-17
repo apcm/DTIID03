@@ -1,13 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- 
-	* PopulateDatabase.xml 
-	* 
-	* Copyright (C) 2019 Universidad de Sevilla 
-	* 
-	* The use of this project is hereby constrained to the conditions of the 
-	* TDG Licence, a copy of which you may download from http://www.tdg-seville.info/License.html 
--->
+<!-- * PopulateDatabase.xml * * Copyright (C) 2019 Universidad de Sevilla 
+	* * The use of this project is hereby constrained to the conditions of the 
+	* TDG Licence, a copy of which you may download from http://www.tdg-seville.info/License.html -->
 
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -16,11 +11,13 @@
 	">
 	<!-- Customisation -->
 	<bean id="customisation1" class="domain.Customisation">
-		<property name="systemName" value="Acme Hacker-Rank"/>
-		<property name="bannerUrl" value="https://i.imgur.com/7b8lu4b.png"/>
-		<property name="welcomeMessageEng" value="Welcome to Acme hacker Rank! We’re IT hacker’s favourite job marketplace!"/>
-		<property name="welcomeMessageEsp" value="¡Bien-venidos a Acme Hacker Rank! ¡Somos el mercado de trabajo favorito de los profesionales de las TICs!"/>
-		<property name="phoneNumberCode" value="+34"/>
+		<property name="systemName" value="Acme Hacker-Rank" />
+		<property name="bannerUrl" value="https://i.imgur.com/7b8lu4b.png" />
+		<property name="welcomeMessageEng"
+			value="Welcome to Acme hacker Rank! We're IT hacker's favourite job marketplace!" />
+		<property name="welcomeMessageEsp"
+			value="¡Bienvenidos a Acme Hacker Rank! ¡Somos el mercado de trabajo favorito de los profesionales de las TICs!" />
+		<property name="phoneNumberCode" value="+34" />
 		<property name="spamWords">
 			<list>
 				<value>SEX</value>
@@ -36,8 +33,8 @@
 				<value>UN MILLÓN</value>
 			</list>
 		</property>
-		<property name="finderDuration" value="1"/>
-		<property name="resultsNumber" value="10"/>
+		<property name="finderDuration" value="1" />
+		<property name="resultsNumber" value="10" />
 	</bean>
 	<!-- User accounts -->
 
@@ -64,7 +61,7 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="userAccount3" class="security.UserAccount">
 		<property name="username" value="hacker2" />
 		<property name="password" value="91af68b69a50a98dbc0800942540342c" />
@@ -76,7 +73,7 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="userAccount4" class="security.UserAccount">
 		<property name="username" value="company1" />
 		<property name="password" value="df655f976f7c9d3263815bd981225cd9" />
@@ -88,7 +85,7 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="userAccount5" class="security.UserAccount">
 		<property name="username" value="company2" />
 		<property name="password" value="d196a28097115067fefd73d25b0c0be8" />
@@ -102,16 +99,16 @@
 	</bean>
 	<!-- Actors -->
 	<bean id="admin" class="domain.Administrator">
-		<property name="name" value="Administrator"/>
-		<property name="surname" value="Admin"/>
-		<property name="photo" value="http://www.foto.com"/>
-		<property name="email" value="admin@admin.com"/>
-		<property name="phoneNumber" value="+34 676676676"/>
-		<property name="address" value="Address 1"/>
-		<property name="vat" value="21"/>
-		<property name="flagSpam" value="false"/>
-		<property name="isBanned" value="false"/>
-		<property name="userAccount" ref="userAccount1"/>
+		<property name="name" value="Administrator" />
+		<property name="surname" value="Admin" />
+		<property name="photo" value="http://www.foto.com" />
+		<property name="email" value="admin@admin.com" />
+		<property name="phoneNumber" value="+34 676676676" />
+		<property name="address" value="Address 1" />
+		<property name="vat" value="21" />
+		<property name="flagSpam" value="false" />
+		<property name="isBanned" value="false" />
+		<property name="userAccount" ref="userAccount1" />
 		<property name="socialProfiles">
 			<list>
 			</list>
@@ -128,19 +125,19 @@
 		<property name="expirationMonth" value="5"/>
 		<property name="cvv" value="583"/>
 	</bean>
-	
+
 	<bean id="hacker1" class="domain.Hacker">
-		<property name="name" value="Hacker"/>
-		<property name="finder" ref="finder1"/>
-		<property name="surname" value="One"/>
-		<property name="photo" value="http://www.foto.com"/>
-		<property name="email" value="hacker1@hackerrank.com"/>
-		<property name="phoneNumber" value="+34 611111111"/>
-		<property name="address" value="Address 2"/>
-		<property name="vat" value="21"/>
-		<property name="flagSpam" value="false"/>
-		<property name="isBanned" value="false"/>
-		<property name="userAccount" ref="userAccount2"/>
+		<property name="name" value="Hacker" />
+		<property name="finder" ref="finder1" />
+		<property name="surname" value="One" />
+		<property name="photo" value="http://www.foto.com" />
+		<property name="email" value="hacker1@hackerrank.com" />
+		<property name="phoneNumber" value="+34 611111111" />
+		<property name="address" value="Address 2" />
+		<property name="vat" value="21" />
+		<property name="flagSpam" value="false" />
+		<property name="isBanned" value="false" />
+		<property name="userAccount" ref="userAccount2" />
 		<property name="socialProfiles">
 			<list>
 			</list>
@@ -158,17 +155,17 @@
 		<property name="cvv" value="188"/>
 	</bean>
 	<bean id="hacker2" class="domain.Hacker">
-		<property name="name" value="Hacker"/>
-		<property name="finder" ref="finder2"/>
-		<property name="surname" value="Two"/>
-		<property name="photo" value="http://www.foto.com"/>
-		<property name="email" value="hacker2@hackerrank.com"/>
-		<property name="phoneNumber" value="+34 621111111"/>
-		<property name="address" value="Address 3"/>
-		<property name="vat" value="21"/>
-		<property name="flagSpam" value="false"/>
-		<property name="isBanned" value="false"/>
-		<property name="userAccount" ref="userAccount3"/>
+		<property name="name" value="Hacker" />
+		<property name="finder" ref="finder2" />
+		<property name="surname" value="Two" />
+		<property name="photo" value="http://www.foto.com" />
+		<property name="email" value="hacker2@hackerrank.com" />
+		<property name="phoneNumber" value="+34 621111111" />
+		<property name="address" value="Address 3" />
+		<property name="vat" value="21" />
+		<property name="flagSpam" value="false" />
+		<property name="isBanned" value="false" />
+		<property name="userAccount" ref="userAccount3" />
 		<property name="socialProfiles">
 			<list>
 			</list>
@@ -185,19 +182,19 @@
 		<property name="expirationMonth" value="5"/>
 		<property name="cvv" value="206"/>
 	</bean>
-	
+
 	<bean id="company1" class="domain.Company">
-		<property name="name" value="Company 1"/>
-		<property name="surname" value="One"/>
-		<property name="photo" value="http://www.foto.com"/>
-		<property name="email" value="company1@hackerrank.com"/>
-		<property name="phoneNumber" value="+34 622222222"/>
-		<property name="address" value="Address 4"/>
-		<property name="vat" value="21"/>
-		<property name="flagSpam" value="false"/>
-		<property name="isBanned" value="false"/>
-		<property name="userAccount" ref="userAccount4"/>
-		<property name="companyName" value="COM"/>
+		<property name="name" value="Company 1" />
+		<property name="surname" value="One" />
+		<property name="photo" value="http://www.foto.com" />
+		<property name="email" value="company1@hackerrank.com" />
+		<property name="phoneNumber" value="+34 622222222" />
+		<property name="address" value="Address 4" />
+		<property name="vat" value="21" />
+		<property name="flagSpam" value="false" />
+		<property name="isBanned" value="false" />
+		<property name="userAccount" ref="userAccount4" />
+		<property name="companyName" value="COM" />
 		<property name="socialProfiles">
 			<list>
 			</list>
@@ -213,19 +210,19 @@
 		<property name="expirationMonth" value="2"/>
 		<property name="cvv" value="247"/>
 	</bean>
-	
+
 	<bean id="company2" class="domain.Company">
-		<property name="name" value="Company"/>
-		<property name="surname" value="Two"/>
-		<property name="photo" value="http://www.foto.com"/>
-		<property name="email" value="company2@hackerrank.com"/>
-		<property name="phoneNumber" value="+34 622222233"/>
-		<property name="address" value="Address 5"/>
-		<property name="vat" value="21"/>
-		<property name="flagSpam" value="false"/>
-		<property name="isBanned" value="false"/>
-		<property name="userAccount" ref="userAccount5"/>
-		<property name="companyName" value="COMPANY2"/>
+		<property name="name" value="Company" />
+		<property name="surname" value="Two" />
+		<property name="photo" value="http://www.foto.com" />
+		<property name="email" value="company2@hackerrank.com" />
+		<property name="phoneNumber" value="+34 622222233" />
+		<property name="address" value="Address 5" />
+		<property name="vat" value="21" />
+		<property name="flagSpam" value="false" />
+		<property name="isBanned" value="false" />
+		<property name="userAccount" ref="userAccount5" />
+		<property name="companyName" value="COMPANY2" />
 		<property name="socialProfiles">
 			<list>
 			</list>
@@ -242,679 +239,764 @@
 		<property name="cvv" value="339"/>
 	</bean>
 	<!-- CREDITCARDS -->
+	<bean id="creditcard1" class="domain.CreditCard">
+		<property name="holderName" value="Hacker One" />
+		<property name="makeName" value="VISA" />
+		<property name="number" value="4128837079312553" />
+		<property name="expirationYear" value="2022" />
+		<property name="expirationMonth" value="4" />
+		<property name="cvv" value="188" />
+		<property name="actor" ref="hacker1" />
+	</bean>
+	<bean id="creditcard2" class="domain.CreditCard">
+		<property name="holderName" value="Hacker Two" />
+		<property name="makeName" value="VISA" />
+		<property name="number" value="4338709129661089" />
+		<property name="expirationYear" value="2023" />
+		<property name="expirationMonth" value="5" />
+		<property name="cvv" value="206" />
+		<property name="actor" ref="hacker2" />
+	</bean>
+	<bean id="creditcard3" class="domain.CreditCard">
+		<property name="holderName" value="Company One" />
+		<property name="makeName" value="VISA" />
+		<property name="number" value="4588502912013759" />
+		<property name="expirationYear" value="2022" />
+		<property name="expirationMonth" value="2" />
+		<property name="cvv" value="247" />
+		<property name="actor" ref="company1" />
+	</bean>
+	<bean id="creditcard4" class="domain.CreditCard">
+		<property name="holderName" value="Company Two" />
+		<property name="makeName" value="VISA" />
+		<property name="number" value="4489952508772500" />
+		<property name="expirationYear" value="2024" />
+		<property name="expirationMonth" value="7" />
+		<property name="cvv" value="339" />
+		<property name="actor" ref="company2" />
+	</bean>
+	<bean id="creditcard5" class="domain.CreditCard">
+		<property name="holderName" value="Admin Admin" />
+		<property name="makeName" value="VISA" />
+		<property name="number" value="4083602396731593" />
+		<property name="expirationYear" value="2025" />
+		<property name="expirationMonth" value="5" />
+		<property name="cvv" value="583" />
+		<property name="actor" ref="admin" />
+	</bean>
+	<!-- Problems -->
+	<bean id="problem1" class="domain.Problem">
+		<property name="title" value="Problem 1" />
+		<property name="statement" value="Solve this problem:..." />
+		<property name="hint" value="You have to use ..." />
+		<property name="attachments" value="StackOverFlow" />
+		<property name="finalMode" value="true" />
+		<property name="company" ref="company1" />
+	</bean>
+	<bean id="problem2" class="domain.Problem">
+		<property name="title" value="Problem 2" />
+		<property name="statement" value="Solve this problem:..." />
+		<property name="hint" value="You have to use ..." />
+		<property name="attachments" value="StackOverFlow" />
+		<property name="finalMode" value="true" />
+		<property name="company" ref="company1" />
+	</bean>
+	<bean id="problem3" class="domain.Problem">
+		<property name="title" value="Problem 3" />
+		<property name="statement" value="Solve this problem:..." />
+		<property name="hint" value="You have to use ..." />
+		<property name="attachments" value="StackOverFlow" />
+		<property name="finalMode" value="true" />
+		<property name="company" ref="company1" />
+	</bean>
+	<bean id="problem4" class="domain.Problem">
+		<property name="title" value="Problem 4" />
+		<property name="statement" value="Solve this problem:..." />
+		<property name="hint" value="You have to use ..." />
+		<property name="attachments" value="StackOverFlow" />
+		<property name="finalMode" value="true" />
+		<property name="company" ref="company1" />
+	</bean>
+	<bean id="problem5" class="domain.Problem">
+		<property name="title" value="Problem 5" />
+		<property name="statement" value="Solve this problem:..." />
+		<property name="hint" value="You have to use ..." />
+		<property name="attachments" value="StackOverFlow" />
+		<property name="finalMode" value="true" />
+		<property name="company" ref="company1" />
+	</bean>
+	<bean id="problem6" class="domain.Problem">
+		<property name="title" value="Problem 6" />
+		<property name="statement" value="Solve this problem:..." />
+		<property name="hint" value="You have to use ..." />
+		<property name="attachments" value="StackOverFlow" />
+		<property name="finalMode" value="true" />
+		<property name="company" ref="company1" />
+	</bean>
+	<bean id="problem7" class="domain.Problem">
+		<property name="title" value="Problem 7" />
+		<property name="statement" value="Solve this problem:..." />
+		<property name="hint" value="You have to use ..." />
+		<property name="attachments" value="StackOverFlow" />
+		<property name="finalMode" value="true" />
+		<property name="company" ref="company1" />
+	</bean>
+	<bean id="problem8" class="domain.Problem">
+		<property name="title" value="Problem 1" />
+		<property name="statement" value="Solve this problem:..." />
+		<property name="hint" value="You have to use ..." />
+		<property name="attachments" value="StackOverFlow" />
+		<property name="finalMode" value="true" />
+		<property name="company" ref="company2" />
+	</bean>
+	<bean id="problem9" class="domain.Problem">
+		<property name="title" value="Problem 2" />
+		<property name="statement" value="Solve this problem:..." />
+		<property name="hint" value="You have to use ..." />
+		<property name="attachments" value="StackOverFlow" />
+		<property name="finalMode" value="true" />
+		<property name="company" ref="company2" />
+	</bean>
+	<bean id="problem10" class="domain.Problem">
+		<property name="title" value="Problem 3" />
+		<property name="statement" value="Solve this problem:..." />
+		<property name="hint" value="You have to use ..." />
+		<property name="attachments" value="StackOverFlow" />
+		<property name="finalMode" value="true" />
+		<property name="company" ref="company2" />
+	</bean>
+	<bean id="problem11" class="domain.Problem">
+		<property name="title" value="Problem 4" />
+		<property name="statement" value="Solve this problem:..." />
+		<property name="hint" value="You have to use ..." />
+		<property name="attachments" value="StackOverFlow" />
+		<property name="finalMode" value="true" />
+		<property name="company" ref="company2" />
+	</bean>
+	<bean id="problem12" class="domain.Problem">
+		<property name="title" value="Problem 5" />
+		<property name="statement" value="Solve this problem:..." />
+		<property name="hint" value="You have to use ..." />
+		<property name="attachments" value="StackOverFlow" />
+		<property name="finalMode" value="true" />
+		<property name="company" ref="company2" />
+	</bean>
+	<bean id="problem13" class="domain.Problem">
+		<property name="title" value="Problem 6" />
+		<property name="statement" value="Solve this problem:..." />
+		<property name="hint" value="You have to use ..." />
+		<property name="attachments" value="StackOverFlow" />
+		<property name="finalMode" value="true" />
+		<property name="company" ref="company2" />
+	</bean>
+	<bean id="problem14" class="domain.Problem">
+		<property name="title" value="Problem 7" />
+		<property name="statement" value="Solve this problem:..." />
+		<property name="hint" value="You have to use ..." />
+		<property name="attachments" value="StackOverFlow" />
+		<property name="finalMode" value="true" />
+		<property name="company" ref="company2" />
+	</bean>
+	<!-- Positions -->
+	<bean id="position1" class="domain.Position">
+		<property name="title" value="Position 1" />
+		<property name="description" value="Description" />
+		<property name="deadline" value="2019/06/06" />
+		<property name="skills">
+			<list>
+				<value>Database administration</value>
+				<value>Coding</value>
+			</list>
+		</property>
+		<property name="technologies">
+			<list>
+				<value>UNIX</value>
+				<value>Ruby</value>
+			</list>
+		</property>
+		<property name="profile" value="Experience 1 year" />
+		<property name="isCancelled" value="false" />
+		<property name="salary" value="1300" />
+		<property name="finalMode" value="true" />
+		<property name="ticker" value="COMX-1354" />
+		<property name="company" ref="company1" />
+		<property name="problems">
+			<list>
+				<ref bean="problem1" />
+				<ref bean="problem2" />
+				<ref bean="problem3" />
+			</list>
+		</property>
+	</bean>
+	<bean id="position2" class="domain.Position">
+		<property name="title" value="Position 2" />
+		<property name="description" value="Description" />
+		<property name="deadline" value="2019/06/06" />
+		<property name="skills">
+			<list>
+				<value>Database administration</value>
+				<value>Coding</value>
+			</list>
+		</property>
+		<property name="technologies">
+			<list>
+				<value>UNIX</value>
+				<value>Ruby</value>
+			</list>
+		</property>
+		<property name="profile" value="Experience 1 year" />
+		<property name="isCancelled" value="false" />
+		<property name="salary" value="1300" />
+		<property name="finalMode" value="true" />
+		<property name="ticker" value="COMX-1355" />
+		<property name="company" ref="company1" />
+		<property name="problems">
+			<list>
+				<ref bean="problem1" />
+				<ref bean="problem2" />
+				<ref bean="problem3" />
+			</list>
+		</property>
+	</bean>
+	<bean id="position3" class="domain.Position">
+		<property name="title" value="Position 3" />
+		<property name="description" value="Description" />
+		<property name="deadline" value="2019/06/06" />
+		<property name="skills">
+			<list>
+				<value>Database administration</value>
+				<value>Coding</value>
+			</list>
+		</property>
+		<property name="technologies">
+			<list>
+				<value>UNIX</value>
+				<value>Ruby</value>
+			</list>
+		</property>
+		<property name="profile" value="Experience 1 year" />
+		<property name="isCancelled" value="false" />
+		<property name="salary" value="1300" />
+		<property name="finalMode" value="true" />
+		<property name="ticker" value="COMX-1854" />
+		<property name="company" ref="company1" />
+		<property name="problems">
+			<list>
+				<ref bean="problem1" />
+				<ref bean="problem2" />
+				<ref bean="problem3" />
+			</list>
+		</property>
+	</bean>
+	<bean id="position4" class="domain.Position">
+		<property name="title" value="Position 4" />
+		<property name="description" value="Description" />
+		<property name="deadline" value="2019/06/06" />
+		<property name="skills">
+			<list>
+				<value>Database administration</value>
+				<value>Coding</value>
+			</list>
+		</property>
+		<property name="technologies">
+			<list>
+				<value>UNIX</value>
+				<value>Ruby</value>
+			</list>
+		</property>
+		<property name="profile" value="Experience 1 year" />
+		<property name="isCancelled" value="false" />
+		<property name="salary" value="1300" />
+		<property name="finalMode" value="true" />
+		<property name="ticker" value="COMX-1900" />
+		<property name="company" ref="company1" />
+		<property name="problems">
+			<list>
+				<ref bean="problem1" />
+				<ref bean="problem2" />
+				<ref bean="problem3" />
+			</list>
+		</property>
+	</bean>
+	<bean id="position5" class="domain.Position">
+		<property name="title" value="Position 5" />
+		<property name="description" value="Description" />
+		<property name="deadline" value="2019/06/06" />
+		<property name="skills">
+			<list>
+				<value>Database administration</value>
+				<value>Coding</value>
+			</list>
+		</property>
+		<property name="technologies">
+			<list>
+				<value>UNIX</value>
+				<value>Ruby</value>
+			</list>
+		</property>
+		<property name="profile" value="Experience 1 year" />
+		<property name="isCancelled" value="false" />
+		<property name="salary" value="1300" />
+		<property name="finalMode" value="true" />
+		<property name="ticker" value="COMX-9392" />
+		<property name="company" ref="company1" />
+		<property name="problems">
+			<list>
+				<ref bean="problem1" />
+				<ref bean="problem2" />
+				<ref bean="problem3" />
+			</list>
+		</property>
+	</bean>
+	<bean id="position6" class="domain.Position">
+		<property name="title" value="Position 6" />
+		<property name="description" value="Description" />
+		<property name="deadline" value="2019/06/06" />
+		<property name="skills">
+			<list>
+				<value>Database administration</value>
+				<value>Coding</value>
+			</list>
+		</property>
+		<property name="technologies">
+			<list>
+				<value>UNIX</value>
+				<value>Ruby</value>
+			</list>
+		</property>
+		<property name="profile" value="Experience 1 year" />
+		<property name="isCancelled" value="false" />
+		<property name="salary" value="1300" />
+		<property name="finalMode" value="true" />
+		<property name="ticker" value="COMX-4555" />
+		<property name="company" ref="company1" />
+		<property name="problems">
+			<list>
+				<ref bean="problem1" />
+				<ref bean="problem2" />
+				<ref bean="problem3" />
+			</list>
+		</property>
+	</bean>
+	<bean id="position7" class="domain.Position">
+		<property name="title" value="Position 7" />
+		<property name="description" value="Description" />
+		<property name="deadline" value="2019/06/06" />
+		<property name="skills">
+			<list>
+				<value>Database administration</value>
+				<value>Coding</value>
+			</list>
+		</property>
+		<property name="technologies">
+			<list>
+				<value>UNIX</value>
+				<value>Ruby</value>
+			</list>
+		</property>
+		<property name="profile" value="Experience 1 year" />
+		<property name="isCancelled" value="false" />
+		<property name="salary" value="1300" />
+		<property name="finalMode" value="true" />
+		<property name="ticker" value="COMX-7312" />
+		<property name="company" ref="company1" />
+		<property name="problems">
+			<list>
+				<ref bean="problem1" />
+				<ref bean="problem2" />
+				<ref bean="problem3" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="position8" class="domain.Position">
+		<property name="title" value="Position 1" />
+		<property name="description" value="Description" />
+		<property name="deadline" value="2019/06/06" />
+		<property name="skills">
+			<list>
+				<value>Database administration</value>
+				<value>Coding</value>
+			</list>
+		</property>
+		<property name="technologies">
+			<list>
+				<value>UNIX</value>
+				<value>Ruby</value>
+			</list>
+		</property>
+		<property name="profile" value="Experience 1 year" />
+		<property name="isCancelled" value="false" />
+		<property name="salary" value="1300" />
+		<property name="finalMode" value="true" />
+		<property name="ticker" value="COMP-1354" />
+		<property name="company" ref="company2" />
+		<property name="problems">
+			<list>
+				<ref bean="problem11" />
+				<ref bean="problem12" />
+				<ref bean="problem13" />
+			</list>
+		</property>
+	</bean>
+	<bean id="position9" class="domain.Position">
+		<property name="title" value="Position 2" />
+		<property name="description" value="Description" />
+		<property name="deadline" value="2019/06/06" />
+		<property name="skills">
+			<list>
+				<value>Database administration</value>
+				<value>Coding</value>
+			</list>
+		</property>
+		<property name="technologies">
+			<list>
+				<value>UNIX</value>
+				<value>Ruby</value>
+			</list>
+		</property>
+		<property name="profile" value="Experience 1 year" />
+		<property name="isCancelled" value="false" />
+		<property name="salary" value="1300" />
+		<property name="finalMode" value="true" />
+		<property name="ticker" value="COMP-1355" />
+		<property name="company" ref="company2" />
+		<property name="problems">
+			<list>
+				<ref bean="problem11" />
+				<ref bean="problem12" />
+				<ref bean="problem13" />
+			</list>
+		</property>
+	</bean>
+	<bean id="position10" class="domain.Position">
+		<property name="title" value="Position 3" />
+		<property name="description" value="Description" />
+		<property name="deadline" value="2019/06/06" />
+		<property name="skills">
+			<list>
+				<value>Database administration</value>
+				<value>Coding</value>
+			</list>
+		</property>
+		<property name="technologies">
+			<list>
+				<value>UNIX</value>
+				<value>Ruby</value>
+			</list>
+		</property>
+		<property name="profile" value="Experience 1 year" />
+		<property name="isCancelled" value="false" />
+		<property name="salary" value="1300" />
+		<property name="finalMode" value="true" />
+		<property name="ticker" value="COMP-1854" />
+		<property name="company" ref="company2" />
+		<property name="problems">
+			<list>
+				<ref bean="problem11" />
+				<ref bean="problem12" />
+				<ref bean="problem13" />
+			</list>
+		</property>
+	</bean>
+	<bean id="position11" class="domain.Position">
+		<property name="title" value="Position 4" />
+		<property name="description" value="Description" />
+		<property name="deadline" value="2019/06/06" />
+		<property name="skills">
+			<list>
+				<value>Database administration</value>
+				<value>Coding</value>
+			</list>
+		</property>
+		<property name="technologies">
+			<list>
+				<value>UNIX</value>
+				<value>Ruby</value>
+			</list>
+		</property>
+		<property name="profile" value="Experience 1 year" />
+		<property name="isCancelled" value="false" />
+		<property name="salary" value="1300" />
+		<property name="finalMode" value="true" />
+		<property name="ticker" value="COMP-1900" />
+		<property name="company" ref="company2" />
+		<property name="problems">
+			<list>
+				<ref bean="problem11" />
+				<ref bean="problem12" />
+				<ref bean="problem13" />
+			</list>
+		</property>
+	</bean>
+	<bean id="position12" class="domain.Position">
+		<property name="title" value="Position 5" />
+		<property name="description" value="Description" />
+		<property name="deadline" value="2019/06/06" />
+		<property name="skills">
+			<list>
+				<value>Database administration</value>
+				<value>Coding</value>
+			</list>
+		</property>
+		<property name="technologies">
+			<list>
+				<value>UNIX</value>
+				<value>Ruby</value>
+			</list>
+		</property>
+		<property name="profile" value="Experience 1 year" />
+		<property name="isCancelled" value="false" />
+		<property name="salary" value="1300" />
+		<property name="finalMode" value="true" />
+		<property name="ticker" value="COMP-9392" />
+		<property name="company" ref="company2" />
+		<property name="problems">
+			<list>
+				<ref bean="problem11" />
+				<ref bean="problem12" />
+				<ref bean="problem13" />
+			</list>
+		</property>
+	</bean>
+	<bean id="position13" class="domain.Position">
+		<property name="title" value="Position 6" />
+		<property name="description" value="Description" />
+		<property name="deadline" value="2019/06/06" />
+		<property name="skills">
+			<list>
+				<value>Database administration</value>
+				<value>Coding</value>
+			</list>
+		</property>
+		<property name="technologies">
+			<list>
+				<value>UNIX</value>
+				<value>Ruby</value>
+			</list>
+		</property>
+		<property name="profile" value="Experience 1 year" />
+		<property name="isCancelled" value="false" />
+		<property name="salary" value="1300" />
+		<property name="finalMode" value="true" />
+		<property name="ticker" value="COMP-4555" />
+		<property name="company" ref="company2" />
+		<property name="problems">
+			<list>
+				<ref bean="problem11" />
+				<ref bean="problem12" />
+				<ref bean="problem13" />
+			</list>
+		</property>
+	</bean>
+	<bean id="position14" class="domain.Position">
+		<property name="title" value="Position 7" />
+		<property name="description" value="Description" />
+		<property name="deadline" value="2019/06/06" />
+		<property name="skills">
+			<list>
+				<value>Database administration</value>
+				<value>Coding</value>
+			</list>
+		</property>
+		<property name="technologies">
+			<list>
+				<value>UNIX</value>
+				<value>Ruby</value>
+			</list>
+		</property>
+		<property name="profile" value="Experience 1 year" />
+		<property name="isCancelled" value="false" />
+		<property name="salary" value="1300" />
+		<property name="finalMode" value="true" />
+		<property name="ticker" value="COMP-7312" />
+		<property name="company" ref="company2" />
+		<property name="problems">
+			<list>
+				<ref bean="problem11" />
+				<ref bean="problem12" />
+				<ref bean="problem13" />
+			</list>
+		</property>
+	</bean>
 
 
-<!-- Problems -->
-<bean id="problem1" class="domain.Problem">
-	<property name="title" value="Problem 1"/>
-	<property name="statement" value="Solve this problem:..."/>
-	<property name="hint" value="You have to use ..."/>
-	<property name="attachments" value="StackOverFlow"/>
-	<property name="finalMode" value="true"/>
-	<property name="company" ref="company1"/>
-</bean>
-<bean id="problem2" class="domain.Problem">
-	<property name="title" value="Problem 2"/>
-	<property name="statement" value="Solve this problem:..."/>
-	<property name="hint" value="You have to use ..."/>
-	<property name="attachments" value="StackOverFlow"/>
-	<property name="finalMode" value="true"/>
-	<property name="company" ref="company1"/>
-</bean>
-<bean id="problem3" class="domain.Problem">
-	<property name="title" value="Problem 3"/>
-	<property name="statement" value="Solve this problem:..."/>
-	<property name="hint" value="You have to use ..."/>
-	<property name="attachments" value="StackOverFlow"/>
-	<property name="finalMode" value="true"/>
-	<property name="company" ref="company1"/>
-</bean>
-<bean id="problem4" class="domain.Problem">
-	<property name="title" value="Problem 4"/>
-	<property name="statement" value="Solve this problem:..."/>
-	<property name="hint" value="You have to use ..."/>
-	<property name="attachments" value="StackOverFlow"/>
-	<property name="finalMode" value="true"/>
-	<property name="company" ref="company1"/>
-</bean>
-<bean id="problem5" class="domain.Problem">
-	<property name="title" value="Problem 5"/>
-	<property name="statement" value="Solve this problem:..."/>
-	<property name="hint" value="You have to use ..."/>
-	<property name="attachments" value="StackOverFlow"/>
-	<property name="finalMode" value="true"/>
-	<property name="company" ref="company1"/>
-</bean>
-<bean id="problem6" class="domain.Problem">
-	<property name="title" value="Problem 6"/>
-	<property name="statement" value="Solve this problem:..."/>
-	<property name="hint" value="You have to use ..."/>
-	<property name="attachments" value="StackOverFlow"/>
-	<property name="finalMode" value="true"/>
-	<property name="company" ref="company1"/>
-</bean>
-<bean id="problem7" class="domain.Problem">
-	<property name="title" value="Problem 7"/>
-	<property name="statement" value="Solve this problem:..."/>
-	<property name="hint" value="You have to use ..."/>
-	<property name="attachments" value="StackOverFlow"/>
-	<property name="finalMode" value="true"/>
-	<property name="company" ref="company1"/>
-</bean>
-<bean id="problem8" class="domain.Problem">
-	<property name="title" value="Problem 1"/>
-	<property name="statement" value="Solve this problem:..."/>
-	<property name="hint" value="You have to use ..."/>
-	<property name="attachments" value="StackOverFlow"/>
-	<property name="finalMode" value="true"/>
-	<property name="company" ref="company2"/>
-</bean>
-<bean id="problem9" class="domain.Problem">
-	<property name="title" value="Problem 2"/>
-	<property name="statement" value="Solve this problem:..."/>
-	<property name="hint" value="You have to use ..."/>
-	<property name="attachments" value="StackOverFlow"/>
-	<property name="finalMode" value="true"/>
-	<property name="company" ref="company2"/>
-</bean>
-<bean id="problem10" class="domain.Problem">
-	<property name="title" value="Problem 3"/>
-	<property name="statement" value="Solve this problem:..."/>
-	<property name="hint" value="You have to use ..."/>
-	<property name="attachments" value="StackOverFlow"/>
-	<property name="finalMode" value="true"/>
-	<property name="company" ref="company2"/>
-</bean>
-<bean id="problem11" class="domain.Problem">
-	<property name="title" value="Problem 4"/>
-	<property name="statement" value="Solve this problem:..."/>
-	<property name="hint" value="You have to use ..."/>
-	<property name="attachments" value="StackOverFlow"/>
-	<property name="finalMode" value="true"/>
-	<property name="company" ref="company2"/>
-</bean>
-<bean id="problem12" class="domain.Problem">
-	<property name="title" value="Problem 5"/>
-	<property name="statement" value="Solve this problem:..."/>
-	<property name="hint" value="You have to use ..."/>
-	<property name="attachments" value="StackOverFlow"/>
-	<property name="finalMode" value="true"/>
-	<property name="company" ref="company2"/>
-</bean>
-<bean id="problem13" class="domain.Problem">
-	<property name="title" value="Problem 6"/>
-	<property name="statement" value="Solve this problem:..."/>
-	<property name="hint" value="You have to use ..."/>
-	<property name="attachments" value="StackOverFlow"/>
-	<property name="finalMode" value="true"/>
-	<property name="company" ref="company2"/>
-</bean>
-<bean id="problem14" class="domain.Problem">
-	<property name="title" value="Problem 7"/>
-	<property name="statement" value="Solve this problem:..."/>
-	<property name="hint" value="You have to use ..."/>
-	<property name="attachments" value="StackOverFlow"/>
-	<property name="finalMode" value="true"/>
-	<property name="company" ref="company2"/>
-</bean>
-<!-- Positions -->
-<bean id="position1" class="domain.Position">
-	<property name="title" value="Position 1"/>
-	<property name="description" value="Description"/>
-	<property name="deadline" value="2019/06/06"/>
-	<property name="skills">
-		<list>
-			<value>Database administration</value>
-			<value>Coding</value>
-		</list>
-	</property>
-	<property name="technologies">
-		<list>
-			<value>UNIX</value>
-			<value>Ruby</value>
-		</list>
-	</property>
-	<property name="profile" value="Experience 1 year"/>
-	<property name="isCancelled" value="false"/>
-	<property name="salary" value="1300"/>
-	<property name="finalMode" value="true"/>
-	<property name="ticker" value="COMX-1354"/>
-	<property name="company" ref="company1"/>
-	<property name="problems">
-		<list>
-			<ref bean="problem1"/>
-			<ref bean="problem2"/>
-			<ref bean="problem3"/>
-		</list>
-	</property>
-</bean>
-<bean id="position2" class="domain.Position">
-	<property name="title" value="Position 2"/>
-	<property name="description" value="Description"/>
-	<property name="deadline" value="2019/06/06"/>
-	<property name="skills">
-		<list>
-			<value>Database administration</value>
-			<value>Coding</value>
-		</list>
-	</property>
-	<property name="technologies">
-		<list>
-			<value>UNIX</value>
-			<value>Ruby</value>
-		</list>
-	</property>
-	<property name="profile" value="Experience 1 year"/>
-	<property name="isCancelled" value="false"/>
-	<property name="salary" value="1300"/>
-	<property name="finalMode" value="true"/>
-	<property name="ticker" value="COMX-1355"/>
-	<property name="company" ref="company1"/>
-	<property name="problems">
-		<list>
-			<ref bean="problem1"/>
-			<ref bean="problem2"/>
-			<ref bean="problem3"/>
-		</list>
-	</property>
-</bean>
-<bean id="position3" class="domain.Position">
-	<property name="title" value="Position 3"/>
-	<property name="description" value="Description"/>
-	<property name="deadline" value="2019/06/06"/>
-	<property name="skills">
-		<list>
-			<value>Database administration</value>
-			<value>Coding</value>
-		</list>
-	</property>
-	<property name="technologies">
-		<list>
-			<value>UNIX</value>
-			<value>Ruby</value>
-		</list>
-	</property>
-	<property name="profile" value="Experience 1 year"/>
-	<property name="isCancelled" value="false"/>
-	<property name="salary" value="1300"/>
-	<property name="finalMode" value="true"/>
-	<property name="ticker" value="COMX-1854"/>
-	<property name="company" ref="company1"/>
-	<property name="problems">
-		<list>
-			<ref bean="problem1"/>
-			<ref bean="problem2"/>
-			<ref bean="problem3"/>
-		</list>
-	</property>
-</bean>
-<bean id="position4" class="domain.Position">
-	<property name="title" value="Position 4"/>
-	<property name="description" value="Description"/>
-	<property name="deadline" value="2019/06/06"/>
-	<property name="skills">
-		<list>
-			<value>Database administration</value>
-			<value>Coding</value>
-		</list>
-	</property>
-	<property name="technologies">
-		<list>
-			<value>UNIX</value>
-			<value>Ruby</value>
-		</list>
-	</property>
-	<property name="profile" value="Experience 1 year"/>
-	<property name="isCancelled" value="false"/>
-	<property name="salary" value="1300"/>
-	<property name="finalMode" value="true"/>
-	<property name="ticker" value="COMX-1900"/>
-	<property name="company" ref="company1"/>
-	<property name="problems">
-		<list>
-			<ref bean="problem1"/>
-			<ref bean="problem2"/>
-			<ref bean="problem3"/>
-		</list>
-	</property>
-</bean>
-<bean id="position5" class="domain.Position">
-	<property name="title" value="Position 5"/>
-	<property name="description" value="Description"/>
-	<property name="deadline" value="2019/06/06"/>
-	<property name="skills">
-		<list>
-			<value>Database administration</value>
-			<value>Coding</value>
-		</list>
-	</property>
-	<property name="technologies">
-		<list>
-			<value>UNIX</value>
-			<value>Ruby</value>
-		</list>
-	</property>
-	<property name="profile" value="Experience 1 year"/>
-	<property name="isCancelled" value="false"/>
-	<property name="salary" value="1300"/>
-	<property name="finalMode" value="true"/>
-	<property name="ticker" value="COMX-9392"/>
-	<property name="company" ref="company1"/>
-	<property name="problems">
-		<list>
-			<ref bean="problem1"/>
-			<ref bean="problem2"/>
-			<ref bean="problem3"/>
-		</list>
-	</property>
-</bean>
-<bean id="position6" class="domain.Position">
-	<property name="title" value="Position 6"/>
-	<property name="description" value="Description"/>
-	<property name="deadline" value="2019/06/06"/>
-	<property name="skills">
-		<list>
-			<value>Database administration</value>
-			<value>Coding</value>
-		</list>
-	</property>
-	<property name="technologies">
-		<list>
-			<value>UNIX</value>
-			<value>Ruby</value>
-		</list>
-	</property>
-	<property name="profile" value="Experience 1 year"/>
-	<property name="isCancelled" value="false"/>
-	<property name="salary" value="1300"/>
-	<property name="finalMode" value="true"/>
-	<property name="ticker" value="COMX-4555"/>
-	<property name="company" ref="company1"/>
-	<property name="problems">
-		<list>
-			<ref bean="problem1"/>
-			<ref bean="problem2"/>
-			<ref bean="problem3"/>
-		</list>
-	</property>
-</bean>
-<bean id="position7" class="domain.Position">
-	<property name="title" value="Position 7"/>
-	<property name="description" value="Description"/>
-	<property name="deadline" value="2019/06/06"/>
-	<property name="skills">
-		<list>
-			<value>Database administration</value>
-			<value>Coding</value>
-		</list>
-	</property>
-	<property name="technologies">
-		<list>
-			<value>UNIX</value>
-			<value>Ruby</value>
-		</list>
-	</property>
-	<property name="profile" value="Experience 1 year"/>
-	<property name="isCancelled" value="false"/>
-	<property name="salary" value="1300"/>
-	<property name="finalMode" value="true"/>
-	<property name="ticker" value="COMX-7312"/>
-	<property name="company" ref="company1"/>
-	<property name="problems">
-		<list>
-			<ref bean="problem1"/>
-			<ref bean="problem2"/>
-			<ref bean="problem3"/>
-		</list>
-	</property>
-</bean>
+	<!-- Applications -->
+	<bean id="application1" class="domain.Application">
+		<property name="moment" value="2019/02/02 21:00:00" />
+		<property name="status" value="PENDING" />
+		<property name="answerExplanation" value="" />
+		<property name="link" value="" />
+		<property name="position" ref="position1" />
+		<property name="hacker" ref="hacker1" />
+	</bean>
+	<bean id="application2" class="domain.Application">
+		<property name="moment" value="2019/02/02 21:00:00" />
+		<property name="status" value="SUBMITTED" />
+		<property name="answerExplanation" value="For solve the problem..." />
+		<property name="link" value="http://github.com/unknown/repo" />
+		<property name="position" ref="position2" />
+		<property name="hacker" ref="hacker1" />
+	</bean>
+	<bean id="application3" class="domain.Application">
+		<property name="moment" value="2019/02/02 21:00:00" />
+		<property name="status" value="REJECTED" />
+		<property name="answerExplanation" value="For solve the problem..." />
+		<property name="link" value="http://github.com/unknown/repo" />
+		<property name="position" ref="position3" />
+		<property name="hacker" ref="hacker1" />
+	</bean>
+	<bean id="application4" class="domain.Application">
+		<property name="moment" value="2019/02/02 21:00:00" />
+		<property name="status" value="ACCEPTED" />
+		<property name="answerExplanation" value="For solve the problem..." />
+		<property name="link" value="http://github.com/unknown/repo" />
+		<property name="position" ref="position4" />
+		<property name="hacker" ref="hacker1" />
+	</bean>
+	<bean id="application5" class="domain.Application">
+		<property name="moment" value="2019/02/02 21:00:00" />
+		<property name="status" value="REJECTED" />
+		<property name="answerExplanation" value="For solve the problem..." />
+		<property name="link" value="http://github.com/unknown/repo" />
+		<property name="position" ref="position5" />
+		<property name="hacker" ref="hacker1" />
+	</bean>
+	<bean id="application6" class="domain.Application">
+		<property name="moment" value="2019/02/02 21:00:00" />
+		<property name="status" value="REJECTED" />
+		<property name="answerExplanation" value="For solve the problem..." />
+		<property name="link" value="http://github.com/unknown/repo" />
+		<property name="position" ref="position6" />
+		<property name="hacker" ref="hacker1" />
+	</bean>
+	<bean id="application7" class="domain.Application">
+		<property name="moment" value="2019/02/02 21:00:00" />
+		<property name="status" value="REJECTED" />
+		<property name="answerExplanation" value="For solve the problem..." />
+		<property name="link" value="http://github.com/unknown/repo" />
+		<property name="position" ref="position7" />
+		<property name="hacker" ref="hacker1" />
+	</bean>
 
-<bean id="position8" class="domain.Position">
-	<property name="title" value="Position 1"/>
-	<property name="description" value="Description"/>
-	<property name="deadline" value="2019/06/06"/>
-	<property name="skills">
-		<list>
-			<value>Database administration</value>
-			<value>Coding</value>
-		</list>
-	</property>
-	<property name="technologies">
-		<list>
-			<value>UNIX</value>
-			<value>Ruby</value>
-		</list>
-	</property>
-	<property name="profile" value="Experience 1 year"/>
-	<property name="isCancelled" value="false"/>
-	<property name="salary" value="1300"/>
-	<property name="finalMode" value="true"/>
-	<property name="ticker" value="COMP-1354"/>
-	<property name="company" ref="company2"/>
-	<property name="problems">
-		<list>
-			<ref bean="problem11"/>
-			<ref bean="problem12"/>
-			<ref bean="problem13"/>
-		</list>
-	</property>
-</bean>
-<bean id="position9" class="domain.Position">
-	<property name="title" value="Position 2"/>
-	<property name="description" value="Description"/>
-	<property name="deadline" value="2019/06/06"/>
-	<property name="skills">
-		<list>
-			<value>Database administration</value>
-			<value>Coding</value>
-		</list>
-	</property>
-	<property name="technologies">
-		<list>
-			<value>UNIX</value>
-			<value>Ruby</value>
-		</list>
-	</property>
-	<property name="profile" value="Experience 1 year"/>
-	<property name="isCancelled" value="false"/>
-	<property name="salary" value="1300"/>
-	<property name="finalMode" value="true"/>
-	<property name="ticker" value="COMP-1355"/>
-	<property name="company" ref="company2"/>
-	<property name="problems">
-		<list>
-			<ref bean="problem11"/>
-			<ref bean="problem12"/>
-			<ref bean="problem13"/>
-		</list>
-	</property>
-</bean>
-<bean id="position10" class="domain.Position">
-	<property name="title" value="Position 3"/>
-	<property name="description" value="Description"/>
-	<property name="deadline" value="2019/06/06"/>
-	<property name="skills">
-		<list>
-			<value>Database administration</value>
-			<value>Coding</value>
-		</list>
-	</property>
-	<property name="technologies">
-		<list>
-			<value>UNIX</value>
-			<value>Ruby</value>
-		</list>
-	</property>
-	<property name="profile" value="Experience 1 year"/>
-	<property name="isCancelled" value="false"/>
-	<property name="salary" value="1300"/>
-	<property name="finalMode" value="true"/>
-	<property name="ticker" value="COMP-1854"/>
-	<property name="company" ref="company2"/>
-	<property name="problems">
-		<list>
-			<ref bean="problem11"/>
-			<ref bean="problem12"/>
-			<ref bean="problem13"/>
-		</list>
-	</property>
-</bean>
-<bean id="position11" class="domain.Position">
-	<property name="title" value="Position 4"/>
-	<property name="description" value="Description"/>
-	<property name="deadline" value="2019/06/06"/>
-	<property name="skills">
-		<list>
-			<value>Database administration</value>
-			<value>Coding</value>
-		</list>
-	</property>
-	<property name="technologies">
-		<list>
-			<value>UNIX</value>
-			<value>Ruby</value>
-		</list>
-	</property>
-	<property name="profile" value="Experience 1 year"/>
-	<property name="isCancelled" value="false"/>
-	<property name="salary" value="1300"/>
-	<property name="finalMode" value="true"/>
-	<property name="ticker" value="COMP-1900"/>
-	<property name="company" ref="company2"/>
-	<property name="problems">
-		<list>
-			<ref bean="problem11"/>
-			<ref bean="problem12"/>
-			<ref bean="problem13"/>
-		</list>
-	</property>
-</bean>
-<bean id="position12" class="domain.Position">
-	<property name="title" value="Position 5"/>
-	<property name="description" value="Description"/>
-	<property name="deadline" value="2019/06/06"/>
-	<property name="skills">
-		<list>
-			<value>Database administration</value>
-			<value>Coding</value>
-		</list>
-	</property>
-	<property name="technologies">
-		<list>
-			<value>UNIX</value>
-			<value>Ruby</value>
-		</list>
-	</property>
-	<property name="profile" value="Experience 1 year"/>
-	<property name="isCancelled" value="false"/>
-	<property name="salary" value="1300"/>
-	<property name="finalMode" value="true"/>
-	<property name="ticker" value="COMP-9392"/>
-	<property name="company" ref="company2"/>
-	<property name="problems">
-		<list>
-			<ref bean="problem11"/>
-			<ref bean="problem12"/>
-			<ref bean="problem13"/>
-		</list>
-	</property>
-</bean>
-<bean id="position13" class="domain.Position">
-	<property name="title" value="Position 6"/>
-	<property name="description" value="Description"/>
-	<property name="deadline" value="2019/06/06"/>
-	<property name="skills">
-		<list>
-			<value>Database administration</value>
-			<value>Coding</value>
-		</list>
-	</property>
-	<property name="technologies">
-		<list>
-			<value>UNIX</value>
-			<value>Ruby</value>
-		</list>
-	</property>
-	<property name="profile" value="Experience 1 year"/>
-	<property name="isCancelled" value="false"/>
-	<property name="salary" value="1300"/>
-	<property name="finalMode" value="true"/>
-	<property name="ticker" value="COMP-4555"/>
-	<property name="company" ref="company2"/>
-	<property name="problems">
-		<list>
-			<ref bean="problem11"/>
-			<ref bean="problem12"/>
-			<ref bean="problem13"/>
-		</list>
-	</property>
-</bean>
-<bean id="position14" class="domain.Position">
-	<property name="title" value="Position 7"/>
-	<property name="description" value="Description"/>
-	<property name="deadline" value="2019/06/06"/>
-	<property name="skills">
-		<list>
-			<value>Database administration</value>
-			<value>Coding</value>
-		</list>
-	</property>
-	<property name="technologies">
-		<list>
-			<value>UNIX</value>
-			<value>Ruby</value>
-		</list>
-	</property>
-	<property name="profile" value="Experience 1 year"/>
-	<property name="isCancelled" value="false"/>
-	<property name="salary" value="1300"/>
-	<property name="finalMode" value="true"/>
-	<property name="ticker" value="COMP-7312"/>
-	<property name="company" ref="company2"/>
-	<property name="problems">
-		<list>
-			<ref bean="problem11"/>
-			<ref bean="problem12"/>
-			<ref bean="problem13"/>
-		</list>
-	</property>
-</bean>
+	<bean id="application8" class="domain.Application">
+		<property name="moment" value="2019/02/02 21:00:00" />
+		<property name="status" value="PENDING" />
+		<property name="answerExplanation" value="" />
+		<property name="link" value="" />
+		<property name="position" ref="position8" />
+		<property name="hacker" ref="hacker2" />
+	</bean>
+	<bean id="application9" class="domain.Application">
+		<property name="moment" value="2019/02/02 21:00:00" />
+		<property name="status" value="SUBMITTED" />
+		<property name="answerExplanation" value="For solve the problem..." />
+		<property name="link" value="http://github.com/unknown/repo" />
+		<property name="position" ref="position9" />
+		<property name="hacker" ref="hacker2" />
+	</bean>
+	<bean id="application10" class="domain.Application">
+		<property name="moment" value="2019/02/02 21:00:00" />
+		<property name="status" value="REJECTED" />
+		<property name="answerExplanation" value="For solve the problem..." />
+		<property name="link" value="http://github.com/unknown/repo" />
+		<property name="position" ref="position10" />
+		<property name="hacker" ref="hacker2" />
+	</bean>
+	<bean id="application11" class="domain.Application">
+		<property name="moment" value="2019/02/02 21:00:00" />
+		<property name="status" value="ACCEPTED" />
+		<property name="answerExplanation" value="For solve the problem..." />
+		<property name="link" value="http://github.com/unknown/repo" />
+		<property name="position" ref="position11" />
+		<property name="hacker" ref="hacker2" />
+	</bean>
+	<bean id="application12" class="domain.Application">
+		<property name="moment" value="2019/02/02 21:00:00" />
+		<property name="status" value="REJECTED" />
+		<property name="answerExplanation" value="For solve the problem..." />
+		<property name="link" value="http://github.com/unknown/repo" />
+		<property name="position" ref="position12" />
+		<property name="hacker" ref="hacker2" />
+	</bean>
+	<bean id="application13" class="domain.Application">
+		<property name="moment" value="2019/02/02 21:00:00" />
+		<property name="status" value="REJECTED" />
+		<property name="answerExplanation" value="For solve the problem..." />
+		<property name="link" value="http://github.com/unknown/repo" />
+		<property name="position" ref="position13" />
+		<property name="hacker" ref="hacker2" />
+	</bean>
+	<bean id="application14" class="domain.Application">
+		<property name="moment" value="2019/02/02 21:00:00" />
+		<property name="status" value="REJECTED" />
+		<property name="answerExplanation" value="For solve the problem..." />
+		<property name="link" value="http://github.com/unknown/repo" />
+		<property name="position" ref="position14" />
+		<property name="hacker" ref="hacker2" />
+	</bean>
 
+	<!-- FINDERS -->
+	<bean id="finder1" class="domain.Finder">
+		<property name="keyword" value="" />
+		<property name="deadline">
+			<null />
+		</property>
+		<property name="maximumDeadline">
+			<null />
+		</property>
+		<property name="minimumSalary">
+			<null />
+		</property>
+		<property name="moment" value="2019/01/01 00:00:00"/>
+		<property name="positions">
+			<list>
+			</list>
+		</property>
+	</bean>
+	<bean id="finder2" class="domain.Finder">
+		<property name="keyword" value="" />
+		<property name="deadline">
+			<null />
+		</property>
+		<property name="maximumDeadline">
+			<null />
+		</property>
+		<property name="minimumSalary">
+			<null />
+		</property>
+		<property name="moment" value="2019/01/01 00:00:00"/>
+		<property name="positions">
+			<list>
+			</list>
+		</property>
+	</bean>
 
-<!-- Applications -->
-<bean id="application1" class="domain.Application">
-	<property name="moment" value="2019/02/02 21:00:00"/>
-	<property name="status" value="PENDING"/>
-	<property name="answerExplanation" value=""/>
-	<property name="link" value=""/>
-	<property name="position" ref="position1"/>
-	<property name="hacker" ref="hacker1"/>
-</bean>
-<bean id="application2" class="domain.Application">
-	<property name="moment" value="2019/02/02 21:00:00"/>
-	<property name="status" value="SUBMITTED"/>
-	<property name="answerExplanation" value="For solve the problem..."/>
-	<property name="link" value="http://github.com/unknown/repo"/>
-	<property name="position" ref="position2"/>
-	<property name="hacker" ref="hacker1"/>
-</bean>
-<bean id="application3" class="domain.Application">
-	<property name="moment" value="2019/02/02 21:00:00"/>
-	<property name="status" value="REJECTED"/>
-	<property name="answerExplanation" value="For solve the problem..."/>
-	<property name="link" value="http://github.com/unknown/repo"/>
-	<property name="position" ref="position3"/>
-	<property name="hacker" ref="hacker1"/>
-</bean>
-<bean id="application4" class="domain.Application">
-	<property name="moment" value="2019/02/02 21:00:00"/>
-	<property name="status" value="ACCEPTED"/>
-	<property name="answerExplanation" value="For solve the problem..."/>
-	<property name="link" value="http://github.com/unknown/repo"/>
-	<property name="position" ref="position4"/>
-	<property name="hacker" ref="hacker1"/>
-</bean>
-<bean id="application5" class="domain.Application">
-	<property name="moment" value="2019/02/02 21:00:00"/>
-	<property name="status" value="REJECTED"/>
-	<property name="answerExplanation" value="For solve the problem..."/>
-	<property name="link" value="http://github.com/unknown/repo"/>
-	<property name="position" ref="position5"/>
-	<property name="hacker" ref="hacker1"/>
-</bean>
-<bean id="application6" class="domain.Application">
-	<property name="moment" value="2019/02/02 21:00:00"/>
-	<property name="status" value="REJECTED"/>
-	<property name="answerExplanation" value="For solve the problem..."/>
-	<property name="link" value="http://github.com/unknown/repo"/>
-	<property name="position" ref="position6"/>
-	<property name="hacker" ref="hacker1"/>
-</bean>
-<bean id="application7" class="domain.Application">
-	<property name="moment" value="2019/02/02 21:00:00"/>
-	<property name="status" value="REJECTED"/>
-	<property name="answerExplanation" value="For solve the problem..."/>
-	<property name="link" value="http://github.com/unknown/repo"/>
-	<property name="position" ref="position7"/>
-	<property name="hacker" ref="hacker1"/>
-</bean>
-
-<bean id="application8" class="domain.Application">
-	<property name="moment" value="2019/02/02 21:00:00"/>
-	<property name="status" value="PENDING"/>
-	<property name="answerExplanation" value=""/>
-	<property name="link" value=""/>
-	<property name="position" ref="position8"/>
-	<property name="hacker" ref="hacker2"/>
-</bean>
-<bean id="application9" class="domain.Application">
-	<property name="moment" value="2019/02/02 21:00:00"/>
-	<property name="status" value="SUBMITTED"/>
-	<property name="answerExplanation" value="For solve the problem..."/>
-	<property name="link" value="http://github.com/unknown/repo"/>
-	<property name="position" ref="position9"/>
-	<property name="hacker" ref="hacker2"/>
-</bean>
-<bean id="application10" class="domain.Application">
-	<property name="moment" value="2019/02/02 21:00:00"/>
-	<property name="status" value="REJECTED"/>
-	<property name="answerExplanation" value="For solve the problem..."/>
-	<property name="link" value="http://github.com/unknown/repo"/>
-	<property name="position" ref="position10"/>
-	<property name="hacker" ref="hacker2"/>
-</bean>
-<bean id="application11" class="domain.Application">
-	<property name="moment" value="2019/02/02 21:00:00"/>
-	<property name="status" value="ACCEPTED"/>
-	<property name="answerExplanation" value="For solve the problem..."/>
-	<property name="link" value="http://github.com/unknown/repo"/>
-	<property name="position" ref="position11"/>
-	<property name="hacker" ref="hacker2"/>
-</bean>
-<bean id="application12" class="domain.Application">
-	<property name="moment" value="2019/02/02 21:00:00"/>
-	<property name="status" value="REJECTED"/>
-	<property name="answerExplanation" value="For solve the problem..."/>
-	<property name="link" value="http://github.com/unknown/repo"/>
-	<property name="position" ref="position12"/>
-	<property name="hacker" ref="hacker2"/>
-</bean>
-<bean id="application13" class="domain.Application">
-	<property name="moment" value="2019/02/02 21:00:00"/>
-	<property name="status" value="REJECTED"/>
-	<property name="answerExplanation" value="For solve the problem..."/>
-	<property name="link" value="http://github.com/unknown/repo"/>
-	<property name="position" ref="position13"/>
-	<property name="hacker" ref="hacker2"/>
-</bean>
-<bean id="application14" class="domain.Application">
-	<property name="moment" value="2019/02/02 21:00:00"/>
-	<property name="status" value="REJECTED"/>
-	<property name="answerExplanation" value="For solve the problem..."/>
-	<property name="link" value="http://github.com/unknown/repo"/>
-	<property name="position" ref="position14"/>
-	<property name="hacker" ref="hacker2"/>
-</bean>
-
-<!-- FINDERS -->
-<bean id="finder1" class="domain.Finder">
-	<property name="keyword" value=""/>
-	<property name="deadline"><null/></property>
-	<property name="maximumDeadline"><null/></property>
-	<property name="minimumSalary"><null/></property>
-	<property name="positions">
-		<list>
-		</list>
-	</property>
-</bean>
-<bean id="finder2" class="domain.Finder">
-	<property name="keyword" value=""/>
-	<property name="deadline"><null/></property>
-	<property name="maximumDeadline"><null/></property>
-	<property name="minimumSalary"><null/></property>
-	<property name="positions">
-		<list>
-		</list>
-	</property>
-</bean>
+	<!-- CURRICULA -->
+	<bean id="curricula1" class="domain.Curricula">
+		<property name="hacker" ref="hacker1" />
+	</bean>
+	<bean id="curricula2" class="domain.Curricula">
+		<property name="hacker" ref="hacker2" />
+	</bean>
+<!-- 
+	<bean id="personalData1" class="domain.PersonalData">
+		<property name="fullName" value="Hacker One" />
+		<property name="statement" value="Statement" />
+		<property name="phoneNumber" value="678787789" />
+		<property name="gitProfile" value="https://github.com/unknown1" />
+		<property name="linkedinProfile" value="https://linkedin.com/unknown1" />
+		<property name="curricula" ref="curricula1"/>
+	</bean>
+	<bean id="personalData2" class="domain.PersonalData">
+		<property name="fullName" value="Hacker Two" />
+		<property name="statement" value="Statement" />
+		<property name="phoneNumber" value="678654456" />
+		<property name="gitProfile" value="https://github.com/unknown2" />
+		<property name="linkedinProfile" value="https://linkedin.com/unknown2" />
+		<property name="curricula" ref="curricula2"/>
+	</bean>  -->
+	<!-- <bean id="positionData1" class="domain.PositionData">
+		<property name=""
+	</bean> -->
 </beans>
