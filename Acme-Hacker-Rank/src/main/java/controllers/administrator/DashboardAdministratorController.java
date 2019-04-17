@@ -54,6 +54,18 @@ public class DashboardAdministratorController extends AbstractController {
 		final List<Position> highestSalaryPosition = new ArrayList<>(this.dashboardService.highestSalaryPosition());
 		final List<Position> lowestSalaryPosition = new ArrayList<>(this.dashboardService.lowestSalaryPosition());
 
+		final Integer minCurricula = this.dashboardService.minCurricula();
+		final Integer maxCurricula = this.dashboardService.maxCurricula();
+		final Double avgCurricula = this.dashboardService.avgCurricula();
+		final Double stddevCurricula = this.dashboardService.stddevCurricula();
+
+		final Integer minResults = this.dashboardService.minResults();
+		final Integer maxResults = this.dashboardService.maxResults();
+		final Double avgResults = this.dashboardService.avgResults();
+		final Double stddevResults = this.dashboardService.stddevResults();
+
+		final Double ratioFinders = this.dashboardService.ratioFinders();
+
 		res.addObject("avgPositions", avgPositions);
 		res.addObject("minPositions", minPositions);
 		res.addObject("maxPositions", maxPositions);
@@ -70,6 +82,16 @@ public class DashboardAdministratorController extends AbstractController {
 		res.addObject("hackersWithMoreApplications", hackersWithMorePositions);
 		res.addObject("highestSalaryPosition", highestSalaryPosition.get(0));
 		res.addObject("lowestSalaryPosition", lowestSalaryPosition.get(0));
+
+		res.addObject("avgCurricula", avgCurricula);
+		res.addObject("minCurricula", minCurricula);
+		res.addObject("maxCurricula", maxCurricula);
+		res.addObject("stddevCurricula", stddevCurricula);
+		res.addObject("avgResults", avgResults);
+		res.addObject("minResults", minResults);
+		res.addObject("maxResults", maxResults);
+		res.addObject("stddevResults", stddevResults);
+		res.addObject("ratioFinders", ratioFinders);
 
 		return res;
 	}

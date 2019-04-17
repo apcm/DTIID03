@@ -112,4 +112,49 @@ public class DashboardService {
 		return this.repository.lowestSalaryPosition();
 	}
 
+	public Integer minCurricula() {
+		Assert.isTrue(this.checkAdmin());
+		return this.repository.minCurricula();
+	}
+
+	public Integer maxCurricula() {
+		Assert.isTrue(this.checkAdmin());
+		return this.repository.maxCurricula();
+	}
+
+	public Double avgCurricula() {
+		Assert.isTrue(this.checkAdmin());
+		return this.repository.avgCurricula();
+	}
+
+	public Double stddevCurricula() {
+		Assert.isTrue(this.checkAdmin());
+		return this.repository.stddevCurricula();
+	}
+
+	public Integer minResults() {
+		Assert.isTrue(this.checkAdmin());
+		return this.repository.minResults();
+	}
+
+	public Integer maxResults() {
+		Assert.isTrue(this.checkAdmin());
+		return this.repository.maxResults();
+	}
+
+	public Double avgResults() {
+		Assert.isTrue(this.checkAdmin());
+		return this.repository.avgResults();
+	}
+
+	public Double stddevResults() {
+		Assert.isTrue(this.checkAdmin());
+		return this.repository.stddevResults();
+	}
+
+	public Double ratioFinders() {
+		Assert.isTrue(this.checkAdmin());
+		return this.repository.ratioFinders();
+	}
+
 }
