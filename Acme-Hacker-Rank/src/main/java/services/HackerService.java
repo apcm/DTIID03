@@ -16,6 +16,7 @@ import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 
+import repositories.FinderRepository;
 import repositories.HackerRepository;
 import security.Authority;
 import security.LoginService;
@@ -44,6 +45,9 @@ public class HackerService {
 
 	@Autowired
 	public FinderService		finderService;
+
+	@Autowired
+	public FinderRepository		finderRepository;
 
 
 	//Constructor
@@ -136,7 +140,8 @@ public class HackerService {
 			hacker.setUserAccount(cuenta);
 
 			final Finder find = new Finder();
-			final Finder find2 = this.finderService.save(find);
+			find.setMoment(new Date());
+			final Finder find2 = this.finderRepository.save(find);
 			hacker.setFinder(find2);
 		}
 		// Restrictions
@@ -220,10 +225,13 @@ public class HackerService {
 		find.setMoment(new Date());
 		find2.setMoment(new Date());
 
-		this.finderService.save(find);
-		this.finderService.save(find2);
-		hacker.setFinder(find);
-		hackerForm.setFinder(find2);
+		final Finder find3 = this.finderService.save(find);
+		final Finder find4 = this.finderService.save(find2);
+
+		this.finderService.flush();
+
+		hacker.setFinder(find3);
+		hackerForm.setFinder(find4);
 
 		hacker.setIsBanned(false);
 
