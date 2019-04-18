@@ -37,7 +37,8 @@
 				<ul>
 					<li class="arrow"></li>
 					<li><a href="company/company/edit.do"><spring:message code="master.page.edit.company" /></a></li>
-									
+					<li><a href="problem/company/list.do"><spring:message code="master.page.problem" /></a></li>	
+					
 				</ul>
 			</li>
 		</security:authorize>
@@ -47,7 +48,9 @@
 				<ul>
 					<li class="arrow"></li>
 					<li><a href="hacker/hacker/edit.do"><spring:message code="master.page.edit.hacker" /></a></li>
-					<li><a href="finder/hacker/show.do"><spring:message code="master.page.finder" /></a></li>			
+					<li><a href="finder/hacker/show.do"><spring:message code="master.page.finder" /></a></li>	
+					<li><a href="curricula/hacker/list.do"><spring:message code="master.page.curricula.list"/></a></li>
+					
 				</ul>
 			</li>
 		</security:authorize>
