@@ -115,4 +115,9 @@ public class ProblemService {
 		this.problemRepository.flush();
 
 	}
+		public Collection<Problem> getProblems(final Position position) {
+		final Collection<Problem> res = this.problemService.findAllByCompanyId(this.getThisCompany().getId());
+
+		return res;
+	}
 }

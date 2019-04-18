@@ -113,12 +113,8 @@ public class PositionService {
 		return res;
 	}
 
-	public Collection<Problem> getProblems(final Position position) {
-		final Collection<Problem> res = new ArrayList<Problem>();
-		final Collection<Problem> all = this.problemService.findAll();
-		for (final Problem p : all)
-			if (p.getCompany().equals(this.getThisCompany()))
-				res.add(p);
+		public Collection<Problem> getProblems(final Position position) {
+		final Collection<Problem> res = this.problemService.findAllByCompanyId(this.getThisCompany().getId());
 
 		return res;
 	}

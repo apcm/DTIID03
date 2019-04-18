@@ -222,7 +222,6 @@ public class HackerService {
 
 		this.finderService.save(find);
 		this.finderService.save(find2);
-		this.finderService.flush();
 		hacker.setFinder(find);
 		hackerForm.setFinder(find2);
 
