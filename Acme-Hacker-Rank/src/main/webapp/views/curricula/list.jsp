@@ -3,6 +3,7 @@
 
 <%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>  
 <%@taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
@@ -22,9 +23,11 @@
 	</display:column>
 	
 	<display:column>
+	<jstl:if test="${!fn:contains(row.name,'copy') }">
 	<a href="curricula/hacker/edit.do?curriculaId=${row.id}">
 			<spring:message code="curricula.edit.name" />
 			</a>
+	</jstl:if>
 	</display:column>
 
 	

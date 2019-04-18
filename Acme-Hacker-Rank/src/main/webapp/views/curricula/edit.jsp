@@ -11,7 +11,7 @@
 <form:form action="curricula/hacker/edit.do"
 	modelAttribute="curricula">
 	<form:hidden path="id" />
-	<jstl:if test="${id==0 }">
+	<jstl:if test="${curricula.id==0 }">
 	<form:hidden path="version" />
 
 	<form:hidden path="hacker" />
@@ -35,7 +35,7 @@
 	
 	<input type="submit" name="save"
 		value="<spring:message code="curricula.save" />" />&nbsp;
-		<jstl:if test="${problem.id!=0 }">
+		<jstl:if test="${curricula.id!=0 }">
 	<input type="submit" name="delete"
 		value="<spring:message code="curricula.delete" />"
 		onclick="return confirm('<spring:message code="curricula.confirm.delete" />')" />&nbsp;

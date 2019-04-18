@@ -111,7 +111,8 @@ public class ProblemService {
 		return res;
 	}
 
-	public List<Problem> findAll() {
-		return this.problemRepository.findAll();
+	public void flush() {
+		this.problemRepository.flush();
+
 	}
 }
