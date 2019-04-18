@@ -45,6 +45,9 @@
 		<security:intercept-url pattern="/welcome/index.do" access="permitAll" /> 
 		
 		<security:intercept-url pattern="/security/termsAndConditions.do" access="permitAll" /> 
+		<security:intercept-url pattern="/position/list.do" access="permitAll" /> 
+		<security:intercept-url pattern="/company/list.do" access="permitAll" /> 
+		
 		
 		
 		<!-- ANON -->
