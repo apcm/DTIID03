@@ -21,8 +21,6 @@
 		titleKey="position.technologies" />
 	<display:column property="profile" titleKey="position.profile" />
 	<display:column property="salary" titleKey="position.salary" />
-	
-	<security:authorize access="hasRole('COMPANY')">
 	<display:column property="ticker" titleKey="position.ticker" />
 	<display:column property="finalMode" titleKey="position.finalmode" />
  	</security:authorize>
