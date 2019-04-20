@@ -94,6 +94,7 @@ public class CurriculaService {
 		if (c.getApplication() != null) {
 			Curricula copy = this.create();
 			copy.setIsCopy(true);
+
 			copy.setHacker(c.getHacker());
 			copy.setApplication(c.getApplication());
 			final String title = c.getName();

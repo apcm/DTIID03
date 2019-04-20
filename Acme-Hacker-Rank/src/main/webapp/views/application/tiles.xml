@@ -20,10 +20,11 @@
 		<put-attribute name="title" value="Solve the problem" />
 		<put-attribute name="body" value="/views/application/solve.jsp" />
 	</definition>
-	
+
 		<definition name="application/hacker/create" extends="master.page">
 		<put-attribute name="title" value="Create application" />
 		<put-attribute name="body" value="/views/application/create.jsp" />
 	</definition>
+
 
 </tiles-definitions>

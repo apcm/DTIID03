@@ -29,6 +29,7 @@
 					<li><a href="dashboard/administrator/dashboard.do"><spring:message code="master.page.administrator.dashboard" /></a></li>
 					<li><a href="customisation/administrator/edit.do"><spring:message code="master.page.administrator.customisation" /></a></li>
 					<li><a href="ban/administrator/list.do"><spring:message code="master.page.administrator.ban" /></a></li>
+
 				</ul>
 			</li>
 		</security:authorize>

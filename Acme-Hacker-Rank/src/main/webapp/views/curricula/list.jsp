@@ -23,7 +23,9 @@
 	</display:column>
 	
 	<display:column>
+
 	<jstl:if test="${!row.isCopy }">
+
 	<a href="curricula/hacker/edit.do?curriculaId=${row.id}">
 			<spring:message code="curricula.edit.name" />
 			</a>

@@ -5,7 +5,6 @@ import java.util.Collection;
 import java.util.List;
 
 import javax.validation.ValidationException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
@@ -42,7 +41,6 @@ public class ApplicationHackerController {
 
 	@Autowired
 	private CurriculaService	curriculaService;
-
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list() {
@@ -110,7 +108,7 @@ public class ApplicationHackerController {
 
 	protected ModelAndView createSolveModelAndView(final Application application, final String message) {
 		final ModelAndView result;
-
+    
 		Application a = application;
 		result = new ModelAndView("application/hacker/solve");
 		if (a.getProblem() == null)
@@ -127,6 +125,7 @@ public class ApplicationHackerController {
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create(@RequestParam final int positionId) {
 		final ModelAndView result;
+
 		final Application a = this.as.create();
 		final Position p = this.ps.findOne(positionId);
 		final Hacker h = this.hs.getHackerByUserAccount(LoginService.getPrincipal().getId());
@@ -168,4 +167,5 @@ public class ApplicationHackerController {
 		}
 		return result;
 	}
+
 }

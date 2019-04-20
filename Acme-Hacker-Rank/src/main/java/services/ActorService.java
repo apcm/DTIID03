@@ -130,7 +130,7 @@ public class ActorService {
 
 			}
 		Assert.isTrue(fine);
-		//Fin de la comprobación
+		//Fin de la comprobaciÃ³n
 
 		final Box result = this.mbs.save(m);
 

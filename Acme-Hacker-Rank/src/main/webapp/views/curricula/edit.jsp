@@ -13,6 +13,7 @@
 	<form:hidden path="id" />
 	<jstl:if test="${curricula.id==0 }">
 	<form:hidden path="isCopy"/>
+
 	<form:hidden path="version" />
 
 	<form:hidden path="hacker" />

@@ -41,8 +41,9 @@
 	
 		<value>/views/positionData/tiles.xml</value>
 		<value>/views/miscellaneousData/tiles.xml</value> 
-		
+
 		<value>/views/ban/tiles.xml</value> 
+
 
 	</util:list>
 
