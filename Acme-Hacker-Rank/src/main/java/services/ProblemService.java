@@ -72,6 +72,7 @@ public class ProblemService {
 
 	public void save(final Problem p) {
 		this.checkConditions();
+		Assert.isTrue(!p.isFinalMode());
 		Assert.isTrue(p.getCompany().getId() == this.companyService.findOnePrincipal().getId());
 
 		this.problemRepository.save(p);
