@@ -61,11 +61,19 @@ public class CurriculaService {
 		return lc;
 	}
 
+	public List<Curricula> getCurriculasFromHackerNotCopies() {
+		this.checkConditions();
+		final Hacker h = this.hackerService.findOnePrincipal();
+		final List<Curricula> lc = this.curriculaRepository.findCurriculaByHackerIdNotCopies(h.getId());
+		return lc;
+	}
+
 	public Curricula create() {
 		final Curricula res = new Curricula();
 		final Hacker h = this.hackerService.findOnePrincipal();
 		res.setId(0);
 		res.setHacker(h);
+		res.setIsCopy(false);
 
 		return res;
 	}
@@ -80,15 +88,56 @@ public class CurriculaService {
 
 	public void save(final Curricula c) {
 		this.checkConditions();
+		Assert.isTrue(!c.getIsCopy());
 		Assert.isTrue(c.getHacker().getId() == this.hackerService.findOnePrincipal().getId());
 
 		if (c.getApplication() != null) {
-			Curricula copy = new Curricula();
-			copy = c;
-			final String title = copy.getName();
-			c.setName(title + " copy");
-			this.save(copy);
+			Curricula copy = this.create();
+			copy.setIsCopy(true);
+			copy.setHacker(c.getHacker());
+			copy.setApplication(c.getApplication());
+			final String title = c.getName();
+			copy.setName(title + " copy");
+			copy = this.curriculaRepository.save(copy);
 			//Falta guardar una copia de cada apartado y asociarlo a la copia
+			final List<EducationData> ed = this.educationDataService.findByCurriculaId(c.getId());
+			final List<PersonalData> pd = this.personalDataService.findByCurriculaId(c.getId());
+			final List<PositionData> pd2 = this.positionDataService.findByCurriculaId(c.getId());
+			final List<MiscellaneousData> md = this.miscellaneousDataService.findByCurriculaId(c.getId());
+			for (final EducationData ed1 : ed) {
+				final EducationData newEd = this.educationDataService.create(copy.getId());
+				newEd.setDegree(ed1.getDegree());
+				newEd.setEndMoment(ed1.getEndMoment());
+				newEd.setInstitution(ed1.getInstitution());
+				newEd.setMark(ed1.getMark());
+				newEd.setStartMoment(ed1.getStartMoment());
+				this.educationDataService.save(newEd);
+			}
+			for (final PersonalData pd1 : pd) {
+				final PersonalData newPd = this.personalDataService.create(copy.getId());
+				newPd.setFullName(pd1.getFullName());
+				newPd.setGitProfile(pd1.getGitProfile());
+				newPd.setLinkedInProfile(pd1.getLinkedInProfile());
+				newPd.setPhoneNumber(pd1.getPhoneNumber());
+				newPd.setStatement(pd1.getStatement());
+				this.personalDataService.save(newPd);
+			}
+			for (final PositionData posi : pd2) {
+				final PositionData newPosi = this.positionDataService.create(copy.getId());
+				newPosi.setDescription(posi.getDescription());
+				newPosi.setEndMoment(posi.getEndMoment());
+				newPosi.setStartMoment(posi.getStartMoment());
+				newPosi.setTitle(posi.getTitle());
+
+				this.positionDataService.save(newPosi);
+			}
+			for (final MiscellaneousData md1 : md) {
+				final MiscellaneousData newMd = this.miscellaneousDataService.create(copy.getId());
+				newMd.setAttachments(md1.getAttachments());
+				newMd.setFreeText(md1.getFreeText());
+
+				this.miscellaneousDataService.save(newMd);
+			}
 			c.setApplication(null);
 		}
 		this.curriculaRepository.save(c);
@@ -97,6 +146,9 @@ public class CurriculaService {
 	public void delete(final Curricula c) {
 		this.checkConditions();
 		Assert.isTrue(this.getCurriculasFromHacker().contains(c));
+
+		if (c.getIsCopy())
+			Assert.isTrue(c.getApplication() == null);
 
 		final List<EducationData> l1 = this.educationDataService.findByCurriculaId(c.getId());
 		for (final EducationData ed : l1)
@@ -133,5 +185,19 @@ public class CurriculaService {
 			throw new ValidationException();
 
 		return res;
+	}
+
+	public Curricula reconstructApplicationC(final Curricula c, final BindingResult binding) {
+		Curricula res;
+		res = this.findOne(c.getId());
+		res.setApplication(c.getApplication());
+
+		this.validator.validate(res, binding);
+
+		if (binding.hasErrors())
+			throw new ValidationException();
+
+		return res;
+
 	}
 }

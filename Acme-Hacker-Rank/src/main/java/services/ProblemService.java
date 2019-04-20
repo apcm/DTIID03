@@ -110,4 +110,16 @@ public class ProblemService {
 
 		return res;
 	}
+
+	public void flush() {
+		this.problemRepository.flush();
+
+	}
+	/*
+	 * public Collection<Problem> getProblems(final Position position) {
+	 * final Collection<Problem> res = this.problemRepository.findAllByCompanyId(this.getThisCompany().getId());
+	 * 
+	 * return res;
+	 * }
+	 */
 }

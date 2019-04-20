@@ -16,7 +16,16 @@ public class Curricula extends DomainEntity {
 	private Hacker		hacker;
 	private String		name;
 	private Application	application;
+	private Boolean		isCopy;
 
+
+	public Boolean getIsCopy() {
+		return this.isCopy;
+	}
+
+	public void setIsCopy(final Boolean isCopy) {
+		this.isCopy = isCopy;
+	}
 
 	@NotBlank
 	public String getName() {

@@ -63,4 +63,30 @@ public interface DashboardRepository extends JpaRepository<Administrator, Intege
 	@Query("select p from Position p order by p.salary asc")
 	Collection<Position> lowestSalaryPosition();
 
+	@Query("select min(1*(select count(c) from Curricula c where c.hacker.id = h.id group by c.hacker)) from Hacker h")
+	Integer minCurricula();
+
+	@Query("select max(1*(select count(c) from Curricula c where c.hacker.id = h.id group by c.hacker)) from Hacker h")
+	Integer maxCurricula();
+
+	@Query("select avg(1.0*(select count(c) from Curricula c where c.hacker.id = h.id group by c.hacker)) from Hacker h")
+	Double avgCurricula();
+
+	@Query("select stddev(1.0*(select count(c) from Curricula c where c.hacker.id = h.id group by c.hacker)) from Hacker h")
+	Double stddevCurricula();
+
+	@Query("select min(f.positions.size) from Finder f")
+	Integer minResults();
+
+	@Query("select max(f.positions.size) from Finder f")
+	Integer maxResults();
+
+	@Query("select avg(f.positions.size) from Finder f")
+	Double avgResults();
+
+	@Query("select stddev(f.positions.size) from Finder f")
+	Double stddevResults();
+
+	@Query("select 1.0 * count(f)/(select count(f1) from Finder f1 where f1.positions.size = 0) from Finder f where f.positions.size>0")
+	Double ratioFinders();
 }
