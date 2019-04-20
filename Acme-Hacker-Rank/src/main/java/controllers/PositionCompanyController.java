@@ -1,3 +1,4 @@
+
 package controllers;
 
 import java.util.Collection;
@@ -13,23 +14,24 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import domain.Position;
-
 import services.PositionService;
+import domain.Position;
+import domain.Problem;
 
 @Controller
 @RequestMapping("/position/company")
 public class PositionCompanyController {
-	
+
 	@Autowired
 	private PositionService	positionService;
-	
+
+
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list() {
 		ModelAndView result;
 
-		Collection<Position> positions = this.positionService.getMyPositionList();
-    
+		final Collection<Position> positions = this.positionService.getMyPositionList();
+
 		result = new ModelAndView("position/company/list");
 		result.addObject("positions", positions);
 		result.addObject("requestURI", "/position/company/list.do");
@@ -47,7 +49,7 @@ public class PositionCompanyController {
 		result = this.createEditModelAndView(position);
 		return result;
 	}
-	
+
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit(@RequestParam final int positionId) {
 		ModelAndView result;
@@ -55,17 +57,16 @@ public class PositionCompanyController {
 
 		position = this.positionService.findOne(positionId);
 
-		Collection<Problem> problems = this.positionService.getProblems(position);
-		if(position.isFinalMode()){
+		final Collection<Problem> problems = this.positionService.getProblems(position);
+		if (position.isFinalMode())
 			result = this.list();
-		}else{
-		result = this.createEditModelAndView(position);
-		result.addObject("problems", problems);
+		else {
+			result = this.createEditModelAndView(position);
+			result.addObject("problems", problems);
 		}
-		
+
 		return result;
 	}
-	
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@Valid final Position position, final BindingResult binding) {
@@ -84,37 +85,33 @@ public class PositionCompanyController {
 		return result;
 	}
 
-
 	@RequestMapping(value = "/cancel", method = RequestMethod.GET)
 	public ModelAndView cancelPosition(@RequestParam final int positionId) {
 		ModelAndView result;
 
-		Position p = this.positionService.findOne(positionId);
-		
-		if(!p.isFinalMode()){
+		final Position p = this.positionService.findOne(positionId);
+
+		if (!p.isFinalMode())
 			result = this.list();
-		}else{
+		else {
 			this.positionService.cancelP(positionId);
 			result = this.list();
 		}
-			
-			
+
 		return result;
 	}
-	
-	
 
-	protected ModelAndView createEditModelAndView(Position position) {
+	protected ModelAndView createEditModelAndView(final Position position) {
 
 		ModelAndView result;
 		result = this.createEditModelAndView(position, null);
 
 		return result;
 	}
-	
-	protected ModelAndView createEditModelAndView(Position position, String messageCode) {
+
+	protected ModelAndView createEditModelAndView(final Position position, final String messageCode) {
 		ModelAndView result;
-		
+
 		result = new ModelAndView("position/company/edit");
 		result.addObject("position", position);
 
@@ -124,36 +121,36 @@ public class PositionCompanyController {
 	}
 
 	//-------------------------DISPLAY-----------------------------------
-	
-		@RequestMapping(value = "/display", method = RequestMethod.GET)
-		public ModelAndView display(@RequestParam final int positionId) {
-			ModelAndView result;
-			Position position;
 
-			position = this.positionService.findOne(positionId);
-			Assert.notNull(position);
+	@RequestMapping(value = "/display", method = RequestMethod.GET)
+	public ModelAndView display(@RequestParam final int positionId) {
+		ModelAndView result;
+		Position position;
 
-			result = this.createDisplayModelAndView(position);
+		position = this.positionService.findOne(positionId);
+		Assert.notNull(position);
 
-			return result;
-		}
+		result = this.createDisplayModelAndView(position);
 
-		protected ModelAndView createDisplayModelAndView(final Position position) {
-			ModelAndView result;
-			result = this.createDisplayModelAndView(position, null);
+		return result;
+	}
 
-			return result;
-		}
+	protected ModelAndView createDisplayModelAndView(final Position position) {
+		ModelAndView result;
+		result = this.createDisplayModelAndView(position, null);
 
-		protected ModelAndView createDisplayModelAndView(final Position position, final String messageCode) {
-			ModelAndView result;
+		return result;
+	}
 
-			result = new ModelAndView("position/company/display");
-			result.addObject("position", position);
-			result.addObject("messageCode", messageCode);
-		
-			return result;
+	protected ModelAndView createDisplayModelAndView(final Position position, final String messageCode) {
+		ModelAndView result;
 
-		}
+		result = new ModelAndView("position/company/display");
+		result.addObject("position", position);
+		result.addObject("messageCode", messageCode);
+
+		return result;
+
+	}
 
 }

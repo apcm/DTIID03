@@ -95,7 +95,7 @@ public class PositionService {
 		return positions;
 	}
 
-	private Company getThisCompany() {
+	public Company getThisCompany() {
 		Company res;
 		UserAccount userAccount;
 		userAccount = LoginService.getPrincipal();
@@ -113,13 +113,11 @@ public class PositionService {
 		return res;
 	}
 
-
-		public Collection<Problem> getProblems(final Position position) {
-		final Collection<Problem> res = this.problemService.findAllByCompanyId(this.getThisCompany().getId());
+	public Collection<Problem> getProblems(final Position position) {
+		final Collection<Problem> res = this.problemService.getAllProblemsByCompanyId(this.getThisCompany().getId());
 
 		return res;
 	}
-
 	public List<Position> getPositionByProblemId(final int id) {
 		return this.positionRepository.findByProblemId(id);
 	}

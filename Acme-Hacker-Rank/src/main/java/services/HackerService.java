@@ -49,6 +49,7 @@ public class HackerService {
 	@Autowired
 	public FinderRepository		finderRepository;
 
+
 	//Constructor
 	public HackerService() {
 		super();
@@ -228,8 +229,6 @@ public class HackerService {
 
 		final Finder find3 = this.finderService.save(find);
 		final Finder find4 = this.finderService.save(find2);
-
-		this.finderService.flush();
 
 		hacker.setFinder(find3);
 		hackerForm.setFinder(find4);
