@@ -80,6 +80,7 @@ public class ProblemService {
 
 	public void deleteProblem(final Problem p) {
 		final Company c = this.companyService.findOnePrincipal();
+		Assert.isTrue(!p.isFinalMode());
 		this.checkConditions();
 		Assert.isTrue(this.getAllProblemsByCompanyId(c.getId()).contains(p));
 		final List<Position> p1 = this.positionService.getPositionByProblemId(p.getId());
