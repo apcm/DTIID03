@@ -17,17 +17,17 @@
 <tiles-definitions>
 
 	<definition name="profile/action-1" extends="master.page">	
-		<put-attribute name="title" value="Perfil: Acción 1" />
+		<put-attribute name="title" value="Perfil: Accion 1" />
 		<put-attribute name="body" value="/views/profile/action-1.jsp" />
 	</definition>
 	
 	<definition name="profile/action-2" extends="master.page">	
-		<put-attribute name="title" value="Perfil: Acción 2" />
+		<put-attribute name="title" value="Perfil: Accion 2" />
 		<put-attribute name="body" value="/views/profile/action-2.jsp" />
 	</definition>
 	
 		<definition name="position/company/edit" extends="master.page">	
-		<put-attribute name="title" value="Editar Posición" />
+		<put-attribute name="title" value="Editar Posiciï¿½n" />
 		<put-attribute name="body" value="/views/position/edit.jsp" />
 	</definition>
 	
@@ -37,7 +37,7 @@
 	</definition>
 	
 	<definition name="position/company/display" extends="master.page">	
-		<put-attribute name="title" value="Mostrar Posición" />
+		<put-attribute name="title" value="Mostrar Posiciï¿½n" />
 		<put-attribute name="body" value="/views/position/display.jsp" />
 	</definition>
 	

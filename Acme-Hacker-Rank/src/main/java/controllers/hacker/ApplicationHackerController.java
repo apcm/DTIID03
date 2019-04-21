@@ -178,4 +178,24 @@ public class ApplicationHackerController {
 		return result;
 	}
 
+	@RequestMapping(value = "/show", method = RequestMethod.GET)
+	public ModelAndView show(@RequestParam final int applicationId) {
+		final ModelAndView result;
+		final Hacker h = this.hs.getHackerByUserAccount(LoginService.getPrincipal().getId());
+		final Application a = this.as.findOne(applicationId);
+
+		try {
+			Assert.isTrue(a.getHacker().getId() == h.getId());
+		} catch (final Throwable oops) {
+			result = new ModelAndView("redirect:/application/hacker/list.do");
+			return result;
+		}
+
+		result = new ModelAndView("application/hacker/show");
+		result.addObject(a);
+
+		return result;
+
+	}
+
 }
