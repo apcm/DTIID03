@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.List;
 
 import javax.validation.ValidationException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
@@ -42,6 +43,7 @@ public class ApplicationHackerController {
 	@Autowired
 	private CurriculaService	curriculaService;
 
+
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list() {
 		final ModelAndView result;
@@ -60,11 +62,12 @@ public class ApplicationHackerController {
 	@RequestMapping(value = "/solve", method = RequestMethod.GET)
 	public ModelAndView solve(@RequestParam final int applicationId) {
 		final ModelAndView result;
-
+		final Hacker h = this.hs.getHackerByUserAccount(LoginService.getPrincipal().getId());
 		final Application a = this.as.findOne(applicationId);
 
 		try {
 			Assert.isTrue(a.getStatus().equals("PENDING"));
+			Assert.isTrue(a.getHacker().getId() == h.getId());
 		} catch (final Throwable oops) {
 			result = new ModelAndView("redirect:/application/hacker/list.do");
 			return result;
@@ -108,7 +111,7 @@ public class ApplicationHackerController {
 
 	protected ModelAndView createSolveModelAndView(final Application application, final String message) {
 		final ModelAndView result;
-    
+
 		Application a = application;
 		result = new ModelAndView("application/hacker/solve");
 		if (a.getProblem() == null)
@@ -133,7 +136,8 @@ public class ApplicationHackerController {
 
 		for (final Application app : appsByHacker)
 			if (app.getPosition().equals(p)) {
-				result = new ModelAndView("redirect:/position/hacker/list.do"); //TODO: ESTO DEBE REDIRECCIONAR A LA LISTA DE POSITIONS QUE NO ESTA IMPLEMENTADA TODAVIA
+				result = new ModelAndView("redirect:/position/hacker/list.do");
+				result.addObject("message", "application.creation.error");
 				return result;
 			}
 
@@ -158,7 +162,7 @@ public class ApplicationHackerController {
 		ModelAndView result;
 		try {
 			final Curricula c2 = this.curriculaService.reconstructApplicationC(c, binding);
-			result = new ModelAndView("redirect:/position/hacker/list.do");
+			result = new ModelAndView("redirect:/application/hacker/list.do");
 			this.curriculaService.save(c2);
 		} catch (final ValidationException oops) {
 			result = this.create(c.getApplication().getPosition().getId());

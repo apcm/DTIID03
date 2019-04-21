@@ -12,18 +12,19 @@ curricula.save=Guardar
 select.curricula=Seleccionar curriculum
 
 application.moment = Momento
-application.position.name = Nombre de la posici髇
+application.position.name = Nombre de la posici贸n
 application.status = Estado
 application.solve = Resolver problema
-application.answerExplanation = Explicaci髇 de la respuesta
+application.answerExplanation = Explicaci贸n de la respuesta
 application.answerLink = Enlace a la respuesta
 application.edit.save = Guardar y enviar
 application.cancel = Cancelar
 
-application.problem.title = Resuelve este problema y env韆 tu soluci髇.
+application.problem.title = Resuelve este problema y env铆a tu soluci贸n.
 application.problem.hint = Pista: 
 
-application.problem.create = Aplicar a esta posici髇
+application.problem.create = Aplicar a esta posici贸n
 
-application.error.commit.emptyValues = Ha habido un error guardando tu aplicaci髇. Por favor, recueda que el link de la respuesta debe ser v醠ido y la respuesta no debe estar vac韆.
 application.creation.error = Recuerda que no puedes aplicar dos veces a la misma posici髇.
+
+application.error.commit.emptyValues = Ha habido un error guardando tu aplicaci贸n. Por favor, recueda que el link de la respuesta debe ser v谩lido y la respuesta no debe estar vac铆a.

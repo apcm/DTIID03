@@ -19,13 +19,19 @@
 
 
 <display:table name="positions" id="row" requestURI="${requestURI}" pagesize="5" class ="displaytag">
+<security:authorize access="hasRole('COMPANY')">
 
 <display:column property="ticker" titleKey="position.ticker"/>
-<display:column property="title" titleKey="position.title"/>
 <display:column property="deadline" titleKey="position.deadline"/>
-<display:column property="finalMode" titleKey="position.finalMode"/>
 <display:column property="isCancelled" titleKey="position.isCancelled"/>
 
+</security:authorize>
+<display:column property="title" titleKey="position.title"/>
+<display:column property="finalMode" titleKey="position.finalMode"/>
+<display:column property="deadline" titleKey="position.deadline"/>
+
+
+<security:authorize access="hasRole('COMPANY')">
 
 <display:column>
 	<a href="position/company/cancel.do?positionId=${row.id}">
@@ -45,13 +51,30 @@
 		<spring:message code="position.display"/>
 	</a>
 </display:column>
+</security:authorize>
+<security:authorize access="hasRole('HACKER')">
+ 		<display:column>
+
+			<a href="application/hacker/create.do?positionId=${row.id}">
+			<spring:message code="position.application.create" />
+			</a>
+	</display:column>
+ 	
+ 	</security:authorize>
+ 	
 </display:table>
 
+<security:authorize access="hasRole('COMPANY')">
 
 <a href="position/company/create.do">
 <spring:message code="position.create"/>
 </a>
+</security:authorize>
 
+		<security:authorize access="hasRole('HACKER')">
+		<br/>
+		<spring:message code="application.creation.error" />
+		</security:authorize>
 
 
 
