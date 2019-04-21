@@ -1,6 +1,7 @@
 
 package services;
 
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -14,8 +15,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 
 import repositories.ApplicationRepository;
+import security.LoginService;
 import domain.Application;
 import domain.Hacker;
+import domain.Position;
 import domain.Problem;
 
 @Service
@@ -27,6 +30,12 @@ public class ApplicationService {
 
 	@Autowired
 	private Validator				validator;
+
+	@Autowired
+	private PositionService			ps;
+
+	@Autowired
+	private HackerService			hs;
 
 
 	public List<Application> getApplicationsByHacker(final Hacker h) {
@@ -69,12 +78,28 @@ public class ApplicationService {
 		a.setMoment(moment);
 		final Problem p = this.getRandomProblemByApplication(a);
 		a.setProblem(p);
+
+		Assert.isTrue(this.checkHackerApplications(a.getPosition().getId()));
+
 		final Application res = this.ar.save(a);
 		this.ar.flush();
 		return res;
 
 	}
+	public boolean checkHackerApplications(final int positionId) {
+		boolean result = true;
+		final Position p = this.ps.findOne(positionId);
+		final Hacker h = this.hs.getHackerByUserAccount(LoginService.getPrincipal().getId());
+		final Collection<Application> appsByHacker = this.getApplicationsByHacker(h);
 
+		for (final Application app : appsByHacker)
+			if (app.getPosition().equals(p) && app.getStatus().equals("PENDING")) {
+				result = false;
+				return result;
+			}
+
+		return result;
+	}
 	private Problem getRandomProblemByApplication(final Application a) {
 		final List<Problem> allProblems = (List<Problem>) a.getPosition().getProblems();
 		final int size = allProblems.size();

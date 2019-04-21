@@ -71,10 +71,11 @@
 </a>
 </security:authorize>
 
-		<security:authorize access="hasRole('HACKER')">
-		<br/>
-		<spring:message code="application.creation.error" />
-		</security:authorize>
+	<jstl:if test="${showError == true}">
+		<div class="error">
+			<spring:message code="application.creation.error"/>
+		</div>
+	</jstl:if>
 
 <security:authorize access="isAnonymous()">
 	<input type="button" name="companies"

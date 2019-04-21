@@ -128,18 +128,24 @@ public class ApplicationHackerController {
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create(@RequestParam final int positionId) {
 		final ModelAndView result;
-
-		final Application a = this.as.create();
 		final Position p = this.ps.findOne(positionId);
 		final Hacker h = this.hs.getHackerByUserAccount(LoginService.getPrincipal().getId());
-		final Collection<Application> appsByHacker = this.as.getApplicationsByHacker(h);
 
-		for (final Application app : appsByHacker)
-			if (app.getPosition().equals(p)) {
-				result = new ModelAndView("redirect:/position/hacker/list.do");
-				result.addObject("message", "application.creation.error");
-				return result;
-			}
+		final Application a = this.as.create();
+		try {
+			Assert.isTrue(this.as.checkHackerApplications(positionId));
+		} catch (final Throwable oops) {
+			//to position/hacker/list.do
+			final Collection<Position> positions = this.ps.findAll();
+
+			result = new ModelAndView("position/list");
+			result.addObject("positions", positions);
+			result.addObject("requestURI", "/position/hacker/list.do");
+			final boolean showError = true;
+			result.addObject("showError", showError);
+
+			return result;
+		}
 
 		a.setHacker(h);
 		a.setPosition(p);
