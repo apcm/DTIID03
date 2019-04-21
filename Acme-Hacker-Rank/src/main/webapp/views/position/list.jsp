@@ -76,7 +76,11 @@
 		<spring:message code="application.creation.error" />
 		</security:authorize>
 
-
+<security:authorize access="isAnonymous()">
+	<input type="button" name="companies"
+		value="<spring:message code="position.companies" />"
+		onclick="javascript: relativeRedir('company/list.do');" />
+</security:authorize>
 
 
 
