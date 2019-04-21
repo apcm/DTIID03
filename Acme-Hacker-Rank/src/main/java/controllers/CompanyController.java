@@ -82,9 +82,6 @@ public class CompanyController extends AbstractController {
 			else
 				result = this.createEditModelAndView(companyForm, "company.comit.error");
 		}
-		if (!companyForm.isConditionsAccepted())
-			result = this.createEditModelAndView(companyForm, "company.conditionsError");
-
 		return result;
 
 	}

@@ -84,7 +84,7 @@
 		<form:option value="true"></form:option>
 		<form:option value="false"></form:option>
 		</form:select>
-
+		
 		<form:label path="problems">
 		 <spring:message code="position.problems"/>
 	    </form:label>
@@ -99,7 +99,6 @@
 	<input type ="submit" name="save" value="<spring:message code="position.save"/>" />
 
 	<input type="button" name="cancel" value="<spring:message code="position.cancel" />" onclick="javascript:relativeRedir('position/company/list.do');" />
-
 
 </form:form>
 

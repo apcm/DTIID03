@@ -10,6 +10,9 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -21,6 +24,7 @@ public class Finder extends DomainEntity {
 	private Date					deadline;
 	private Date					maximumDeadline;
 	private Integer					minimumSalary;
+	private Date					moment;
 	private Collection<Position>	positions;
 
 
@@ -51,7 +55,7 @@ public class Finder extends DomainEntity {
 	public void setMaximumDeadline(final Date maximumDeadline) {
 		this.maximumDeadline = maximumDeadline;
 	}
-
+	@Min(0)
 	public Integer getMinimumSalary() {
 		return this.minimumSalary;
 	}
@@ -67,4 +71,16 @@ public class Finder extends DomainEntity {
 	public void setPositions(final Collection<Position> positions) {
 		this.positions = positions;
 	}
+	@Past
+	@NotNull
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	@Temporal(TemporalType.TIMESTAMP)
+	public Date getMoment() {
+		return this.moment;
+	}
+
+	public void setMoment(final Date moment) {
+		this.moment = moment;
+	}
+
 }

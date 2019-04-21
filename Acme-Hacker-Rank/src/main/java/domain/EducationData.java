@@ -57,8 +57,8 @@ public class EducationData extends DomainEntity {
 
 	@Past
 	@NotNull
-	@Temporal(TemporalType.TIMESTAMP)
-	@DateTimeFormat(pattern = "yyyy-HH-dd HH:mm:ss")
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	public Date getStartMoment() {
 		return this.startMoment;
 	}
@@ -66,8 +66,8 @@ public class EducationData extends DomainEntity {
 	public void setStartMoment(final Date startMoment) {
 		this.startMoment = startMoment;
 	}
-	@Temporal(TemporalType.TIMESTAMP)
-	@DateTimeFormat(pattern = "yyyy-HH-dd HH:mm:ss")
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	public Date getEndMoment() {
 		return this.endMoment;
 	}

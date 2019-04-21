@@ -21,4 +21,10 @@
 		<put-attribute name="body" value="/views/application/solve.jsp" />
 	</definition>
 
+		<definition name="application/hacker/create" extends="master.page">
+		<put-attribute name="title" value="Solicitar un puesto" />
+		<put-attribute name="body" value="/views/application/create.jsp" />
+	</definition>
+
+
 </tiles-definitions>

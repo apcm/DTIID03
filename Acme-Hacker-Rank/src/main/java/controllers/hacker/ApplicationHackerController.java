@@ -4,6 +4,7 @@ package controllers.hacker;
 import java.util.Collection;
 import java.util.List;
 
+import javax.validation.ValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
@@ -17,9 +18,11 @@ import org.springframework.web.servlet.ModelAndView;
 import security.LoginService;
 import security.UserAccount;
 import services.ApplicationService;
+import services.CurriculaService;
 import services.HackerService;
 import services.PositionService;
 import domain.Application;
+import domain.Curricula;
 import domain.Hacker;
 import domain.Position;
 
@@ -36,6 +39,8 @@ public class ApplicationHackerController {
 	@Autowired
 	private PositionService		ps;
 
+	@Autowired
+	private CurriculaService	curriculaService;
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list() {
@@ -103,6 +108,7 @@ public class ApplicationHackerController {
 
 	protected ModelAndView createSolveModelAndView(final Application application, final String message) {
 		final ModelAndView result;
+    
 		Application a = application;
 		result = new ModelAndView("application/hacker/solve");
 		if (a.getProblem() == null)
@@ -135,11 +141,31 @@ public class ApplicationHackerController {
 		a.setPosition(p);
 		a.setStatus("created");
 
-		this.as.firstSave(a);
+		final Application a2 = this.as.firstSave(a);
 
-		result = new ModelAndView("redirect:/application/hacker/list.do");
+		final List<Curricula> lCurricula = this.curriculaService.getCurriculasFromHackerNotCopies();
+		result = new ModelAndView("application/hacker/create");
+		result.addObject("lC", lCurricula);
+		final Curricula c = this.curriculaService.create();
+		c.setApplication(a2);
+		result.addObject("curricula", c);
+
 		return result;
 
+	}
+	@RequestMapping(value = "/create", method = RequestMethod.POST, params = "save")
+	public ModelAndView create(final Curricula c, final BindingResult binding) {
+		ModelAndView result;
+		try {
+			final Curricula c2 = this.curriculaService.reconstructApplicationC(c, binding);
+			result = new ModelAndView("redirect:/position/hacker/list.do");
+			this.curriculaService.save(c2);
+		} catch (final ValidationException oops) {
+			result = this.create(c.getApplication().getPosition().getId());
+		} catch (final Throwable oops) {
+			result = new ModelAndView("redirect:/position/hacker/list.do");
+		}
+		return result;
 	}
 
 }

@@ -33,3 +33,6 @@
 <jstl:out value="${position.salary}"/>
 <br/>
 
+<b><spring:message code="position.company"/></b>
+<jstl:out value="${position.company}"/>
+<br/>

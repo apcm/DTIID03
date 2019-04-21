@@ -70,6 +70,24 @@ public class ActorService {
 		return res;
 	}
 
+	public boolean checkHacker() {
+		boolean res;
+		final Authority a = new Authority();
+		final UserAccount user = LoginService.getPrincipal();
+		a.setAuthority(Authority.HACKER);
+		res = user.getAuthorities().contains(a);
+		return res;
+	}
+
+	public boolean checkAdmin() {
+		boolean res;
+		final Authority a = new Authority();
+		final UserAccount user = LoginService.getPrincipal();
+		a.setAuthority(Authority.ADMIN);
+		res = user.getAuthorities().contains(a);
+		return res;
+	}
+
 	public Collection<Actor> findAll() {
 		return this.actorRepository.findAll();
 	}
@@ -112,7 +130,7 @@ public class ActorService {
 
 			}
 		Assert.isTrue(fine);
-		//Fin de la comprobación
+		//Fin de la comprobaciÃ³n
 
 		final Box result = this.mbs.save(m);
 
@@ -196,6 +214,37 @@ public class ActorService {
 		result.add(spambox1);
 
 		return result;
+	}
+
+	public List<Actor> findAllBanned() {
+		this.checkAdmin();
+
+		return this.actorRepository.findAllBanned();
+	}
+
+	public List<Actor> findAllNotBanned() {
+		this.checkAdmin();
+
+		return this.actorRepository.findAllNotBanned();
+	}
+
+	public void banActor(final Actor a) {
+		this.checkAdmin();
+		if (a.getFlagSpam() && !a.getIsBanned())
+			a.setIsBanned(true);
+
+		this.save(a);
+
+	}
+
+	public void unbanActor(final Actor a) {
+		this.checkAdmin();
+		if (a.getIsBanned()) {
+			a.setFlagSpam(false);
+			a.setIsBanned(false);
+		}
+		this.save(a);
+
 	}
 
 }

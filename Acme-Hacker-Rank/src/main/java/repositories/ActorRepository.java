@@ -1,6 +1,8 @@
 
 package repositories;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -16,4 +18,11 @@ public interface ActorRepository extends JpaRepository<Actor, Integer> {
 
 	@Query("select a from Actor a where a.userAccount.id = ?1")
 	Actor findByUserAccountId(int userAccount);
+
+	@Query("select a from Actor a where a.isBanned = 1")
+	List<Actor> findAllBanned();
+
+	@Query("select a from Actor a where a.isBanned = 0")
+	List<Actor> findAllNotBanned();
+
 }
