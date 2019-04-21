@@ -1,4 +1,3 @@
-
 package converters;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +7,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import repositories.ProblemRepository;
+
+
 import domain.Problem;
 
 @Component
@@ -20,21 +21,19 @@ public class StringToProblemConverter implements Converter<String, Problem> {
 
 	@Override
 	public Problem convert(final String text) {
-		Problem result;
+		Problem res;
 		int id;
 
 		try {
 			if (StringUtils.isEmpty(text))
-				result = null;
+				res = null;
 			else {
 				id = Integer.valueOf(text);
-				result = this.problemRepository.findOne(id);
+				res = this.problemRepository.findOne(id);
 			}
 		} catch (final Throwable oops) {
 			throw new IllegalArgumentException(oops);
 		}
-		return result;
-
+		return res;
 	}
-
 }

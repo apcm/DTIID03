@@ -53,38 +53,6 @@
 	<jstl:out value="${company.companyName}"></jstl:out>
 	
 
-	<h4>
-		<spring:message code="company.holderName" />:
-	</h4>
-	<jstl:out value="${company.holderName}"></jstl:out>
-	
-	<h4>
-		<spring:message code="company.makeName" />:
-	</h4>
-	<jstl:out value="${company.makeName}"></jstl:out>
-	
-	<h4>
-		<spring:message code="company.number" />:
-	</h4>
-	<jstl:out value="${company.number}"></jstl:out>
-	
-	<h4>
-		<spring:message code="company.expirationYear" />:
-	</h4>
-	<jstl:out value="${company.expirationYear}"></jstl:out>
-	
-	<h4>
-		<spring:message code="company.expirationMonth" />:
-	</h4>
-	<jstl:out value="${company.expirationMonth}"></jstl:out>
-	
-	<h4>
-		<spring:message code="company.cvv" />:
-	</h4>
-	<jstl:out value="${company.cvv}"></jstl:out>
-	
-
-
 <br/><br/>
 
 	<spring:message code="company.export.explanation" var="exportExplanation"/>
@@ -94,3 +62,16 @@
 	
 	
 	<br/>
+<security:authorize access="hasRole('MEMBER')">
+	<jstl:if test="${enrolement.status=='APPROVED'}">
+	<form:form action="company/member/show.do" modelAttribute="company">
+	<form:hidden path="id"/>
+	<input type="submit" name="delete"
+			value="<spring:message code="company.delete" />"
+			onclick="return confirm('<spring:message code="message.confirm.delete" />')" />&nbsp;
+	</form:form>
+	</jstl:if>
+	
+	<input type="button" name="back" onclick="javascript: window.location.replace('enrolements/member/list.do')"
+		value="<spring:message code="member.back" />" />
+	</security:authorize>

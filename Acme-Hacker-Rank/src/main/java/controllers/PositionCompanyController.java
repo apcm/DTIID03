@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import domain.Position;
+import domain.Problem;
 
 import services.PositionService;
 
@@ -43,8 +44,10 @@ public class PositionCompanyController {
 		Position position;
 
 		position = this.positionService.create();
-
+		Collection<Problem> problems = this.positionService.getProblems(position);
+		
 		result = this.createEditModelAndView(position);
+		result.addObject("problems", problems);
 		return result;
 	}
 	

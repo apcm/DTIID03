@@ -26,7 +26,7 @@ public class PositionHackerController {
 
 		final Collection<Position> positions = this.positionService.findAll();
 
-		result = new ModelAndView("position/list");
+		result = new ModelAndView("position/company/list");
 		result.addObject("positions", positions);
 		result.addObject("requestURI", "/position/hacker/list.do");
 

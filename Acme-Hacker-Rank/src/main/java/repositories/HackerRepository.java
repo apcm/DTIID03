@@ -10,6 +10,6 @@ import domain.Hacker;
 @Repository
 public interface HackerRepository extends JpaRepository<Hacker, Integer> {
 
-	@Query("select h from Hacker h where h.userAccount.id = ?1")
+	@Query("select a from Hacker a where a.userAccount.id = ?1")
 	Hacker findByUserAccountId(int userAccount);
 }
