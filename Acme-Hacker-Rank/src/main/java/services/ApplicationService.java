@@ -193,6 +193,18 @@ public class ApplicationService {
 		return res;
 	}
 	
+	public Collection<Application> getAS(Collection<Application> applications) {
+		Collection<Application> res = new ArrayList<Application>();
+		for(Application a : applications){
+			if(a.getStatus().equals("SUBMITTED")){
+				res.add(a);
+			}
+		}
+		return res;
+	}
+	
+	
+	
 	public Collection<Application> getAA(Collection<Application> applications) {
 		Collection<Application> res = new ArrayList<Application>();
 		for(Application a : applications){

@@ -33,12 +33,12 @@ public class ApplicationCompanyController {
 
 		Collection<Application> applications = this.applicationService.getMyAppList();
 		
-		Collection<Application> applicationsP = this.applicationService.getAP(applications);
+		Collection<Application> applicationsS = this.applicationService.getAS(applications);
 		Collection<Application> applicationsA = this.applicationService.getAA(applications);
 		Collection<Application> applicationsR = this.applicationService.getAR(applications);
 
 		result = new ModelAndView("application/company/list");
-		result.addObject("applicationsP", applicationsP);
+		result.addObject("applicationsS", applicationsS);
 		result.addObject("applicationsA", applicationsA);
 		result.addObject("applicationsR", applicationsR);
 		result.addObject("requestURI", "/application/company/list.do");

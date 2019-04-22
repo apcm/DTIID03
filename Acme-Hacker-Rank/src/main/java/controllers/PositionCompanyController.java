@@ -20,7 +20,7 @@ import domain.Problem;
 
 @Controller
 @RequestMapping("/position/company")
-public class PositionCompanyController {
+public class PositionCompanyController extends AbstractController{
 
 	@Autowired
 	private PositionService	positionService;
@@ -45,10 +45,10 @@ public class PositionCompanyController {
 		Position position;
 
 		position = this.positionService.create();
-		final Collection<Problem> problems = this.positionService.getProblems(position);
+		
 	
 		result = this.createEditModelAndView(position);
-		result.addObject("problems", problems);
+		
 		return result;
 	}
 
@@ -114,8 +114,10 @@ public class PositionCompanyController {
 	protected ModelAndView createEditModelAndView(final Position position, final String messageCode) {
 		ModelAndView result;
 
+		final Collection<Problem> problems = this.positionService.getProblems(position);
 		result = new ModelAndView("position/company/edit");
 		result.addObject("position", position);
+		result.addObject("problems", problems);
 
 		result.addObject("message", messageCode);
 
