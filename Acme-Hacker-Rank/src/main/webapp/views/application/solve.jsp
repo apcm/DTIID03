@@ -48,7 +48,7 @@ modelAttribute="application">
 
 	<input type="submit" name="save" value="<spring:message code="application.edit.save" />" />
 	<input type="button" name="cancel"
-		onclick="javascript: window.location.replace('welcome/index.do')"
+		onclick="javascript: window.location.replace('application/hacker/list.do')"
 		value="<spring:message code="application.cancel" />" />	
 		
 		
