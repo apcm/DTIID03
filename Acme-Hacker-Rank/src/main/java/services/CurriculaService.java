@@ -201,9 +201,4 @@ public class CurriculaService {
 		return res;
 
 	}
-  
-	public void flush() {
-		this.curriculaRepository.flush();
-
-	}
 }

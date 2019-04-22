@@ -41,7 +41,6 @@
 					<li><a href="company/company/edit.do"><spring:message code="master.page.edit.company" /></a></li>
 					<li><a href="problem/company/list.do"><spring:message code="master.page.problem" /></a></li>	
 					<li><a href="position/company/list.do"><spring:message code="master.page.list.position" /></a></li>
-					<li><a href="application/company/list.do"><spring:message code="master.page.list.application" /></a></li>
 				</ul>
 			</li>
 		</security:authorize>
@@ -74,8 +73,6 @@
 			</li>
 		</security:authorize>
 		<security:authorize access="isAnonymous()">
-			<li><a class="fNiv" href="position/list.do"><spring:message code="master.page.position" /></a></li>
-			<li><a class="fNiv" href="company/list.do"><spring:message code="master.page.company" /></a></li>
 			<li>
 			<a class="fNiv" href="company/register.do"><spring:message code="master.page.register.company" /></a>
 			</li>

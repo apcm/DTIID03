@@ -60,12 +60,11 @@ public class ApplicationHackerController {
 	@RequestMapping(value = "/solve", method = RequestMethod.GET)
 	public ModelAndView solve(@RequestParam final int applicationId) {
 		final ModelAndView result;
-		final Hacker h = this.hs.getHackerByUserAccount(LoginService.getPrincipal().getId());
+
 		final Application a = this.as.findOne(applicationId);
 
 		try {
 			Assert.isTrue(a.getStatus().equals("PENDING"));
-			Assert.isTrue(a.getHacker().getId() == h.getId());
 		} catch (final Throwable oops) {
 			result = new ModelAndView("redirect:/application/hacker/list.do");
 			return result;
@@ -109,6 +108,7 @@ public class ApplicationHackerController {
 
 	protected ModelAndView createSolveModelAndView(final Application application, final String message) {
 		final ModelAndView result;
+    
 		Application a = application;
 		result = new ModelAndView("application/hacker/solve");
 		if (a.getProblem() == null)
@@ -125,24 +125,17 @@ public class ApplicationHackerController {
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create(@RequestParam final int positionId) {
 		final ModelAndView result;
-		final Position p = this.ps.findOne(positionId);
-		final Hacker h = this.hs.getHackerByUserAccount(LoginService.getPrincipal().getId());
 
 		final Application a = this.as.create();
-		try {
-			Assert.isTrue(this.as.checkHackerApplications(positionId));
-		} catch (final Throwable oops) {
-			//to position/hacker/list.do
-			final Collection<Position> positions = this.ps.findAll();
+		final Position p = this.ps.findOne(positionId);
+		final Hacker h = this.hs.getHackerByUserAccount(LoginService.getPrincipal().getId());
+		final Collection<Application> appsByHacker = this.as.getApplicationsByHacker(h);
 
-			result = new ModelAndView("position/list");
-			result.addObject("positions", positions);
-			result.addObject("requestURI", "/position/hacker/list.do");
-			final boolean showError = true;
-			result.addObject("showError", showError);
-
-			return result;
-		}
+		for (final Application app : appsByHacker)
+			if (app.getPosition().equals(p)) {
+				result = new ModelAndView("redirect:/position/hacker/list.do"); //TODO: ESTO DEBE REDIRECCIONAR A LA LISTA DE POSITIONS QUE NO ESTA IMPLEMENTADA TODAVIA
+				return result;
+			}
 
 		a.setHacker(h);
 		a.setPosition(p);
@@ -156,41 +149,6 @@ public class ApplicationHackerController {
 		final Curricula c = this.curriculaService.create();
 		c.setApplication(a2);
 		result.addObject("curricula", c);
-
-		return result;
-
-	}
-	@RequestMapping(value = "/create", method = RequestMethod.POST, params = "save")
-	public ModelAndView create(final Curricula c, final BindingResult binding) {
-		ModelAndView result;
-		try {
-			final Curricula c2 = this.curriculaService.reconstructApplicationC(c, binding);
-			result = new ModelAndView("redirect:/application/hacker/list.do");
-			this.curriculaService.save(c2);
-		} catch (final ValidationException oops) {
-			result = this.create(c.getApplication().getPosition().getId());
-		} catch (final Throwable oops) {
-			result = new ModelAndView("redirect:/position/hacker/list.do");
-		}
-		return result;
-	}
-
-	@RequestMapping(value = "/show", method = RequestMethod.GET)
-	public ModelAndView show(@RequestParam final int applicationId) {
-		final ModelAndView result;
-		final Hacker h = this.hs.getHackerByUserAccount(LoginService.getPrincipal().getId());
-		final Application a = this.as.findOne(applicationId);
-
-		try {
-			Assert.isTrue(a.getHacker().getId() == h.getId());
-		} catch (final Throwable oops) {
-			result = new ModelAndView("redirect:/application/hacker/list.do");
-			return result;
-		}
-
-		result = new ModelAndView("application/hacker/show");
-		result.addObject(a);
-
 
 		return result;
 

@@ -72,7 +72,6 @@ public class MiscellaneousDataService {
 
 	public void save(final MiscellaneousData e) {
 		this.checkConditions();
-		Assert.isTrue(!this.findOne(e.getId()).getCurricula().getIsCopy());
 		Assert.isTrue(e.getCurricula().getHacker().getId() == this.hackerService.findOnePrincipal().getId());
 
 		this.miscellaneousDataRepository.save(e);
@@ -80,7 +79,6 @@ public class MiscellaneousDataService {
 
 	public void delete(final MiscellaneousData p) {
 		this.checkConditions();
-		Assert.isTrue(!p.getCurricula().getIsCopy());
 		Assert.isTrue(this.miscellaneousDataRepository.findOne(p.getId()).getCurricula().getHacker() == this.hackerService.findOnePrincipal());
 
 		this.miscellaneousDataRepository.delete(p);
