@@ -54,7 +54,7 @@
 			onclick="return confirm('<spring:message code="problem.confirm.delete" />')" />&nbsp;
 	</jstl:if>
 	</form:form>
-	
+
 	
 	<input type="button" name="back" onclick="javascript: window.location.replace('problem/company/list.do')"
 		value="<spring:message code="problem.back" />" />

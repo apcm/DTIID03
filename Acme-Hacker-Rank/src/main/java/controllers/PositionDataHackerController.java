@@ -1,6 +1,9 @@
 
 package controllers;
 
+import java.util.Calendar;
+import java.util.Date;
+
 import javax.validation.ValidationException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,6 +74,14 @@ public class PositionDataHackerController {
 		ModelAndView res;
 
 		try {
+			//Compruebo que las fechas no me lleguen mal
+			if (pd.getTitle() != "" && pd.getDescription() != "" && (pd.getStartMoment() != null || pd.getStartMoment().before(Calendar.getInstance().getTime())))
+				if (pd.getEndMoment() != null || pd.getEndMoment() != new Date())
+					if (pd.getEndMoment().before(pd.getStartMoment()))
+						return this.createEditModelAndView(pd, "positionData.error.date");
+			//Compruebo que no se esta intentando editar un curriculum que es una copia
+			if (pd.getId() != 0)
+				Assert.isTrue(!this.positionDataService.findOne(pd.getId()).getCurricula().getIsCopy(), "errorCopy");
 			pd = this.positionDataService.reconstruct(pd, binding);
 			this.positionDataService.save(pd);
 
@@ -80,7 +91,10 @@ public class PositionDataHackerController {
 		} catch (final ValidationException oops) {
 			res = this.createEditModelAndView(pd);
 		} catch (final Throwable oops) {
-			res = this.createEditModelAndView(pd, "error.positionData");
+			if (oops.getMessage() == "errorCopy")
+				res = this.createEditModelAndView(pd, "error.copy.positionData");
+			else
+				res = this.createEditModelAndView(pd, "error.positionData");
 		}
 
 		return res;

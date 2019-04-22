@@ -88,7 +88,6 @@ public class CurriculaService {
 
 	public void save(final Curricula c) {
 		this.checkConditions();
-		Assert.isTrue(!c.getIsCopy());
 		Assert.isTrue(c.getHacker().getId() == this.hackerService.findOnePrincipal().getId());
 
 		if (c.getApplication() != null) {
@@ -199,6 +198,11 @@ public class CurriculaService {
 			throw new ValidationException();
 
 		return res;
+
+	}
+
+	public void flush() {
+		this.curriculaRepository.flush();
 
 	}
 }

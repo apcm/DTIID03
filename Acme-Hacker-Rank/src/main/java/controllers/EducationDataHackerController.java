@@ -1,6 +1,8 @@
 
 package controllers;
 
+import java.util.Calendar;
+
 import javax.validation.ValidationException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,6 +72,16 @@ public class EducationDataHackerController {
 		ModelAndView res;
 
 		try {
+			if (ed.getDegree() != "" && ed.getInstitution() != "" && (ed.getMark() != null || ed.getMark() < 10 && ed.getMark() > 0) && (ed.getStartMoment() != null || ed.getStartMoment().before(Calendar.getInstance().getTime()))
+				&& (ed.getEndMoment() != null || ed.getEndMoment().before(Calendar.getInstance().getTime())))
+				//Compruebo que no me lleguen las fechas mal
+				if (ed.getStartMoment().after(ed.getEndMoment()))
+					return res = this.createEditModelAndView(ed, "educationData.date.error");
+
+			//Compruebo que no se intente editar una copia
+			if (ed.getId() != 0)
+				Assert.isTrue(this.educationDataService.findOne(ed.getId()).getCurricula().getIsCopy() == false, "educationDataCopy.error");
+
 			ed = this.educationDataService.reconstruct(ed, binding);
 			this.educationDataService.save(ed);
 
@@ -79,7 +91,10 @@ public class EducationDataHackerController {
 		} catch (final ValidationException oops) {
 			res = this.createEditModelAndView(ed);
 		} catch (final Throwable oops) {
-			res = this.createEditModelAndView(ed, "error.educationData");
+			if (oops.getMessage() == "educationDataCopy.error")
+				res = this.createEditModelAndView(ed, "educationData.copy.error");
+			else
+				res = this.createEditModelAndView(ed, "error.educationData");
 		}
 
 		return res;

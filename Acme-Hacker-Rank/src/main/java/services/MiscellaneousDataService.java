@@ -55,6 +55,7 @@ public class MiscellaneousDataService {
 	public MiscellaneousData create(final int curriculaId) {
 		final Curricula c = this.curriculaService.findOne(curriculaId);
 		Assert.isTrue(this.curriculaService.getCurriculasFromHacker().contains(c));
+		Assert.isTrue(this.curriculaService.findOne(curriculaId).getIsCopy() == false);
 
 		final MiscellaneousData res = new MiscellaneousData();
 		res.setCurricula(c);
@@ -79,6 +80,7 @@ public class MiscellaneousDataService {
 
 	public void delete(final MiscellaneousData p) {
 		this.checkConditions();
+		Assert.isTrue(p.getCurricula().getIsCopy() == false);
 		Assert.isTrue(this.miscellaneousDataRepository.findOne(p.getId()).getCurricula().getHacker() == this.hackerService.findOnePrincipal());
 
 		this.miscellaneousDataRepository.delete(p);
@@ -99,6 +101,11 @@ public class MiscellaneousDataService {
 			throw new ValidationException();
 
 		return res;
+	}
+
+	public void flush() {
+		this.miscellaneousDataRepository.flush();
+
 	}
 
 }
