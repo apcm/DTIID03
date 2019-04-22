@@ -72,6 +72,7 @@ public class PositionDataService {
 
 	public void save(final PositionData p) {
 		this.checkConditions();
+		Assert.isTrue(!this.findOne(p.getId()).getCurricula().getIsCopy());
 		Assert.isTrue(p.getCurricula().getHacker().getId() == this.hackerService.findOnePrincipal().getId());
 
 		this.positionDataRepository.save(p);
@@ -79,6 +80,7 @@ public class PositionDataService {
 
 	public void delete(final PositionData p) {
 		this.checkConditions();
+		Assert.isTrue(!p.getCurricula().getIsCopy());
 		Assert.isTrue(this.positionDataRepository.findOne(p.getId()).getCurricula().getHacker() == this.hackerService.findOnePrincipal());
 
 		this.positionDataRepository.delete(p);

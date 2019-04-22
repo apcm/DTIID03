@@ -51,11 +51,10 @@ public class CompanyCompanyController extends AbstractController {
 		ModelAndView result;
 
 		try {
+			company = this.companyService.reconstruct(company, binding);
 			final String vacia = "";
 			if (!company.getEmail().isEmpty() || company.getEmail() != vacia)
 				Assert.isTrue(company.getEmail().matches("^[A-z0-9]+@[A-z0-9.]+$") || company.getEmail().matches("^[A-z0-9 ]+ <[A-z0-9]+@[A-z0-9.]+>$"), "Wrong email");
-
-			company = this.companyService.reconstruct(company, binding);
 
 			this.companyService.save(company);
 			result = new ModelAndView("redirect:/welcome/index.do");

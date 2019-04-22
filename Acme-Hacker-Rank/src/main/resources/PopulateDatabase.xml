@@ -306,7 +306,7 @@
 		<property name="statement" value="Solve this problem:..." />
 		<property name="hint" value="You have to use ..." />
 		<property name="attachments" value="StackOverFlow" />
-		<property name="finalMode" value="true" />
+		<property name="finalMode" value="false" />
 		<property name="company" ref="company1" />
 	</bean>
 	<bean id="problem4" class="domain.Problem">
