@@ -82,19 +82,17 @@ public class PositionService {
 	}
 
 	public Collection<Position> getMyPositionList() {
-		Collection<Position> positions = this.positionsByCompany(this.findAll());
+		final Collection<Position> positions = this.positionsByCompany(this.findAll());
 		return positions;
 	}
 
 	private Collection<Position> positionsByCompany(final Collection<Position> all) {
-	    Company actual = this.getThisCompany();
-		Collection<Position> positions = new ArrayList<Position>();
-		for (final Position p : all){
-			if (p.getCompany().equals(actual)){
+		final Company actual = this.getThisCompany();
+		final Collection<Position> positions = new ArrayList<Position>();
+		for (final Position p : all)
+			if (p.getCompany().equals(actual))
 				positions.add(p);
-			}
-		}
-			
+
 		return positions;
 	}
 
@@ -161,25 +159,25 @@ public class PositionService {
 		if (finder.getKeyword() != null || finder.getKeyword() != "")
 			res.addAll(this.finderKeyword(finder.getKeyword()));
 		else
-			res.addAll(this.findAll());
+			res.addAll(this.findPositionFinalMode());
 		if (finder.getDeadline() != null)
 			res.addAll(this.finderDeadline(finder.getDeadline()));
 		else
-			res.addAll(this.findAll());
+			res.addAll(this.findPositionFinalMode());
 		if (finder.getMaximumDeadline() != null)
 			res.addAll(this.finderMaxDeadline(finder.getMaximumDeadline()));
 		else
-			res.addAll(this.findAll());
+			res.addAll(this.findPositionFinalMode());
 		if (finder.getMinimumSalary() != null)
 			res.addAll(this.finderSalary(finder.getMinimumSalary()));
 		else
-			res.addAll(this.findAll());
+			res.addAll(this.findPositionFinalMode());
 
 		return res;
 	}
-	
+
 	public Collection<Position> findPositionFinalMode() {
-		return positionRepository.findPositionFinalMode();
+		return this.positionRepository.findPositionFinalMode();
 	}
 
 }
