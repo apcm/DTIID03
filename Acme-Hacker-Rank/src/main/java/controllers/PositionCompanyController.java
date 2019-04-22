@@ -45,10 +45,8 @@ public class PositionCompanyController {
 		Position position;
 
 		position = this.positionService.create();
-		final Collection<Problem> problems = this.positionService.getProblems(position);
-	
+
 		result = this.createEditModelAndView(position);
-		result.addObject("problems", problems);
 		return result;
 	}
 

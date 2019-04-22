@@ -48,11 +48,11 @@
 	<form:form action="problem/company/edit.do" modelAttribute="problem">
 	<form:hidden path="id"/>
 
-	<jstl:if test="${!problem.finalMode}">
+<jstl:if test="${!problem.finalMode}">
 	<input type="submit" name="delete"
 			value="<spring:message code="problem.delete" />"
 			onclick="return confirm('<spring:message code="problem.confirm.delete" />')" />&nbsp;
-	</jstl:if>
+</jstl:if>
 	</form:form>
 
 	

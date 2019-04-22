@@ -61,11 +61,9 @@
 		<security:intercept-url pattern="/company/company/show.do" access="hasRole('COMPANY')" />
 		<security:intercept-url pattern="/position/company/**" access="hasRole('COMPANY')" />
 		<security:intercept-url pattern="/problem/company/**" access="hasRole('COMPANY')" />
-		<security:intercept-url pattern="/application/company/**" access="hasRole('COMPANY')" />
 		
 		
 		<!-- HACKER -->
-		<security:intercept-url pattern="/application/hacker/show.do" access="hasRole('HACKER')" /> 
 		<security:intercept-url pattern="/application/hacker/list.do" access="hasRole('HACKER')" /> 
 		<security:intercept-url pattern="/application/hacker/solve.do" access="hasRole('HACKER')" /> 
 		<security:intercept-url pattern="/application/hacker/create.do" access="hasRole('HACKER')" /> 

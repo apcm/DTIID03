@@ -29,8 +29,6 @@ public class PositionHackerController {
 		result = new ModelAndView("position/list");
 		result.addObject("positions", positions);
 		result.addObject("requestURI", "/position/hacker/list.do");
-		final boolean showError = false;
-		result.addObject("showError", showError);
 
 		return result;
 	}

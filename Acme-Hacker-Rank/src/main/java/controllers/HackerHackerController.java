@@ -51,11 +51,10 @@ public class HackerHackerController extends AbstractController {
 		ModelAndView result;
 
 		try {
+			hacker = this.hackerService.reconstruct(hacker, binding);
 			final String vacia = "";
 			if (!hacker.getEmail().isEmpty() || hacker.getEmail() != vacia)
 				Assert.isTrue(hacker.getEmail().matches("^[A-z0-9]+@[A-z0-9.]+$") || hacker.getEmail().matches("^[A-z0-9 ]+ <[A-z0-9]+@[A-z0-9.]+>$"), "Wrong email");
-
-			hacker = this.hackerService.reconstruct(hacker, binding);
 
 			this.hackerService.save(hacker);
 			result = new ModelAndView("redirect:/welcome/index.do");
