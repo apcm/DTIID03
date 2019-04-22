@@ -17,7 +17,6 @@ import domain.Actor;
 import domain.Administrator;
 import domain.Box;
 import domain.Company;
-import domain.Hacker;
 import domain.Message;
 
 @Service
@@ -84,14 +83,14 @@ public class BoxService {
 
 	}
 
-	public Box saveToRemote(final Box messageBox, final Hacker c) {
+	public Box saveToRemote(final Box messageBox, final Actor actor) {
 
 		final Box mb = this.messageBoxRepository.save(messageBox);
-		if (!c.getBoxes().contains(messageBox)) {
-			final Collection<Box> mboxes = c.getBoxes();
+		if (!actor.getBoxes().contains(messageBox)) {
+			final Collection<Box> mboxes = actor.getBoxes();
 			mboxes.add(mb);
-			c.setBoxes(mboxes);
-			Assert.isTrue(c.getBoxes().contains(mb));
+			actor.setBoxes(mboxes);
+			Assert.isTrue(actor.getBoxes().contains(mb));
 
 		}
 		return mb;
@@ -139,62 +138,25 @@ public class BoxService {
 		final Message result = this.ms.save(msg);
 
 		final Collection<Box> aboxes = a.getBoxes();
-		for (final Box abox : aboxes)
-			if (abox.getName().endsWith("out box") && abox.getPredefined() == true) {
-				final Collection<Message> ames = abox.getMessages();
-				ames.add(result);
-				abox.setMessages(ames);
+		for (final Box abox : aboxes) {
+			final Collection<Message> ames = abox.getMessages();
+			ames.add(result);
+			abox.setMessages(ames);
+
+		}
+
+		final Actor r = result.getRecipient();
+		if (r.getId() != actual.getId()) {
+			final Collection<Box> rboxes = r.getBoxes();
+			for (final Box rbox : rboxes) {
+
+				final Collection<Message> rmes = rbox.getMessages();
+				rmes.add(result);
+				rbox.setMessages(rmes);
 
 			}
-
-		final Collection<Actor> recipients = result.getRecipients();
-		for (final Actor r : recipients) {
-			final Collection<Box> rboxes = r.getBoxes();
-			for (final Box rbox : rboxes)
-
-				if (rbox.getName().endsWith("in box") && rbox.getPredefined() == true) {
-					final Collection<Message> rmes = rbox.getMessages();
-					rmes.add(result);
-					rbox.setMessages(rmes);
-
-				}
 		}
-		System.out.println();
-		System.out.println("Lo guarda");
 		return result;
 	}
-	public Message sendSpamMessage(final Message msg) {
-		final UserAccount actual = LoginService.getPrincipal();
-		final Actor a = this.actorRepository.getActor(actual);
-		Assert.notNull(msg);
-		Assert.isTrue(!a.getIsBanned());
-		Assert.isTrue(msg.getFlagSpam());
 
-		final Message result = this.ms.save(msg);
-
-		final Collection<Box> aboxes = a.getBoxes();
-		for (final Box abox : aboxes)
-			if (abox.getName().endsWith("out box") && abox.getPredefined() == true) {
-				final Collection<Message> ames = abox.getMessages();
-				ames.add(result);
-				abox.setMessages(ames);
-
-			}
-
-		final Collection<Actor> recipients = result.getRecipients();
-		for (final Actor r : recipients) {
-			final Collection<Box> rboxes = r.getBoxes();
-			for (final Box rbox : rboxes)
-
-				if (rbox.getName().endsWith("spam box") && rbox.getPredefined() == true) {
-					final Collection<Message> rmes = rbox.getMessages();
-					rmes.add(result);
-					rbox.setMessages(rmes);
-
-				}
-		}
-		System.out.println();
-		System.out.println("Lo guarda");
-		return result;
-	}
 }

@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.List;
 
 import javax.validation.ValidationException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
@@ -41,6 +42,7 @@ public class ApplicationHackerController {
 
 	@Autowired
 	private CurriculaService	curriculaService;
+
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list() {
@@ -160,20 +162,6 @@ public class ApplicationHackerController {
 		return result;
 
 	}
-	@RequestMapping(value = "/create", method = RequestMethod.POST, params = "save")
-	public ModelAndView create(final Curricula c, final BindingResult binding) {
-		ModelAndView result;
-		try {
-			final Curricula c2 = this.curriculaService.reconstructApplicationC(c, binding);
-			result = new ModelAndView("redirect:/application/hacker/list.do");
-			this.curriculaService.save(c2);
-		} catch (final ValidationException oops) {
-			result = this.create(c.getApplication().getPosition().getId());
-		} catch (final Throwable oops) {
-			result = new ModelAndView("redirect:/position/hacker/list.do");
-		}
-		return result;
-	}
 
 	@RequestMapping(value = "/show", method = RequestMethod.GET)
 	public ModelAndView show(@RequestParam final int applicationId) {
@@ -191,10 +179,22 @@ public class ApplicationHackerController {
 		result = new ModelAndView("application/hacker/show");
 		result.addObject(a);
 
-
 		return result;
 
 	}
-
+	@RequestMapping(value = "/create", method = RequestMethod.POST, params = "save")
+	public ModelAndView create(final Curricula c, final BindingResult binding) {
+		ModelAndView result;
+		try {
+			final Curricula c2 = this.curriculaService.reconstructApplicationC(c, binding);
+			result = new ModelAndView("redirect:/position/hacker/list.do");
+			this.curriculaService.save(c2);
+		} catch (final ValidationException oops) {
+			result = this.create(c.getApplication().getPosition().getId());
+		} catch (final Throwable oops) {
+			result = new ModelAndView("redirect:/position/hacker/list.do");
+		}
+		return result;
+	}
 
 }

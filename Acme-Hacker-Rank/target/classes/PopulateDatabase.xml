@@ -126,6 +126,7 @@
 		</property>
 		<property name="boxes">
 			<list>
+			<ref bean="in3" />
 			</list>
 		</property>
 		
@@ -154,6 +155,8 @@
 		</property>
 		<property name="boxes">
 			<list>
+			<ref bean="in4" />
+
 			</list>
 		</property>
 
@@ -183,6 +186,8 @@
 		</property>
 		<property name="boxes">
 			<list>
+			<ref bean="in5" />
+
 			</list>
 		</property>
 		
@@ -211,6 +216,8 @@
 		</property>
 		<property name="boxes">
 			<list>
+			<ref bean="in1" />
+
 			</list>
 		</property>
 		
@@ -240,6 +247,8 @@
 		</property>
 		<property name="boxes">
 			<list>
+			<ref bean="in2" />
+
 			</list>
 		</property>
 		<property name="holderName" value="Company One"/>
@@ -268,6 +277,8 @@
 		</property>
 		<property name="boxes">
 			<list>
+			<ref bean="in6" />
+
 			</list>
 		</property>
 		<property name="holderName" value="Company Two"/>
@@ -1191,5 +1202,155 @@
 	<property name="freeText" value="This is some free text1"/>
 	<property name="attachments" value="http://Attachment1.com"/>
 	<property name="curricula" ref="curricula4"/>
+	</bean>
+	
+	<!-- ******************************BOXES************************************* -->
+
+<bean id="in1" class="domain.Box">
+
+		<property name="name" value="in box" />
+
+		<property name="predefined" value="true" />
+
+		<property name="messages">
+
+			<list>
+
+			</list>
+		</property>
+
+		<property name="descendants">
+
+			<list>
+
+			</list>
+		</property>
+
+
+	</bean>
+
+	
+	<bean id="in2" class="domain.Box">
+
+		<property name="name" value="in box" />
+
+		<property name="predefined" value="true" />
+
+		<property name="messages">
+
+			<list>
+
+			</list>
+		</property>
+
+		<property name="descendants">
+
+			<list>
+
+			</list>
+		</property>
+
+
+	</bean>
+
+	
+
+	<bean id="in3" class="domain.Box">
+
+		<property name="name" value="in box" />
+
+		<property name="predefined" value="true" />
+
+		<property name="messages">
+
+			<list>
+				
+
+			</list>
+		</property>
+
+		<property name="descendants">
+
+			<list>
+
+			</list>
+		</property>
+
+
+	</bean>
+
+	
+
+	<bean id="in4" class="domain.Box">
+
+		<property name="name" value="in box" />
+
+		<property name="predefined" value="true" />
+
+		<property name="messages">
+
+			<list>
+
+			</list>
+		</property>
+
+		<property name="descendants">
+
+			<list>
+
+			</list>
+		</property>
+
+
+	</bean>
+
+	
+
+	<bean id="in5" class="domain.Box">
+
+		<property name="name" value="in box" />
+
+		<property name="predefined" value="true" />
+
+		<property name="messages">
+
+			<list>
+
+			</list>
+		</property>
+
+		<property name="descendants">
+
+			<list>
+
+			</list>
+		</property>
+
+
+	</bean>
+
+	
+
+	<bean id="in6" class="domain.Box">
+
+		<property name="name" value="in box" />
+
+		<property name="predefined" value="true" />
+
+		<property name="messages">
+
+			<list>
+
+			</list>
+		</property>
+
+		<property name="descendants">
+
+			<list>
+
+			</list>
+		</property>
+
+
 	</bean>
 </beans>

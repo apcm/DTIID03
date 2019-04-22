@@ -43,6 +43,8 @@
 		<value>/views/miscellaneousData/tiles.xml</value> 
 
 		<value>/views/ban/tiles.xml</value> 
+		<value>/views/message/tiles.xml</value> 
+		<value>/views/box/tiles.xml</value> 
 
 
 	</util:list>

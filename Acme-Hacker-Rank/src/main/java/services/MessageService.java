@@ -14,7 +14,6 @@ import repositories.ActorRepository;
 import repositories.MessageRepository;
 import security.LoginService;
 import security.UserAccount;
-import security.UserAccountRepository;
 import domain.Actor;
 import domain.Box;
 import domain.Message;
@@ -24,19 +23,16 @@ import domain.Message;
 public class MessageService {
 
 	@Autowired
-	private MessageRepository		messageRepository;
+	private MessageRepository	messageRepository;
 
 	@Autowired
-	private ActorRepository			ar;
+	private ActorRepository		ar;
 
 	@Autowired
-	private UserAccountRepository	ur;
+	private ActorService		as;
 
 	@Autowired
-	private ActorService			as;
-
-	@Autowired
-	private BoxService				mbs;
+	private BoxService			mbs;
 
 
 	public Message create() {
@@ -53,106 +49,86 @@ public class MessageService {
 
 	public void deleteMessage(final Message m) {
 		Assert.notNull(m);
+
 		Assert.isTrue(!(m.getId() == 0));
 		final UserAccount actual = LoginService.getPrincipal();
 		final Actor actorActual = this.ar.getActor(actual);
 		Assert.isTrue(!actorActual.getIsBanned());
 
 		final List<Box> msgb = (List<Box>) actorActual.getBoxes();
-		final Box trash = msgb.get(3);
-		Boolean addToTrash = false;
-		if (trash.getMessages().contains(m)) {
-			final Collection<Message> mess = trash.getMessages();
-			mess.remove(m);
-			trash.setMessages(mess);
-			this.mbs.save(trash);
-			addToTrash = true;
+		final Box pull = msgb.get(0);
+		if (!m.getTag().contains("DELETED")) {
+			for (final Message mens : pull.getMessages())
+				if (mens.getId() == m.getId())
+					mens.setTag(mens.getTag() + ", DELETED");
+		} else {
+			Message toDelete = null;
+			final Collection<Message> newCol = pull.getMessages();
+			for (final Message mens : pull.getMessages())
+				//Actor actual
+				if (mens.getId() == m.getId())
+					toDelete = mens;
 
-			Boolean bBorrar = true;
-			final Collection<Actor> actores = this.as.findAll();
-			actores.remove(actorActual);
-			for (final Actor a : actores) {
-				for (final Box mboxes : a.getBoxes()) {
-					for (final Message mes : mboxes.getMessages())
-						if (mes.getId() == m.getId()) {
-							bBorrar = false;
-							break;
-						}
+			//El otro actor (sender o recipient)
+			if (actorActual.getId() == m.getSender().getId()) {
+				final List<Box> aux2 = (List<Box>) m.getRecipient().getBoxes();
+				final Box newCol2 = aux2.get(0);
+				for (final Message mens2 : newCol2.getMessages())
+					//Actor actual
+					if (mens2.getId() == m.getId())
+						toDelete = mens2;
 
-					if (!bBorrar)
-						break;
-				}
-				if (!bBorrar)
-					break;
+				newCol2.getMessages().remove(toDelete);
+				aux2.get(0).setMessages(newCol2.getMessages());
+				this.mbs.saveToRemote(aux2.get(0), m.getRecipient());
+			} else {
+				final List<Box> aux2 = (List<Box>) m.getSender().getBoxes();
+				final Box newCol2 = aux2.get(0);
+				for (final Message mens2 : newCol2.getMessages())
+					//Actor actual
+					if (mens2.getId() == m.getId())
+						toDelete = mens2;
+
+				newCol2.getMessages().remove(toDelete);
+				aux2.get(0).setMessages(newCol2.getMessages());
+				this.mbs.saveToRemote(aux2.get(0), m.getRecipient());
 			}
-			if (bBorrar) {
-				this.delete(m);
-				return;
-			}
+			newCol.remove(toDelete);
+			pull.setMessages(newCol);
+			this.mbs.save(pull);
+			this.delete(m);
 		}
-		for (int i = 0; i < msgb.size(); i++)
-			if (msgb.get(i).getMessages().contains(m)) {
-				final Box boxm = msgb.get(i);
 
-				if (!boxm.getName().endsWith("trash box")) {
-					final Collection<Message> mthere = boxm.getMessages();
-					mthere.remove(m);
-					boxm.setMessages(mthere);
-					this.mbs.save(boxm);
-
-					if (addToTrash == false) {
-						final Box trashDestino = msgb.get(3);
-						final Collection<Message> tmessages = trashDestino.getMessages();
-						tmessages.add(m);
-						trashDestino.setMessages(tmessages);
-						this.mbs.save(trashDestino);
-					}
-				}
-			}
-	}
-	private void storeMessageOnTrashBox(final Message m, final Actor a) {
-		Assert.notNull(a);
-		Assert.notNull(m);
-		final Collection<Box> msgboxes = a.getBoxes();
-
-		for (final Box mbox : msgboxes)
-			if (mbox.getPredefined() == true && mbox.getName().endsWith("trash box")) {
-				final Collection<Message> messages = mbox.getMessages();
-				messages.add(m);
-				mbox.setMessages(messages);
-				Assert.notNull(mbox);
-
-			}
 	}
 
-	public Message broadcastMessage(final Message msg) {
+	public void broadcastMessage(final Message msg) {
+
 		final UserAccount actual = LoginService.getPrincipal();
 		final Actor admin = this.ar.getActor(actual);
 		Assert.notNull(msg);
 		Assert.isTrue(!admin.getIsBanned());
 
-		final Message result = this.save(msg);
-
-		final Collection<Box> aboxes = admin.getBoxes();
-		for (final Box abox : aboxes)
-			if (abox.getName().endsWith("out box") && abox.getPredefined() == true) {
-				final Collection<Message> ames = abox.getMessages();
-				ames.add(result);
-				abox.setMessages(ames);
-			}
-
 		final Collection<Actor> listaActores = this.as.findAll();
 		listaActores.remove(admin);
-		for (final Actor actors : listaActores)
+		for (final Actor actors : listaActores) {
+			msg.setRecipient(actors);
+			final Message result = this.save(msg);
 			for (final Box msb : actors.getBoxes())
 
-				if (msb.getName().endsWith("notification box") && msb.getPredefined() == true) {
+				if (msb.getName().endsWith("in box") && msb.getPredefined() == true) {
 					final Collection<Message> rmes = msb.getMessages();
 					rmes.add(result);
 					msb.setMessages(rmes);
 				}
-		return result;
+			for (final Box msb : admin.getBoxes())
 
+				if (msb.getName().endsWith("in box") && msb.getPredefined() == true) {
+					final Collection<Message> rmes = msb.getMessages();
+					rmes.add(result);
+					msb.setMessages(rmes);
+				}
+
+		}
 	}
 
 	public Message broadcastSpamMessage(final Message msg) {

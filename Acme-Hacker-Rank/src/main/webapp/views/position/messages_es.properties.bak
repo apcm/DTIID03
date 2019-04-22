@@ -6,15 +6,32 @@
 # TDG Licence, a copy of which you may download from 
 # http://www.tdg-seville.info/License.html
 
-position.title = Título
-position.description = Descripción
-position.deadline = Fecha límite
-position.skills = Conocimientos
-position.technologies = Tecnologías
-position.profile = Perfil
-position.salary = Salario
-position.ticker = Ticker
-position.finalmode = Modo final
+profile.action.1	= Esta es la acción 1 del perfil
+profile.action.2	= Esta es la acción 2 del perfil
+
+position.ticker	 = Ticker
+position.title	 = Título
+position.deadline	 = Plazo
+position.isCancelled	 = Cancelar
+position.finalMode	 = Modo Final
+position.skills	 = Skills
+position.technologies	 = Technologies
+position.description	 = Descripcion
+position.profile	 = Perfil
+position.salary	 = Salario
+position.company	= Empresa
+
+position.save	 = Guardar
+position.cancel	 = Cancelar
+position.create		= Crear Posición
+
+position.error		= Error
+position.display	 = Mostrar
+position.edit	 = Editar
+position.problems	= Problemas
+position.commit.error	= Error
+
 
 position.companies = Compañías
 position.keyword = Palabra clave
+position.application.create = Aplicar a esta posición

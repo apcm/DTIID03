@@ -72,6 +72,16 @@
 					<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /> </a></li>
 				</ul>
 			</li>
+			
+			<li>
+				<a class="fNiv"> 
+					<spring:message code="master.page.messages.header" /> 
+				</a>
+				<ul>
+					<li class="arrow"></li>					
+					<li><a href="boxes/list.do"><spring:message code="master.page.messages.link" /> </a></li>
+				</ul>
+			</li>
 		</security:authorize>
 		<security:authorize access="isAnonymous()">
 			<li><a class="fNiv" href="position/list.do"><spring:message code="master.page.position" /></a></li>

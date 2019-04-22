@@ -9,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
@@ -25,6 +27,7 @@ public class Box extends DomainEntity {
 
 
 	@ManyToMany
+	@Cascade(CascadeType.DELETE)
 	public Collection<Message> getMessages() {
 		return this.messages;
 	}

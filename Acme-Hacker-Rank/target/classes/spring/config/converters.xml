@@ -49,6 +49,8 @@
   		<bean class="converters.StringToPositionDataConverter" /> 
   		<bean class="converters.MiscellaneousDataToStringConverter" /> 
   		<bean class="converters.StringToMiscellaneousDataConverter" />
+  		<bean class="converters.ActorToStringConverter" /> 
+  		<bean class="converters.StringToActorConverter" />
 	</util:list>
 	
 </beans>

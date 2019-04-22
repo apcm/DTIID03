@@ -115,15 +115,9 @@ public class MessageController extends AbstractController {
 			try {
 
 				final List<Box> mbox = (List<Box>) a.getBoxes();
-				final Integer id = mbox.get(2).getId();
+				final Integer id = mbox.get(0).getId();
 
-				if (this.as.checkspammer(message.getBody()) == true || this.as.checkspammer(message.getSubject()) == true || this.as.checkspammer(message.getTag()) == true) {
-					message.setFlagSpam(true);
-					a.setFlagSpam(true);
-					this.as.save(a);
-					this.mbs.sendSpamMessage(message);
-				} else
-					this.mbs.sendMessage(message);
+				this.mbs.sendMessage(message);
 
 				result = new ModelAndView("redirect:list.do?boxId=" + id);
 			} catch (final Throwable oops) {
@@ -156,12 +150,12 @@ public class MessageController extends AbstractController {
 		final UserAccount actual = LoginService.getPrincipal();
 		final Actor a = this.ar.getActor(actual);
 
-		final Collection<Actor> recipients = this.mr.getRecipientsWorking(messageId);
+		final Actor recipient = message.getRecipient();
 
 		try {
 			Assert.notNull(message);
 			Assert.notNull(message);
-			Assert.isTrue(recipients.contains(a) || message.getSender().getId() == a.getId());
+			Assert.isTrue(recipient.equals(a) || message.getSender().getId() == a.getId());
 
 		} catch (final Throwable oops) {
 			result = new ModelAndView("redirect: list.do");
@@ -192,55 +186,18 @@ public class MessageController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
-	public ModelAndView edit(@RequestParam final int messageId) {
+	public ModelAndView delete(@RequestParam final int messageId) {
 		ModelAndView result;
-		Message message;
-
-		message = this.ms.findOne(messageId);
-		final UserAccount actual = LoginService.getPrincipal();
-		final Actor a = this.ar.getActor(actual);
-
-		final Collection<Actor> recipients = this.mr.getRecipientsWorking(messageId);
-
-		Assert.notNull(message);
-		Assert.isTrue(recipients.contains(a) || message.getSender().getId() == a.getId());
-
-		result = this.createDeleteModelAndView(message);
-
-		return result;
-	}
-
-	@RequestMapping(value = "/delete", method = RequestMethod.POST, params = "delete")
-	public ModelAndView delete(final Message message, final BindingResult binding) {
-		ModelAndView result;
-
+		final Message message = this.ms.findOne(messageId);
+		final Actor actual = this.as.findByPrincipal();
+		//TODO: Comprobar que el mensaje le pertenece.
 		try {
+			Assert.isTrue(message.getSender().getId() == actual.getId() || message.getRecipient().getId() == actual.getId());
 			this.ms.deleteMessage(message);
 			result = new ModelAndView("redirect:/boxes/list.do");
 		} catch (final Throwable oops) {
-			result = this.createDeleteModelAndView(message, "messages.commit.error");
+			result = new ModelAndView("redirect:/boxes/list.do");
 		}
-
-		return result;
-	}
-
-	protected ModelAndView createDeleteModelAndView(final Message m) {
-		ModelAndView result;
-		result = this.createDeleteModelAndView(m, null);
-
-		return result;
-	}
-
-	protected ModelAndView createDeleteModelAndView(final Message m, final String messageCode) {
-		ModelAndView result;
-		Collection<Actor> recipients;
-
-		recipients = this.as.findAll();
-
-		result = new ModelAndView("messages/delete");
-		result.addObject("mesInformation", m);
-		result.addObject("recipients", recipients);
-		result.addObject("mesError", messageCode);
 
 		return result;
 	}
@@ -256,17 +213,11 @@ public class MessageController extends AbstractController {
 			result = this.createEditModelAndView(message);
 		else
 			try {
-				message.setBroadcast(true);
-				message.setRecipients(this.as.findAll());
-				if (this.as.checkspammer(message.getBody()) == true || this.as.checkspammer(message.getSubject()) == true || this.as.checkspammer(message.getTag()) == true) {
-					message.setFlagSpam(true);
-					a.setFlagSpam(true);
-					this.as.save(a);
-					this.ms.broadcastSpamMessage(message);
-				} else
-					this.ms.broadcastMessage(message);
+				if (!message.getTag().contains("SYSTEM"))
+					message.setTag(message.getTag() + ", SYSTEM");
+				this.ms.broadcastMessage(message);
 				final List<Box> mbox = (List<Box>) a.getBoxes();
-				final Integer id = mbox.get(2).getId();
+				final Integer id = mbox.get(0).getId();
 				result = new ModelAndView("redirect:list.do?boxId=" + id);
 
 			} catch (final Throwable oops) {
@@ -276,222 +227,4 @@ public class MessageController extends AbstractController {
 		return result;
 
 	}
-
-	/*
-	 * @Autowired
-	 * MessageService ms;
-	 * 
-	 * @Autowired
-	 * ActorService as;
-	 * 
-	 * @Autowired
-	 * private SystemConfigService scs;
-	 * 
-	 * @Autowired
-	 * BoxService mbs;
-	 * 
-	 * @Autowired
-	 * AdministratorService ads;
-	 * 
-	 * @Autowired
-	 * ActorRepository ar;
-	 * 
-	 * 
-	 * @RequestMapping(value = "/list", method = RequestMethod.GET)
-	 * public ModelAndView list(@RequestParam final int messageBoxId) {
-	 * 
-	 * ModelAndView result;
-	 * final Collection<Message> mes;
-	 * 
-	 * mes = this.as.messagesByMessageBoxName(this.mbs.findOne(messageBoxId).getName());
-	 * result = new ModelAndView("messages/list");
-	 * 
-	 * System.out.println(mes);
-	 * result.addObject("messages", mes);
-	 * 
-	 * result.addObject("requestURI", "/messages/list.do");
-	 * final String banner = this.scs.getSystemConfig().getBanner();
-	 * result.addObject("bannerImage", banner);
-	 * return result;
-	 * 
-	 * }
-	 * 
-	 * @RequestMapping(value = "/create", method = RequestMethod.GET)
-	 * public ModelAndView create() {
-	 * ModelAndView result;
-	 * Message message;
-	 * 
-	 * message = this.ms.create();
-	 * 
-	 * result = this.createEditModelAndView(message);
-	 * System.out.println("create controlador :");
-	 * System.out.println(message.getSender());
-	 * return result;
-	 * }
-	 * 
-	 * @RequestMapping(value = "/delete", method = RequestMethod.GET)
-	 * public ModelAndView edit(@RequestParam final int messageId) {
-	 * ModelAndView result;
-	 * Message message;
-	 * 
-	 * message = this.ms.findOne(messageId);
-	 * System.out.println("edit GET");
-	 * System.out.println(message.getSender());
-	 * System.out.println(message.getRecipients());
-	 * Assert.notNull(message);
-	 * result = this.createDeleteModelAndView(message);
-	 * 
-	 * return result;
-	 * }
-	 * 
-	 * @RequestMapping(value = "/edit", method = RequestMethod.POST, params = "send")
-	 * public ModelAndView send(@Valid final Message message, final BindingResult binding) {
-	 * ModelAndView result;
-	 * 
-	 * final UserAccount actual = LoginService.getPrincipal();
-	 * final Actor a = this.ar.getActor(actual);
-	 * 
-	 * if (binding.hasErrors()) {
-	 * System.out.println("tiene errores");
-	 * 
-	 * result = this.createEditModelAndView(message);
-	 * } else
-	 * try {
-	 * System.out.println("antes de llegar al servicio");
-	 * 
-	 * final List<MessageBox> mbox = (List<MessageBox>) a.getMessageBoxes();
-	 * final Integer id = mbox.get(1).getId();
-	 * 
-	 * this.as.sendMessage(message);
-	 * System.out.println("LLega al servicio");
-	 * result = new ModelAndView("redirect:list.do?messageBoxId=" + id);
-	 * } catch (final Throwable oops) {
-	 * System.out.println("oops:" + oops);
-	 * result = this.createEditModelAndView(message, "messages.commit.error");
-	 * }
-	 * 
-	 * return result;
-	 * }
-	 * 
-	 * @RequestMapping(value = "/edit", method = RequestMethod.POST, params = "sendToAll")
-	 * public ModelAndView broadcast(@Valid final Message message, final BindingResult binding) {
-	 * ModelAndView result;
-	 * 
-	 * final UserAccount actual = LoginService.getPrincipal();
-	 * final Actor a = this.ar.getActor(actual);
-	 * 
-	 * if (binding.hasErrors()) {
-	 * result = this.createEditModelAndView(message);
-	 * System.out.println("el formulario tiene errores");
-	 * 
-	 * } else
-	 * try {
-	 * this.ads.broadcastMessage(message);
-	 * final List<MessageBox> mbox = (List<MessageBox>) a.getMessageBoxes();
-	 * final Integer id = mbox.get(1).getId();
-	 * result = new ModelAndView("redirect:list.do?messageBoxId=" + id);
-	 * } catch (final Throwable oops) {
-	 * result = this.createEditModelAndView(message, "messages.commit.error");
-	 * }
-	 * 
-	 * return result;
-	 * }
-	 * 
-	 * @RequestMapping(value = "/delete", method = RequestMethod.POST, params = "delete")
-	 * public ModelAndView delete(final Message message, final BindingResult binding) {
-	 * ModelAndView result;
-	 * 
-	 * try {
-	 * this.as.deleteMessage(message);
-	 * result = new ModelAndView("redirect:/messageBox/list.do");
-	 * } catch (final Throwable oops) {
-	 * result = this.createDeleteModelAndView(message, "messages.commit.error");
-	 * }
-	 * 
-	 * return result;
-	 * }
-	 * 
-	 * protected ModelAndView createEditModelAndView(final Message m) {
-	 * ModelAndView result;
-	 * result = this.createEditModelAndView(m, null);
-	 * 
-	 * return result;
-	 * }
-	 * 
-	 * protected ModelAndView createEditModelAndView(final Message m, final String messageCode) {
-	 * ModelAndView result;
-	 * Collection<Actor> recipients;
-	 * 
-	 * recipients = this.as.findAll();
-	 * 
-	 * result = new ModelAndView("messages/edit");
-	 * result.addObject("mesInformation", m);
-	 * result.addObject("recipients", recipients);
-	 * System.out.println("llega hasta el editmodelandview");
-	 * System.out.println(m.getSender());
-	 * result.addObject("mesError", messageCode);
-	 * final String banner = this.scs.getSystemConfig().getBanner();
-	 * result.addObject("bannerImage", banner);
-	 * return result;
-	 * }
-	 * 
-	 * protected ModelAndView createDeleteModelAndView(final Message m) {
-	 * ModelAndView result;
-	 * result = this.createDeleteModelAndView(m, null);
-	 * 
-	 * return result;
-	 * }
-	 * 
-	 * protected ModelAndView createDeleteModelAndView(final Message m, final String messageCode) {
-	 * ModelAndView result;
-	 * Collection<Actor> recipients;
-	 * 
-	 * recipients = this.as.findAll();
-	 * 
-	 * result = new ModelAndView("messages/delete");
-	 * result.addObject("mesInformation", m);
-	 * result.addObject("recipients", recipients);
-	 * System.out.println("llega hasta el editmodelandview");
-	 * System.out.println(m.getSender());
-	 * result.addObject("mesError", messageCode);
-	 * final String banner = this.scs.getSystemConfig().getBanner();
-	 * result.addObject("bannerImage", banner);
-	 * return result;
-	 * }
-	 * 
-	 * @RequestMapping(value = "/display", method = RequestMethod.GET)
-	 * public ModelAndView display(@RequestParam final int messageId) {
-	 * ModelAndView result;
-	 * Message message;
-	 * 
-	 * message = this.ms.findOne(messageId);
-	 * System.out.println(message.getId());
-	 * System.out.println(message.getBody());
-	 * Assert.notNull(message);
-	 * 
-	 * result = this.createDisplayModelAndView(message);
-	 * 
-	 * return result;
-	 * }
-	 * 
-	 * protected ModelAndView createDisplayModelAndView(final Message m) {
-	 * ModelAndView result;
-	 * result = this.createDisplayModelAndView(m, null);
-	 * 
-	 * return result;
-	 * }
-	 * 
-	 * protected ModelAndView createDisplayModelAndView(final Message m, final String messageCode) {
-	 * ModelAndView result;
-	 * System.out.println(m.getBody());
-	 * 
-	 * result = new ModelAndView("messages/display");
-	 * result.addObject("messageInfo", m);
-	 * result.addObject("messageCode", messageCode);
-	 * final String banner = this.scs.getSystemConfig().getBanner();
-	 * result.addObject("bannerImage", banner);
-	 * return result;
-	 * 
-	 * }
-	 */
 }
