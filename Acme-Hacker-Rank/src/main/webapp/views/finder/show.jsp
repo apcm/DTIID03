@@ -36,6 +36,9 @@
 	<br/>
 	<jstl:forEach var = "result" items="${finder.positions}">
 		<jstl:out value="${result.title}"/>
+		<a href="position/display.do?positionId=${result.id}">
+		<spring:message code="position.display"/>
+		</a>
 		<br/>
 	</jstl:forEach>
 	<%-- <display:table pagesize="5" class="displaytag" keepStatus="true"

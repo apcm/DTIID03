@@ -30,6 +30,11 @@
 <display:column property="finalMode" titleKey="position.finalMode"/>
 <display:column property="deadline" titleKey="position.deadline"/>
 
+<display:column>
+	<a href="position/display.do?positionId=${row.id}">
+		<spring:message code="position.display"/>
+	</a>
+</display:column>
 
 <security:authorize access="hasRole('COMPANY')">
 
@@ -77,11 +82,7 @@
 		</div>
 	</jstl:if>
 
-<security:authorize access="isAnonymous()">
-	<input type="button" name="companies"
-		value="<spring:message code="position.companies" />"
-		onclick="javascript: relativeRedir('company/list.do');" />
-</security:authorize>
+
 
 
 

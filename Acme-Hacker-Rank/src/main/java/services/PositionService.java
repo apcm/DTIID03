@@ -131,7 +131,7 @@ public class PositionService {
 		return user.getAuthorities().contains(a);
 	}
 
-	public Collection<String> searchPositions(final String keyword) {
+	public Collection<Position> searchPositions(final String keyword) {
 		return this.positionRepository.searchPositions(keyword);
 	}
 
@@ -176,6 +176,10 @@ public class PositionService {
 			res.addAll(this.findAll());
 
 		return res;
+	}
+	
+	public Collection<Position> findPositionFinalMode() {
+		return positionRepository.findPositionFinalMode();
 	}
 
 }

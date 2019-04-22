@@ -195,19 +195,6 @@ public class ApplicationHackerController {
 		return result;
 
 	}
-	@RequestMapping(value = "/create", method = RequestMethod.POST, params = "save")
-	public ModelAndView create(final Curricula c, final BindingResult binding) {
-		ModelAndView result;
-		try {
-			final Curricula c2 = this.curriculaService.reconstructApplicationC(c, binding);
-			result = new ModelAndView("redirect:/position/hacker/list.do");
-			this.curriculaService.save(c2);
-		} catch (final ValidationException oops) {
-			result = this.create(c.getApplication().getPosition().getId());
-		} catch (final Throwable oops) {
-			result = new ModelAndView("redirect:/position/hacker/list.do");
-		}
-		return result;
-	}
+
 
 }

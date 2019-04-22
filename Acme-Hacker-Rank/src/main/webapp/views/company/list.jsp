@@ -15,8 +15,10 @@
 <display:column property="phoneNumber" titleKey="company.phoneNumber"/>
 <display:column property="address" titleKey="company.address"/>
 
-</display:table>
+<display:column>
+	<a href="company/show.do?companyId=${row.id}">
+		<spring:message code="company.show"/>
+	</a>
+</display:column>
 
-<input type="button" name="positions"
-		value="<spring:message code="company.positions" />"
-		onclick="javascript: relativeRedir('position/list.do');" />
+</display:table>

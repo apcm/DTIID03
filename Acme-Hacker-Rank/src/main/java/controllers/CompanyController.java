@@ -12,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import security.Authority;
@@ -160,4 +161,49 @@ public class CompanyController extends AbstractController {
 	//		result.addObject("userAccount", userAccount);
 	//		return result;
 	//	}
+	
+	@RequestMapping(value = "/show", method = RequestMethod.GET)
+	public ModelAndView show(@RequestParam int companyId) {
+		ModelAndView res;
+		Company company;
+
+		company = this.companyService.findOne(companyId);
+		res = this.createShowModelAndView(company);
+		return res;
+
+	}
+
+	protected ModelAndView createShowModelAndView(final Company company) {
+		ModelAndView result;
+
+		result = this.createShowModelAndView(company, null);
+
+		return result;
+
+	}
+
+	protected ModelAndView createShowModelAndView(final Company company, final String message) {
+		ModelAndView result;
+		//		Collection<Box> boxes;
+		//		final Collection<SocialProfile> socialProfiles;
+
+		//		boxes = company.getBoxes();
+		//		socialProfiles = company.getSocialProfiles();
+		//		endorsements = company.getEndorsements();
+		
+		//		 if (socialProfiles.isEmpty())
+		//		 * socialProfiles = null;
+		//		 * if (endorsements.isEmpty())
+		//		 * endorsements = null;
+		//if (boxes.isEmpty())
+		//	boxes = null;
+
+		result = new ModelAndView("company/show");
+		result.addObject("company", company);
+		//		result.addObject("boxes", boxes);
+		//		result.addObject("socialProfiles", socialProfiles);
+		result.addObject("message", message);
+		
+		return result;
+	}
 }

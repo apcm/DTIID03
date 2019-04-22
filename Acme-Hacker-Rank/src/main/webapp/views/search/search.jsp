@@ -15,6 +15,9 @@
 </form>
 
 <jstl:forEach items="${positions}" var="pos">
-	<jstl:out value="${pos}"/>
+	<jstl:out value="${pos.title}"/>
+		<a href="position/display.do?positionId=${pos.id}">
+		<spring:message code="position.display"/>
+		</a>
 	<br/>
 </jstl:forEach>

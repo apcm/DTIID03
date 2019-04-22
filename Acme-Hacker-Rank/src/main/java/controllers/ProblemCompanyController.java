@@ -109,6 +109,8 @@ public class ProblemCompanyController extends AbstractController {
 		ModelAndView res;
 
 		try {
+			if (p.getId() != 0)
+				Assert.isTrue(this.problemService.findOne(p.getId()).isFinalMode() != true, "finalMode");
 			p = this.problemService.reconstruct(p, binding);
 			this.problemService.save(p);
 
@@ -116,7 +118,12 @@ public class ProblemCompanyController extends AbstractController {
 		} catch (final ValidationException oops) {
 			res = this.createEditModelAndView(p);
 		} catch (final Throwable oops) {
-			res = this.createEditModelAndView(p, "error.problem");
+
+			if (oops.getMessage() == "Wrong email")
+				res = this.createEditModelAndView(p, "problem.finalMode.error");
+
+			else
+				res = this.createEditModelAndView(p, "error.problem");
 		}
 
 		return res;

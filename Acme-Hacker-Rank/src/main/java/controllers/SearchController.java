@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.PositionService;
+import domain.Position;
 
 @Controller
 @RequestMapping("/search")
@@ -33,7 +34,7 @@ public class SearchController extends AbstractController {
 	@RequestMapping(value = "/search", method = RequestMethod.GET, params = "search")
 	public ModelAndView search(@RequestParam("keyword") final String keyword, final HttpServletRequest request, final HttpServletResponse response) {
 		final ModelAndView res = new ModelAndView("search/search");
-		final Collection<String> positions = this.positionService.searchPositions(keyword);
+		final Collection<Position> positions = this.positionService.searchPositions(keyword);
 		res.addObject("positions", positions);
 		return res;
 	}
