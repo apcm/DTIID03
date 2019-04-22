@@ -46,6 +46,4 @@
 		<put-attribute name="body" value="/views/application/show.jsp" />
 	</definition>
 	
-
-
 </tiles-definitions>

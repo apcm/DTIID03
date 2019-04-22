@@ -72,6 +72,7 @@ public class PersonalDataService {
 
 	public void save(final PersonalData e) {
 		this.checkConditions();
+		Assert.isTrue(!this.findOne(e.getId()).getCurricula().getIsCopy());
 		Assert.isTrue(e.getCurricula().getHacker().getId() == this.hackerService.findOnePrincipal().getId());
 
 		this.personalDataRepository.save(e);
@@ -79,6 +80,7 @@ public class PersonalDataService {
 
 	public void delete(final PersonalData p) {
 		this.checkConditions();
+		Assert.isTrue(!p.getCurricula().getIsCopy());
 		Assert.isTrue(this.personalDataRepository.findOne(p.getId()).getCurricula().getHacker() == this.hackerService.findOnePrincipal());
 
 		this.personalDataRepository.delete(p);
@@ -104,6 +106,11 @@ public class PersonalDataService {
 			throw new ValidationException();
 
 		return res;
+	}
+
+	public void flush() {
+		this.personalDataRepository.flush();
+
 	}
 
 }

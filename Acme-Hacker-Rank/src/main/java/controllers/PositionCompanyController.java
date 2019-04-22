@@ -30,7 +30,7 @@ public class PositionCompanyController {
 	public ModelAndView list() {
 		ModelAndView result;
 
-		Collection<Position> positions = this.positionService.getMyPositionList();
+		final Collection<Position> positions = this.positionService.getMyPositionList();
 
 		result = new ModelAndView("position/company/list");
 		result.addObject("positions", positions);
