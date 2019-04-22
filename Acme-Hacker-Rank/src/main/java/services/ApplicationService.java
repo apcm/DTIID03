@@ -1,6 +1,7 @@
 
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -15,8 +16,11 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 
 import repositories.ApplicationRepository;
+import repositories.CompanyRepository;
 import security.LoginService;
+import security.UserAccount;
 import domain.Application;
+import domain.Company;
 import domain.Hacker;
 import domain.Position;
 import domain.Problem;
@@ -36,6 +40,9 @@ public class ApplicationService {
 
 	@Autowired
 	private HackerService			hs;
+	
+	@Autowired
+	private CompanyRepository		cr;
 
 
 	public List<Application> getApplicationsByHacker(final Hacker h) {
@@ -150,4 +157,87 @@ public class ApplicationService {
 
 		return res;
 	}
+
+	public Collection<Application> getMyAppList() {
+		Collection<Application> res = new ArrayList<Application>();
+		Collection<Application> all = this.findAll();
+		for(Application a : all){
+			if(a.getPosition().getCompany().equals(this.getThisCompany())){
+				res.add(a);
+			}
+		}
+		
+		return res;
+	}
+
+	public Collection<Application> findAll() {
+		return this.ar.findAll();
+	}
+	
+	public Company getThisCompany() {
+		Company res;
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Assert.notNull(userAccount);
+		res = this.cr.findByUserAccountId(userAccount.getId());
+		return res;
+	}
+
+	public Collection<Application> getAP(Collection<Application> applications) {
+		Collection<Application> res = new ArrayList<Application>();
+		for(Application a : applications){
+			if(a.getStatus().equals("PENDING")){
+				res.add(a);
+			}
+		}
+		return res;
+	}
+	
+	public Collection<Application> getAA(Collection<Application> applications) {
+		Collection<Application> res = new ArrayList<Application>();
+		for(Application a : applications){
+			if(a.getStatus().equals("ACCEPTED")){
+				res.add(a);
+			}
+		}
+		return res;
+	}
+	
+	public Collection<Application> getAR(Collection<Application> applications) {
+		Collection<Application> res = new ArrayList<Application>();
+		for(Application a : applications){
+			if(a.getStatus().equals("REJECTED")){
+				res.add(a);
+			}
+		}
+		return res;
+	}
+
+	public Application saveStatus(Application application) {
+		Application res = new Application();
+		res = this.ar.save(application);
+		return res;
+	}
+
+	public boolean checkApplication(Application application) {
+		Boolean res = true;
+		
+		if(application.getStatus().equals("ACCEPTED")|| application.getStatus().equals("REJECTED")){
+			res = false;
+		}
+		
+		return res;
+	}
+
+	public boolean checkApplicationCompany(Application application) {
+		Boolean res = true;
+		
+		if(!application.getPosition().getCompany().equals(getThisCompany())){
+			res = false;
+		}
+		
+		return res;
+	}
+	
+	
 }

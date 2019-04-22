@@ -30,6 +30,22 @@
 		<put-attribute name="title" value="Show application" />
 		<put-attribute name="body" value="/views/application/show.jsp" />
 	</definition>
+	
+	<definition name="application/company/edit" extends="master.page">
+		<put-attribute name="title" value="Edit Status Application" />
+		<put-attribute name="body" value="/views/application/edit_status.jsp" />
+	</definition>
+	
+	<definition name="application/company/list" extends="master.page">
+		<put-attribute name="title" value="List Status Application" />
+		<put-attribute name="body" value="/views/application/list_status.jsp" />
+	</definition>
+	
+	<definition name="application/company/display" extends="master.page">
+		<put-attribute name="title" value="Display Application" />
+		<put-attribute name="body" value="/views/application/show.jsp" />
+	</definition>
+	
 
 
 </tiles-definitions>
