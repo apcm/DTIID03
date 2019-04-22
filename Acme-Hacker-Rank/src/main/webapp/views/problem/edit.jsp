@@ -66,7 +66,7 @@
 	
 	<input type="submit" name="save"
 		value="<spring:message code="problem.save" />" />&nbsp;
-		<jstl:if test="${problem.id!=0}">
+		<jstl:if test="${problem.id!=0 }">
 	<input type="submit" name="delete"
 		value="<spring:message code="problem.delete" />"
 		onclick="return confirm('<spring:message code="problem.confirm.delete" />')" />&nbsp;
