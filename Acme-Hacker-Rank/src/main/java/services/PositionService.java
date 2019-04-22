@@ -82,19 +82,16 @@ public class PositionService {
 	}
 
 	public Collection<Position> getMyPositionList() {
-		Collection<Position> positions = this.positionsByCompany(this.findAll());
+		final Collection<Position> positions = this.positionsByCompany(this.findAll());
 		return positions;
 	}
 
 	private Collection<Position> positionsByCompany(final Collection<Position> all) {
-	    Company actual = this.getThisCompany();
-		Collection<Position> positions = new ArrayList<Position>();
-		for (final Position p : all){
-			if (p.getCompany().equals(actual)){
+		final Company actual = this.getThisCompany();
+		final Collection<Position> positions = new ArrayList<Position>();
+		for (final Position p : all)
+			if (p.getCompany().equals(actual))
 				positions.add(p);
-			}
-		}
-			
 		return positions;
 	}
 

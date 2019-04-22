@@ -25,11 +25,5 @@
 			</a>
 				</jstl:if>		
 	</display:column>
-	
-		<display:column>
-			<a href="application/hacker/show.do?applicationId=${row.id }">
-			<spring:message code="application.show" />
-			</a>
-	</display:column>
 
 </display:table>

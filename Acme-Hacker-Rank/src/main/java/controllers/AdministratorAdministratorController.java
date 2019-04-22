@@ -56,11 +56,10 @@ public class AdministratorAdministratorController extends AbstractController {
 		ModelAndView result;
 
 		try {
+			administrator = this.administratorService.reconstruct(administrator, binding);
 			final String vacia = "";
 			if (!administrator.getEmail().isEmpty() || administrator.getEmail() != vacia)
 				Assert.isTrue(administrator.getEmail().matches("^[A-z0-9]+@$") || administrator.getEmail().matches("^[A-z0-9 ]+ <[A-z0-9]+@>$"), "Wrong email");
-
-			administrator = this.administratorService.reconstruct(administrator, binding);
 
 			this.administratorService.save(administrator);
 			result = new ModelAndView("redirect:/welcome/index.do");
