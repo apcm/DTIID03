@@ -37,6 +37,7 @@ public class PersonalDataService {
 
 	public List<PersonalData> findByCurriculaId(final int curriculaId) {
 		this.checkConditions();
+
 		final List<Curricula> lc = this.curriculaService.getCurriculasFromHacker();
 		final List<PersonalData> res = this.personalDataRepository.findPersonalDataByCurriculaId(curriculaId);
 		for (final PersonalData ed : res)
@@ -55,6 +56,7 @@ public class PersonalDataService {
 	public PersonalData create(final int curriculaId) {
 		final Curricula c = this.curriculaService.findOne(curriculaId);
 		Assert.isTrue(this.curriculaService.getCurriculasFromHacker().contains(c));
+		Assert.isTrue(this.curriculaService.findOne(curriculaId).getIsCopy() == false);
 
 		final PersonalData res = new PersonalData();
 		res.setCurricula(c);
@@ -72,7 +74,6 @@ public class PersonalDataService {
 
 	public void save(final PersonalData e) {
 		this.checkConditions();
-		Assert.isTrue(!this.findOne(e.getId()).getCurricula().getIsCopy());
 		Assert.isTrue(e.getCurricula().getHacker().getId() == this.hackerService.findOnePrincipal().getId());
 
 		this.personalDataRepository.save(e);

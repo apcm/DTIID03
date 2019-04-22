@@ -55,6 +55,7 @@ public class PositionDataService {
 	public PositionData create(final int curriculaId) {
 		final Curricula c = this.curriculaService.findOne(curriculaId);
 		Assert.isTrue(this.curriculaService.getCurriculasFromHacker().contains(c));
+		Assert.isTrue(this.curriculaService.findOne(curriculaId).getIsCopy() == false);
 
 		final PositionData res = new PositionData();
 		res.setCurricula(c);
@@ -72,7 +73,6 @@ public class PositionDataService {
 
 	public void save(final PositionData p) {
 		this.checkConditions();
-		Assert.isTrue(!this.findOne(p.getId()).getCurricula().getIsCopy());
 		Assert.isTrue(p.getCurricula().getHacker().getId() == this.hackerService.findOnePrincipal().getId());
 
 		this.positionDataRepository.save(p);
@@ -104,5 +104,9 @@ public class PositionDataService {
 			throw new ValidationException();
 
 		return res;
+	}
+
+	public void flush() {
+		this.positionDataRepository.flush();
 	}
 }

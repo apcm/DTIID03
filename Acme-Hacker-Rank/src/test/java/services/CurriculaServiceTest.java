@@ -107,6 +107,8 @@ public class CurriculaServiceTest extends AbstractTest {
 		this.authenticate("hacker1");
 		final Curricula c = this.curriculaService.findOne(this.getEntityId("curricula1"));
 		c.setName("C1");
+		c.setIsCopy(false);
+		c.setApplication(null);
 
 		//p3->finalMode=false
 		final Curricula c2 = this.curriculaService.findOne(this.getEntityId("curricula2"));
@@ -129,12 +131,12 @@ public class CurriculaServiceTest extends AbstractTest {
 			/**
 			 * TESTING REQUIREMENT #9.2
 			 * NEGATIVE TEST: YOU CANNOT EDIT A COPY OF A CURRICULA
-			 * (Expected IllegalArgumentException)
+			 * (Expected NullPointerException)
 			 * COVERED INSTRUCTIONS: 100%
 			 * COVERED DATA: 10%
 			 * */
 			{
-				"hacker1", c2, IllegalArgumentException.class
+				"hacker1", c2, NullPointerException.class
 			}
 
 		};

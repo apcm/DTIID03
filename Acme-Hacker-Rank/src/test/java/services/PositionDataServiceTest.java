@@ -1,11 +1,13 @@
 
 package services;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.transaction.Transactional;
 import javax.validation.ConstraintViolationException;
 
+import org.joda.time.format.DateTimeFormat;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,14 +15,14 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import utilities.AbstractTest;
-import domain.PersonalData;
+import domain.PositionData;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
 	"classpath:spring/junit.xml"
 })
 @Transactional
-public class PersonalDataServiceTest extends AbstractTest {
+public class PositionDataServiceTest extends AbstractTest {
 
 	//SUT
 	@Autowired
@@ -30,11 +32,11 @@ public class PersonalDataServiceTest extends AbstractTest {
 	CurriculaService	curriculaService;
 
 	@Autowired
-	PersonalDataService	personalDataService;
+	PositionDataService	positionDataService;
 
 
 	/**
-	 * TESTING REQUIREMENT #15 (Manage personal data in a curricula)
+	 * TESTING REQUIREMENT #15 (Manage position data in a curricula)
 	 * POSITIVE TEST
 	 * COVERED INSTRUCTIONS IN THIS TEST: 100%
 	 * COVERED INSTRUCTIONS IN LinkRecordService: 22.9%
@@ -42,21 +44,19 @@ public class PersonalDataServiceTest extends AbstractTest {
 	 * */
 
 	@Test
-	public void createPersonalData() {
+	public void createPositionData() {
 		this.authenticate("hacker1");
-		final PersonalData pd = this.personalDataService.create(this.getEntityId("curricula1"));
-		pd.setFullName("Pepe Gonzalez");
-		pd.setGitProfile("http://adsasf.com");
-		pd.setLinkedInProfile("http://adsasf.com");
-		pd.setPhoneNumber("676893423");
-		pd.setStatement("Statement");
+		final PositionData pd = this.positionDataService.create(this.getEntityId("curricula1"));
+		pd.setDescription("Descrption1");
+		Date d1 = new Date();
+		d1 = DateTimeFormat.forPattern("yyyy-MM-dd").parseDateTime("2005-06-12").toDate();
+		pd.setStartMoment(d1);
+		pd.setTitle("Title1");
 
-		final PersonalData pd2 = this.personalDataService.create(this.getEntityId("curricula1"));
-		pd2.setFullName("Pepe Gonzalez");
-		pd2.setGitProfile("http://adsasf.com");
-		pd2.setLinkedInProfile("http://adsasf.com");
-		pd2.setPhoneNumber("676893423");
-		pd2.setStatement("");
+		final PositionData pd2 = this.positionDataService.create(this.getEntityId("curricula2"));
+		pd2.setDescription("Description1");
+		pd2.setStartMoment(d1);
+		pd2.setTitle("");
 
 		this.unauthenticate();
 
@@ -74,7 +74,7 @@ public class PersonalDataServiceTest extends AbstractTest {
 
 			/**
 			 * // * TESTING REQUIREMENT #9.2
-			 * // * NEGATIVE TEST:YOU CANNOT CREATE A personalDATE WITHOUT DEGREE
+			 * // * NEGATIVE TEST:YOU CANNOT CREATE A positionData WITHOUT TITLE
 			 * (Expected ConstraintViolationException)
 			 * // * COVERED INSTRUCTIONS: 100%
 			 * // * COVERED DATA: 10%
@@ -88,15 +88,15 @@ public class PersonalDataServiceTest extends AbstractTest {
 		};
 
 		for (int i = 0; i < testingData.length; i++)
-			this.template2((String) testingData[i][0], (PersonalData) testingData[i][1], (Class<?>) testingData[i][2]);
+			this.template2((String) testingData[i][0], (PositionData) testingData[i][1], (Class<?>) testingData[i][2]);
 	}
 	@Test
-	public void editpersonalData() {
+	public void editpositionData() {
 		this.authenticate("hacker1");
 
-		final List<PersonalData> edL = this.personalDataService.findByCurriculaId(this.getEntityId("curricula1"));
-		final PersonalData pd = edL.get(0);
-		pd.setFullName("Tototototto");
+		final List<PositionData> edL = this.positionDataService.findByCurriculaId(this.getEntityId("curricula1"));
+		final PositionData pd = edL.get(0);
+		pd.setDescription("Cambio");
 
 		this.unauthenticate();
 
@@ -114,15 +114,15 @@ public class PersonalDataServiceTest extends AbstractTest {
 		};
 
 		for (int i = 0; i < testingData.length; i++)
-			this.template2((String) testingData[i][0], (PersonalData) testingData[i][1], (Class<?>) testingData[i][2]);
+			this.template2((String) testingData[i][0], (PositionData) testingData[i][1], (Class<?>) testingData[i][2]);
 	}
 
 	@Test
-	public void editpersonalData2() {
+	public void editpositionData2() {
 		this.authenticate("hacker1");
-		final List<PersonalData> edL2 = this.personalDataService.findByCurriculaId(this.getEntityId("curricula2"));
-		final PersonalData pd2 = edL2.get(0);
-		pd2.setLinkedInProfile("");
+		final List<PositionData> edL2 = this.positionDataService.findByCurriculaId(this.getEntityId("curricula2"));
+		final PositionData pd2 = edL2.get(0);
+		pd2.setDescription("");
 
 		this.unauthenticate();
 
@@ -130,7 +130,7 @@ public class PersonalDataServiceTest extends AbstractTest {
 
 			/**
 			 * TESTING REQUIREMENT #9.2
-			 * NEGATIVE TEST: YOU CANNOT EDIT AN ED WITHOUT LinkedInProfile
+			 * NEGATIVE TEST: YOU CANNOT EDIT AN PositionData WITHOUT DESCRIPTION
 			 * (Expected ConstraintViolationException)
 			 * COVERED INSTRUCTIONS: 100%
 			 * COVERED DATA: 10%
@@ -142,19 +142,19 @@ public class PersonalDataServiceTest extends AbstractTest {
 		};
 
 		for (int i = 0; i < testingData.length; i++)
-			this.template2((String) testingData[i][0], (PersonalData) testingData[i][1], (Class<?>) testingData[i][2]);
+			this.template2((String) testingData[i][0], (PositionData) testingData[i][1], (Class<?>) testingData[i][2]);
 	}
 
 	@Test
-	public void deletePersonalData() {
+	public void deletePositionData() {
 		this.authenticate("hacker1");
-		final List<PersonalData> edL = this.personalDataService.findByCurriculaId(this.getEntityId("curricula1"));
-		final PersonalData ed = edL.get(0);
-		ed.getCurricula().setIsCopy(false);
+		final List<PositionData> edL = this.positionDataService.findByCurriculaId(this.getEntityId("curricula1"));
+		final PositionData pd = edL.get(0);
+		pd.getCurricula().setIsCopy(false);
 
-		final List<PersonalData> edL2 = this.personalDataService.findByCurriculaId(this.getEntityId("curricula2"));
-		final PersonalData ed2 = edL2.get(0);
-		ed2.getCurricula().setIsCopy(true);
+		final List<PositionData> edL2 = this.positionDataService.findByCurriculaId(this.getEntityId("curricula2"));
+		final PositionData pd2 = edL2.get(0);
+		pd2.getCurricula().setIsCopy(true);
 
 		this.unauthenticate();
 
@@ -167,7 +167,7 @@ public class PersonalDataServiceTest extends AbstractTest {
 			 * COVERED DATA: 10%
 			 * */
 			{
-				"hacker1", ed, null
+				"hacker1", pd, null
 			},
 
 			/**
@@ -178,15 +178,15 @@ public class PersonalDataServiceTest extends AbstractTest {
 			 * COVERED DATA: 10%
 			 * */
 			{
-				"hacker1", ed2, IllegalArgumentException.class
+				"hacker1", pd2, IllegalArgumentException.class
 			}
 
 		};
 
 		for (int i = 0; i < testingData.length; i++)
-			this.templateD((String) testingData[i][0], (PersonalData) testingData[i][1], (Class<?>) testingData[i][2]);
+			this.templateD((String) testingData[i][0], (PositionData) testingData[i][1], (Class<?>) testingData[i][2]);
 	}
-	protected void template2(final String username, final PersonalData ed, final Class<?> expected) {
+	protected void template2(final String username, final PositionData ed, final Class<?> expected) {
 
 		Class<?> caught;
 
@@ -194,8 +194,8 @@ public class PersonalDataServiceTest extends AbstractTest {
 
 		try {
 			this.authenticate(username);
-			this.personalDataService.save(ed);
-			this.personalDataService.flush();
+			this.positionDataService.save(ed);
+			this.positionDataService.flush();
 
 			this.unauthenticate();
 
@@ -205,7 +205,7 @@ public class PersonalDataServiceTest extends AbstractTest {
 
 		super.checkExceptions(expected, caught);
 	}
-	protected void templateD(final String username, final PersonalData ed, final Class<?> expected) {
+	protected void templateD(final String username, final PositionData ed, final Class<?> expected) {
 
 		Class<?> caught;
 
@@ -213,8 +213,8 @@ public class PersonalDataServiceTest extends AbstractTest {
 
 		try {
 			this.authenticate(username);
-			this.personalDataService.delete(ed);
-			this.personalDataService.flush();
+			this.positionDataService.delete(ed);
+			this.positionDataService.flush();
 
 			this.unauthenticate();
 
@@ -224,5 +224,4 @@ public class PersonalDataServiceTest extends AbstractTest {
 
 		super.checkExceptions(expected, caught);
 	}
-
 }

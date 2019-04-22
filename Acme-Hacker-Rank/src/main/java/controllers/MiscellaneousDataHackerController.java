@@ -71,6 +71,8 @@ public class MiscellaneousDataHackerController {
 		ModelAndView res;
 
 		try {
+			if (pd.getId() != 0)
+				Assert.isTrue(!this.miscellaneousDataService.findOne(pd.getId()).getCurricula().getIsCopy(), "errorCopy");
 			pd = this.miscellaneousDataService.reconstruct(pd, binding);
 			this.miscellaneousDataService.save(pd);
 
@@ -80,6 +82,8 @@ public class MiscellaneousDataHackerController {
 		} catch (final ValidationException oops) {
 			res = this.createEditModelAndView(pd);
 		} catch (final Throwable oops) {
+			if (oops.getMessage() == "errorCopy")
+				res = this.createEditModelAndView(pd, "error.copy.miscellaneousData");
 			res = this.createEditModelAndView(pd, "error.miscellaneousData");
 		}
 

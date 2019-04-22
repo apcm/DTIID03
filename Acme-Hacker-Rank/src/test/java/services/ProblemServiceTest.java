@@ -142,13 +142,6 @@ public class ProblemServiceTest extends AbstractTest {
 	@Test
 	public void editProblem() {
 		this.authenticate("company1");
-		final Problem p = this.problemService.findOne(this.getEntityId("problem1"));
-		p.setStatement("Esto es un statement");
-		p.setAttachments("Sample address");
-		p.setFinalMode(true);
-		p.setHint("Hint1");
-		p.setTitle("title1");
-
 		//p3->finalMode=false
 		final Problem p3 = this.problemService.findOne(this.getEntityId("problem3"));
 
@@ -168,17 +161,37 @@ public class ProblemServiceTest extends AbstractTest {
 			 * */
 			{
 				"company1", p3, null
-			},
+			}
+
+		};
+
+		for (int i = 0; i < testingData.length; i++)
+			this.template2((String) testingData[i][0], (Problem) testingData[i][1], (Class<?>) testingData[i][2]);
+	}
+
+	@Test
+	public void editProblem2() {
+		this.authenticate("company1");
+		final Problem p = this.problemService.findOne(this.getEntityId("problem1"));
+		p.setStatement("Esto es un statement");
+		p.setAttachments("Sample address");
+		p.setFinalMode(false);
+		p.setHint("Hint1");
+		p.setTitle("");
+
+		this.unauthenticate();
+
+		final Object testingData[][] = {
 
 			/**
 			 * TESTING REQUIREMENT #9.2
-			 * NEGATIVE TEST: YOU CANNOT EDIT A PROBLEM WITH FINAL MODE = TRUE
-			 * (Expected IllegalArgumentException)
+			 * NEGATIVE TEST: YOU CANNOT EDIT A PROBLEM WITH NO TITLE
+			 * (Expected ConstraintViolationException)
 			 * COVERED INSTRUCTIONS: 100%
 			 * COVERED DATA: 10%
 			 * */
 			{
-				"company1", p, IllegalArgumentException.class
+				"company1", p, ConstraintViolationException.class
 			}
 
 		};

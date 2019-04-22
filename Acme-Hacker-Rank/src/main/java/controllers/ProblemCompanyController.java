@@ -119,7 +119,7 @@ public class ProblemCompanyController extends AbstractController {
 			res = this.createEditModelAndView(p);
 		} catch (final Throwable oops) {
 
-			if (oops.getMessage() == "Wrong email")
+			if (oops.getMessage() == "finalMode")
 				res = this.createEditModelAndView(p, "problem.finalMode.error");
 
 			else

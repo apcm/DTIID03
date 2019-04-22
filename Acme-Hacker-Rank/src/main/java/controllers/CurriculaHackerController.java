@@ -141,6 +141,8 @@ public class CurriculaHackerController extends AbstractController {
 		ModelAndView res;
 
 		try {
+			if (c.getId() != 0)
+				Assert.isTrue(!this.curriculaService.findOne(c.getId()).getIsCopy(), "curriculaCopy");
 			c = this.curriculaService.reconstruct(c, binding);
 			this.curriculaService.save(c);
 
@@ -148,7 +150,11 @@ public class CurriculaHackerController extends AbstractController {
 		} catch (final ValidationException oops) {
 			res = this.createEditModelAndView(c);
 		} catch (final Throwable oops) {
-			res = this.createEditModelAndView(c, "error.curricula");
+			if (oops.getMessage() == "curriculaCopy")
+				res = this.createEditModelAndView(c, "curricula.copy.error");
+
+			else
+				res = this.createEditModelAndView(c, "error.curricula");
 		}
 
 		return res;

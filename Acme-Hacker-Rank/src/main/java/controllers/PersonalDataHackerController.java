@@ -71,6 +71,9 @@ public class PersonalDataHackerController {
 		ModelAndView res;
 
 		try {
+			//Compruebo que no se intente editar una copia
+			if (pd.getId() != 0)
+				Assert.isTrue(!this.personalDataService.findOne(pd.getId()).getCurricula().getIsCopy(), "errorCopy");
 			pd = this.personalDataService.reconstruct(pd, binding);
 			this.personalDataService.save(pd);
 
@@ -80,7 +83,10 @@ public class PersonalDataHackerController {
 		} catch (final ValidationException oops) {
 			res = this.createEditModelAndView(pd);
 		} catch (final Throwable oops) {
-			res = this.createEditModelAndView(pd, "error.personalData");
+			if (oops.getMessage() == "errorCopy")
+				res = this.createEditModelAndView(pd, "personalData.copy.error");
+			else
+				res = this.createEditModelAndView(pd, "error.personalData");
 		}
 
 		return res;
