@@ -42,14 +42,13 @@ public class PositionService {
 		final Position res = new Position();
 		res.setFinalMode(false);
 		res.setIsCancelled(false);
-		final String ticker = TickerGenerator.tickerPosition();
+		final String ticker = TickerGenerator.tickerPosition(this.getThisCompany().getCompanyName());
 		res.setTicker(ticker);
 		final Collection<Problem> problems = new ArrayList<Problem>();
 		res.setProblems(problems);
 
 		return res;
 	}
-
 	public Collection<Position> findAll() {
 		return this.positionRepository.findAll();
 	}
