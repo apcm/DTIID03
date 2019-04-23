@@ -24,6 +24,7 @@ import domain.Actor;
 import domain.Administrator;
 import domain.Box;
 import domain.Customisation;
+import domain.Message;
 import domain.SocialProfile;
 import forms.AdministratorForm;
 
@@ -42,6 +43,9 @@ public class AdministratorService {
 	
 	@Autowired
 	public SocialProfileService socialprofileService;
+	
+	@Autowired
+	private MessageService			messageService;
 
 
 	//Constructor
@@ -287,9 +291,40 @@ public class AdministratorService {
 		ua.setPassword(pass2);
 		logAdministrator.setUserAccount(ua);
 	}
-
+	
 	public void flush() {
 		this.adminRepository.flush();
 	}
 
+	public void flagSpamProccess() {
+		Assert.isTrue(this.actorService.checkAdmin());
+		final List<Actor> a1 = new ArrayList<Actor>(this.actorService.findAll());
+		for (final Actor a : a1) {
+			final List<Box> b1 = new ArrayList<Box>(a.getBoxes());
+			if (!b1.isEmpty()) {
+				final Box box = b1.get(0);
+				for (final Message m : box.getMessages()) {
+					final List<Customisation> lc = new ArrayList<Customisation>(this.customisationService.findAll());
+					for (final String word : lc.get(0).getSpamWords())
+						if (m.getBody().contains(word)) {
+							m.setFlagSpam(true);
+							this.messageService.save(m);
+							break;
+						}
+				}
+			}
+		}
+		this.flagSpamActorProcess();
+	}
+	public void flagSpamActorProcess() {
+		Assert.isTrue(this.actorService.checkAdmin());
+		final List<Actor> a1 = new ArrayList<Actor>(this.actorService.findAll());
+		for (final Actor a : a1) {
+			final Double d1 = this.actorService.flagSpamMessagesCount(a.getId());
+			if (d1 > 0.1) {
+				a.setFlagSpam(true);
+				this.actorService.save(a);
+			}
+		}
+	}
 }

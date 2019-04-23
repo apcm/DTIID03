@@ -252,4 +252,10 @@ public class ActorService {
 
 	}
 
+	public Double flagSpamMessagesCount(final int id) {
+		Assert.isTrue(this.checkAdmin());
+		return this.actorRepository.flagSpamMessagesCount(id);
+
+	}
+
 }

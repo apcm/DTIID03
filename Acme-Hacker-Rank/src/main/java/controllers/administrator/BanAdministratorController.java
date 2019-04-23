@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.ActorService;
+import services.AdministratorService;
 import controllers.AbstractController;
 import domain.Actor;
 
@@ -19,7 +20,10 @@ import domain.Actor;
 public class BanAdministratorController extends AbstractController {
 
 	@Autowired
-	ActorService	actorService;
+	ActorService			actorService;
+
+	@Autowired
+	AdministratorService	administratorService;
 
 
 	//list
@@ -39,6 +43,16 @@ public class BanAdministratorController extends AbstractController {
 		return result;
 	}
 
+	//list
+	@RequestMapping(value = "/spamProcess", method = RequestMethod.GET)
+	public ModelAndView spamProcess() {
+		final ModelAndView result;
+		this.administratorService.flagSpamProccess();
+
+		result = new ModelAndView("redirect:list.do");
+
+		return result;
+	}
 	//	@RequestMapping(value = "/show", method = RequestMethod.GET)
 	//	public ModelAndView show(@RequestParam final int actorId) {
 	//		final ModelAndView res;

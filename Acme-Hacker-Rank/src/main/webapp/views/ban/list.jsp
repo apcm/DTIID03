@@ -66,4 +66,8 @@
 	
 		
 </display:table>
+
+<a href="ban/administrator/spamProcess.do">
+			<spring:message code="admin.spamProcess" />
+			</a>
 </security:authorize>
