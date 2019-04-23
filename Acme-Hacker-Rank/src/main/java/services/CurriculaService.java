@@ -92,7 +92,6 @@ public class CurriculaService {
 
 		if (c.getApplication() != null) {
 			Curricula copy = this.create();
-			copy.setIsCopy(true);
 
 			copy.setHacker(c.getHacker());
 			copy.setApplication(c.getApplication());
@@ -139,8 +138,11 @@ public class CurriculaService {
 				this.miscellaneousDataService.save(newMd);
 			}
 			c.setApplication(null);
+			copy.setIsCopy(true);
+			this.curriculaRepository.save(copy);
 		}
 		this.curriculaRepository.save(c);
+
 	}
 
 	public void delete(final Curricula c) {

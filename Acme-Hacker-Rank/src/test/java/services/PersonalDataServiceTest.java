@@ -34,10 +34,10 @@ public class PersonalDataServiceTest extends AbstractTest {
 
 
 	/**
-	 * TESTING REQUIREMENT #15 (Manage personal data in a curricula)
+	 * TESTING REQUIREMENT #15 (Manage personal data in a curricula:CREATE)
 	 * POSITIVE TEST
 	 * COVERED INSTRUCTIONS IN THIS TEST: 100%
-	 * COVERED INSTRUCTIONS IN LinkRecordService: 22.9%
+	 * COVERED INSTRUCTIONS IN PERSONALDATASERVICE: 65.6%
 	 * COVERED DATA IN THIS TEST: 12%
 	 * */
 
@@ -63,7 +63,7 @@ public class PersonalDataServiceTest extends AbstractTest {
 		final Object testingData[][] = {
 
 			/**
-			 * TESTING REQUIREMENT #9.2
+			 * TESTING REQUIREMENT #15
 			 * POSITIVE TEST
 			 * COVERED INSTRUCTIONS: 100%
 			 * COVERED DATA: 10%
@@ -73,7 +73,7 @@ public class PersonalDataServiceTest extends AbstractTest {
 			},
 
 			/**
-			 * // * TESTING REQUIREMENT #9.2
+			 * // * TESTING REQUIREMENT #15
 			 * // * NEGATIVE TEST:YOU CANNOT CREATE A personalDATE WITHOUT DEGREE
 			 * (Expected ConstraintViolationException)
 			 * // * COVERED INSTRUCTIONS: 100%
@@ -90,20 +90,27 @@ public class PersonalDataServiceTest extends AbstractTest {
 		for (int i = 0; i < testingData.length; i++)
 			this.template2((String) testingData[i][0], (PersonalData) testingData[i][1], (Class<?>) testingData[i][2]);
 	}
+	/**
+	 * TESTING REQUIREMENT #15 (Manage personal data in a curricula:EDIT)
+	 * POSITIVE TEST
+	 * COVERED INSTRUCTIONS IN THIS TEST: 100%
+	 * COVERED INSTRUCTIONS IN PERSONALDATASERVICE: 65.6%
+	 * COVERED DATA IN THIS TEST: 12%
+	 * */
 	@Test
 	public void editpersonalData() {
 		this.authenticate("hacker1");
 
 		final List<PersonalData> edL = this.personalDataService.findByCurriculaId(this.getEntityId("curricula1"));
 		final PersonalData pd = edL.get(0);
-		pd.setFullName("Tototototto");
+		pd.setFullName("TOMÁS CABELLO LÓPEZ");
 
 		this.unauthenticate();
 
 		final Object testingData[][] = {
 
 			/**
-			 * TESTING REQUIREMENT #9.2
+			 * TESTING REQUIREMENT #15
 			 * POSITIVE TEST
 			 * COVERED INSTRUCTIONS: 100%
 			 * COVERED DATA: 10%
@@ -117,6 +124,13 @@ public class PersonalDataServiceTest extends AbstractTest {
 			this.template2((String) testingData[i][0], (PersonalData) testingData[i][1], (Class<?>) testingData[i][2]);
 	}
 
+	/**
+	 * TESTING REQUIREMENT #15 (Manage personal data in a curricula:EDIT)
+	 * POSITIVE TEST
+	 * COVERED INSTRUCTIONS IN THIS TEST: 100%
+	 * COVERED INSTRUCTIONS IN PERSONALDATASERVICE: 65.6%
+	 * COVERED DATA IN THIS TEST: 12%
+	 * */
 	@Test
 	public void editpersonalData2() {
 		this.authenticate("hacker1");
@@ -129,8 +143,8 @@ public class PersonalDataServiceTest extends AbstractTest {
 		final Object testingData[][] = {
 
 			/**
-			 * TESTING REQUIREMENT #9.2
-			 * NEGATIVE TEST: YOU CANNOT EDIT AN ED WITHOUT LinkedInProfile
+			 * TESTING REQUIREMENT #15
+			 * NEGATIVE TEST: YOU CANNOT EDIT A PERSONAL DATA WITHOUT LinkedInProfile
 			 * (Expected ConstraintViolationException)
 			 * COVERED INSTRUCTIONS: 100%
 			 * COVERED DATA: 10%
@@ -145,6 +159,13 @@ public class PersonalDataServiceTest extends AbstractTest {
 			this.template2((String) testingData[i][0], (PersonalData) testingData[i][1], (Class<?>) testingData[i][2]);
 	}
 
+	/**
+	 * TESTING REQUIREMENT #15 (Manage personal data in a curricula:DELETE)
+	 * POSITIVE TEST
+	 * COVERED INSTRUCTIONS IN THIS TEST: 100%
+	 * COVERED INSTRUCTIONS IN PERSONALDATASERVICE: 65.6%
+	 * COVERED DATA IN THIS TEST: 12%
+	 * */
 	@Test
 	public void deletePersonalData() {
 		this.authenticate("hacker1");
@@ -161,7 +182,7 @@ public class PersonalDataServiceTest extends AbstractTest {
 		final Object testingData[][] = {
 
 			/**
-			 * TESTING REQUIREMENT #9.2
+			 * TESTING REQUIREMENT #15
 			 * POSITIVE TEST
 			 * COVERED INSTRUCTIONS: 100%
 			 * COVERED DATA: 10%
@@ -171,7 +192,7 @@ public class PersonalDataServiceTest extends AbstractTest {
 			},
 
 			/**
-			 * TESTING REQUIREMENT #9.2
+			 * TESTING REQUIREMENT #15
 			 * NEGATIVE TEST: YOU CANNOT DELETE A CURRICULA WICH IS A COPY
 			 * (Expected IllegalArgumentException)
 			 * COVERED INSTRUCTIONS: 100%

@@ -37,6 +37,7 @@ public class PersonalDataService {
 
 	public List<PersonalData> findByCurriculaId(final int curriculaId) {
 		this.checkConditions();
+
 		final List<Curricula> lc = this.curriculaService.getCurriculasFromHacker();
 		final List<PersonalData> res = this.personalDataRepository.findPersonalDataByCurriculaId(curriculaId);
 		for (final PersonalData ed : res)

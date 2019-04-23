@@ -26,11 +26,11 @@ public class ProblemServiceTest extends AbstractTest {
 
 
 	/**
-	 * TESTING REQUIREMENT #9.2 (Manage problems database when you are a company.)
+	 * TESTING REQUIREMENT #9.2 (Manage problems database when you are a company: create)
 	 * POSITIVE TEST
 	 * COVERED INSTRUCTIONS IN THIS TEST: 100%
-	 * COVERED INSTRUCTIONS IN LinkRecordService: 22.9%
-	 * COVERED DATA IN THIS TEST: 12%
+	 * COVERED INSTRUCTIONS IN ProblemService: 71.1%
+	 * COVERED DATA IN THIS TEST: 60%
 	 * */
 
 	@Test
@@ -123,7 +123,7 @@ public class ProblemServiceTest extends AbstractTest {
 			},
 
 			/**
-			 * TESTING REQUIREMENT #9.1
+			 * TESTING REQUIREMENT #9.2
 			 * NEGATIVE TEST: YOU CANNOT CREATE A PROBLEM BEING A HACKER
 			 * (Expected ConstraintViolationException)
 			 * COVERED INSTRUCTIONS: 100%
@@ -138,6 +138,14 @@ public class ProblemServiceTest extends AbstractTest {
 		for (int i = 0; i < testingData.length; i++)
 			this.template2((String) testingData[i][0], (Problem) testingData[i][1], (Class<?>) testingData[i][2]);
 	}
+
+	/**
+	 * TESTING REQUIREMENT #9.2 (Manage problems database when you are a company: edit)
+	 * POSITIVE TEST
+	 * COVERED INSTRUCTIONS IN THIS TEST: 100%
+	 * COVERED INSTRUCTIONS IN ProblemService: 71.1%
+	 * COVERED DATA IN THIS TEST: 30%
+	 * */
 
 	@Test
 	public void editProblem() {
@@ -169,6 +177,13 @@ public class ProblemServiceTest extends AbstractTest {
 			this.template2((String) testingData[i][0], (Problem) testingData[i][1], (Class<?>) testingData[i][2]);
 	}
 
+	/**
+	 * TESTING REQUIREMENT #9.2 (Manage problems database when you are a company: edit)
+	 * POSITIVE TEST
+	 * COVERED INSTRUCTIONS IN THIS TEST: 100%
+	 * COVERED INSTRUCTIONS IN ProblemService: 71.1%
+	 * COVERED DATA IN THIS TEST: 60%
+	 * */
 	@Test
 	public void editProblem2() {
 		this.authenticate("company1");
@@ -200,6 +215,13 @@ public class ProblemServiceTest extends AbstractTest {
 			this.template2((String) testingData[i][0], (Problem) testingData[i][1], (Class<?>) testingData[i][2]);
 	}
 
+	/**
+	 * TESTING REQUIREMENT #9.2 (Manage problems database when you are a company: delete)
+	 * POSITIVE TEST
+	 * COVERED INSTRUCTIONS IN THIS TEST: 100%
+	 * COVERED INSTRUCTIONS IN ProblemService: 71.1%
+	 * COVERED DATA IN THIS TEST: 60%
+	 * */
 	@Test
 	public void deleteProblem() {
 		this.authenticate("company1");
