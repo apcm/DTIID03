@@ -238,7 +238,7 @@ public class ActorService {
 	}
 
 	public void unbanActor(final Actor a) {
-		this.checkAdmin();
+		Assert.isTrue(this.checkAdmin());
 		if (a.getIsBanned()) {
 			a.setFlagSpam(false);
 			a.setIsBanned(false);
