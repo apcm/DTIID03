@@ -40,7 +40,11 @@ public class ProblemService {
 		return this.problemRepository.findAllByCompanyId(id);
 	}
 
-	private void checkCompany(final int id) {
+	public List<Problem> getAllProblemsByCompanyIdFinalMode(final int id) {
+		this.checkCompany(id);
+		return this.problemRepository.findAllByCompanyIdFinalMode(id);
+	}
+	void checkCompany(final int id) {
 		Assert.isTrue(id == this.companyService.findOnePrincipal().getId());
 
 	}
