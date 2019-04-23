@@ -15,24 +15,37 @@ import repositories.MessageRepository;
 import security.LoginService;
 import security.UserAccount;
 import domain.Actor;
+import domain.Administrator;
 import domain.Box;
+import domain.Finder;
+import domain.Hacker;
 import domain.Message;
+import domain.Position;
 
 @Service
 @Transactional
 public class MessageService {
 
 	@Autowired
-	private MessageRepository	messageRepository;
+	private MessageRepository		messageRepository;
 
 	@Autowired
-	private ActorRepository		ar;
+	private ActorRepository			ar;
 
 	@Autowired
-	private ActorService		as;
+	private ActorService			as;
 
 	@Autowired
-	private BoxService			mbs;
+	private BoxService				mbs;
+
+	@Autowired
+	private AdministratorService	adminService;
+
+	@Autowired
+	private HackerService			hackerService;
+
+	@Autowired
+	private FinderService			finderService;
 
 
 	public Message create() {
@@ -172,6 +185,36 @@ public class MessageService {
 			+ "\n\n If you need further information about this issue, please be sure to contact us using the email support.madruga@acme.com or our customer service phone."
 			+ "The security breach has been identified and we are working hard to fix it. \n Once again, we are very sorry for this error. ";
 	}
+	public void sendApplicationStatusChangeMessage(final Actor recipient, final String status) {
+		final Message mes = this.create();
+		final List<Administrator> listAdmin = (List<Administrator>) this.adminService.findAll();
+		mes.setSender(listAdmin.get(0));
+		mes.setRecipient(recipient);
+		mes.setBody("One application you are involved changed its status to " + status + ".");
+		mes.setBroadcast(false);
+		mes.setFlagSpam(false);
+		mes.setSubject("Information about applications");
+		mes.setTag("AUTO-GENERATED");
+
+		this.mbs.sendAutomaticMessage(mes);
+
+	}
+
+	public void sendApplicationMatchesFinderMessage(final Actor recipient) {
+		final Message mes = this.create();
+		final List<Administrator> listAdmin = (List<Administrator>) this.adminService.findAll();
+		mes.setSender(listAdmin.get(0));
+		mes.setRecipient(recipient);
+		mes.setBody("One new application matches your finder criteria!");
+		mes.setBroadcast(false);
+		mes.setFlagSpam(false);
+		mes.setSubject("Information about applications");
+		mes.setTag("AUTO-GENERATED");
+
+		this.mbs.sendAutomaticMessage(mes);
+
+	}
+
 	public Collection<Message> findAll() {
 		return this.messageRepository.findAll();
 	}
@@ -186,6 +229,44 @@ public class MessageService {
 
 	public void delete(final Message message) {
 		this.messageRepository.delete(message);
+	}
+
+	public void doesPositionMatchesFinderCriteria(final Position p) {
+		final Collection<Hacker> allHackers = this.hackerService.findAll();
+		for (final Hacker h : allHackers) {
+			final Finder f = h.getFinder();
+			if (this.auxMatchesFinderCriteria(f, p))
+				this.sendApplicationMatchesFinderMessage(h);
+		}
+
+	}
+
+	private boolean auxMatchesFinderCriteria(final Finder f, final Position p) {
+		Boolean res = true;
+		final String k = f.getKeyword();
+		//KEYWORD
+		if (k != null || k != "")
+			if (!(p.getDescription().contains(k) || p.getTicker().contains(k))) {
+				res = false;
+				return res;
+			}
+		//
+		if (f.getMinimumSalary() != null)
+			if (!(p.getSalary() > f.getMinimumSalary())) {
+				res = false;
+				return res;
+			}
+		if (f.getDeadline() != null)
+			if (!(p.getDeadline().before(f.getDeadline()))) {
+				res = false;
+				return res;
+			}
+		if (f.getMaximumDeadline() != null)
+			if (!(p.getDeadline().before(f.getDeadline()))) {
+				res = false;
+				return res;
+			}
+		return res;
 	}
 
 }

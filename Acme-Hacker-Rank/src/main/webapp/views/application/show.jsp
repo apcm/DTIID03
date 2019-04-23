@@ -25,9 +25,9 @@
 	<jstl:out value="${application.status}"></jstl:out>
 	
 		<h4>
-		<spring:message code="application.problem.title" />:
+		<spring:message code="application.problem.title2" />:
 	</h4>
-	<jstl:out value="${application.problem.title2}"></jstl:out>
+	<jstl:out value="${application.problem.title}"></jstl:out>
 	
 	
 		<h4>

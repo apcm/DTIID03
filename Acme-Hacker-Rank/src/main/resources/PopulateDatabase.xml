@@ -879,6 +879,7 @@
 		<property name="link" value="" />
 		<property name="position" ref="position1" />
 		<property name="hacker" ref="hacker1" />
+		<property name="problem" ref="problem1" />
 	</bean>
 	<bean id="application2" class="domain.Application">
 		<property name="moment" value="2019/02/02 21:00:00" />
@@ -887,6 +888,7 @@
 		<property name="link" value="http://github.com/unknown/repo" />
 		<property name="position" ref="position2" />
 		<property name="hacker" ref="hacker1" />
+		<property name="problem" ref="problem1" />
 	</bean>
 	<bean id="application3" class="domain.Application">
 		<property name="moment" value="2019/02/02 21:00:00" />
@@ -895,6 +897,7 @@
 		<property name="link" value="http://github.com/unknown/repo" />
 		<property name="position" ref="position3" />
 		<property name="hacker" ref="hacker1" />
+		<property name="problem" ref="problem1" />
 	</bean>
 	<bean id="application4" class="domain.Application">
 		<property name="moment" value="2019/02/02 21:00:00" />
@@ -903,6 +906,7 @@
 		<property name="link" value="http://github.com/unknown/repo" />
 		<property name="position" ref="position4" />
 		<property name="hacker" ref="hacker1" />
+		<property name="problem" ref="problem1" />
 	</bean>
 	<bean id="application5" class="domain.Application">
 		<property name="moment" value="2019/02/02 21:00:00" />
@@ -911,6 +915,7 @@
 		<property name="link" value="http://github.com/unknown/repo" />
 		<property name="position" ref="position5" />
 		<property name="hacker" ref="hacker1" />
+		<property name="problem" ref="problem1" />
 	</bean>
 	<bean id="application6" class="domain.Application">
 		<property name="moment" value="2019/02/02 21:00:00" />
@@ -919,6 +924,7 @@
 		<property name="link" value="http://github.com/unknown/repo" />
 		<property name="position" ref="position6" />
 		<property name="hacker" ref="hacker1" />
+		<property name="problem" ref="problem1" />
 	</bean>
 	<bean id="application7" class="domain.Application">
 		<property name="moment" value="2019/02/02 21:00:00" />
@@ -927,6 +933,7 @@
 		<property name="link" value="http://github.com/unknown/repo" />
 		<property name="position" ref="position7" />
 		<property name="hacker" ref="hacker1" />
+		<property name="problem" ref="problem1" />
 	</bean>
 
 	<bean id="application8" class="domain.Application">
@@ -936,6 +943,7 @@
 		<property name="link" value="" />
 		<property name="position" ref="position8" />
 		<property name="hacker" ref="hacker2" />
+		<property name="problem" ref="problem11" />
 	</bean>
 	<bean id="application9" class="domain.Application">
 		<property name="moment" value="2019/02/02 21:00:00" />
@@ -944,6 +952,8 @@
 		<property name="link" value="http://github.com/unknown/repo" />
 		<property name="position" ref="position9" />
 		<property name="hacker" ref="hacker2" />
+		<property name="problem" ref="problem11" />
+		
 	</bean>
 	<bean id="application10" class="domain.Application">
 		<property name="moment" value="2019/02/02 21:00:00" />
@@ -952,6 +962,7 @@
 		<property name="link" value="http://github.com/unknown/repo" />
 		<property name="position" ref="position10" />
 		<property name="hacker" ref="hacker2" />
+		<property name="problem" ref="problem11" />
 	</bean>
 	<bean id="application11" class="domain.Application">
 		<property name="moment" value="2019/02/02 21:00:00" />
@@ -960,6 +971,7 @@
 		<property name="link" value="http://github.com/unknown/repo" />
 		<property name="position" ref="position11" />
 		<property name="hacker" ref="hacker2" />
+		<property name="problem" ref="problem11" />
 	</bean>
 	<bean id="application12" class="domain.Application">
 		<property name="moment" value="2019/02/02 21:00:00" />
@@ -968,6 +980,7 @@
 		<property name="link" value="http://github.com/unknown/repo" />
 		<property name="position" ref="position12" />
 		<property name="hacker" ref="hacker2" />
+		<property name="problem" ref="problem11" />
 	</bean>
 	<bean id="application13" class="domain.Application">
 		<property name="moment" value="2019/02/02 21:00:00" />
@@ -976,6 +989,7 @@
 		<property name="link" value="http://github.com/unknown/repo" />
 		<property name="position" ref="position13" />
 		<property name="hacker" ref="hacker2" />
+		<property name="problem" ref="problem11" />
 	</bean>
 	<bean id="application14" class="domain.Application">
 		<property name="moment" value="2019/02/02 21:00:00" />
@@ -984,6 +998,7 @@
 		<property name="link" value="http://github.com/unknown/repo" />
 		<property name="position" ref="position14" />
 		<property name="hacker" ref="hacker2" />
+		<property name="problem" ref="problem11" />
 	</bean>
 
 	<!-- FINDERS -->
@@ -1239,7 +1254,7 @@
 		<property name="messages">
 
 			<list>
-
+				<ref bean="message1" />
 			</list>
 		</property>
 
@@ -1315,7 +1330,7 @@
 		<property name="messages">
 
 			<list>
-
+				<ref bean="message1" />
 			</list>
 		</property>
 
@@ -1352,5 +1367,16 @@
 		</property>
 
 
+	</bean>
+	
+	<bean id="message1" class="domain.Message">
+		<property name="body" value="Prueba" />
+		<property name="broadcast" value="FALSE" />
+		<property name="flagSpam" value="FALSE" />
+		<property name="moment" value="10/10/2018 00:00:00" />
+		<property name="recipient" ref="company1"/>
+		<property name="sender" ref="hacker1" />
+		<property name="subject" value="Prueba" />
+		<property name="tag" value="Prueba" />
 	</bean>
 </beans>

@@ -146,7 +146,36 @@ public class BoxService {
 		}
 
 		final Actor r = result.getRecipient();
-		if (r.getId() != actual.getId()) {
+		if (r.getId() != a.getId()) {
+			final Collection<Box> rboxes = r.getBoxes();
+			for (final Box rbox : rboxes) {
+
+				final Collection<Message> rmes = rbox.getMessages();
+				rmes.add(result);
+				rbox.setMessages(rmes);
+
+			}
+		}
+		return result;
+	}
+
+	public Message sendAutomaticMessage(final Message msg) {
+		final Actor a = msg.getSender();
+		Assert.notNull(msg);
+		Assert.isTrue(!a.getIsBanned());
+
+		final Message result = this.ms.save(msg);
+
+		final Collection<Box> aboxes = a.getBoxes();
+		for (final Box abox : aboxes) {
+			final Collection<Message> ames = abox.getMessages();
+			ames.add(result);
+			abox.setMessages(ames);
+
+		}
+
+		final Actor r = result.getRecipient();
+		if (r.getId() != a.getId()) {
 			final Collection<Box> rboxes = r.getBoxes();
 			for (final Box rbox : rboxes) {
 

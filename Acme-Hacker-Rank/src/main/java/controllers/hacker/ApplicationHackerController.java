@@ -18,10 +18,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import security.LoginService;
 import security.UserAccount;
+import services.ActorService;
 import services.ApplicationService;
 import services.CurriculaService;
 import services.HackerService;
+import services.MessageService;
 import services.PositionService;
+import domain.Actor;
 import domain.Application;
 import domain.Curricula;
 import domain.Hacker;
@@ -42,6 +45,12 @@ public class ApplicationHackerController {
 
 	@Autowired
 	private CurriculaService	curriculaService;
+
+	@Autowired
+	private ActorService		actorService;
+
+	@Autowired
+	private MessageService		messageService;
 
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -89,6 +98,11 @@ public class ApplicationHackerController {
 				result = this.createSolveModelAndView(application, "application.error.commit.emptyValues");
 				return result;
 			}
+			//Send the message (A-Level requirement)
+			final Actor actual = this.actorService.findByPrincipal();
+			this.messageService.sendApplicationStatusChangeMessage(actual, a.getStatus());
+			this.messageService.sendApplicationStatusChangeMessage(a.getPosition().getCompany(), a.getStatus());
+			//END
 
 		} catch (final Throwable oops) {
 			result = this.createSolveModelAndView(application, "application.error.commit.emptyValues");

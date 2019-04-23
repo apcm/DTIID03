@@ -1,3 +1,4 @@
+
 package controllers;
 
 import java.util.Collection;
@@ -13,29 +14,35 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import domain.Application;
-
-
+import services.ActorService;
 import services.ApplicationService;
-
+import services.MessageService;
+import domain.Actor;
+import domain.Application;
 
 @Controller
 @RequestMapping("/application/company")
 public class ApplicationCompanyController {
-	
-	
+
 	@Autowired
 	private ApplicationService	applicationService;
-	
+
+	@Autowired
+	private ActorService		actorService;
+
+	@Autowired
+	private MessageService		messageService;
+
+
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list() {
 		ModelAndView result;
 
-		Collection<Application> applications = this.applicationService.getMyAppList();
-		
-		Collection<Application> applicationsS = this.applicationService.getAS(applications);
-		Collection<Application> applicationsA = this.applicationService.getAA(applications);
-		Collection<Application> applicationsR = this.applicationService.getAR(applications);
+		final Collection<Application> applications = this.applicationService.getMyAppList();
+
+		final Collection<Application> applicationsS = this.applicationService.getAS(applications);
+		final Collection<Application> applicationsA = this.applicationService.getAA(applications);
+		final Collection<Application> applicationsR = this.applicationService.getAR(applications);
 
 		result = new ModelAndView("application/company/list");
 		result.addObject("applicationsS", applicationsS);
@@ -45,28 +52,26 @@ public class ApplicationCompanyController {
 
 		return result;
 	}
-	
+
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit(@RequestParam final int applicationId) {
 		ModelAndView result;
 		Application application;
 
 		application = this.applicationService.findOne(applicationId);
-		
-		if(!this.applicationService.checkApplicationCompany(application)){
+
+		if (!this.applicationService.checkApplicationCompany(application))
 			return new ModelAndView("redirect:/welcome/index.do");
-		}
-		
-		if(!this.applicationService.checkApplication(application)){
+
+		if (!this.applicationService.checkApplication(application))
 			return new ModelAndView("redirect:list.do");
-		}
 
 		result = this.createEditModelAndView(application);
 		result.addObject("application", application);
-		
+
 		return result;
 	}
-	
+
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@Valid final Application application, final BindingResult binding) {
 		ModelAndView result;
@@ -75,28 +80,31 @@ public class ApplicationCompanyController {
 			result = this.createEditModelAndView(application);
 		else
 			try {
-				if(!this.applicationService.checkApplicationCompany(application)){
+				if (!this.applicationService.checkApplicationCompany(application))
 					return new ModelAndView("redirect:/welcome/index.do");
-				}
-				
-				this.applicationService.saveStatus(application);
+
+				final Application a = this.applicationService.saveStatus(application);
 				result = new ModelAndView("redirect:list.do");
+				//Send the message (A-Level requirement)
+				final Actor actual = this.actorService.findByPrincipal();
+				this.messageService.sendApplicationStatusChangeMessage(actual, a.getStatus());
+				this.messageService.sendApplicationStatusChangeMessage(a.getHacker(), a.getStatus());
+				//END
 			} catch (final Throwable oops) {
 				result = this.createEditModelAndView(application, "application.commit.error");
 			}
 
 		return result;
 	}
-	
 
-	protected ModelAndView createEditModelAndView(Application application) {
+	protected ModelAndView createEditModelAndView(final Application application) {
 		ModelAndView result;
 		result = this.createEditModelAndView(application, null);
 
 		return result;
 	}
 
-	protected ModelAndView createEditModelAndView(Application application, String messageCode) {
+	protected ModelAndView createEditModelAndView(final Application application, final String messageCode) {
 		ModelAndView result;
 
 		result = new ModelAndView("application/company/edit");
@@ -107,42 +115,40 @@ public class ApplicationCompanyController {
 		return result;
 	}
 
-	
 	//-------------------------DISPLAY-----------------------------------
 
-		@RequestMapping(value = "/display", method = RequestMethod.GET)
-		public ModelAndView display(@RequestParam final int applicationId) {
-			ModelAndView result;
-			Application application;
+	@RequestMapping(value = "/display", method = RequestMethod.GET)
+	public ModelAndView display(@RequestParam final int applicationId) {
+		ModelAndView result;
+		Application application;
 
-			application = this.applicationService.findOne(applicationId);
-			Assert.notNull(application);
-			
-			if(!this.applicationService.checkApplicationCompany(application)){
-				return new ModelAndView("redirect:/welcome/index.do");
-			}
+		application = this.applicationService.findOne(applicationId);
+		Assert.notNull(application);
 
-			result = this.createDisplayModelAndView(application);
+		if (!this.applicationService.checkApplicationCompany(application))
+			return new ModelAndView("redirect:/welcome/index.do");
 
-			return result;
-		}
+		result = this.createDisplayModelAndView(application);
 
-		protected ModelAndView createDisplayModelAndView(final Application application) {
-			ModelAndView result;
-			result = this.createDisplayModelAndView(application, null);
+		return result;
+	}
 
-			return result;
-		}
+	protected ModelAndView createDisplayModelAndView(final Application application) {
+		ModelAndView result;
+		result = this.createDisplayModelAndView(application, null);
 
-		protected ModelAndView createDisplayModelAndView(final Application application, final String messageCode) {
-			ModelAndView result;
+		return result;
+	}
 
-			result = new ModelAndView("application/company/display");
-			result.addObject("application", application);
-			result.addObject("messageCode", messageCode);
+	protected ModelAndView createDisplayModelAndView(final Application application, final String messageCode) {
+		ModelAndView result;
 
-			return result;
+		result = new ModelAndView("application/company/display");
+		result.addObject("application", application);
+		result.addObject("messageCode", messageCode);
 
-		}
+		return result;
+
+	}
 
 }

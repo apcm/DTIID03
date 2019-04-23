@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.MessageService;
 import services.PositionService;
 import domain.Position;
 import domain.Problem;
@@ -24,6 +25,9 @@ public class PositionCompanyController extends AbstractController {
 
 	@Autowired
 	private PositionService	positionService;
+
+	@Autowired
+	private MessageService	messageService;
 
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -77,8 +81,10 @@ public class PositionCompanyController extends AbstractController {
 			result = this.createEditModelAndView(position);
 		else
 			try {
-				this.positionService.save(position);
+				final Position p = this.positionService.save(position);
 				result = new ModelAndView("redirect:list.do");
+				if (p.isFinalMode() == true)
+					this.messageService.doesPositionMatchesFinderCriteria(p);
 			} catch (final Throwable oops) {
 				result = this.createEditModelAndView(position, "position.commit.error");
 			}
