@@ -38,9 +38,9 @@ public class WelcomeController extends AbstractController {
 	@RequestMapping(value = "/index")
 	public ModelAndView index(@RequestParam(required = false, defaultValue = "John Doe") final String name) {
 		ModelAndView result;
-		if (this.actorService.findByPrincipal().getIsBanned())
-			return result = new ModelAndView("welcome/banned");
-		else
+		//if (this.actorService.findByPrincipal().getIsBanned())
+		//	return result = new ModelAndView("welcome/banned");
+		//else
 			result = new ModelAndView("welcome/index");
 		final String idioma = LocaleContextHolder.getLocale().getLanguage();
 		result.addObject("idioma", idioma);
