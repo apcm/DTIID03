@@ -55,6 +55,7 @@ public class EducationDataService {
 	public EducationData create(final int curriculaId) {
 		final Curricula c = this.curriculaService.findOne(curriculaId);
 		Assert.isTrue(this.curriculaService.getCurriculasFromHacker().contains(c));
+		Assert.isTrue(this.curriculaService.findOne(curriculaId).getIsCopy() == false);
 
 		final EducationData res = new EducationData();
 		res.setCurricula(c);
@@ -79,6 +80,7 @@ public class EducationDataService {
 
 	public void delete(final EducationData p) {
 		this.checkConditions();
+		Assert.isTrue(!p.getCurricula().getIsCopy());
 		Assert.isTrue(this.educationDataRepository.findOne(p.getId()).getCurricula().getHacker() == this.hackerService.findOnePrincipal());
 
 		this.educationDataRepository.delete(p);
@@ -103,6 +105,11 @@ public class EducationDataService {
 			throw new ValidationException();
 
 		return res;
+	}
+
+	public void flush() {
+		this.educationDataRepository.flush();
+
 	}
 
 }

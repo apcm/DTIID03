@@ -26,11 +26,11 @@ public class ProblemServiceTest extends AbstractTest {
 
 
 	/**
-	 * TESTING REQUIREMENT #9.2 (Manage problems database when you are a company.)
+	 * TESTING REQUIREMENT #9.2 (Manage problems database when you are a company: create)
 	 * POSITIVE TEST
 	 * COVERED INSTRUCTIONS IN THIS TEST: 100%
-	 * COVERED INSTRUCTIONS IN LinkRecordService: 22.9%
-	 * COVERED DATA IN THIS TEST: 12%
+	 * COVERED INSTRUCTIONS IN ProblemService: 71.1%
+	 * COVERED DATA IN THIS TEST: 60%
 	 * */
 
 	@Test
@@ -123,7 +123,7 @@ public class ProblemServiceTest extends AbstractTest {
 			},
 
 			/**
-			 * TESTING REQUIREMENT #9.1
+			 * TESTING REQUIREMENT #9.2
 			 * NEGATIVE TEST: YOU CANNOT CREATE A PROBLEM BEING A HACKER
 			 * (Expected ConstraintViolationException)
 			 * COVERED INSTRUCTIONS: 100%
@@ -139,16 +139,17 @@ public class ProblemServiceTest extends AbstractTest {
 			this.template2((String) testingData[i][0], (Problem) testingData[i][1], (Class<?>) testingData[i][2]);
 	}
 
+	/**
+	 * TESTING REQUIREMENT #9.2 (Manage problems database when you are a company: edit)
+	 * POSITIVE TEST
+	 * COVERED INSTRUCTIONS IN THIS TEST: 100%
+	 * COVERED INSTRUCTIONS IN ProblemService: 71.1%
+	 * COVERED DATA IN THIS TEST: 30%
+	 * */
+
 	@Test
 	public void editProblem() {
 		this.authenticate("company1");
-		final Problem p = this.problemService.findOne(this.getEntityId("problem1"));
-		p.setStatement("Esto es un statement");
-		p.setAttachments("Sample address");
-		p.setFinalMode(true);
-		p.setHint("Hint1");
-		p.setTitle("title1");
-
 		//p3->finalMode=false
 		final Problem p3 = this.problemService.findOne(this.getEntityId("problem3"));
 
@@ -168,17 +169,6 @@ public class ProblemServiceTest extends AbstractTest {
 			 * */
 			{
 				"company1", p3, null
-			},
-
-			/**
-			 * TESTING REQUIREMENT #9.2
-			 * NEGATIVE TEST: YOU CANNOT EDIT A PROBLEM WITH FINAL MODE = TRUE
-			 * (Expected IllegalArgumentException)
-			 * COVERED INSTRUCTIONS: 100%
-			 * COVERED DATA: 10%
-			 * */
-			{
-				"company1", p, IllegalArgumentException.class
 			}
 
 		};
@@ -187,6 +177,51 @@ public class ProblemServiceTest extends AbstractTest {
 			this.template2((String) testingData[i][0], (Problem) testingData[i][1], (Class<?>) testingData[i][2]);
 	}
 
+	/**
+	 * TESTING REQUIREMENT #9.2 (Manage problems database when you are a company: edit)
+	 * POSITIVE TEST
+	 * COVERED INSTRUCTIONS IN THIS TEST: 100%
+	 * COVERED INSTRUCTIONS IN ProblemService: 71.1%
+	 * COVERED DATA IN THIS TEST: 60%
+	 * */
+	@Test
+	public void editProblem2() {
+		this.authenticate("company1");
+		final Problem p = this.problemService.findOne(this.getEntityId("problem1"));
+		p.setStatement("Esto es un statement");
+		p.setAttachments("Sample address");
+		p.setFinalMode(false);
+		p.setHint("Hint1");
+		p.setTitle("");
+
+		this.unauthenticate();
+
+		final Object testingData[][] = {
+
+			/**
+			 * TESTING REQUIREMENT #9.2
+			 * NEGATIVE TEST: YOU CANNOT EDIT A PROBLEM WITH NO TITLE
+			 * (Expected ConstraintViolationException)
+			 * COVERED INSTRUCTIONS: 100%
+			 * COVERED DATA: 10%
+			 * */
+			{
+				"company1", p, ConstraintViolationException.class
+			}
+
+		};
+
+		for (int i = 0; i < testingData.length; i++)
+			this.template2((String) testingData[i][0], (Problem) testingData[i][1], (Class<?>) testingData[i][2]);
+	}
+
+	/**
+	 * TESTING REQUIREMENT #9.2 (Manage problems database when you are a company: delete)
+	 * POSITIVE TEST
+	 * COVERED INSTRUCTIONS IN THIS TEST: 100%
+	 * COVERED INSTRUCTIONS IN ProblemService: 71.1%
+	 * COVERED DATA IN THIS TEST: 60%
+	 * */
 	@Test
 	public void deleteProblem() {
 		this.authenticate("company1");

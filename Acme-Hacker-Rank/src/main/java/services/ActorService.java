@@ -223,13 +223,13 @@ public class ActorService {
 	}
 
 	public List<Actor> findAllNotBanned() {
-		this.checkAdmin();
+		Assert.isTrue(this.checkAdmin());
 
 		return this.actorRepository.findAllNotBanned();
 	}
 
 	public void banActor(final Actor a) {
-		this.checkAdmin();
+		Assert.isTrue(this.checkAdmin());
 		if (a.getFlagSpam() && !a.getIsBanned())
 			a.setIsBanned(true);
 
@@ -244,6 +244,11 @@ public class ActorService {
 			a.setIsBanned(false);
 		}
 		this.save(a);
+
+	}
+
+	public void flush() {
+		this.actorRepository.flush();
 
 	}
 

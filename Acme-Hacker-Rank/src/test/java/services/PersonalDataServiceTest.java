@@ -1,7 +1,10 @@
 
 package services;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
+import javax.validation.ConstraintViolationException;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -31,10 +34,10 @@ public class PersonalDataServiceTest extends AbstractTest {
 
 
 	/**
-	 * TESTING REQUIREMENT #15 (Manage personal data in a curricula)
+	 * TESTING REQUIREMENT #15 (Manage personal data in a curricula:CREATE)
 	 * POSITIVE TEST
 	 * COVERED INSTRUCTIONS IN THIS TEST: 100%
-	 * COVERED INSTRUCTIONS IN LinkRecordService: 22.9%
+	 * COVERED INSTRUCTIONS IN PERSONALDATASERVICE: 65.6%
 	 * COVERED DATA IN THIS TEST: 12%
 	 * */
 
@@ -48,19 +51,66 @@ public class PersonalDataServiceTest extends AbstractTest {
 		pd.setPhoneNumber("676893423");
 		pd.setStatement("Statement");
 
-		//		final PersonalData pd2 = this.personalDataService.create(this.getEntityId("curricula1"));
-		//		pd.setFullName("Pepe Gonzalez");
-		//		pd.setGitProfile("http://adsasf.com");
-		//		pd.setLinkedInProfile("http://adsasf.com");
-		//		pd.setPhoneNumber("676893423");
-		//		pd.setStatement("");
+		final PersonalData pd2 = this.personalDataService.create(this.getEntityId("curricula1"));
+		pd2.setFullName("Pepe Gonzalez");
+		pd2.setGitProfile("http://adsasf.com");
+		pd2.setLinkedInProfile("http://adsasf.com");
+		pd2.setPhoneNumber("676893423");
+		pd2.setStatement("");
 
 		this.unauthenticate();
 
 		final Object testingData[][] = {
 
 			/**
-			 * TESTING REQUIREMENT #9.2
+			 * TESTING REQUIREMENT #15
+			 * POSITIVE TEST
+			 * COVERED INSTRUCTIONS: 100%
+			 * COVERED DATA: 10%
+			 * */
+			{
+				"hacker1", pd, null
+			},
+
+			/**
+			 * // * TESTING REQUIREMENT #15
+			 * // * NEGATIVE TEST:YOU CANNOT CREATE A personalDATE WITHOUT DEGREE
+			 * (Expected ConstraintViolationException)
+			 * // * COVERED INSTRUCTIONS: 100%
+			 * // * COVERED DATA: 10%
+			 * // *
+			 */
+
+			{
+				"hacker1", pd2, ConstraintViolationException.class
+			}
+
+		};
+
+		for (int i = 0; i < testingData.length; i++)
+			this.template2((String) testingData[i][0], (PersonalData) testingData[i][1], (Class<?>) testingData[i][2]);
+	}
+	/**
+	 * TESTING REQUIREMENT #15 (Manage personal data in a curricula:EDIT)
+	 * POSITIVE TEST
+	 * COVERED INSTRUCTIONS IN THIS TEST: 100%
+	 * COVERED INSTRUCTIONS IN PERSONALDATASERVICE: 65.6%
+	 * COVERED DATA IN THIS TEST: 12%
+	 * */
+	@Test
+	public void editpersonalData() {
+		this.authenticate("hacker1");
+
+		final List<PersonalData> edL = this.personalDataService.findByCurriculaId(this.getEntityId("curricula1"));
+		final PersonalData pd = edL.get(0);
+		pd.setFullName("TOMÁS CABELLO LÓPEZ");
+
+		this.unauthenticate();
+
+		final Object testingData[][] = {
+
+			/**
+			 * TESTING REQUIREMENT #15
 			 * POSITIVE TEST
 			 * COVERED INSTRUCTIONS: 100%
 			 * COVERED DATA: 10%
@@ -68,145 +118,95 @@ public class PersonalDataServiceTest extends AbstractTest {
 			{
 				"hacker1", pd, null
 			}
-
-		/**
-		 * // * TESTING REQUIREMENT #9.2
-		 * // * NEGATIVE TEST:YOU CANNOT CREATE A personalDATE WITHOUT DEGREE
-		 * (Expected ConstraintViolationException)
-		 * // * COVERED INSTRUCTIONS: 100%
-		 * // * COVERED DATA: 10%
-		 * // *
-		 */
-
-		//			{
-		//				"hacker1", pd2, ConstraintViolationException.class
-		//			}
-
 		};
 
 		for (int i = 0; i < testingData.length; i++)
 			this.template2((String) testingData[i][0], (PersonalData) testingData[i][1], (Class<?>) testingData[i][2]);
 	}
-	//	@Test
-	//	public void editpersonalData() {
-	//		this.authenticate("hacker1");
-	//		final List<personalData> edL = this.personalDataService.findByCurriculaId(this.getEntityId("curricula1"));
-	//		final personalData ed20 = edL.get(0);
-	//		ed20.setInstitution("ETSII2");
-	//		ed20.setInstitution("Institution1");
-	//		ed20.setMark(8.0);
-	//		Date d1 = new Date();
-	//		d1 = DateTimeFormat.forPattern("yyyy-MM-dd").parseDateTime("2005-06-12").toDate();
-	//		Date d2 = new Date();
-	//		d2 = DateTimeFormat.forPattern("yyyy-MM-dd").parseDateTime("2005-07-12").toDate();
-	//		ed20.setStartMoment(d1);
-	//		ed20.setEndMoment(d2);
-	//
-	//		this.unauthenticate();
-	//
-	//		final Object testingData[][] = {
-	//
-	//			/**
-	//			 * TESTING REQUIREMENT #9.2
-	//			 * POSITIVE TEST
-	//			 * COVERED INSTRUCTIONS: 100%
-	//			 * COVERED DATA: 10%
-	//			 * */
-	//			{
-	//				"hacker1", ed20, null
-	//			}
-	//		};
-	//
-	//		for (int i = 0; i < testingData.length; i++)
-	//			this.template2((String) testingData[i][0], (personalData) testingData[i][1], (Class<?>) testingData[i][2]);
-	//	}
-	//
-	//	public void editpersonalData2() {
-	//		this.authenticate("hacker1");
-	//		final List<personalData> edL = this.personalDataService.findByCurriculaId(this.getEntityId("curricula1"));
-	//		Date d1 = new Date();
-	//		d1 = DateTimeFormat.forPattern("yyyy-MM-dd").parseDateTime("2005-06-12").toDate();
-	//		Date d2 = new Date();
-	//		d2 = DateTimeFormat.forPattern("yyyy-MM-dd").parseDateTime("2005-07-12").toDate();
-	//
-	//		final personalData ed2 = edL.get(1);
-	//		ed2.setEndMoment(d2);
-	//		ed2.setStartMoment(d1);
-	//		ed2.setInstitution("");
-	//
-	//		this.unauthenticate();
-	//
-	//		final Object testingData[][] = {
-	//
-	//			/**
-	//			 * TESTING REQUIREMENT #9.2
-	//			 * NEGATIVE TEST: YOU CANNOT EDIT A ED WITHOUT DEGREE
-	//			 * (Expected ConstraintViolationException)
-	//			 * COVERED INSTRUCTIONS: 100%
-	//			 * COVERED DATA: 10%
-	//			 * */
-	//			{
-	//				"hacker1", ed2, ConstraintViolationException.class
-	//			}
-	//
-	//		};
-	//
-	//		for (int i = 0; i < testingData.length; i++)
-	//			this.template2((String) testingData[i][0], (personalData) testingData[i][1], (Class<?>) testingData[i][2]);
-	//	}
-	//	@Test
-	//	public void deletepersonalData() {
-	//		this.authenticate("hacker1");
-	//		final List<personalData> edL = this.personalDataService.findByCurriculaId(this.getEntityId("curricula1"));
-	//		final personalData ed = edL.get(0);
-	//
-	//		this.unauthenticate();
-	//
-	//		final Object testingData[][] = {
-	//
-	//			/**
-	//			 * TESTING REQUIREMENT #9.2
-	//			 * POSITIVE TEST
-	//			 * COVERED INSTRUCTIONS: 100%
-	//			 * COVERED DATA: 10%
-	//			 * */
-	//			{
-	//				"hacker1", ed, null
-	//			}
-	//
-	//		};
-	//
-	//		for (int i = 0; i < testingData.length; i++)
-	//			this.templateD((String) testingData[i][0], (personalData) testingData[i][1], (Class<?>) testingData[i][2]);
-	//	}
-	//
-	//	public void deletepersonalData2() {
-	//		this.authenticate("hacker1");
-	//		final List<personalData> edL = this.personalDataService.findByCurriculaId(this.getEntityId("curricula1"));
-	//		final personalData ed2 = edL.get(1);
-	//		ed2.getCurricula().setIsCopy(true);
-	//
-	//		this.unauthenticate();
-	//
-	//		final Object testingData[][] = {
-	//
-	//			/**
-	//			 * TESTING REQUIREMENT #9.2
-	//			 * NEGATIVE TEST: YOU CANNOT DELETE A CURRICULA WICH IS A COPY
-	//			 * (Expected IllegalArgumentException)
-	//			 * COVERED INSTRUCTIONS: 100%
-	//			 * COVERED DATA: 10%
-	//			 * */
-	//			{
-	//				"hacker1", ed2, IllegalArgumentException.class
-	//			}
-	//
-	//		};
-	//
-	//		for (int i = 0; i < testingData.length; i++)
-	//			this.templateD((String) testingData[i][0], (personalData) testingData[i][1], (Class<?>) testingData[i][2]);
-	//	}
 
+	/**
+	 * TESTING REQUIREMENT #15 (Manage personal data in a curricula:EDIT)
+	 * POSITIVE TEST
+	 * COVERED INSTRUCTIONS IN THIS TEST: 100%
+	 * COVERED INSTRUCTIONS IN PERSONALDATASERVICE: 65.6%
+	 * COVERED DATA IN THIS TEST: 12%
+	 * */
+	@Test
+	public void editpersonalData2() {
+		this.authenticate("hacker1");
+		final List<PersonalData> edL2 = this.personalDataService.findByCurriculaId(this.getEntityId("curricula2"));
+		final PersonalData pd2 = edL2.get(0);
+		pd2.setLinkedInProfile("");
+
+		this.unauthenticate();
+
+		final Object testingData[][] = {
+
+			/**
+			 * TESTING REQUIREMENT #15
+			 * NEGATIVE TEST: YOU CANNOT EDIT A PERSONAL DATA WITHOUT LinkedInProfile
+			 * (Expected ConstraintViolationException)
+			 * COVERED INSTRUCTIONS: 100%
+			 * COVERED DATA: 10%
+			 * */
+
+			{
+				"hacker1", pd2, ConstraintViolationException.class
+			}
+		};
+
+		for (int i = 0; i < testingData.length; i++)
+			this.template2((String) testingData[i][0], (PersonalData) testingData[i][1], (Class<?>) testingData[i][2]);
+	}
+
+	/**
+	 * TESTING REQUIREMENT #15 (Manage personal data in a curricula:DELETE)
+	 * POSITIVE TEST
+	 * COVERED INSTRUCTIONS IN THIS TEST: 100%
+	 * COVERED INSTRUCTIONS IN PERSONALDATASERVICE: 65.6%
+	 * COVERED DATA IN THIS TEST: 12%
+	 * */
+	@Test
+	public void deletePersonalData() {
+		this.authenticate("hacker1");
+		final List<PersonalData> edL = this.personalDataService.findByCurriculaId(this.getEntityId("curricula1"));
+		final PersonalData ed = edL.get(0);
+		ed.getCurricula().setIsCopy(false);
+
+		final List<PersonalData> edL2 = this.personalDataService.findByCurriculaId(this.getEntityId("curricula2"));
+		final PersonalData ed2 = edL2.get(0);
+		ed2.getCurricula().setIsCopy(true);
+
+		this.unauthenticate();
+
+		final Object testingData[][] = {
+
+			/**
+			 * TESTING REQUIREMENT #15
+			 * POSITIVE TEST
+			 * COVERED INSTRUCTIONS: 100%
+			 * COVERED DATA: 10%
+			 * */
+			{
+				"hacker1", ed, null
+			},
+
+			/**
+			 * TESTING REQUIREMENT #15
+			 * NEGATIVE TEST: YOU CANNOT DELETE A CURRICULA WICH IS A COPY
+			 * (Expected IllegalArgumentException)
+			 * COVERED INSTRUCTIONS: 100%
+			 * COVERED DATA: 10%
+			 * */
+			{
+				"hacker1", ed2, IllegalArgumentException.class
+			}
+
+		};
+
+		for (int i = 0; i < testingData.length; i++)
+			this.templateD((String) testingData[i][0], (PersonalData) testingData[i][1], (Class<?>) testingData[i][2]);
+	}
 	protected void template2(final String username, final PersonalData ed, final Class<?> expected) {
 
 		Class<?> caught;

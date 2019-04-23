@@ -21,27 +21,17 @@ public class CurriculaServiceTest extends AbstractTest {
 
 	//SUT
 	@Autowired
-	HackerService				hackerService;
+	HackerService		hackerService;
 
 	@Autowired
-	CurriculaService			curriculaService;
-
-	@Autowired
-	PersonalDataService			personalDataService;
-
-	@Autowired
-	PositionDataService			positionDataService;
-
-	@Autowired
-	MiscellaneousDataService	miscellaneousDataService;
+	CurriculaService	curriculaService;
 
 
 	/**
-	 * TESTING REQUIREMENT #15 (Manage curricula.)
-	 * POSITIVE TEST
+	 * TESTING REQUIREMENT #15 (Manage curricula: create)
 	 * COVERED INSTRUCTIONS IN THIS TEST: 100%
-	 * COVERED INSTRUCTIONS IN LinkRecordService: 22.9%
-	 * COVERED DATA IN THIS TEST: 12%
+	 * COVERED INSTRUCTIONS IN CurriculaService: 55.2%
+	 * COVERED DATA IN THIS TEST: 50%
 	 * */
 
 	@Test
@@ -63,17 +53,17 @@ public class CurriculaServiceTest extends AbstractTest {
 		final Object testingData[][] = {
 
 			/**
-			 * TESTING REQUIREMENT #9.2
+			 * TESTING REQUIREMENT #15
 			 * POSITIVE TEST
 			 * COVERED INSTRUCTIONS: 100%
-			 * COVERED DATA: 10%
+			 * COVERED DATA: 20%
 			 * */
 			{
 				"hacker1", c, null
 			},
 
 			/**
-			 * // * TESTING REQUIREMENT #9.2
+			 * // * TESTING REQUIREMENT #15
 			 * // * NEGATIVE TEST:YOU CANNOT CREATE A CURRICULA WITHOUT NAME
 			 * (Expected IllegalArgumentException)
 			 * // * COVERED INSTRUCTIONS: 100%
@@ -86,7 +76,7 @@ public class CurriculaServiceTest extends AbstractTest {
 			},
 
 			/**
-			 * TESTING REQUIREMENT #9.2
+			 * TESTING REQUIREMENT #15
 			 * NEGATIVE TEST: YOU CANNOT CREATE A CURRICULA BEING A COMPANY
 			 * (Expected NullPointerException)
 			 * COVERED INSTRUCTIONS: 100%
@@ -102,11 +92,20 @@ public class CurriculaServiceTest extends AbstractTest {
 			this.template2((String) testingData[i][0], (Curricula) testingData[i][1], (Class<?>) testingData[i][2]);
 	}
 
+	/**
+	 * TESTING REQUIREMENT #15 (Edit curricula)
+	 * COVERED INSTRUCTIONS IN THIS TEST: 98.9%
+	 * COVERED INSTRUCTIONS IN CurriculaService: 55.2%
+	 * COVERED DATA IN THIS TEST: 50%
+	 * */
+
 	@Test
 	public void editCurricula() {
 		this.authenticate("hacker1");
 		final Curricula c = this.curriculaService.findOne(this.getEntityId("curricula1"));
 		c.setName("C1");
+		c.setIsCopy(false);
+		c.setApplication(null);
 
 		//p3->finalMode=false
 		final Curricula c2 = this.curriculaService.findOne(this.getEntityId("curricula2"));
@@ -117,9 +116,9 @@ public class CurriculaServiceTest extends AbstractTest {
 		final Object testingData[][] = {
 
 			/**
-			 * TESTING REQUIREMENT #9.2
+			 * TESTING REQUIREMENT #15
 			 * POSITIVE TEST
-			 * COVERED INSTRUCTIONS: 100%
+			 * COVERED INSTRUCTIONS: 99.7%
 			 * COVERED DATA: 10%
 			 * */
 			{
@@ -127,10 +126,10 @@ public class CurriculaServiceTest extends AbstractTest {
 			},
 
 			/**
-			 * TESTING REQUIREMENT #9.2
+			 * TESTING REQUIREMENT #15
 			 * NEGATIVE TEST: YOU CANNOT EDIT A COPY OF A CURRICULA
 			 * (Expected IllegalArgumentException)
-			 * COVERED INSTRUCTIONS: 100%
+			 * COVERED INSTRUCTIONS: 99.7%
 			 * COVERED DATA: 10%
 			 * */
 			{
@@ -143,6 +142,12 @@ public class CurriculaServiceTest extends AbstractTest {
 			this.template2((String) testingData[i][0], (Curricula) testingData[i][1], (Class<?>) testingData[i][2]);
 	}
 
+	/**
+	 * TESTING REQUIREMENT #15 (Manage curricula: delete)
+	 * COVERED INSTRUCTIONS IN THIS TEST: 100%
+	 * COVERED INSTRUCTIONS IN CurriculaService: 55.2%
+	 * COVERED DATA IN THIS TEST: 50%
+	 * */
 	@Test
 	public void deleteCurricula() {
 		this.authenticate("hacker1");
@@ -156,7 +161,7 @@ public class CurriculaServiceTest extends AbstractTest {
 		final Object testingData[][] = {
 
 			/**
-			 * TESTING REQUIREMENT #9.2
+			 * TESTING REQUIREMENT #15
 			 * POSITIVE TEST
 			 * COVERED INSTRUCTIONS: 100%
 			 * COVERED DATA: 10%
@@ -166,7 +171,7 @@ public class CurriculaServiceTest extends AbstractTest {
 			},
 
 			/**
-			 * TESTING REQUIREMENT #9.2
+			 * TESTING REQUIREMENT #15
 			 * NEGATIVE TEST: YOU CANNOT DELETE A CURRICULA WICH IS A COPY
 			 * (Expected IllegalArgumentException)
 			 * COVERED INSTRUCTIONS: 100%

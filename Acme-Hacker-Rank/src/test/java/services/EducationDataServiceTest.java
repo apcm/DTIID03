@@ -36,10 +36,9 @@ public class EducationDataServiceTest extends AbstractTest {
 
 
 	/**
-	 * TESTING REQUIREMENT #15 (Manage education data in a curricula)
-	 * POSITIVE TEST
+	 * TESTING REQUIREMENT #15 (Manage education data in a curricula:create)
 	 * COVERED INSTRUCTIONS IN THIS TEST: 100%
-	 * COVERED INSTRUCTIONS IN LinkRecordService: 22.9%
+	 * COVERED INSTRUCTIONS IN EducationService: 64.7%
 	 * COVERED DATA IN THIS TEST: 12%
 	 * */
 
@@ -70,7 +69,7 @@ public class EducationDataServiceTest extends AbstractTest {
 		final Object testingData[][] = {
 
 			/**
-			 * TESTING REQUIREMENT #9.2
+			 * TESTING REQUIREMENT #15
 			 * POSITIVE TEST
 			 * COVERED INSTRUCTIONS: 100%
 			 * COVERED DATA: 10%
@@ -80,7 +79,7 @@ public class EducationDataServiceTest extends AbstractTest {
 			},
 
 			/**
-			 * // * TESTING REQUIREMENT #9.2
+			 * // * TESTING REQUIREMENT #15
 			 * // * NEGATIVE TEST:YOU CANNOT CREATE A EDUCATIONDATE WITHOUT DEGREE
 			 * (Expected ConstraintViolationException)
 			 * // * COVERED INSTRUCTIONS: 100%
@@ -97,6 +96,12 @@ public class EducationDataServiceTest extends AbstractTest {
 		for (int i = 0; i < testingData.length; i++)
 			this.template2((String) testingData[i][0], (EducationData) testingData[i][1], (Class<?>) testingData[i][2]);
 	}
+	/**
+	 * TESTING REQUIREMENT #15 (Manage education data in a curricula:EDIT)
+	 * COVERED INSTRUCTIONS IN THIS TEST: 100%
+	 * COVERED INSTRUCTIONS IN EducationService: 64.7%
+	 * COVERED DATA IN THIS TEST: 12%
+	 * */
 	@Test
 	public void editEducationData() {
 		this.authenticate("hacker1");
@@ -117,7 +122,7 @@ public class EducationDataServiceTest extends AbstractTest {
 		final Object testingData[][] = {
 
 			/**
-			 * TESTING REQUIREMENT #9.2
+			 * TESTING REQUIREMENT #15
 			 * POSITIVE TEST
 			 * COVERED INSTRUCTIONS: 100%
 			 * COVERED DATA: 10%
@@ -130,7 +135,13 @@ public class EducationDataServiceTest extends AbstractTest {
 		for (int i = 0; i < testingData.length; i++)
 			this.template2((String) testingData[i][0], (EducationData) testingData[i][1], (Class<?>) testingData[i][2]);
 	}
-
+	/**
+	 * TESTING REQUIREMENT #15 (Manage education data in a curricula:EDIT)
+	 * COVERED INSTRUCTIONS IN THIS TEST: 100%
+	 * COVERED INSTRUCTIONS IN EducationService: 64.7%
+	 * COVERED DATA IN THIS TEST: 12%
+	 * */
+	@Test
 	public void editEducationData2() {
 		this.authenticate("hacker1");
 		final List<EducationData> edL = this.educationDataService.findByCurriculaId(this.getEntityId("curricula1"));
@@ -149,8 +160,8 @@ public class EducationDataServiceTest extends AbstractTest {
 		final Object testingData[][] = {
 
 			/**
-			 * TESTING REQUIREMENT #9.2
-			 * NEGATIVE TEST: YOU CANNOT EDIT A ED WITHOUT DEGREE
+			 * TESTING REQUIREMENT #15
+			 * NEGATIVE TEST: YOU CANNOT EDIT AN EDUCATION DATA WITHOUT DEGREE
 			 * (Expected ConstraintViolationException)
 			 * COVERED INSTRUCTIONS: 100%
 			 * COVERED DATA: 10%
@@ -164,6 +175,13 @@ public class EducationDataServiceTest extends AbstractTest {
 		for (int i = 0; i < testingData.length; i++)
 			this.template2((String) testingData[i][0], (EducationData) testingData[i][1], (Class<?>) testingData[i][2]);
 	}
+
+	/**
+	 * TESTING REQUIREMENT #15 (Manage education data in a curricula:DELETE)
+	 * COVERED INSTRUCTIONS IN THIS TEST: 100%
+	 * COVERED INSTRUCTIONS IN EducationService: 64.7%
+	 * COVERED DATA IN THIS TEST: 12%
+	 * */
 	@Test
 	public void deleteEducationData() {
 		this.authenticate("hacker1");
@@ -175,7 +193,7 @@ public class EducationDataServiceTest extends AbstractTest {
 		final Object testingData[][] = {
 
 			/**
-			 * TESTING REQUIREMENT #9.2
+			 * TESTING REQUIREMENT #15
 			 * POSITIVE TEST
 			 * COVERED INSTRUCTIONS: 100%
 			 * COVERED DATA: 10%
@@ -190,6 +208,13 @@ public class EducationDataServiceTest extends AbstractTest {
 			this.templateD((String) testingData[i][0], (EducationData) testingData[i][1], (Class<?>) testingData[i][2]);
 	}
 
+	/**
+	 * TESTING REQUIREMENT #15 (Manage education data in a curricula:DELETE)
+	 * COVERED INSTRUCTIONS IN THIS TEST: 100%
+	 * COVERED INSTRUCTIONS IN EducationService: 64.7%
+	 * COVERED DATA IN THIS TEST: 12%
+	 * */
+	@Test
 	public void deleteEducationData2() {
 		this.authenticate("hacker1");
 		final List<EducationData> edL = this.educationDataService.findByCurriculaId(this.getEntityId("curricula1"));
@@ -201,8 +226,8 @@ public class EducationDataServiceTest extends AbstractTest {
 		final Object testingData[][] = {
 
 			/**
-			 * TESTING REQUIREMENT #9.2
-			 * NEGATIVE TEST: YOU CANNOT DELETE A CURRICULA WICH IS A COPY
+			 * TESTING REQUIREMENT #15
+			 * NEGATIVE TEST: YOU CANNOT DELETE A EDUCATIONDATA FROM A CURRICULA WICH IS A COPY
 			 * (Expected IllegalArgumentException)
 			 * COVERED INSTRUCTIONS: 100%
 			 * COVERED DATA: 10%
