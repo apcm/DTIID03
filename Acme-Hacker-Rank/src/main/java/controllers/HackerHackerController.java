@@ -1,5 +1,6 @@
-
 package controllers;
+
+import java.util.Collection;
 
 import javax.validation.ValidationException;
 
@@ -15,14 +16,14 @@ import org.springframework.web.servlet.ModelAndView;
 import security.UserAccount;
 import services.HackerService;
 import domain.Hacker;
+import domain.SocialProfile;
 
 @Controller
 @RequestMapping("/hacker/hacker")
 public class HackerHackerController extends AbstractController {
 
 	@Autowired
-	HackerService	hackerService;
-
+	HackerService hackerService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -30,9 +31,9 @@ public class HackerHackerController extends AbstractController {
 		super();
 	}
 
-	////////////////////////////
-	//////////EDIT//////////////
-	////////////////////////////
+	// //////////////////////////
+	// ////////EDIT//////////////
+	// //////////////////////////
 
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView editEdit() {
@@ -40,20 +41,25 @@ public class HackerHackerController extends AbstractController {
 		Hacker hacker;
 
 		hacker = this.hackerService.findByPrincipal();
-		//hacker = this.hackerService.findOne(hackerId);
+		// hacker = this.hackerService.findOne(hackerId);
 		res = this.createEditEditModelAndView(hacker);
 		return res;
 
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@ModelAttribute Hacker hacker, final BindingResult binding) {
+	public ModelAndView save(@ModelAttribute Hacker hacker,
+			final BindingResult binding) {
 		ModelAndView result;
 
 		try {
 			final String vacia = "";
 			if (!hacker.getEmail().isEmpty() || hacker.getEmail() != vacia)
-				Assert.isTrue(hacker.getEmail().matches("^[A-z0-9]+@[A-z0-9.]+$") || hacker.getEmail().matches("^[A-z0-9 ]+ <[A-z0-9]+@[A-z0-9.]+>$"), "Wrong email");
+				Assert.isTrue(
+						hacker.getEmail().matches("^[A-z0-9]+@[A-z0-9.]+$")
+								|| hacker.getEmail().matches(
+										"^[A-z0-9 ]+ <[A-z0-9]+@[A-z0-9.]+>$"),
+						"Wrong email");
 
 			hacker = this.hackerService.reconstruct(hacker, binding);
 
@@ -63,14 +69,17 @@ public class HackerHackerController extends AbstractController {
 			result = this.createEditEditModelAndView(hacker);
 		} catch (final Throwable oops) {
 			if (oops.getMessage() == "Wrong email")
-				result = this.createEditEditModelAndView(hacker, "hacker.email.error");
+				result = this.createEditEditModelAndView(hacker,
+						"hacker.email.error");
 			else
-				result = this.createEditEditModelAndView(hacker, "hacker.comit.error");
+				result = this.createEditEditModelAndView(hacker,
+						"hacker.comit.error");
 		}
 
 		return result;
 
 	}
+
 	protected ModelAndView createEditEditModelAndView(final Hacker hacker) {
 		ModelAndView result;
 
@@ -80,7 +89,8 @@ public class HackerHackerController extends AbstractController {
 
 	}
 
-	protected ModelAndView createEditEditModelAndView(final Hacker hacker, final String message) {
+	protected ModelAndView createEditEditModelAndView(final Hacker hacker,
+			final String message) {
 		ModelAndView result;
 
 		UserAccount userAccount;
@@ -93,9 +103,9 @@ public class HackerHackerController extends AbstractController {
 		return result;
 	}
 
-	////////////////////////////
-	//////////SHOW//////////////
-	////////////////////////////
+	// //////////////////////////
+	// ////////SHOW//////////////
+	// //////////////////////////
 
 	@RequestMapping(value = "/show", method = RequestMethod.GET)
 	public ModelAndView show() {
@@ -103,7 +113,7 @@ public class HackerHackerController extends AbstractController {
 		Hacker hacker;
 
 		hacker = this.hackerService.findByPrincipal();
-		//hacker = this.hackerService.findOne(hackerId);
+		// hacker = this.hackerService.findOne(hackerId);
 		res = this.createShowModelAndView(hacker);
 		return res;
 
@@ -118,43 +128,37 @@ public class HackerHackerController extends AbstractController {
 
 	}
 
-	protected ModelAndView createShowModelAndView(final Hacker hacker, final String message) {
+	protected ModelAndView createShowModelAndView(final Hacker hacker,
+			final String message) {
 		ModelAndView result;
-		//		Collection<Box> boxes;
-		//		final Collection<SocialProfile> socialProfiles;
-		//		final Collection<Endorsement> endorsements;
-		//		final Collection<FixUpTask> fixUpTasks;
+		// Collection<Box> boxes;
+		Collection<SocialProfile> socialProfiles;
 		UserAccount userAccount;
 
-		//		fixUpTasks = hacker.getFixUpTasks();
-		//		boxes = hacker.getBoxes();
-		//		socialProfiles = hacker.getSocialProfiles();
-		//		endorsements = hacker.getEndorsements();
+		// boxes = hacker.getBoxes();
+		 socialProfiles = hacker.getSocialProfiles();
 		userAccount = hacker.getUserAccount();
-		//		 if (socialProfiles.isEmpty())
-		//		 * socialProfiles = null;
-		//		 * if (endorsements.isEmpty())
-		//		 * endorsements = null;
-		//if (boxes.isEmpty())
-		//	boxes = null;
+		 if (socialProfiles.isEmpty())
+			 socialProfiles = null;
+		// if (boxes.isEmpty())
+		// boxes = null;
 
 		result = new ModelAndView("hacker/show");
 		result.addObject("hacker", hacker);
-		//		result.addObject("boxes", boxes);
-		//		result.addObject("socialProfiles", socialProfiles);
+		// result.addObject("boxes", boxes);
+		 result.addObject("socialProfiles", socialProfiles);
 		result.addObject("message", message);
-		//		result.addObject("endorsements", endorsements);
-		//		result.addObject("fixUpTasks", fixUpTasks);
 		result.addObject("userAccount", userAccount);
 		return result;
 	}
 
-	////////////////////////////
-	//////////DELETE//////////////
-	////////////////////////////
+	// //////////////////////////
+	// ////////DELETE//////////////
+	// //////////////////////////
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "leave")
-	public ModelAndView saveLeave(final Hacker hacker, final BindingResult binding) {
+	public ModelAndView saveLeave(final Hacker hacker,
+			final BindingResult binding) {
 		ModelAndView result;
 
 		if (binding.hasErrors())
@@ -163,12 +167,15 @@ public class HackerHackerController extends AbstractController {
 			try {
 
 				this.hackerService.leave();
-				result = new ModelAndView("redirect:../../j_spring_security_logout");
+				result = new ModelAndView(
+						"redirect:../../j_spring_security_logout");
 			} catch (final Throwable error) {
 				if (error.getMessage() == "Wrong email")
-					result = this.createEditEditModelAndView(hacker, "hacker.email.error");
+					result = this.createEditEditModelAndView(hacker,
+							"hacker.email.error");
 				else
-					result = this.createEditEditModelAndView(hacker, "hacker.comit.error");
+					result = this.createEditEditModelAndView(hacker,
+							"hacker.comit.error");
 				System.out.println(error.getMessage());
 			}
 

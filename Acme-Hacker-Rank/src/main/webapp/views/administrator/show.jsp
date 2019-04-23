@@ -75,7 +75,12 @@
 	</h4>
 	<jstl:out value="${administrator.cvv}"></jstl:out>
 	
-
+	<h4>
+		<spring:message code="administrator.socialprofile" />:
+	</h4>
+	<jstl:forEach items="${administrator.socialProfiles}" var="sp">
+		<jstl:out value="${sp.nick}"></jstl:out>
+	</jstl:forEach>
 
 <br/><br/>
 

@@ -39,6 +39,9 @@ public class AdministratorService {
 
 	@Autowired
 	public CustomisationService		customisationService;
+	
+	@Autowired
+	public SocialProfileService socialprofileService;
 
 
 	//Constructor
@@ -275,6 +278,8 @@ public class AdministratorService {
 
 		final UserAccount ua = logAdministrator.getUserAccount();
 		final String tick1 = TickerGenerator.tickerLeave();
+		for(SocialProfile sp: logAdministrator.getSocialProfiles())
+			this.socialprofileService.deleteLeave(sp);
 		ua.setUsername("Unknown" + tick1);
 		final String pass1 = TickerGenerator.generateTicker();
 		final Md5PasswordEncoder encoder = new Md5PasswordEncoder();

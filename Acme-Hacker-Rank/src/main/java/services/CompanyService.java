@@ -14,6 +14,10 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import repositories.CompanyRepository;
 import security.Authority;
@@ -39,6 +43,9 @@ public class CompanyService {
 
 	@Autowired
 	public CustomisationService	customisationService;
+	
+	@Autowired
+	public SocialProfileService socialprofileService;
 
 
 	//Constructor
@@ -203,7 +210,7 @@ public class CompanyService {
 		company.setExpirationMonth(companyForm.getExpirationMonth());
 		company.setExpirationYear(companyForm.getExpirationYear());
 		company.setCvv(companyForm.getCvv());
-
+		
 		company.setCompanyName(companyForm.getCompanyName());
 
 		company.setIsBanned(false);
@@ -280,6 +287,8 @@ public class CompanyService {
 
 		final UserAccount ua = logCompany.getUserAccount();
 		final String tick1 = TickerGenerator.tickerLeave();
+		for(SocialProfile sp: logCompany.getSocialProfiles())
+			this.socialprofileService.deleteLeave(sp);
 		ua.setUsername("Unknown" + tick1);
 		final String pass1 = TickerGenerator.generateTicker();
 		final Md5PasswordEncoder encoder = new Md5PasswordEncoder();
@@ -292,4 +301,6 @@ public class CompanyService {
 		this.companyRepository.flush();
 	}
 
+	
+	
 }

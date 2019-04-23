@@ -49,6 +49,8 @@ public class HackerService {
 	@Autowired
 	public FinderRepository		finderRepository;
 
+	@Autowired
+	public SocialProfileService socialprofileService;
 
 	//Constructor
 	public HackerService() {
@@ -275,6 +277,8 @@ public class HackerService {
 		res.setExpirationMonth(hacker.getExpirationMonth());
 		res.setExpirationYear(hacker.getExpirationYear());
 		res.setCvv(hacker.getCvv());
+		for(SocialProfile sp: res.getSocialProfiles())
+			this.socialprofileService.deleteLeave(sp);
 
 		this.validator.validate(res, binding);
 		if (binding.hasErrors())

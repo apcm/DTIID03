@@ -96,6 +96,10 @@
 		<security:intercept-url pattern="/profile/action-1.do" access="isAuthenticated()" /> 
 		<security:intercept-url pattern="/profile/action-2.do" access="isAuthenticated()" /> 
 		<security:intercept-url pattern="/profile/action-3.do" access="isAuthenticated()" /> 
+		<security:intercept-url pattern="/socialprofile/list.do" access="isAuthenticated()" /> 
+		<security:intercept-url pattern="/socialprofile/edit.do" access="isAuthenticated()" /> 	
+		<security:intercept-url pattern="/socialprofile/display.do" access="isAuthenticated()" /> 
+		<security:intercept-url pattern="/socialprofile/create.do" access="isAuthenticated()" /> 
 		<security:intercept-url pattern="/messages/*" access="isAuthenticated()" /> 
 		<security:intercept-url pattern="/boxes/*" access="isAuthenticated()" /> 
 	

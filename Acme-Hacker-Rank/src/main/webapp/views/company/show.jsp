@@ -83,6 +83,14 @@
 	</h4>
 	<jstl:out value="${company.cvv}"></jstl:out>
 	
+	<h4>
+		<spring:message code="company.socialprofile" />:
+	</h4>
+	<jstl:forEach items="${company.socialProfiles}" var="sp">
+		<jstl:out value="${sp.nick}"></jstl:out>
+	</jstl:forEach>
+	
+	
 
 
 <br/><br/>
