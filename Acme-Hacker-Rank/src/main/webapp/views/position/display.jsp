@@ -34,5 +34,15 @@
 <br/>
 
 <b><spring:message code="position.company"/></b>
-<jstl:out value="${position.company}"/>
+<jstl:out value="${position.company.companyName}"/>
 <br/>
+
+<security:authorize access="hasRole('COMPANY')">
+<b><spring:message code="position.problems"/></b>
+<br/>
+	<jstl:forEach var = "result" items="${position.problems}">
+		<jstl:out value="${result.title}"/>
+		<br/>
+	</jstl:forEach>
+	
+</security:authorize>

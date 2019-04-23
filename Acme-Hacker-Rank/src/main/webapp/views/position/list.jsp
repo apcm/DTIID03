@@ -30,6 +30,14 @@
 <display:column property="finalMode" titleKey="position.finalMode"/>
 <display:column property="deadline" titleKey="position.deadline"/>
 
+<security:authorize access="hasRole('COMPANY')">
+<display:column titleKey="position.problems">
+	<jstl:forEach var = "result" items="${row.problems}">
+		<jstl:out value="${result.title}"/>
+		<br/>
+	</jstl:forEach>
+</display:column>
+</security:authorize>
 <display:column>
 	<a href="position/display.do?positionId=${row.id}">
 		<spring:message code="position.display"/>
@@ -39,23 +47,24 @@
 <security:authorize access="hasRole('COMPANY')">
 
 <display:column>
-	<a href="position/company/cancel.do?positionId=${row.id}">
-		<spring:message code="position.cancel"/>
-	</a>
-</display:column>
-
-<display:column>
-	<a href="position/company/edit.do?positionId=${row.id}">
-		<spring:message code="position.edit"/>
-	</a>
+	<jstl:if test="${row.isCancelled==false}">
+		<a href="position/company/cancel.do?positionId=${row.id}">
+			<spring:message code="position.cancel"/>
+		</a>
+	</jstl:if>
 </display:column>
 
 
-<display:column>
-	<a href="position/company/display.do?positionId=${row.id}">
-		<spring:message code="position.display"/>
-	</a>
-</display:column>
+	<display:column>
+		<jstl:if test="${row.finalMode==false}">
+		<a href="position/company/edit.do?positionId=${row.id}">
+			<spring:message code="position.edit"/>
+		</a>
+		</jstl:if>
+	</display:column>
+
+
+
 </security:authorize>
 <security:authorize access="hasRole('HACKER')">
  		<display:column>

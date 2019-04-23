@@ -93,9 +93,13 @@
 		<form:options items="${problems}" itemLabel="title"
 			/>
 	</form:select>
-		
-		
-			
+	
+	<br/>
+	<br/>
+	<spring:message code="position.mandatory" var="mandatory"/>
+	(<jstl:out value="${mandatory}"></jstl:out>)
+	<br/>
+	<br/>	
 	<input type ="submit" name="save" value="<spring:message code="position.save"/>" />
 
 	<input type="button" name="cancel" value="<spring:message code="position.cancel" />" onclick="javascript:relativeRedir('position/company/list.do');" />

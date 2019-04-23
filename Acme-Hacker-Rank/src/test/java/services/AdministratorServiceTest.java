@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import repositories.AdministratorRepository;
 import security.Authority;
 import security.UserAccount;
 import utilities.AbstractTest;
@@ -30,6 +31,9 @@ public class AdministratorServiceTest extends AbstractTest {
 	//SUT
 	@Autowired
 	private AdministratorService	administratorService;
+
+	@Autowired
+	private AdministratorRepository	administratorRepository;
 
 
 	/**
@@ -133,7 +137,7 @@ public class AdministratorServiceTest extends AbstractTest {
 			this.authenticate(username);
 
 			this.administratorService.save(lr);
-			this.administratorService.flush();
+			this.administratorRepository.flush();
 
 			this.unauthenticate();
 		} catch (final Throwable oops) {
@@ -208,7 +212,7 @@ public class AdministratorServiceTest extends AbstractTest {
 
 			this.administratorService.save(comp);
 
-			this.administratorService.flush();
+			this.administratorRepository.flush();
 			this.unauthenticate();
 
 		} catch (final Throwable oops) {

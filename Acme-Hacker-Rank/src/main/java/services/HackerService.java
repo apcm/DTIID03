@@ -300,9 +300,9 @@ public class HackerService {
 		logHacker.setSocialProfiles(null);
 		logHacker.setSurname("Unknown");
 
-		final Finder f = new Finder();
-		final Finder find = this.finderService.save(f);
-		logHacker.setFinder(find);
+		//		final Finder f = new Finder();
+		//		final Finder find = this.finderService.save(f);
+		//		logHacker.setFinder(find);
 
 		logHacker.setHolderName("Unknown");
 		logHacker.setMakeName("Unknown");
@@ -310,6 +310,8 @@ public class HackerService {
 		logHacker.setExpirationMonth(1);
 		logHacker.setExpirationYear(9999);
 		logHacker.setNumber("4532134223318979");
+
+		this.hackerRepository.flush();
 
 		final UserAccount ua = logHacker.getUserAccount();
 		final String tick1 = TickerGenerator.tickerLeave();

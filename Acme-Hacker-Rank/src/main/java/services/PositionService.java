@@ -114,8 +114,8 @@ public class PositionService {
 		return res;
 	}
 
-	public Collection<Problem> getProblems(final Position position) {
-		final Collection<Problem> res = this.problemService.getAllProblemsByCompanyId(this.getThisCompany().getId());
+	public Collection<Problem> getProblems() {
+		final Collection<Problem> res = this.problemService.getAllProblemsByCompanyIdFinalMode(this.getThisCompany().getId());
 
 		return res;
 	}
