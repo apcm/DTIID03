@@ -91,7 +91,7 @@ public class MessageService {
 
 				newCol2.getMessages().remove(toDelete);
 				aux2.get(0).setMessages(newCol2.getMessages());
-				this.mbs.saveToRemote(aux2.get(0), m.getRecipient());
+				this.mbs.saveToRemote(aux2.get(0), m.getSender());
 			}
 			newCol.remove(toDelete);
 			pull.setMessages(newCol);

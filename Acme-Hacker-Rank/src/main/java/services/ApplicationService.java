@@ -40,7 +40,7 @@ public class ApplicationService {
 
 	@Autowired
 	private HackerService			hs;
-	
+
 	@Autowired
 	private CompanyRepository		cr;
 
@@ -100,7 +100,7 @@ public class ApplicationService {
 		final Collection<Application> appsByHacker = this.getApplicationsByHacker(h);
 
 		for (final Application app : appsByHacker)
-			if (app.getPosition().equals(p) && app.getStatus().equals("PENDING")) {
+			if (app.getPosition().equals(p) && !app.getStatus().equals("REJECTED")) {
 				result = false;
 				return result;
 			}
@@ -159,21 +159,19 @@ public class ApplicationService {
 	}
 
 	public Collection<Application> getMyAppList() {
-		Collection<Application> res = new ArrayList<Application>();
-		Collection<Application> all = this.findAll();
-		for(Application a : all){
-			if(a.getPosition().getCompany().equals(this.getThisCompany())){
+		final Collection<Application> res = new ArrayList<Application>();
+		final Collection<Application> all = this.findAll();
+		for (final Application a : all)
+			if (a.getPosition().getCompany().equals(this.getThisCompany()))
 				res.add(a);
-			}
-		}
-		
+
 		return res;
 	}
 
 	public Collection<Application> findAll() {
 		return this.ar.findAll();
 	}
-	
+
 	public Company getThisCompany() {
 		Company res;
 		UserAccount userAccount;
@@ -183,73 +181,60 @@ public class ApplicationService {
 		return res;
 	}
 
-	public Collection<Application> getAP(Collection<Application> applications) {
-		Collection<Application> res = new ArrayList<Application>();
-		for(Application a : applications){
-			if(a.getStatus().equals("PENDING")){
+	public Collection<Application> getAP(final Collection<Application> applications) {
+		final Collection<Application> res = new ArrayList<Application>();
+		for (final Application a : applications)
+			if (a.getStatus().equals("PENDING"))
 				res.add(a);
-			}
-		}
-		return res;
-	}
-	
-	public Collection<Application> getAS(Collection<Application> applications) {
-		Collection<Application> res = new ArrayList<Application>();
-		for(Application a : applications){
-			if(a.getStatus().equals("SUBMITTED")){
-				res.add(a);
-			}
-		}
-		return res;
-	}
-	
-	
-	
-	public Collection<Application> getAA(Collection<Application> applications) {
-		Collection<Application> res = new ArrayList<Application>();
-		for(Application a : applications){
-			if(a.getStatus().equals("ACCEPTED")){
-				res.add(a);
-			}
-		}
-		return res;
-	}
-	
-	public Collection<Application> getAR(Collection<Application> applications) {
-		Collection<Application> res = new ArrayList<Application>();
-		for(Application a : applications){
-			if(a.getStatus().equals("REJECTED")){
-				res.add(a);
-			}
-		}
 		return res;
 	}
 
-	public Application saveStatus(Application application) {
+	public Collection<Application> getAS(final Collection<Application> applications) {
+		final Collection<Application> res = new ArrayList<Application>();
+		for (final Application a : applications)
+			if (a.getStatus().equals("SUBMITTED"))
+				res.add(a);
+		return res;
+	}
+
+	public Collection<Application> getAA(final Collection<Application> applications) {
+		final Collection<Application> res = new ArrayList<Application>();
+		for (final Application a : applications)
+			if (a.getStatus().equals("ACCEPTED"))
+				res.add(a);
+		return res;
+	}
+
+	public Collection<Application> getAR(final Collection<Application> applications) {
+		final Collection<Application> res = new ArrayList<Application>();
+		for (final Application a : applications)
+			if (a.getStatus().equals("REJECTED"))
+				res.add(a);
+		return res;
+	}
+
+	public Application saveStatus(final Application application) {
 		Application res = new Application();
 		res = this.ar.save(application);
 		return res;
 	}
 
-	public boolean checkApplication(Application application) {
+	public boolean checkApplication(final Application application) {
 		Boolean res = true;
-		
-		if(application.getStatus().equals("ACCEPTED")|| application.getStatus().equals("REJECTED")){
+
+		if (application.getStatus().equals("ACCEPTED") || application.getStatus().equals("REJECTED"))
 			res = false;
-		}
-		
+
 		return res;
 	}
 
-	public boolean checkApplicationCompany(Application application) {
+	public boolean checkApplicationCompany(final Application application) {
 		Boolean res = true;
-		
-		if(!application.getPosition().getCompany().equals(getThisCompany())){
+
+		if (!application.getPosition().getCompany().equals(this.getThisCompany()))
 			res = false;
-		}
-		
+
 		return res;
 	}
-	
-	
+
 }

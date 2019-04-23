@@ -136,6 +136,7 @@ public class MessageController extends AbstractController {
 		final String messageText = this.ms.getTemplateSecurityBreachNotificationMessage();
 		message.setBody(messageText);
 		message.setSubject("Security breach on the system");
+		message.setTag("SYSTEM, ");
 
 		result = this.createEditModelAndView(message);
 		return result;

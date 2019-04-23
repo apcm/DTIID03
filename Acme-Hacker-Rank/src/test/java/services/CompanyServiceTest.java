@@ -36,8 +36,9 @@ public class CompanyServiceTest extends AbstractTest {
 	 * TESTING REQUIREMENT #7.1 (Register as a company)
 	 * POSITIVE TEST
 	 * COVERED INSTRUCTIONS IN THIS TEST: 100%
-	 * COVERED INSTRUCTIONS IN LinkRecordService: 22.9%
-	 * COVERED DATA IN THIS TEST: 12%
+	 * COVERED INSTRUCTIONS IN CompanyService: 30.1%
+	 * COVERED INSTRUCTIONS IN ActorService: 35.6%
+	 * COVERED DATA IN THIS TEST: 40%
 	 * */
 
 	@Test
@@ -146,8 +147,9 @@ public class CompanyServiceTest extends AbstractTest {
 	/**
 	 * THIS TEST IS FOR TESTING THE REQUIREMENT #8.2 (EDIT PERSONAL DATA)
 	 * COVERED INSTRUCTIONS IN THIS TEST: 100%
-	 * COVERED INSTRUCTIONS IN LinkRecordService: 70.9%
-	 * COVERED DATA IN THIS TEST: 70%
+	 * COVERED INSTRUCTIONS IN CompanyService: 30.1%
+	 * COVERED INSTRUCTIONS IN ActorService: 35.6%
+	 * * COVERED DATA IN THIS TEST: 50%
 	 * */
 
 	@Test

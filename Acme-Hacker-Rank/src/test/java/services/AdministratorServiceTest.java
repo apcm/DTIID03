@@ -40,8 +40,9 @@ public class AdministratorServiceTest extends AbstractTest {
 	 * TESTING REQUIREMENT #7.1 (Register as a administrator)
 	 * POSITIVE TEST
 	 * COVERED INSTRUCTIONS IN THIS TEST: 100%
-	 * COVERED INSTRUCTIONS IN LinkRecordService: 22.9%
-	 * COVERED DATA IN THIS TEST: 12%
+	 * COVERED INSTRUCTIONS IN AdministratorService: 29.8%
+	 * COVERED INSTRUCTIONS IN ActorService: 35.6%
+	 * COVERED DATA IN THIS TEST: 40%
 	 * */
 
 	@Test
@@ -152,8 +153,9 @@ public class AdministratorServiceTest extends AbstractTest {
 	/**
 	 * THIS TEST IS FOR TESTING THE REQUIREMENT #8.2 (EDIT PERSONAL DATA)
 	 * COVERED INSTRUCTIONS IN THIS TEST: 100%
-	 * COVERED INSTRUCTIONS IN LinkRecordService: 70.9%
-	 * COVERED DATA IN THIS TEST: 70%
+	 * COVERED INSTRUCTIONS IN AdministratorService: 29.8%
+	 * COVERED INSTRUCTIONS IN ActorService: 35.6%
+	 * COVERED DATA IN THIS TEST: 50%
 	 * */
 
 	@Test
