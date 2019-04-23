@@ -156,22 +156,19 @@ public class PositionService {
 	public Set<Position> finderResults(final Finder finder) {
 		Assert.isTrue(this.checkHacker());
 		final Set<Position> res = new HashSet<>();
+		if ((finder.getKeyword() == null || finder.getKeyword() == "") && finder.getDeadline() == null && finder.getMaximumDeadline() == null && finder.getMinimumSalary() == null)
+			res.addAll(this.findPositionFinalMode());
 		if (finder.getKeyword() != null || finder.getKeyword() != "")
 			res.addAll(this.finderKeyword(finder.getKeyword()));
-		else
-			res.addAll(this.findPositionFinalMode());
+
 		if (finder.getDeadline() != null)
 			res.addAll(this.finderDeadline(finder.getDeadline()));
-		else
-			res.addAll(this.findPositionFinalMode());
+
 		if (finder.getMaximumDeadline() != null)
 			res.addAll(this.finderMaxDeadline(finder.getMaximumDeadline()));
-		else
-			res.addAll(this.findPositionFinalMode());
+
 		if (finder.getMinimumSalary() != null)
 			res.addAll(this.finderSalary(finder.getMinimumSalary()));
-		else
-			res.addAll(this.findPositionFinalMode());
 
 		return res;
 	}
