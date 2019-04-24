@@ -296,7 +296,7 @@ public class AdministratorService {
 		this.adminRepository.flush();
 	}
 
-	public void flagSpamProccess() {
+		public void flagSpamProccess() {
 		Assert.isTrue(this.actorService.checkAdmin());
 		final List<Actor> a1 = new ArrayList<Actor>(this.actorService.findAll());
 		for (final Actor a : a1) {
@@ -306,7 +306,7 @@ public class AdministratorService {
 				for (final Message m : box.getMessages()) {
 					final List<Customisation> lc = new ArrayList<Customisation>(this.customisationService.findAll());
 					for (final String word : lc.get(0).getSpamWords())
-						if (m.getBody().contains(word)) {
+						if ((m.getSubject() + " " + m.getBody() + m.getTag()).contains(word)) {
 							m.setFlagSpam(true);
 							this.messageService.save(m);
 							break;
