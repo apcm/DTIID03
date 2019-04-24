@@ -176,4 +176,7 @@ public class PositionService {
 		return this.positionRepository.findPositionFinalMode();
 	}
 
+	public Collection<Position> findPositionFinalModeNotCancelled() {
+		return this.positionRepository.findPositionFinalModeNotCancelled();
+	}
 }

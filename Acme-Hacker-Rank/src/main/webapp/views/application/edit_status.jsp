@@ -37,7 +37,7 @@
 		<spring:message code="application.status" />:
 	    </form:label>
 	    <form:select path="status">
-		<form:option value="PENDING"></form:option>
+
 		<form:option value="ACCEPTED"></form:option>
 		<form:option value="REJECTED"></form:option>
 		</form:select>

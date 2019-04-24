@@ -24,7 +24,7 @@ public class PositionHackerController {
 	public ModelAndView list() {
 		ModelAndView result;
 
-		final Collection<Position> positions = this.positionService.findAll();
+		final Collection<Position> positions = this.positionService.findPositionFinalModeNotCancelled();
 
 		result = new ModelAndView("position/list");
 		result.addObject("positions", positions);
