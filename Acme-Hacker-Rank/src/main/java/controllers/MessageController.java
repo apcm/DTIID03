@@ -108,6 +108,8 @@ public class MessageController extends AbstractController {
 
 		final UserAccount actual = LoginService.getPrincipal();
 		final Actor a = this.ar.getActor(actual);
+		//PARA EVITAR GET HACKING:
+		message.setSender(a);
 
 		if (binding.hasErrors())
 			result = this.createEditModelAndView(message);

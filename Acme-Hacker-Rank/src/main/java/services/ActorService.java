@@ -181,38 +181,6 @@ public class ActorService {
 		final Box inbox1 = this.mbs.saveInitial(inbox);
 		result.add(inbox1);
 
-		final Box notificationbox = new Box();
-		notificationbox.setDescendants(new ArrayList<Box>());
-		notificationbox.setMessages(new ArrayList<Message>());
-		notificationbox.setName("notification box");
-		notificationbox.setPredefined(true);
-		final Box notificationbox1 = this.mbs.saveInitial(notificationbox);
-		result.add(notificationbox1);
-
-		final Box outbox = new Box();
-		outbox.setDescendants(new ArrayList<Box>());
-		outbox.setMessages(new ArrayList<Message>());
-		outbox.setName("out box");
-		outbox.setPredefined(true);
-		final Box outbox1 = this.mbs.saveInitial(outbox);
-		result.add(outbox1);
-
-		final Box trashbox = new Box();
-		trashbox.setDescendants(new ArrayList<Box>());
-		trashbox.setMessages(new ArrayList<Message>());
-		trashbox.setName("trash box");
-		trashbox.setPredefined(true);
-		final Box trashbox1 = this.mbs.saveInitial(trashbox);
-		result.add(trashbox1);
-
-		final Box spambox = new Box();
-		spambox.setDescendants(new ArrayList<Box>());
-		spambox.setMessages(new ArrayList<Message>());
-		spambox.setName("spam box");
-		spambox.setPredefined(true);
-		final Box spambox1 = this.mbs.saveInitial(spambox);
-		result.add(spambox1);
-
 		return result;
 	}
 

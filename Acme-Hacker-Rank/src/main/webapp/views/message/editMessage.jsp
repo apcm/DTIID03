@@ -50,7 +50,7 @@
 		<input type="submit" name = "sendToAll" value = "<spring:message code ="mes.sendToAll" /> " />
 		</security:authorize>
 		
-		<input type="button" name="cancel" value="${cancel}" onclick="javascript:relativeRedir('messageBox/list.do');" />
+		<input type="button" name="cancel" value="${cancel}" onclick="javascript:relativeRedir('boxes/list.do');" />
 		
 		
 		
