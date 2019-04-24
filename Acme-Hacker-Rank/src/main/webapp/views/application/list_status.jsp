@@ -23,8 +23,11 @@
 <display:table name="applicationsS" id="row" requestURI="${requestURI}"
 	pagesize="5" class="displaytag">
 
+	<display:column property="hacker.name" titleKey="application.hacker" />
 	<display:column property="moment" titleKey="application.moment" />
 	<display:column property="status" titleKey="application.status" />
+
+
 
 	<display:column>
 			<a href="application/company/edit.do?applicationId=${row.id}"> <spring:message

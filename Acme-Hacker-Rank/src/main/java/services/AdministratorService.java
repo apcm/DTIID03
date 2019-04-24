@@ -40,10 +40,10 @@ public class AdministratorService {
 
 	@Autowired
 	public CustomisationService		customisationService;
-	
+
 	@Autowired
-	public SocialProfileService socialprofileService;
-	
+	public SocialProfileService		socialprofileService;
+
 	@Autowired
 	private MessageService			messageService;
 
@@ -282,8 +282,9 @@ public class AdministratorService {
 
 		final UserAccount ua = logAdministrator.getUserAccount();
 		final String tick1 = TickerGenerator.tickerLeave();
-		for(SocialProfile sp: logAdministrator.getSocialProfiles())
-			this.socialprofileService.deleteLeave(sp);
+		if (logAdministrator.getSocialProfiles() != null)
+			for (final SocialProfile sp : logAdministrator.getSocialProfiles())
+				this.socialprofileService.deleteLeave(sp);
 		ua.setUsername("Unknown" + tick1);
 		final String pass1 = TickerGenerator.generateTicker();
 		final Md5PasswordEncoder encoder = new Md5PasswordEncoder();
@@ -291,7 +292,7 @@ public class AdministratorService {
 		ua.setPassword(pass2);
 		logAdministrator.setUserAccount(ua);
 	}
-	
+
 	public void flush() {
 		this.adminRepository.flush();
 	}

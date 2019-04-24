@@ -50,7 +50,8 @@ public class HackerService {
 	public FinderRepository		finderRepository;
 
 	@Autowired
-	public SocialProfileService socialprofileService;
+	public SocialProfileService	socialprofileService;
+
 
 	//Constructor
 	public HackerService() {
@@ -277,8 +278,6 @@ public class HackerService {
 		res.setExpirationMonth(hacker.getExpirationMonth());
 		res.setExpirationYear(hacker.getExpirationYear());
 		res.setCvv(hacker.getCvv());
-		for(SocialProfile sp: res.getSocialProfiles())
-			this.socialprofileService.deleteLeave(sp);
 
 		this.validator.validate(res, binding);
 		if (binding.hasErrors())
@@ -319,6 +318,10 @@ public class HackerService {
 
 		final UserAccount ua = logHacker.getUserAccount();
 		final String tick1 = TickerGenerator.tickerLeave();
+		if (logHacker.getSocialProfiles() != null)
+			for (final SocialProfile sp : logHacker.getSocialProfiles())
+				this.socialprofileService.deleteLeave(sp);
+
 		ua.setUsername("Unknown" + tick1);
 		final String pass1 = TickerGenerator.generateTicker();
 		final Md5PasswordEncoder encoder = new Md5PasswordEncoder();

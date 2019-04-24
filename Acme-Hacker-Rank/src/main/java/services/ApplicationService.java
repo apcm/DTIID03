@@ -214,9 +214,7 @@ public class ApplicationService {
 	}
 
 	public Application saveStatus(final Application application) {
-		final String accepted = "ACCEPTED";
-		final String rejected = "REJECTED";
-		Assert.isTrue(application.getStatus() == accepted || application.getStatus() == rejected);
+		Assert.isTrue(application.getStatus().equals("ACCEPTED") || application.getStatus().equals("REJECTED"));
 		Application res = new Application();
 		res = this.ar.save(application);
 		return res;

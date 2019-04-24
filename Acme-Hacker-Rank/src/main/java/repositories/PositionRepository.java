@@ -37,4 +37,7 @@ public interface PositionRepository extends JpaRepository<Position, Integer> {
 	@Query("select p from Position p where p.finalMode = 1")
 	Collection<Position> findPositionFinalMode();
 
+	@Query("select p from Position p where p.finalMode = 1 and p.isCancelled = 0")
+	Collection<Position> findPositionFinalModeNotCancelled();
+
 }

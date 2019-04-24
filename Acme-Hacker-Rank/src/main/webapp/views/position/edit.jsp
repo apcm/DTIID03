@@ -89,7 +89,6 @@
 		 <spring:message code="position.problems"/>
 	    </form:label>
 	    <form:select path="problems" multiple="true">	
-		<form:option value="0" label="-----"/>
 		<form:options items="${problems}" itemLabel="title"
 			/>
 	</form:select>

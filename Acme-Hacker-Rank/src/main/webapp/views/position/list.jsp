@@ -21,7 +21,7 @@
 <display:table name="positions" id="row" requestURI="${requestURI}" pagesize="5" class ="displaytag">
 <security:authorize access="hasRole('COMPANY')">
 
-<display:column property="ticker" titleKey="position.ticker"/>
+
 <display:column property="deadline" titleKey="position.deadline"/>
 <display:column property="isCancelled" titleKey="position.isCancelled"/>
 
@@ -29,7 +29,7 @@
 <display:column property="title" titleKey="position.title"/>
 <display:column property="finalMode" titleKey="position.finalMode"/>
 <display:column property="deadline" titleKey="position.deadline"/>
-
+<display:column property="ticker" titleKey="position.ticker"/>
 <security:authorize access="hasRole('COMPANY')">
 <display:column titleKey="position.problems">
 	<jstl:forEach var = "result" items="${row.problems}">
@@ -38,16 +38,18 @@
 	</jstl:forEach>
 </display:column>
 </security:authorize>
+
+
+<security:authorize access="hasRole('COMPANY')">
+
 <display:column>
 	<a href="position/display.do?positionId=${row.id}">
 		<spring:message code="position.display"/>
 	</a>
 </display:column>
 
-<security:authorize access="hasRole('COMPANY')">
-
 <display:column>
-	<jstl:if test="${row.isCancelled==false}">
+	<jstl:if test="${row.isCancelled==false && row.finalMode==true}">
 		<a href="position/company/cancel.do?positionId=${row.id}">
 			<spring:message code="position.cancel"/>
 		</a>

@@ -150,28 +150,28 @@ public class TickerGenerator {
 		return ticker;
 	}
 
-	public static String tickerPosition(String name) {
-		
+	public static String tickerPosition(final String name) {
+
 		String valid = "";
-		if(name.length()>=4){
+		if (name.length() >= 4) {
 			valid = valid + name.charAt(0);
 			valid = valid + name.charAt(1);
 			valid = valid + name.charAt(2);
 			valid = valid + name.charAt(3);
-		}else if(name.length()==3){
+		} else if (name.length() == 3) {
 			valid = valid + name.charAt(0);
 			valid = valid + name.charAt(1);
 			valid = valid + name.charAt(2);
 			valid = valid + "X";
-		}else if(name.length()==2){
+		} else if (name.length() == 2) {
 			valid = valid + name.charAt(0);
 			valid = valid + name.charAt(1);
 			valid = valid + "XX";
-		}else if(name.length()==1){
+		} else if (name.length() == 1) {
 			valid = valid + name.charAt(0);
 			valid = valid + "XXX";
 		}
-		
+
 		final List<String> nums = new ArrayList<String>();
 		nums.add("0");
 		nums.add("1");
@@ -185,13 +185,13 @@ public class TickerGenerator {
 		nums.add("9");
 
 		String ticker = "";
-		
+
 		ticker = ticker + valid + "-";
 
-		for (Integer i = 0; i < 4 ; i++) {
-				final Integer numero = new Random().nextInt(9);
-				final String b = nums.get(numero);
-				ticker = ticker + b;
+		for (Integer i = 0; i < 4; i++) {
+			final Integer numero = new Random().nextInt(9);
+			final String b = nums.get(numero);
+			ticker = ticker + b;
 		}
 
 		return ticker;
