@@ -186,9 +186,9 @@ public class TickerGenerator {
 
 		String ticker = "";
 		
-		ticker = ticker + valid;
+		ticker = ticker + valid + "-";
 
-		for (Integer i = 0; i < 5 ; i++) {
+		for (Integer i = 0; i < 4 ; i++) {
 				final Integer numero = new Random().nextInt(9);
 				final String b = nums.get(numero);
 				ticker = ticker + b;
