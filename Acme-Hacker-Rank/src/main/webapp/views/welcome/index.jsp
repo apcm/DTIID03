@@ -24,3 +24,7 @@
 		<jstl:out value="${customisation.welcomeMessageEsp}"></jstl:out>
 	</jstl:if>
 
+	<jstl:if test="${banned==true}">
+	<h2  style="color:red;"><spring:message code="banned"/></h2>
+	<h3><spring:message code="ban.please"/></h3>
+	</jstl:if>

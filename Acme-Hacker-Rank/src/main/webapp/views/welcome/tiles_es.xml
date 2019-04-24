@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+﻿<?xml version="1.0" encoding="UTF-8" ?>
 
 <!-- 
  * tiles_es.xml
@@ -21,8 +21,5 @@
 		<put-attribute name="body" value="/views/welcome/index.jsp" />
 	</definition>
 	
-	<definition name="welcome/banned" extends="master.page">	
-		<put-attribute name="title" value="Ups! " />
-		<put-attribute name="body" value="/views/welcome/banned.jsp" />
-	</definition>
+
 </tiles-definitions>
