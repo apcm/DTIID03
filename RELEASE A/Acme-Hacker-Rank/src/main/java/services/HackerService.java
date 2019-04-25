@@ -71,7 +71,6 @@ public class HackerService {
 		f.setAuthority(Authority.COMPANY);
 		newUser.addAuthority(f);
 		result.setUserAccount(newUser);
-		result.getUserAccount().setStatus(true);
 
 		result.setSocialProfiles(new ArrayList<SocialProfile>());
 		result.setName("");
@@ -219,6 +218,7 @@ public class HackerService {
 		hacker.setSurname(hackerForm.getSurname());
 		hacker.setUserAccount(ua);
 		hacker.setVat(hackerForm.getVat());
+		hacker.getUserAccount().setStatus(true);
 
 		hacker.setHolderName(hackerForm.getHolderName());
 		hacker.setMakeName(hackerForm.getMakeName());

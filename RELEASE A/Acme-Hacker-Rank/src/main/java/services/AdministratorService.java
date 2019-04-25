@@ -65,7 +65,6 @@ public class AdministratorService {
 		f.setAuthority(Authority.ADMIN);
 		newUser.addAuthority(f);
 		result.setUserAccount(newUser);
-		result.getUserAccount().setStatus(true);
 
 		result.setSocialProfiles(new ArrayList<SocialProfile>());
 		result.setName("");
@@ -204,6 +203,7 @@ public class AdministratorService {
 		admin.setSurname(adminForm.getSurname());
 		admin.setUserAccount(ua);
 		admin.setVat(adminForm.getVat());
+		admin.getUserAccount().setStatus(true);
 
 		admin.setHolderName(adminForm.getHolderName());
 		admin.setMakeName(adminForm.getMakeName());

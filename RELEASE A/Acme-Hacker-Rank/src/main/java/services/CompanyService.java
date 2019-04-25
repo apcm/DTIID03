@@ -62,7 +62,6 @@ public class CompanyService {
 		f.setAuthority(Authority.COMPANY);
 		newUser.addAuthority(f);
 		result.setUserAccount(newUser);
-		result.getUserAccount().setStatus(true);
 
 		result.setSocialProfiles(new ArrayList<SocialProfile>());
 		result.setName("");
@@ -200,6 +199,8 @@ public class CompanyService {
 		company.setPhoneNumber(companyForm.getPhoneNumber());
 		company.setPhoto(companyForm.getPhoto());
 		company.setSurname(companyForm.getSurname());
+		company.getUserAccount().setStatus(true);
+
 		company.setUserAccount(ua);
 		company.setVat(companyForm.getVat());
 		company.setHolderName(companyForm.getHolderName());
