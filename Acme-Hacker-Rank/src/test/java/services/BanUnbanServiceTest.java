@@ -50,7 +50,7 @@ public class BanUnbanServiceTest extends AbstractTest {
 		final Object testingData[][] = {
 
 			/**
-			 * TESTING REQUIREMENT #15
+			 * TESTING REQUIREMENT #24.3
 			 * POSITIVE TEST
 			 * COVERED INSTRUCTIONS: 100%
 			 * COVERED DATA: 10%
