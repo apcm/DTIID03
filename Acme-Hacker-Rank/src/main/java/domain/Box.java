@@ -7,7 +7,6 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
@@ -18,10 +17,6 @@ import org.hibernate.validator.constraints.NotBlank;
 public class Box extends DomainEntity {
 
 	private String				name;
-
-	private boolean				predefined;
-
-	private Collection<Box>		descendants;
 
 	private Collection<Message>	messages;
 
@@ -43,23 +38,6 @@ public class Box extends DomainEntity {
 
 	public void setName(final String name) {
 		this.name = name;
-	}
-
-	public boolean getPredefined() {
-		return this.predefined;
-	}
-
-	public void setPredefined(final boolean predefined) {
-		this.predefined = predefined;
-	}
-
-	@OneToMany
-	public Collection<Box> getDescendants() {
-		return this.descendants;
-	}
-
-	public void setDescendants(final Collection<Box> descendants) {
-		this.descendants = descendants;
 	}
 
 }

@@ -23,6 +23,9 @@
 	<spring:message code="mes.moment" var= "momentHeader" />
 	<display:column property="moment" title="${momentHeader}" sortable="false" format="{0,date,yyyy/MM/dd HH:mm}" />
 	
+	<spring:message code="mes.tags" var= "tagHeader" />
+	<display:column property="tag" title="${tagHeader}" sortable="true" />
+	
 	
 		<display:column>
 			<a href="messages/display.do?messageId=${row.id}">
