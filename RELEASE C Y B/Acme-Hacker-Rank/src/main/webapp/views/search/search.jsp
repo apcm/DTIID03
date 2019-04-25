@@ -1,0 +1,23 @@
+<%@page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
+<%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
+<%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+
+<form action="search/search.do">
+	<label><spring:message code="search.keyword"/></label>
+	<input type ="text" name="keyword"/>
+	<button type="submit" name="search">Search</button>
+</form>
+
+<jstl:forEach items="${positions}" var="pos">
+	<jstl:out value="${pos.title}"/>
+		<a href="position/display.do?positionId=${pos.id}">
+		<spring:message code="position.display"/>
+		</a>
+	<br/>
+</jstl:forEach>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- * tiles_es.xml * * Copyright (C) 2019 Universidad de Sevilla * * The 
+	use of this project is hereby constrained to the conditions of the * TDG 
+	Licence, a copy of which you may download from * http://www.tdg-seville.info/License.html -->
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+
+<definition name="application/hacker/list" extends="master.page">
+		<put-attribute name="title" value="Lista de aplicaciones" />
+		<put-attribute name="body" value="/views/application/list.jsp" />
+	</definition>
+
+
+	<definition name="application/hacker/solve" extends="master.page">
+		<put-attribute name="title" value="Resuelve el problema" />
+		<put-attribute name="body" value="/views/application/solve.jsp" />
+	</definition>
+
+		<definition name="application/hacker/create" extends="master.page">
+		<put-attribute name="title" value="Solicitar un puesto" />
+		<put-attribute name="body" value="/views/application/create.jsp" />
+	</definition>
+
+		<definition name="application/hacker/show" extends="master.page">
+		<put-attribute name="title" value="Mostrar aplicación" />
+		<put-attribute name="body" value="/views/application/show.jsp" />
+	</definition>
+	
+	<definition name="application/company/edit" extends="master.page">
+		<put-attribute name="title" value="Editar Estado de la Aplicación" />
+		<put-attribute name="body" value="/views/application/edit_status.jsp" />
+	</definition>
+	
+	<definition name="application/company/list" extends="master.page">
+		<put-attribute name="title" value="Lista por Estado de Aplicaciones" />
+		<put-attribute name="body" value="/views/application/list_status.jsp" />
+	</definition>
+	
+	<definition name="application/company/display" extends="master.page">
+		<put-attribute name="title" value="Mostrar Aplicación" />
+		<put-attribute name="body" value="/views/application/show.jsp" />
+	</definition>
+
+</tiles-definitions>
