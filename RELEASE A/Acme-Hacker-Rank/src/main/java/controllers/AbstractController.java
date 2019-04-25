@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import services.ActorService;
 import services.CustomisationService;
 import domain.Customisation;
 
@@ -30,8 +29,6 @@ public class AbstractController {
 	@Autowired
 	CustomisationService	customisationService;
 
-	@Autowired
-	ActorService			aService;
 
 
 	@ModelAttribute
@@ -41,6 +38,7 @@ public class AbstractController {
 
 		model.addAttribute("customisation", customisation);
 	}
+
 	// Panic handler ----------------------------------------------------------
 
 	@ExceptionHandler(Throwable.class)

@@ -3,6 +3,7 @@ package services;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 import javax.validation.ValidationException;
@@ -15,6 +16,7 @@ import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 
+import repositories.FinderRepository;
 import repositories.HackerRepository;
 import security.Authority;
 import security.LoginService;
@@ -44,6 +46,12 @@ public class HackerService {
 	@Autowired
 	public FinderService		finderService;
 
+	@Autowired
+	public FinderRepository		finderRepository;
+
+	@Autowired
+	public SocialProfileService	socialprofileService;
+
 
 	//Constructor
 	public HackerService() {
@@ -54,6 +62,7 @@ public class HackerService {
 
 		Hacker result;
 		result = new Hacker();
+		result.setComputed(false);
 
 		final Collection<Box> predefined = new ArrayList<Box>();
 
@@ -135,7 +144,10 @@ public class HackerService {
 			hacker.setUserAccount(cuenta);
 
 			final Finder find = new Finder();
-			final Finder find2 = this.finderService.save(find);
+
+			find.setMoment(new Date());
+			final Finder find2 = this.finderRepository.save(find);
+
 			hacker.setFinder(find2);
 		}
 		// Restrictions
@@ -215,7 +227,15 @@ public class HackerService {
 		hacker.setCvv(hackerForm.getCvv());
 
 		final Finder find = new Finder();
-		hacker.setFinder(find);
+		final Finder find2 = new Finder();
+		find.setMoment(new Date());
+		find2.setMoment(new Date());
+
+		final Finder find3 = this.finderService.save(find);
+		final Finder find4 = this.finderService.save(find2);
+
+		hacker.setFinder(find3);
+		hackerForm.setFinder(find4);
 
 		hacker.setIsBanned(false);
 
@@ -260,10 +280,15 @@ public class HackerService {
 		res.setExpirationYear(hacker.getExpirationYear());
 		res.setCvv(hacker.getCvv());
 
-	public Hacker getHackerByUserAccount(final int id) {
-		return this.hacherRepository.findByUserAccountId(id);
+		this.validator.validate(res, binding);
+		if (binding.hasErrors())
+			throw new ValidationException();
 
 		return res;
+	}
+
+	public Hacker getHackerByUserAccount(final int id) {
+		return this.hackerRepository.findByUserAccountId(id);
 	}
 
 	public void leave() {
@@ -279,9 +304,9 @@ public class HackerService {
 		logHacker.setSocialProfiles(null);
 		logHacker.setSurname("Unknown");
 
-		final Finder f = new Finder();
-		final Finder find = this.finderService.save(f);
-		logHacker.setFinder(find);
+		//		final Finder f = new Finder();
+		//		final Finder find = this.finderService.save(f);
+		//		logHacker.setFinder(find);
 
 		logHacker.setHolderName("Unknown");
 		logHacker.setMakeName("Unknown");
@@ -290,8 +315,14 @@ public class HackerService {
 		logHacker.setExpirationYear(9999);
 		logHacker.setNumber("4532134223318979");
 
+		this.hackerRepository.flush();
+
 		final UserAccount ua = logHacker.getUserAccount();
 		final String tick1 = TickerGenerator.tickerLeave();
+		if (logHacker.getSocialProfiles() != null)
+			for (final SocialProfile sp : logHacker.getSocialProfiles())
+				this.socialprofileService.deleteLeave(sp);
+
 		ua.setUsername("Unknown" + tick1);
 		final String pass1 = TickerGenerator.generateTicker();
 		final Md5PasswordEncoder encoder = new Md5PasswordEncoder();

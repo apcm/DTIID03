@@ -147,10 +147,9 @@ public class ActorService {
 
 	public void banActor(final Actor a) {
 		Assert.isTrue(this.checkAdmin());
-		if (a.getFlagSpam() && !a.getIsBanned()) {
+		if (a.getFlagSpam() && !a.getIsBanned())
 			a.setIsBanned(true);
-			a.getUserAccount().setStatus(false);
-		}
+
 		this.save(a);
 
 	}
@@ -160,7 +159,6 @@ public class ActorService {
 		if (a.getIsBanned()) {
 			a.setFlagSpam(false);
 			a.setIsBanned(false);
-			a.getUserAccount().setStatus(true);
 		}
 		this.save(a);
 

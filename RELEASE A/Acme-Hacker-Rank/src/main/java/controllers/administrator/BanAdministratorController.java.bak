@@ -12,7 +12,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.ActorService;
 import services.AdministratorService;
-import services.CompanyService;
 import controllers.AbstractController;
 import domain.Actor;
 
@@ -22,9 +21,6 @@ public class BanAdministratorController extends AbstractController {
 
 	@Autowired
 	ActorService			actorService;
-
-	@Autowired
-	CompanyService			companyService;
 
 	@Autowired
 	AdministratorService	administratorService;
@@ -76,9 +72,7 @@ public class BanAdministratorController extends AbstractController {
 	@RequestMapping(value = "/ban", method = RequestMethod.GET)
 	public ModelAndView ban(@RequestParam final int actorId) {
 		ModelAndView res;
-		Actor a = this.actorService.findOne(actorId);
-		if (a == null)
-			a = this.companyService.findOne(actorId);
+		final Actor a = this.actorService.findOne(actorId);
 		this.actorService.banActor(a);
 
 		res = new ModelAndView("redirect:list.do");
@@ -89,12 +83,9 @@ public class BanAdministratorController extends AbstractController {
 	@RequestMapping(value = "/unban", method = RequestMethod.GET)
 	public ModelAndView unban(@RequestParam final int actorId) {
 		ModelAndView res;
-		Actor a = this.actorService.findOne(actorId);
-
-		if (a == null)
-			a = this.companyService.findOne(actorId);
-
+		final Actor a = this.actorService.findOne(actorId);
 		this.actorService.unbanActor(a);
+
 		res = new ModelAndView("redirect:list.do");
 
 		return res;

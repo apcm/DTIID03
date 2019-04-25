@@ -71,6 +71,7 @@ public class HackerService {
 		f.setAuthority(Authority.COMPANY);
 		newUser.addAuthority(f);
 		result.setUserAccount(newUser);
+		result.getUserAccount().setStatus(true);
 
 		result.setSocialProfiles(new ArrayList<SocialProfile>());
 		result.setName("");
