@@ -28,6 +28,13 @@ public class SocialProfileServiceTest extends AbstractTest{
 	@Autowired
 	SocialProfileService socialProfileService;
 	
+	/**
+	 * // * TESTING REQUIREMENT #23.1 (Manage Social Profiles : create)
+	 * // * POSITIVETEST
+	 * // * COVERED INSTRUCTIONS: 100%
+	 * // * COVERED DATA: 100%
+	 * // *
+	 */
 	@Test
 	public void createSocialProfileGood() {
 		authenticate("hacker1");
@@ -40,6 +47,14 @@ public class SocialProfileServiceTest extends AbstractTest{
 		super.unauthenticate();
 	}
 	
+	/**
+	 * // * TESTING REQUIREMENT #23.1
+	 * // * NEGATIVE TEST:YOU CANNOT CREATE A SOCIAL PROFILE WITHOUT A NICK
+	 * (Expected ConstraintViolationException)
+	 * // * COVERED INSTRUCTIONS: 100%
+	 * // * COVERED DATA: 100%
+	 * // *
+	 */
 	@Test(expected = ConstraintViolationException.class)
 	public void createSocialProfileBad() {
 		authenticate("hacker1");
