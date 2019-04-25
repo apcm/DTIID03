@@ -33,6 +33,12 @@ public class FinderServiceTest extends AbstractTest {
 	Validator			validator;
 
 
+	/**
+	 * TESTING REQUIREMENT #16
+	 * POSITIVE TEST
+	 * COVERED INSTRUCTIONS: 100%
+	 * COVERED DATA: 50%
+	 * */
 	@Test
 	public void testFinder() {
 		super.authenticate("hacker1");
@@ -47,6 +53,12 @@ public class FinderServiceTest extends AbstractTest {
 		super.unauthenticate();
 	}
 
+	/**
+	 * TESTING REQUIREMENT #16
+	 * POSITIVE TEST
+	 * COVERED INSTRUCTIONS: 100%
+	 * COVERED DATA: 50%
+	 * */
 	@Test(expected = ConstraintViolationException.class)
 	public void testFinderBadSalary() {
 		super.authenticate("hacker1");

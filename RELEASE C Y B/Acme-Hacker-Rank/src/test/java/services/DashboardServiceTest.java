@@ -24,7 +24,7 @@ public class DashboardServiceTest extends AbstractTest {
 	/**
 	 * TESTING REQUIREMENT #11.2
 	 * POSITIVE TEST
-	 * COVERED INSTRUCTIONS: 6.25%
+	 * COVERED INSTRUCTIONS: 100%
 	 * COVERED DATA: 100%
 	 * */
 	public void testAvgPositions() {
