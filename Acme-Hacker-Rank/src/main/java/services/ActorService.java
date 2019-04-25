@@ -107,55 +107,6 @@ public class ActorService {
 		return a.getBoxes();
 	}
 
-	public Box editBox(final Box m) {
-		final UserAccount actual = LoginService.getPrincipal();
-		final Actor a = this.actorRepository.getActor(actual);
-
-		Assert.isTrue(!a.getIsBanned());
-
-		//Compruebo que no se produce ninguna redundancia Padre-Hijo:
-		boolean fine = true;
-		final Collection<Box> desc = m.getDescendants();
-		if (desc != null)
-			for (final Box b : desc) {
-				if (b.getId() == m.getId()) {
-					fine = false;
-					break;
-				}
-				for (final Box b2 : b.getDescendants())
-					if (b2.getId() == m.getId()) {
-						fine = false;
-						break;
-					}
-
-			}
-		Assert.isTrue(fine);
-		//Fin de la comprobación
-
-		final Box result = this.mbs.save(m);
-
-		return result;
-
-	}
-
-	public void deleteMessageBox(final Box m) {
-		final UserAccount actual = LoginService.getPrincipal();
-		final Actor a = this.actorRepository.getActor(actual);
-
-		Assert.isTrue(a.getBoxes().contains(m));
-		Assert.isTrue(!a.getIsBanned());
-
-		Assert.isTrue(!m.getPredefined());
-		final Collection<Box> actorBoxes = a.getBoxes();
-		for (final Box b : actorBoxes)
-			if (b.getDescendants().contains(m))
-				b.getDescendants().remove(m);
-		a.setBoxes(actorBoxes);
-		actorBoxes.remove(m);
-		a.setBoxes(actorBoxes);
-		this.mbs.delete(m);
-
-	}
 	public boolean checkspammer(final String s) {
 		boolean res = false;
 		final List<String> spamwords = this.cs.getCustomisation().getSpamWords();
@@ -174,10 +125,8 @@ public class ActorService {
 		final Collection<Box> result = new ArrayList<Box>();
 		//Creo las cajas predeterminadas del sistema
 		final Box inbox = new Box();
-		inbox.setDescendants(new ArrayList<Box>());
 		inbox.setMessages(new ArrayList<Message>());
 		inbox.setName("in box");
-		inbox.setPredefined(true);
 		final Box inbox1 = this.mbs.saveInitial(inbox);
 		result.add(inbox1);
 

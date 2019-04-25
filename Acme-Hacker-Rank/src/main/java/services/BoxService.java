@@ -36,8 +36,6 @@ public class BoxService {
 	public Box create() {
 
 		final Box msgbox = new Box();
-
-		msgbox.setPredefined(false);
 		return msgbox;
 	}
 
@@ -125,7 +123,6 @@ public class BoxService {
 	}
 
 	public void delete(final Box messageBox) {
-		Assert.isTrue(!messageBox.getPredefined() == true);
 		this.messageBoxRepository.delete(messageBox);
 	}
 

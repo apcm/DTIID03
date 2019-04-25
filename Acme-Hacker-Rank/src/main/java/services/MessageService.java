@@ -126,52 +126,22 @@ public class MessageService {
 		for (final Actor actors : listaActores) {
 			msg.setRecipient(actors);
 			final Message result = this.save(msg);
-			for (final Box msb : actors.getBoxes())
+			for (final Box msb : actors.getBoxes()) {
 
-				if (msb.getName().endsWith("in box") && msb.getPredefined() == true) {
-					final Collection<Message> rmes = msb.getMessages();
-					rmes.add(result);
-					msb.setMessages(rmes);
-				}
-			for (final Box msb : admin.getBoxes())
-
-				if (msb.getName().endsWith("in box") && msb.getPredefined() == true) {
-					final Collection<Message> rmes = msb.getMessages();
-					rmes.add(result);
-					msb.setMessages(rmes);
-				}
-
-		}
-	}
-
-	public Message broadcastSpamMessage(final Message msg) {
-		final UserAccount actual = LoginService.getPrincipal();
-		final Actor admin = this.ar.getActor(actual);
-		Assert.notNull(msg);
-		Assert.isTrue(!admin.getIsBanned());
-
-		final Message result = this.save(msg);
-
-		final Collection<Box> aboxes = admin.getBoxes();
-		for (final Box abox : aboxes)
-			if (abox.getName().endsWith("out box") && abox.getPredefined() == true) {
-				final Collection<Message> ames = abox.getMessages();
-				ames.add(result);
-				abox.setMessages(ames);
+				final Collection<Message> rmes = msb.getMessages();
+				rmes.add(result);
+				msb.setMessages(rmes);
 			}
 
-		final Collection<Actor> listaActores = this.as.findAll();
-		listaActores.remove(admin);
-		for (final Actor actors : listaActores)
-			for (final Box msb : actors.getBoxes())
+			for (final Box msb : admin.getBoxes())
 
-				if (msb.getName().endsWith("spam box") && msb.getPredefined() == true) {
-					final Collection<Message> rmes = msb.getMessages();
-					rmes.add(result);
-					msb.setMessages(rmes);
-				}
-		return result;
+			{
+				final Collection<Message> rmes = msb.getMessages();
+				rmes.add(result);
+				msb.setMessages(rmes);
+			}
 
+		}
 	}
 
 	public String getTemplateSecurityBreachNotificationMessage() {
