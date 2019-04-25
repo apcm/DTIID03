@@ -238,5 +238,9 @@ public class MessageService {
 			}
 		return res;
 	}
+	
+	public void flush(){
+		this.messageRepository.flush();
+	}
 
 }
