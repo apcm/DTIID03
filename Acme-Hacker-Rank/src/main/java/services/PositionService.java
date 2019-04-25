@@ -46,6 +46,7 @@ public class PositionService {
 		res.setTicker(ticker);
 		final Collection<Problem> problems = new ArrayList<Problem>();
 		res.setProblems(problems);
+		res.setCompany(this.getThisCompany());
 
 		return res;
 	}
