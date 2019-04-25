@@ -113,8 +113,9 @@
 		<property name="name" value="Administrator" />
 		<property name="surname" value="Admin" />
 		<property name="photo" value="http://www.foto.com" />
-		<property name="email" value="admin@admin.com" />
+		<property name="email" value="admin@" />
 		<property name="phoneNumber" value="+34 676676676" />
+		<property name="computed" value="false" />
 		<property name="address" value="Address 1" />
 		<property name="vat" value="21" />
 		<property name="flagSpam" value="false" />
@@ -140,9 +141,10 @@
 
 <bean id="admin2" class="domain.Administrator">
 		<property name="name" value="admin2"/>
+		<property name="computed" value="false" />
 		<property name="surname" value="admin2"/>
 		<property name="photo" value="http://www.admin2.com"/>
-		<property name="email" value="admin2@admin2.com"/>
+		<property name="email" value="admin2@"/>
 		<property name="phoneNumber" value="+34 123676676"/>
 		<property name="address" value="Address admin2"/>
 		<property name="vat" value="21"/>
@@ -170,6 +172,7 @@
 
 	<bean id="hacker1" class="domain.Hacker">
 		<property name="name" value="Hacker" />
+		<property name="computed" value="false" />
 		<property name="finder" ref="finder1" />
 		<property name="surname" value="One" />
 		<property name="photo" value="http://www.foto.com" />
@@ -200,6 +203,7 @@
 	</bean>
 	<bean id="hacker2" class="domain.Hacker">
 		<property name="name" value="Hacker" />
+		<property name="computed" value="false" />
 		<property name="finder" ref="finder2" />
 		<property name="surname" value="Two" />
 		<property name="photo" value="http://www.foto.com" />
@@ -231,6 +235,7 @@
 
 	<bean id="company1" class="domain.Company">
 		<property name="name" value="Company 1" />
+		<property name="computed" value="false" />
 		<property name="surname" value="One" />
 		<property name="photo" value="http://www.foto.com" />
 		<property name="email" value="company1@hackerrank.com" />
@@ -261,6 +266,7 @@
 
 	<bean id="company2" class="domain.Company">
 		<property name="name" value="Company" />
+		<property name="computed" value="false" />
 		<property name="surname" value="Two" />
 		<property name="photo" value="http://www.foto.com" />
 		<property name="email" value="company2@hackerrank.com" />
@@ -1223,9 +1229,8 @@
 
 <bean id="in1" class="domain.Box">
 
-		<property name="name" value="in box" />
+		<property name="name" value="Pool" />
 
-		<property name="predefined" value="true" />
 
 		<property name="messages">
 
@@ -1234,34 +1239,20 @@
 			</list>
 		</property>
 
-		<property name="descendants">
-
-			<list>
-
-			</list>
-		</property>
-
+		
 
 	</bean>
 
 	
 	<bean id="in2" class="domain.Box">
 
-		<property name="name" value="in box" />
+		<property name="name" value="Pool" />
 
-		<property name="predefined" value="true" />
 
 		<property name="messages">
 
 			<list>
 				<ref bean="message1" />
-			</list>
-		</property>
-
-		<property name="descendants">
-
-			<list>
-
 			</list>
 		</property>
 
@@ -1272,9 +1263,8 @@
 
 	<bean id="in3" class="domain.Box">
 
-		<property name="name" value="in box" />
+		<property name="name" value="Pool" />
 
-		<property name="predefined" value="true" />
 
 		<property name="messages">
 
@@ -1284,12 +1274,6 @@
 			</list>
 		</property>
 
-		<property name="descendants">
-
-			<list>
-
-			</list>
-		</property>
 
 
 	</bean>
@@ -1298,18 +1282,10 @@
 
 	<bean id="in4" class="domain.Box">
 
-		<property name="name" value="in box" />
+		<property name="name" value="Pool" />
 
-		<property name="predefined" value="true" />
 
 		<property name="messages">
-
-			<list>
-
-			</list>
-		</property>
-
-		<property name="descendants">
 
 			<list>
 
@@ -1323,9 +1299,8 @@
 
 	<bean id="in5" class="domain.Box">
 
-		<property name="name" value="in box" />
+		<property name="name" value="Pool" />
 
-		<property name="predefined" value="true" />
 
 		<property name="messages">
 
@@ -1334,12 +1309,7 @@
 			</list>
 		</property>
 
-		<property name="descendants">
 
-			<list>
-
-			</list>
-		</property>
 
 
 	</bean>
@@ -1348,9 +1318,8 @@
 
 	<bean id="in6" class="domain.Box">
 
-		<property name="name" value="in box" />
+		<property name="name" value="Pool" />
 
-		<property name="predefined" value="true" />
 
 		<property name="messages">
 
@@ -1359,12 +1328,7 @@
 			</list>
 		</property>
 
-		<property name="descendants">
 
-			<list>
-
-			</list>
-		</property>
 
 
 	</bean>

@@ -113,7 +113,7 @@
 		<property name="name" value="Administrator" />
 		<property name="surname" value="Admin" />
 		<property name="photo" value="http://www.foto.com" />
-		<property name="email" value="admin@admin.com" />
+		<property name="email" value="admin@" />
 		<property name="phoneNumber" value="+34 676676676" />
 		<property name="computed" value="false" />
 		<property name="address" value="Address 1" />
@@ -144,7 +144,7 @@
 		<property name="computed" value="false" />
 		<property name="surname" value="admin2"/>
 		<property name="photo" value="http://www.admin2.com"/>
-		<property name="email" value="admin2@admin2.com"/>
+		<property name="email" value="admin2@"/>
 		<property name="phoneNumber" value="+34 123676676"/>
 		<property name="address" value="Address admin2"/>
 		<property name="vat" value="21"/>

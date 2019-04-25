@@ -34,6 +34,9 @@ public class BanAdministratorController extends AbstractController {
 		final List<Actor> lActorNotBanned = this.actorService.findAllNotBanned();
 		final List<Actor> lActorBanned = this.actorService.findAllBanned();
 
+		lActorBanned.remove(this.actorService.findByPrincipal());
+		lActorNotBanned.remove(this.actorService.findByPrincipal());
+
 		result = new ModelAndView("ban/list");
 
 		result.addObject("lH", lActorNotBanned);

@@ -62,6 +62,7 @@ public class BoxService {
 
 	public Box saveInitial(final Box messageBox) {
 		final Box mb = this.messageBoxRepository.save(messageBox);
+		this.messageBoxRepository.flush();
 		return mb;
 
 	}

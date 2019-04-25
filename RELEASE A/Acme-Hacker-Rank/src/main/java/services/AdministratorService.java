@@ -326,7 +326,7 @@ public class AdministratorService {
 			if (this.actorService.flagSpamMessagesCount(a.getId()) != null)
 				d1 = this.actorService.flagSpamMessagesCount(a.getId());
 
-			if (d1 > 0.1) {
+			if (d1 >= 0.1) {
 				a.setFlagSpam(true);
 				this.actorService.save(a);
 			}

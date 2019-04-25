@@ -15,7 +15,7 @@
 		<form:hidden path="moment"/>
 		<form:hidden path="sender"/>
 		
-		<spring:message code="mes.recipients" />:
+		<spring:message code="mes.recipients" />:*
 		<form:select multiple="false" id="recipient" path="recipient">
 		    <form:options items="${recipient}" itemLabel="email" itemValue="id" />
 		    </form:select>
@@ -23,14 +23,14 @@
 		
 		
 		<form:label path="subject">
-			<spring:message code="mes.subject" />:
+			<spring:message code="mes.subject" />:*
 		</form:label>
 		<form:input path="subject" />
 		<form:errors cssClass="error" path="subject" />
 		<br />	
 		
 		<form:label path="body">
-			<spring:message code="mes.body" />:
+			<spring:message code="mes.body" />:*
 		</form:label>
 		<form:textarea path="body" />
 		<form:errors cssClass="error" path="body" />

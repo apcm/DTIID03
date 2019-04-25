@@ -23,20 +23,20 @@
 
 		<form:label path="socialNetwork">
 			<spring:message code="socialProfile.socialNetwork" />:
-		</form:label>
+		</form:label>*
 		<form:input path="socialNetwork" />
 		<form:errors cssClass="error" path="socialNetwork" />
 		<br />	
 
 		<form:label path="link">
 			<spring:message code="socialProfile.link" />:
-		</form:label>
+		</form:label>*
 		<form:input path="link" />
 		<form:errors cssClass="error" path="link" />
 		<br />	
 		
 		<form:label path="nick">
-			<spring:message code="socialProfile.nick" />:
+			<spring:message code="socialProfile.nick" />:*
 		</form:label>
 		<form:input path="nick" />
 		<form:errors cssClass="error" path="nick" />

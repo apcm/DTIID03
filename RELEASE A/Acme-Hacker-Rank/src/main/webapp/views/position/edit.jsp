@@ -28,24 +28,25 @@
 		<form:hidden path="isCancelled"/>
 
 		<form:label path="title">
-			<spring:message code="position.title" />:
+			<spring:message code="position.title" />:*
 		</form:label>
 		<form:input path="title" />
 		<form:errors cssClass="error" path="title" />
 		<br />	
 		
 		<form:label path="description">
-			<spring:message code="position.description" />:
+			<spring:message code="position.description" />:*
 		</form:label>
 		<form:input path="description" />
 		<form:errors cssClass="error" path="description" />
 		<br />	
 
 		<form:label path="deadline">
-			<spring:message code="position.deadline" />:
+			<spring:message code="position.deadline" />:*
 		</form:label>
 		<form:input path="deadline" />
 		<form:errors cssClass="error" path="deadline" />
+		<p class="error"><spring:message code ='${deadlineError}'/></p>
 		<br />
 		
 		<form:label path="skills">
@@ -63,7 +64,7 @@
 		<br />
 		
 		<form:label path="profile">
-			<spring:message code="position.profile" />:
+			<spring:message code="position.profile" />:*
 		</form:label>
 		<form:input path="profile" />
 		<form:errors cssClass="error" path="profile" />
@@ -71,7 +72,7 @@
 		
 		
 		<form:label path="salary">
-			<spring:message code="position.salary" />:
+			<spring:message code="position.salary" />:*
 		</form:label>
 		<form:input path="salary" />
 		<form:errors cssClass="error" path="salary" />

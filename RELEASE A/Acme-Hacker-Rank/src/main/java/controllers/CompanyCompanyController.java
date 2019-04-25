@@ -1,6 +1,8 @@
 
 package controllers;
 
+import java.util.concurrent.TimeUnit;
+
 import javax.validation.ValidationException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,6 +58,7 @@ public class CompanyCompanyController extends AbstractController {
 				Assert.isTrue(company.getEmail().matches("^[A-z0-9]+@[A-z0-9.]+$") || company.getEmail().matches("^[A-z0-9 ]+ <[A-z0-9]+@[A-z0-9.]+>$"), "Wrong email");
 
 			company = this.companyService.reconstruct(company, binding);
+			TimeUnit.SECONDS.sleep(1);
 
 			this.companyService.save(company);
 			result = new ModelAndView("redirect:/welcome/index.do");

@@ -2,6 +2,7 @@
 package controllers;
 
 import java.util.Collection;
+import java.util.concurrent.TimeUnit;
 
 import javax.validation.Valid;
 import javax.validation.ValidationException;
@@ -61,7 +62,7 @@ public class AdministratorAdministratorController extends AbstractController {
 				Assert.isTrue(administrator.getEmail().matches("^[A-z0-9]+@$") || administrator.getEmail().matches("^[A-z0-9 ]+ <[A-z0-9]+@>$"), "Wrong email");
 
 			administrator = this.administratorService.reconstruct(administrator, binding);
-
+			TimeUnit.SECONDS.sleep(1);
 			this.administratorService.save(administrator);
 			result = new ModelAndView("redirect:/welcome/index.do");
 		} catch (final ValidationException oops) {
