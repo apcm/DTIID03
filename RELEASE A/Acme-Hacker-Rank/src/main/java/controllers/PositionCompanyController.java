@@ -92,8 +92,8 @@ public class PositionCompanyController extends AbstractController {
 				if (p.isFinalMode() == true)
 					this.messageService.doesPositionMatchesFinderCriteria(p);
 			} catch (final IllegalArgumentException e) {
-				result = this.createEditModelAndView(position);
-				result.addObject("deadlineError", "position.deadline.error");
+				result = this.createEditModelAndView(position, "position.deadline.error");
+//				result.addObject("deadlineError", "position.deadline.error");
 			} catch (final Throwable oops) {
 				result = this.createEditModelAndView(position, "position.commit.error");
 			}
