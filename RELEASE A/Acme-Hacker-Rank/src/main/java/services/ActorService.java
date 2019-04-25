@@ -126,7 +126,7 @@ public class ActorService {
 		//Creo las cajas predeterminadas del sistema
 		final Box inbox = new Box();
 		inbox.setMessages(new ArrayList<Message>());
-		inbox.setName("Pull");
+		inbox.setName("Pool");
 		final Box inbox1 = this.mbs.saveInitial(inbox);
 		result.add(inbox1);
 

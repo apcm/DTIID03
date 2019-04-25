@@ -62,6 +62,7 @@ public class HackerService {
 
 		Hacker result;
 		result = new Hacker();
+		result.setComputed(false);
 
 		final Collection<Box> predefined = new ArrayList<Box>();
 

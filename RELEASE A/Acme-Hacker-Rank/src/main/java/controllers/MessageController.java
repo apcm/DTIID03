@@ -160,7 +160,7 @@ public class MessageController extends AbstractController {
 			Assert.isTrue(recipient.equals(a) || message.getSender().getId() == a.getId());
 
 		} catch (final Throwable oops) {
-			result = new ModelAndView("redirect: list.do");
+			result = new ModelAndView("redirect:/boxes/list.do");
 			return result;
 		}
 

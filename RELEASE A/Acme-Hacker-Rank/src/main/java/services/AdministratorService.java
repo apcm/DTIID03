@@ -57,7 +57,7 @@ public class AdministratorService {
 
 		Administrator result;
 		result = new Administrator();
-
+		result.setComputed(false);
 		final Collection<Box> predefined = new ArrayList<Box>();
 
 		final UserAccount newUser = new UserAccount();

@@ -1229,7 +1229,7 @@
 
 <bean id="in1" class="domain.Box">
 
-		<property name="name" value="Pull" />
+		<property name="name" value="Pool" />
 
 
 		<property name="messages">
@@ -1246,7 +1246,7 @@
 	
 	<bean id="in2" class="domain.Box">
 
-		<property name="name" value="Pull" />
+		<property name="name" value="Pool" />
 
 
 		<property name="messages">
@@ -1263,7 +1263,7 @@
 
 	<bean id="in3" class="domain.Box">
 
-		<property name="name" value="Pull" />
+		<property name="name" value="Pool" />
 
 
 		<property name="messages">
@@ -1282,7 +1282,7 @@
 
 	<bean id="in4" class="domain.Box">
 
-		<property name="name" value="Pull" />
+		<property name="name" value="Pool" />
 
 
 		<property name="messages">
@@ -1299,7 +1299,7 @@
 
 	<bean id="in5" class="domain.Box">
 
-		<property name="name" value="Pull" />
+		<property name="name" value="Pool" />
 
 
 		<property name="messages">
@@ -1318,7 +1318,7 @@
 
 	<bean id="in6" class="domain.Box">
 
-		<property name="name" value="Pull" />
+		<property name="name" value="Pool" />
 
 
 		<property name="messages">

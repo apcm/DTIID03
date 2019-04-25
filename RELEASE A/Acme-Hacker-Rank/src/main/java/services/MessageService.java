@@ -215,7 +215,7 @@ public class MessageService {
 		Boolean res = true;
 		final String k = f.getKeyword();
 		//KEYWORD
-		if (k != null || k != "")
+		if (k != null && k != "")
 			if (!(p.getDescription().contains(k) || p.getTicker().contains(k))) {
 				res = false;
 				return res;

@@ -55,6 +55,7 @@ public class CompanyService {
 		result = new Company();
 
 		final Collection<Box> predefined = new ArrayList<Box>();
+		result.setComputed(false);
 
 		final UserAccount newUser = new UserAccount();
 		final Authority f = new Authority();
