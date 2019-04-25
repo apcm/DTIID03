@@ -24,10 +24,15 @@
 	<br/>
 	
 	<spring:message code="dashboard.companiesWithMorePositions"/>
-	<jstl:out value="${companiesWithMorePositions}"/>
+	<jstl:forEach items="${companiesWithMorePositions }" var="c">
+	<jstl:out value="${c.companyName}"/>, 
+	</jstl:forEach>
 	<br/>
 	<spring:message code="dashboard.hackersWithMoreApplications"/>
-	<jstl:out value="${hackersWithMoreApplications}"/>
+	<jstl:forEach items="${hackersWithMoreApplications }" var="h">
+	<jstl:out value="${h.name}"/> 
+	<jstl:out value="${h.surname}"/>, 
+	</jstl:forEach>
 	<br/>
 	
 	<spring:message code="dashboard.avgApplications"/>
@@ -57,10 +62,11 @@
 	<br/>
 	
 	<spring:message code="dashboard.highestSalaryPosition"/>
-	<jstl:out value="${highestSalaryPosition}"/>
+	
+	<jstl:out value="${highestSalaryPosition.title}"/>
 	<br/>
 	<spring:message code="dashboard.lowestSalaryPosition"/>
-	<jstl:out value="${lowestSalaryPosition}"/>
+	<jstl:out value="${lowestSalaryPosition.title}"/>
 	<br/>
 	
 	<spring:message code="dashboard.minCurricula"/>
