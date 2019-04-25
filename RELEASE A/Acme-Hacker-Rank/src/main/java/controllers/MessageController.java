@@ -62,7 +62,6 @@ public class MessageController extends AbstractController {
 		result = new ModelAndView("messages/list");
 
 		result.addObject("messages", mes);
-		result.addObject("descendants", this.mbs.findOne(boxId).getDescendants());
 
 		result.addObject("requestURI", "/messages/list.do");
 
