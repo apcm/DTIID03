@@ -61,6 +61,10 @@ public class PositionCompanyController extends AbstractController {
 		Position position;
 
 		position = this.positionService.findOne(positionId);
+		
+		if(position.getCompany().getId()!= positionService.getThisCompany().getId()){
+			return new ModelAndView("redirect:/welcome/index.do");
+		}
 
 		final Collection<Problem> problems = this.positionService.getProblems();
 		if (position.isFinalMode())
@@ -97,6 +101,10 @@ public class PositionCompanyController extends AbstractController {
 		ModelAndView result;
 
 		final Position p = this.positionService.findOne(positionId);
+		
+		if(p.getCompany().getId()!= positionService.getThisCompany().getId()){
+			return new ModelAndView("redirect:/welcome/index.do");
+		}
 
 		if (!p.isFinalMode())
 			result = this.list();
@@ -137,6 +145,11 @@ public class PositionCompanyController extends AbstractController {
 		Position position;
 
 		position = this.positionService.findOne(positionId);
+		
+		if(position.getCompany().getId()!= positionService.getThisCompany().getId()){
+			return new ModelAndView("redirect:/welcome/index.do");
+		}
+		
 		Assert.notNull(position);
 
 		result = this.createDisplayModelAndView(position);

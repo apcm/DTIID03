@@ -43,7 +43,7 @@
 <security:authorize access="hasRole('COMPANY')">
 
 <display:column>
-	<a href="position/display.do?positionId=${row.id}">
+	<a href="position/company/display.do?positionId=${row.id}">
 		<spring:message code="position.display"/>
 	</a>
 </display:column>
