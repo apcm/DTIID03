@@ -79,8 +79,13 @@ public class FinderService {
 		if (finder.getId() != 0) {
 			final Hacker principal = this.hackerService.findOnePrincipal();
 			Assert.isTrue(principal.getFinder().getId() == finder.getId());
+			final Customisation cust = this.customisationService.getCustomisation();
+			final int resultsNumber = cust.getResultsNumber();
 
-			final Set<Position> results = this.positionService.finderResults(finder);
+			final Set<Position> rez = this.positionService.finderResults(finder);
+			List<Position> results = new ArrayList<>(rez);
+			if (results.size() > resultsNumber)
+				results = results.subList(0, resultsNumber);
 
 			res.setPositions(results);
 			final Calendar now = Calendar.getInstance();
@@ -89,7 +94,6 @@ public class FinderService {
 		}
 		return res;
 	}
-
 	public Finder clear(final Finder finder) {
 		Assert.isTrue(this.checkHacker());
 		Assert.notNull(finder);
