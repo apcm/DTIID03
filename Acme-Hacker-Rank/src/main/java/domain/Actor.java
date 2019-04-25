@@ -36,6 +36,7 @@ public abstract class Actor extends DomainEntity {
 	private Collection<SocialProfile>	socialProfiles;
 	private Collection<Box>				boxes;
 	private UserAccount					userAccount;
+	private Boolean						computed;
 
 	private String						holderName;
 	private String						makeName;
@@ -71,7 +72,17 @@ public abstract class Actor extends DomainEntity {
 	public void setSurname(final String surname) {
 		this.surname = surname;
 	}
+	public Boolean getComputed() {
+		return this.computed;
+	}
 
+	public void setComputed(final Boolean computed) {
+		this.computed = computed;
+	}
+
+	public void setBanned(final boolean isBanned) {
+		this.isBanned = isBanned;
+	}
 	@URL
 	public String getPhoto() {
 		return this.photo;

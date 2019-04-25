@@ -19,7 +19,12 @@
 	<display:column property="surname" titleKey="actor.surname"  />
 	<display:column property="email" titleKey="actor.email"  />
 	<display:column property="phoneNumber" titleKey="actor.phoneNumber"  />
+	<jstl:if test="${row.computed==true }">
 	<display:column property="flagSpam" titleKey="actor.flagSpam"  />
+	</jstl:if>
+	<jstl:if test="${row.computed==false }">
+	<display:column titleKey="actor.flagSpam" value="N/A"  />
+	</jstl:if>
 	<display:column property="isBanned" titleKey="actor.isBanned"  />
 	
 <%-- 	<display:column>

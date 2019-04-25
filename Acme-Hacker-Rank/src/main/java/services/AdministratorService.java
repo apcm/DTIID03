@@ -321,6 +321,7 @@ public class AdministratorService {
 		Assert.isTrue(this.actorService.checkAdmin());
 		final List<Actor> a1 = new ArrayList<Actor>(this.actorService.findAll());
 		for (final Actor a : a1) {
+			a.setComputed(true);
 			Double d1 = 0.0;
 			if (this.actorService.flagSpamMessagesCount(a.getId()) != null)
 				d1 = this.actorService.flagSpamMessagesCount(a.getId());
